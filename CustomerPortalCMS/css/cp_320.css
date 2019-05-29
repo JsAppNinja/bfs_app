@@ -1,0 +1,33 @@
+﻿/* Small devices */
+
+@media(max-width:320px) {
+
+.icon-jobs {
+    visibility: hidden;
+}
+
+    .badge {
+        visibility: hidden;
+    }
+
+    .panel-default > .panel-heading {
+        font-size: .9em;
+    }
+
+    .panel-heading {
+        padding: 5px 5px;
+    }
+
+        .panel-heading .title.collapsed:before {
+            font-size: 1.5em !important;
+            padding-right: 5px !important;
+        }
+
+        .panel-heading .title:before {
+            font-size: 1.5em !important;
+            padding-right: 5px !important;
+        }
+}
+
+
+

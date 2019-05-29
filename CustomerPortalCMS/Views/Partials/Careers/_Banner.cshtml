@@ -1,0 +1,21 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+
+@{
+    var bannerImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("bannerImage"));
+    var bannerCaption = Umbraco.AssignedContentItem.GetPropertyValue("bannerCaption");
+}
+
+@if (bannerImage != null)
+{
+<div class="CareersBannerInner" style="background-image: url(@bannerImage.Url)">
+
+    <div class="CareersBannerCaption">
+        @if (bannerCaption != null)
+        {
+            <p>@bannerCaption</p>
+        }
+    </div>
+</div>
+}

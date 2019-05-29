@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Facebook Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage" transform="translate(-1050.000000, -6233.000000)" fill="#FFFFFF">
+            <g id="Footer" transform="translate(0.000000, 6127.000000)">
+                <g id="Social" transform="translate(1050.000000, 106.000000)">
+                    <g id="Facebook-Copy">
+                        <path d="M0,20 C0,8.95430446 8.95430446,0 20,0 C31.0456955,0 40,8.95430446 40,20 C40,31.0456955 31.0456955,40 20,40 C8.95430446,40 0,31.0456955 0,20 Z M22.0846292,31.7595639 L22.0846292,20.878508 L25.0882766,20.878508 L25.4863247,17.1288359 L22.0846292,17.1288359 L22.0897324,15.2520889 C22.0897324,14.2741166 22.1826528,13.7500968 23.5873034,13.7500968 L25.4650614,13.7500968 L25.4650614,10 L22.4609888,10 C18.8526146,10 17.5825604,11.8189944 17.5825604,14.877971 L17.5825604,17.1292605 L15.3333333,17.1292605 L15.3333333,20.8789327 L17.5825604,20.8789327 L17.5825604,31.7595639 L22.0846292,31.7595639 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

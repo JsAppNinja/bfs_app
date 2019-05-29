@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+<div class="CareersIntro">
+    <div class="CareersIntroInner">
+        @{
+            var introP1 = Umbraco.AssignedContentItem.GetPropertyValue("careerIntroParagraph1");
+            var introP2 = Umbraco.AssignedContentItem.GetPropertyValue("careerIntroParagraph2");
+        }
+        <p>@introP1</p>
+        <h4>@introP2</h4>
+    </div>
+</div>

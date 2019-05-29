@@ -1,0 +1,74 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "BldrMaster.cshtml";
+    int i = 0;
+}
+<div class="container retroContainer">
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+    <div class="content_full">
+      
+        @Model.Content.GetPropertyValue("pageContent")
+
+        <div class="SiteMap clearfix">
+            <div class="SiteMapWrap">
+                <div class="SiteMapHome"><a data-udi="umb://document/495bb9c3e8834773950d094c839c280f" href="/{localLink:umb://document/495bb9c3e8834773950d094c839c280f}" title="Home"><img id="__mcenew" src="/media/1084/icon_home.png" alt="Home" data-udi="umb://media/7d1feff4749c4e36898d5b6cd178250e" /></a></div>
+                <div class="grid">
+                    <ul>
+                        <li><a href="/about-us/about-us/">About Us</a></li>
+                        <li><a href="/about-us/code-standards/">Resource Center</a></li>
+                        <li><a href="/locations/">Locations</a></li>
+                        <li><a href="/distribution/">Distribution</a></li>
+                        <li><a href="/installed-services/">Installed Services</a></li>
+                        <li><a href="/manufacturing/">Manufacturing</a></li>
+                        <li><a href="https://investors.bldr.com/">Investors</a></li>
+                        <li><a href="https://owa.bldr.com/owa/">Employee Log In</a></li>
+                        <li><a href="/bfs-terms/">BFS Terms of Use</a></li>
+                        <li><a href="/contact-us/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="grid">
+                    <ul>
+                        <li>
+                            <a href="/about-us/code-standards/">Resource Center</a>
+                            <ul>
+                                <li><a href="/about-us/code-standards/">Code Standards</a></li>
+                                <li><a href="/careers/">Careers</a></li>
+                                <li><a href="/about-us/green-works/">Green Works</a></li>
+                                <li><a href="/about-us/forms-library/">Forms Library</a></li>
+                                <li><a href="/about-us/newspress/">News/Press</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                @* List data items for Distribution, Installed Services & Manufacturing *@
+                @*  PRAGMATX: this code breaks on local project
+                    @foreach (var child in Umbraco.TypedContentAtRoot().Where(c => c.Name == "home").First().Children.Where(x => x.DocumentTypeAlias == "basicVideoPage"))*@
+                @{
+                    var root = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias.Equals("home"));
+                    foreach (var child in root.Children.Where(x => x.DocumentTypeAlias == "basicVideoPage"))
+                    {
+                        var childrepo = Umbraco.TypedContent(child.GetPropertyValue<int>("dataLocation"));
+                        var a = i == 2 ? "grid last" : "grid";
+                        i++;
+
+                        <div class="@a">
+                            <ul>
+                                <li>
+                                    <a href="@child.Url">@child.Name</a>
+                                    <ul>
+                                        @foreach (var item in childrepo.Children)
+                                        {
+                                            <li><a href="@child.Url">@item.Name</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

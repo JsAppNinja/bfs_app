@@ -1,0 +1,80 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web
+
+<header class="clearfix">
+
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container retroContainer">
+            <div class="HeaderTop">
+                Log In: <a target="_blank" href="https://owa.bldr.com/owa/">Employee</a> | <a target="_blank" href="https://www.dayforcehcm.com/">Employee Self Service</a> | <a target="_blank" href="https://seemyw2.ceridian.com/seemyw2/cgi-bin/3pp.pl/eReports?cid=806327">SeeMyW2</a> @*| <a href="/customer/">Customer</a>*@
+            </div>
+        </div>
+        <div class="HeaderNav">
+            <div class="navbar-header container">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">@Umbraco.Field("pageTitle")</a>*@
+            </div>
+
+            <!-- Navigation displays top nav bar and 1 level of dropdown menus -->
+            <div id="navbar" class="navbar-collapse collapse container">
+                <ul class="nav navbar-nav" @*style="padding: 0 17px 0 19px;"*@>
+                    @{
+                        //get root node parameter
+                        string rootDocType = ViewData["rootDocType"].ToString();
+                        var root = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias.Equals(rootDocType));
+
+                        //first nav item is the home page
+                        var homeClass = root.Id == Model.Content.Id ? "active" : "";
+                        <li class="@homeClass @root.Name" @root.Name>
+                            <a href="@root.Url" role="button">@root.Name </a>
+                        </li>
+
+                        //top nav bar items are visible child items
+                        var selection = root.Children.Where(x => x.IsVisible()).ToArray();
+                        if (selection.Length > 0)
+                        {
+                            foreach (var item in selection)
+                            {
+                                var navClass = item.IsAncestorOrSelf(Model.Content) ? "active" : "";
+                                var dropClass = item.Children.Where(x => x.IsVisible()).Count() > 0 ? "dropdown" : "";
+                                var linkClass = item.Children.Where(x => x.IsVisible()).Count() > 0 ? "fh5co-sub-ddown dropdown-toggle" : "";
+                                var linkURL = item.DocumentTypeAlias == "externalLink" ? item.GetPropertyValue("externalUrl") : item.Url;
+
+                                <li class="@dropClass @navClass">
+                                    <a href="@linkURL" role="button" class="@linkClass" data-toggle="@dropClass" aria-haspopup="true" aria-expanded="false">@item.Name</a>
+
+                                    @* build dropdown menu *@
+                                    @if (item.Children.Where(x => x.IsVisible()).Count() > 0)
+                                    {
+                                        <ul class="dropdown-menu">
+                                            @{
+                                                var childitems = item.Children.Where(x => x.IsVisible());
+                                                foreach (var child in childitems)
+                                                {
+                                                    var acClass = child.IsAncestorOrSelf(Model.Content) ? "active" : "";
+                                                    var childURL = child.DocumentTypeAlias == "externalLink" ? child.GetPropertyValue("externalUrl") : child.Url;
+                                                    <li>
+                                                        <a href="@childURL" class="@acClass">@child.Name</a>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </div>
+    </nav>
+</header>

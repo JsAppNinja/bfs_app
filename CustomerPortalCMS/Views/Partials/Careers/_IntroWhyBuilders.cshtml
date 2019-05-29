@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+@{ 
+    var leftColumnImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("leftColumnImage"));
+    var leftColumnQuote = Umbraco.AssignedContentItem.GetPropertyValue("leftColumnQuote");
+    var leftColumnQuoteBy = Umbraco.AssignedContentItem.GetPropertyValue("leftColumnQuoteBy");
+    var rightColumnTopText = Umbraco.AssignedContentItem.GetPropertyValue("rightColumnTopText");
+    var rightColumnQuote = Umbraco.AssignedContentItem.GetPropertyValue("rightColumnQuote");
+    var rightColumnQuoteBy = Umbraco.AssignedContentItem.GetPropertyValue("rightColumnQuoteBy");
+    var rightColumnBottomText = Umbraco.AssignedContentItem.GetPropertyValue("rightColumnBottomText");
+}        
+
+<section class="clearfix">
+    <div class="TopColumn col-sm-6">
+        <img src="@leftColumnImage.Url">
+        <div class="FocusedParagraph"><p>@leftColumnQuote<span>- @leftColumnQuoteBy</span></p></div>
+    </div>
+    <div class="TopColumn col-sm-6">
+        <div>
+            @rightColumnTopText
+            <div class="FocusedParagraph"><p>@rightColumnQuote<span>@rightColumnQuoteBy</span></p></div>
+            <div class="LargeVisible">
+                @rightColumnBottomText
+            </div>
+        </div>
+    </div>
+    <div class="clearfix SmallVisible">
+        <div class="col-sm-12">
+            @rightColumnBottomText
+        </div>
+    </div>
+</section>  

@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "BldrMaster.cshtml";
+}
+
+@* the fun starts here *@
+
+<section class="content_wrap AllJobsWrap">
+    <div class="CareersBanner CareerSubBanner">
+        @Html.Partial("Careers/_Banner")
+    </div>
+    @Html.Partial("Careers/_SecondaryNavigation")
+    @Html.Partial("Careers/_FeaturedCareers")
+    @Html.Partial("Careers/_FeaturedPositions")
+</section>

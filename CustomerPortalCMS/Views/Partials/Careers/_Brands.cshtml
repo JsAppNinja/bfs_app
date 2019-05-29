@@ -1,0 +1,41 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+<div class="career_logos clearfix CareersBrandBanner">
+   
+    @{
+        int count = 6;
+        for (int i = 1; i <= count; i++)
+        {
+
+            var image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("brandImage" + @i));
+            var imageLink = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("brandLink" + @i);
+
+            if (image != null & imageLink != null)
+            {
+                foreach (var item in imageLink)
+                {
+                    var linkTarget = (item.NewWindow) ? "_blank" : null;
+                    
+                    <div class="brandingItem">
+                        <a href="@item.Link" target="@linkTarget"><img src="@image.Url" alt="@item.Caption"></a>
+                    </div>
+                }
+
+
+            }
+            else
+            {
+                if (image != null)
+                {
+                    <div class="brandingItem">
+                        <img src="@image.Url" alt="@image.UrlName">
+                    </div>
+                }
+
+            }
+
+        }
+    }
+    
+</div>

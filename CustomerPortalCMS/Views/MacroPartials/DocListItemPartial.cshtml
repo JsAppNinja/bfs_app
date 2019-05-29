@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+
+@{ 
+    var selection = CurrentPage.Children.Where("Visible").OrderBy("SortOrder");
+    bool displayedFiles = false;
+}
+@* OrderBy() takes the property to sort by and optionally order desc/asc *@
+
+<ul class="DocListWrap clearfix">
+    @foreach (var item in selection)
+    {
+        if (!string.IsNullOrEmpty(item.file))
+        {
+            displayedFiles = true;
+        <li>
+            <a href="@item.file" class="PDFLink" target="_blank" download display:block>
+                <div style="width: 100%">
+                    <div class="IconWrap" style="width: 42px;">                      
+                            <img src="/Content/Images/Icons/Icon_Pdf_Small.png" />                      
+                    </div>
+                    <div class="DocInfo">
+                        <div style="position: relative; top: 50%; transform: translateY(-50%);">
+
+                            <span class="DocName" title="@item.documentName">@item.documentName </span><br />
+                            @if (item["releaseDate"] != DateTime.MinValue)
+                            {
+                                <span class="ReleaseDate">
+                                    @item["releaseDate"]
+                                </span><br />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        }
+    }
+</ul>
+@{ 
+    if (!displayedFiles)
+    {
+        Response.Clear();
+        Response.Redirect("/");
+    }
+}

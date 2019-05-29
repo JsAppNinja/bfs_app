@@ -1,0 +1,18 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@* Pragmatx: I commented these out and added above inherits becasue page was broken
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.DocListItem>
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.DocList>*@
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "BldrMaster.cshtml";
+}
+<div class="container retroContainer">
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+    <div>
+        @Umbraco.Field("documentPageHeaderContent")
+    </div>
+    <div class="content_full">
+        @Umbraco.RenderMacro("DocListItemPartial")
+    </div>
+</div>

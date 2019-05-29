@@ -1,0 +1,233 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = "BldrMaster.cshtml";
+    List<string> InstalledList = new List<string>();
+}
+
+@section scripts
+{
+    <script>
+        backButton.ClearDataOnLoad = false;
+        window.onbeforeunload = function () {
+            backButton.enableRestoreOnLoad();
+        }
+    </script>
+}
+
+@{
+    var locationId = @CurrentPage.Id;
+    var location = @Umbraco.Content(@locationId);
+    var locationName = location.Name;
+    //var allDistributionCategories = Umbraco.TypedContentAtRoot().Where(c => c.Name == "Bldr Data Repository").First().Children.Where(c => c.Name == "Distribution"); //.First().Where(x => x.showOnLocationsDetailsPages == true);
+    var allDistributionCategories = @Umbraco.Content(1919).Children; // Where(x => x.showOnLocationsDetailsPages == true);
+    var installed = location.InstalledServicesPicker;
+    string categoryFullName;
+    string categoryName;
+    bool atLeastOneSupplierFound = false;
+}
+
+@{
+    foreach (var installitem in installed)
+    {
+        InstalledList.Add(installitem.Name);
+    }
+    InstalledList = InstalledList.OrderBy(x => x).ToList();
+}
+
+<div class="container retroContainer">
+    @*----------------- Location Logo Image (if present, replaces BFS Logo via js) -----------------------*@
+    @{
+        string LocLogo = location.GetPropertyValue("logoImage").Url;
+        <div style="display: none;">
+            <div id="LocLogo">
+                <a href="/"><img src="@LocLogo" /></a>
+            </div>
+        </div>
+    }
+    <div class="LocDetPageTopWrap">
+        <h1 class="MainH1">
+            <span class="hidden-xs"><a href="/locations">Locations</a>&nbsp;&rsaquo;</span>
+            <span style="font-weight:700;padding-left: 10px;">@location.Name</span>
+        </h1>
+        <div class="LocationH1Shadow">
+            <img class="shadow" alt="line" title="Distribution" src="/Content/Images/Effects/shadow.png">
+        </div>
+    </div>
+
+    <div class="content_full LocationDetail">
+        @*----------------- Location Header Image -----------------------*@
+        @{
+            try
+            {
+                string file = location.GetPropertyValue("largeImage").Url;
+                @*<div class="hidden-md locationHeaderImage" style="position: relative; background-image: url(@file); border: solid 2px #FFF; box-shadow: 0px 8px 8px 0 rgba(0,0,0,.2);">*@
+                @*<img class="BFSOverlay" src="/Content/Images/Branding/BFSLogo_SmallWhite.png"/>*@
+                @*</div>*@
+                <img class="img-responsive locationHeaderImage" src="@file" style="width:100%; height:100%; position: relative; border: solid 2px #FFF; box-shadow: 0px 8px 8px 0 rgba(0,0,0,.2); margin-bottom: 20px;" />
+                @*<img class="BFSOverlay" src="/Content/Images/Branding/BFSLogo_SmallWhite.png"/>*@
+                @*</img>*@
+
+            }
+            catch (Exception ex) { }
+        }
+        @*----------------- General Location Information Section - START  -----------------------*@
+        @{
+            var genInfo = new Dictionary<string, string>();
+            string[] dontShowKeys = { "Address2", "CityStateZip" };
+            if (location.address1 != "") { genInfo.Add("Address", location.address1); };
+            if (location.address2 != "") { genInfo.Add("Address2", location.address2); };
+            if (location.city != "" && location.state != "" && location.zipCode != "") { genInfo.Add("CityStateZip", location.city + ", " + location.state + " " + location.zipCode); }
+            if (location.mainPhone != "") { genInfo.Add("Phone", location.mainPhone); };
+            if (location.mainPhone2 != "") { genInfo.Add("Phone 2", location.mainPhone2); };
+            if (location.fax != "") { genInfo.Add("Fax", location.fax); };
+            if (location.email != "") { genInfo.Add("Email", location.email); };
+            if (location.managerName != "") { genInfo.Add("General Manager", location.managerName); };
+            if (location.salesManager != "") { genInfo.Add("Sales Manager", location.salesManager); };
+            if (location.locationManager != "") { genInfo.Add("Location Manager", location.locationManager); }
+            if (location.HoursMF != "") { genInfo.Add("Hours", location.HoursMF); }
+        }
+        <div class="LocInfo container">
+            <div class="col-sm-9">
+                <div class="LocInfo container">
+                    <div class="clearfix col-md-12">
+                        @foreach (var pair in genInfo)
+                        {
+                            var key = "";
+                            if (genInfo.TryGetValue(pair.Key, out string val))
+                            {
+                                <div class="LocInfoItemWrap">
+                                    @if (pair.Key != "Hours")
+                                    {
+
+                                        if (Array.IndexOf(dontShowKeys, pair.Key) == -1) { key = pair.Key + ":"; } else { key = ""; } // Don't show colon for Address2 etc
+
+                                        <label><b>@key</b></label>
+                                        //uncomment the block below to enable links for address and phone.
+                                        @*if (pair.Key.ToLower().Contains("address") || pair.Key.ToLower().Contains("city"))
+                                            {
+                                                <a href = "https://maps.google.com/?ll=@location.latitude,@location.longitude" target="_blank" ><span style="white-space: nowrap;">&nbsp;@val</span></a>
+                                            }  else if (pair.Key.ToLower().Contains("phone"))
+                                            {
+                                                <a href="tel:@val"><span style="white-space: nowrap;">&nbsp;@val</span></a>
+                                            }  else
+                                            {*@
+                                        <span style="white-space: nowrap;">&nbsp;@val</span>
+                                        //}
+
+
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="clearfix col-md-12">
+                        @if (genInfo.TryGetValue("Hours", out string val1)) //special format
+                        {
+                            <label style="float: left;"><b>Hours:</b></label>
+                            <div class="HoursWrap" style="min-width:190px;">
+                                @*<div>*@
+                                @Html.Raw("&nbsp;" + location.hoursMF + (location.HoursSaturday != "" ? "," + "<br/>&nbsp;Saturday " + location.HoursSaturday : "") + (location.HoursSunday != "" ? ",<br/>&nbsp;Sunday " + location.HoursSunday : ""))
+                                @*</div>*@
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div>
+                    <a href="/contact-us/?loczip=@location.zipCode" style="margin: auto; width: 100%;" class="btn btn-primary">Request Info ></a>
+                </div>
+            </div>
+        </div>
+
+        @*----------------- General Location Information Section - END -----------------------*@
+
+
+        @*---------------- Distributions - START ------------------------*@
+        <div class="clearfix">
+            @*this for bloc may seem quite redundant but is the only way to make C# and HTML play nice with each other*@
+            @foreach (IPublishedContent distributionCateogry in allDistributionCategories)
+            {
+                categoryFullName = distributionCateogry.Name;
+                categoryName = distributionCateogry.GetPropertyValue("locationListItemPropertyAlias").ToString();
+                var suppliers = location.GetPropertyValue(categoryName);
+                if (suppliers != null && suppliers.Count > 0)
+                {
+                    <p>
+                        <b>Distributed Products</b> (Click to See Suppliers)
+                    </p>
+                    atLeastOneSupplierFound = true;
+                    break;
+                }
+            }
+            @if (atLeastOneSupplierFound)
+            {
+                <ul class="DistListWrap">
+                    @foreach (IPublishedContent distributionCateogry in allDistributionCategories)
+                    {
+                        categoryFullName = distributionCateogry.Name;
+                        categoryName = distributionCateogry.GetPropertyValue("locationListItemPropertyAlias").ToString();
+                        var allSuppliers = location.GetPropertyValue(categoryName);
+                        //now want to de-dup suppliers, and i don't know how to cast these dynamic objects to something i can run linq on ... so i'll build a dictionary
+                        if (allSuppliers != null && allSuppliers.Count > 0)
+                        {
+                            var suppliers = (new Dictionary<int, string>());
+                            foreach (var item in allSuppliers)
+                            {
+                                if (!suppliers.ContainsKey(item.Id))
+                                {
+                                    suppliers.Add(item.Id, item.Name);
+                                }
+                            }
+                            <li>
+                                @{var dc = "dist" + @categoryName;}
+                                <text><a href="#" data-toggle="modal" data-target="#logoModal" data-category="@dc" data-catname="@categoryFullName">@categoryFullName</a></text>
+                                @{var id = "modal-content-dist" + @categoryName;}
+                                <div id="@id" class="clearfix">
+                                    @foreach (var kvp in suppliers.OrderBy(k => k.Value))
+                                    {
+                                        var SupId = kvp.Key;
+                                        var SupName = kvp.Value;
+                                        var Node = Umbraco.Content(SupId);
+                                        <div class="ModalLogosWrap">
+                                            @try
+                                            {
+                                                string file = Node.GetPropertyValue("supplierLogo").Url;
+                                                <img src="@file" alt="@SupId" />
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                <div class="DistItemImg">@SupName</div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+
+
+            @*---------------- Installed Services------------------------*@
+
+            @if (InstalledList.Count > 0)
+            {
+                <div>
+                    <div class="LocSubItemList">
+                        <p>
+                            <b>Installed Services</b>
+                        </p>
+                        <ul class="clearfix">
+                            @foreach (var item in InstalledList)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

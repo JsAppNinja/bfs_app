@@ -1,0 +1,68 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+
+@{
+    var visionDesc = Umbraco.AssignedContentItem.GetPropertyValue("visionDescription");
+    var value1Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value1Image"));
+    var value1Desc = Umbraco.AssignedContentItem.GetPropertyValue("value1Desc");
+    var value2Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value2Image"));
+    var value2Desc = Umbraco.AssignedContentItem.GetPropertyValue("value2Desc");
+    var value3Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value3Image"));
+    var value3Desc = Umbraco.AssignedContentItem.GetPropertyValue("value3Desc");
+    var value4Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value4Image"));
+    var value4Desc = Umbraco.AssignedContentItem.GetPropertyValue("value4Desc");
+    var value5Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value5Image"));
+    var value5Desc = Umbraco.AssignedContentItem.GetPropertyValue("value5Desc");
+    var value6Image = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("value6Image"));
+    var value6Desc = Umbraco.AssignedContentItem.GetPropertyValue("value6Desc");
+}
+
+<div class="CareeersSubContentWrap clearfix">
+    <div class="CareersSubContHeader"><h3>Vision, Mission <span style="font-family:Arial, Helvetica, sans-serif;">&amp;</span> Values</h3></div>
+    <div class="shade_divider"></div>
+    <p>@visionDesc</p>
+
+    <div class="MidColumn col-sm-6">
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value1Image.Url" /></div>
+            <div class="ValueDesc">
+                @value1Desc
+            </div>
+        </div>
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value2Image.Url" /></div>
+            <div class="ValueDesc">
+                @value2Desc
+            </div>
+        </div>
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value3Image.Url" /></div>
+            <div class="ValueDesc">
+                @value3Desc
+            </div>
+        </div>
+    </div>
+
+    <div class="MidColumn col-sm-6">
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value4Image.Url" /></div>
+            <div class="ValueDesc">
+                @value4Desc
+            </div>
+        </div>
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value5Image.Url" /></div>
+            <div class="ValueDesc">
+                @value5Desc
+            </div>
+        </div>
+        <div class="clearfix ValueWrap">
+            <div class="ValueIcon" style="min-width: 77px;"><img src="@value6Image.Url" /></div>
+            <div class="ValueDesc">
+                @value6Desc
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,60 @@
+{
+  "name": "bldr.com",
+  "version": "1.0.0",
+  "description": "Builders FirstSource Front End Web Stack",
+  "main": "server.js",
+  "scripts": {
+    "dev": "webpack --watch --config webpack.dev.js",
+    "prod": "webpack --config webpack.prod.js"
+  },
+  "author": "Keinan Pace",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "es6-promise": "^4.2.4",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-react": "^7.8.2",
+    "express": "^4.16.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "inputmask": "^3.3.11",
+    "json-loader": "^0.5.7",
+    "react": "^16.3.2",
+    "react-router-dom": "^4.2.2",
+    "typescript": "^2.8.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-merge": "^4.1.2"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
+  },
+  "dependencies": {
+    "css-loader": "^0.28.11",
+    "js-sha1": "^0.6.0",
+    "node-fetch": "^2.1.2",
+    "react-css-modules": "^4.7.2",
+    "react-dom": "^16.3.2",
+    "style-loader": "^0.21.0",
+    "whatwg-fetch": "^2.0.4"
+  }
+}

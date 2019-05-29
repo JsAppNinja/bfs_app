@@ -1,0 +1,65 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+
+@{
+    <section class="cons_type_wrap">
+        <div class="cons_type clearfix">
+            <h1 class="ContTypeTitle">@Umbraco.AssignedContentItem.GetPropertyValue("constructionTypeTitle")<img src="~/Content/Images/Effects/blueArrow.jpg" alt="blue arrow" title="blue arrow" class="blueArrowRight" /></h1>
+            <div class="ContTypesRow" style="padding-left: 1px !important;">
+
+                @{
+                    int count = 3;
+                    for (int i = 1; i <= count; i++)
+                    {
+
+                        var relatedTypeLink = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("type" + @i + "Link");
+
+                        if (relatedTypeLink != null)
+                        {
+                            foreach (var item in relatedTypeLink)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+
+                                <a href="@item.Link" target="@linkTarget">@Umbraco.AssignedContentItem.GetPropertyValue("type" +@i)</a>
+                            }
+                        }
+
+
+                    }
+                }
+                 
+            </div>
+
+            @*<div class="dropdown" style="float: right;">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    More...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    @{
+                        int countcollapse = 3;
+                        for (int i = 1; i <= countcollapse; i++)
+                        {
+
+                            var relatedTypeLink = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("type" + @i + "Link");
+
+                            if (relatedTypeLink != null)
+                            {
+                                foreach (var item in relatedTypeLink)
+                                {
+                                    var linkTarget = (item.NewWindow) ? "_blank" : null;
+
+                                    <li><a href="@item.Link" target="@linkTarget">@Umbraco.AssignedContentItem.GetPropertyValue("type" + @i)</a></li>
+                                }
+                            }
+
+
+                        }
+                    }
+                    
+                </ul>
+            </div>*@
+        </div>
+    </section>
+}
+

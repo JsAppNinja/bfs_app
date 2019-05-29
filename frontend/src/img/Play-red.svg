@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152px" height="152px" viewBox="0 0 152 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Play</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="40" cy="40" r="40"></circle>
+        <filter x="-77.5%" y="-65.0%" width="255.0%" height="255.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="10" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="20" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.145780187   0 0 0 0 0.0119757871   0 0 0 0 0.0361744552  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage" transform="translate(-644.000000, -5680.000000)">
+            <g id="Portal" transform="translate(251.000000, 5119.000000)">
+                <g id="Video" transform="translate(89.000000, 433.000000)">
+                    <g id="Play" transform="translate(340.000000, 154.000000)">
+                        <g id="Bg">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#F5184E" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <path d="M39.7380189,31.962744 L31.2680189,46.102744 C30.9126606,46.7181436 30.9105389,47.4758909 31.2624455,48.0932709 C31.6143521,48.7106509 32.267431,49.0949338 32.9780189,49.102744 L49.9180189,49.102744 C50.6286069,49.0949338 51.2816858,48.7106509 51.6335924,48.0932709 C51.985499,47.4758909 51.9833773,46.7181436 51.6280189,46.102744 L43.1580189,31.962744 C42.7954533,31.3650253 42.1471051,31 41.4480189,31 C40.7489328,31 40.1005846,31.3650253 39.7380189,31.962744 Z" id="Shape" fill="#FFFFFF" transform="translate(41.448019, 40.051372) rotate(90.000000) translate(-41.448019, -40.051372) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

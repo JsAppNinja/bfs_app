@@ -1,0 +1,73 @@
+﻿/* Medium devices (tablets, 992px and up) */
+@media(min-width:992px) and (max-width:1199px) {
+
+    /* ######### CONTENT STYLES ######### */
+
+    body {
+        font-size: 14px !important;
+    }
+
+    p {
+        font-size: .9em !important;
+    }
+
+    .MainH1 {
+        color: #324c9f !important;
+        font-size: 2em !important;
+        margin: 12px 6px 10px 6px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+    }
+
+        .MainH1 a {
+            color: #324c9f;
+            text-decoration: none;
+        }
+
+    h1 {
+        font-size: 2em !important;
+    }
+
+    h2 {
+        font-size: 1.7em !important;
+    }
+
+    h3 {
+        font-size: 1.5em !important;
+    }
+
+    h4 {
+        font-size: 1.2em !important;
+    }
+
+    h5 {
+        font-size: .9em !important;
+    }
+
+    .h5-left {
+        font-size: .9em !important;
+        text-align: left;
+        color: #253877
+    }
+
+    .h5-right {
+        font-size: .9em !important;
+        text-align: right;
+        color: #253877
+    }
+
+
+    .nav > li {
+        margin-left: .4em;
+        margin-right: .4em;
+        color: #fff !important;
+    }
+
+
+    /* ######### Containers ######### */
+
+    .form-gap {
+        padding-top: .1em;
+    }
+}

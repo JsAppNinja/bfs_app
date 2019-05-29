@@ -1,0 +1,295 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+
+@{
+    var jobHeading = Umbraco.AssignedContentItem.GetPropertyValue("jobHeading");
+}
+
+@{
+    var nav1 = Umbraco.AssignedContentItem.GetPropertyValue("navLink1");
+    var nav2 = Umbraco.AssignedContentItem.GetPropertyValue("navLink2");
+    var nav3 = Umbraco.AssignedContentItem.GetPropertyValue("navLink3");
+    var nav4 = Umbraco.AssignedContentItem.GetPropertyValue("navLink4");
+    var nav5 = Umbraco.AssignedContentItem.GetPropertyValue("navLink5");
+    var nav6 = Umbraco.AssignedContentItem.GetPropertyValue("navLink6");
+    var nav7 = Umbraco.AssignedContentItem.GetPropertyValue("navLink7");
+    var nav8 = Umbraco.AssignedContentItem.GetPropertyValue("navLink8");
+}   
+
+<div class="CareersFeatured">
+    <div class="CareersFeaturedInner">
+        <h2 style="margin-top: 40px; margin-bottom: -30px;">@jobHeading</h2>
+
+        @{ 
+
+            var jobImage1 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job1Image"));
+            var jobCaption1 = Umbraco.AssignedContentItem.GetPropertyValue("job1ImageCaption");
+            var jobTitle1 = Umbraco.AssignedContentItem.GetPropertyValue("job1Title");
+            var jobDesc1 = Umbraco.AssignedContentItem.GetPropertyValue("job1Description");
+            var jobLink1 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job1Link");
+            var jobImageVideoLink1 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job1ImageVideoLink");
+
+            var jobImage2 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job2Image"));
+            var jobCaption2 = Umbraco.AssignedContentItem.GetPropertyValue("job2ImageCaption");
+            var jobTitle2 = Umbraco.AssignedContentItem.GetPropertyValue("job2Title");
+            var jobDesc2 = Umbraco.AssignedContentItem.GetPropertyValue("job2Description");
+            var jobLink2 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job2Link");
+            var jobImageVideoLink2 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job2ImageVideoLink");
+
+            var jobImage3 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job3Image"));
+            var jobCaption3 = Umbraco.AssignedContentItem.GetPropertyValue("job3ImageCaption");
+            var jobTitle3 = Umbraco.AssignedContentItem.GetPropertyValue("job3Title");
+            var jobDesc3 = Umbraco.AssignedContentItem.GetPropertyValue("job3Description");
+            var jobLink3 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job3Link");
+            var jobImageVideoLink3 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job3ImageVideoLink");
+
+            var jobImage4 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job4Image"));
+            var jobCaption4 = Umbraco.AssignedContentItem.GetPropertyValue("job4ImageCaption");
+            var jobTitle4 = Umbraco.AssignedContentItem.GetPropertyValue("job4Title");
+            var jobDesc4 = Umbraco.AssignedContentItem.GetPropertyValue("job4Description");
+            var jobLink4 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job4Link");
+            var jobImageVideoLink4 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job4ImageVideoLink");
+
+            var jobImage5 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job5Image"));
+            var jobCaption5 = Umbraco.AssignedContentItem.GetPropertyValue("job5ImageCaption");
+            var jobTitle5 = Umbraco.AssignedContentItem.GetPropertyValue("job5Title");
+            var jobDesc5 = Umbraco.AssignedContentItem.GetPropertyValue("job5Description");
+            var jobLink5 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job5Link");
+            var jobImageVideoLink5 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job5ImageVideoLink");
+
+            var jobImage6 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("job6Image"));
+            var jobCaption6 = Umbraco.AssignedContentItem.GetPropertyValue("job6ImageCaption");
+            var jobTitle6 = Umbraco.AssignedContentItem.GetPropertyValue("job6Title");
+            var jobDesc6 = Umbraco.AssignedContentItem.GetPropertyValue("job6Description");
+            var jobLink6 = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("job6Link");
+            var jobImageVideoLink6 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("job6ImageVideoLink");
+
+
+
+         }
+
+
+            @if (jobImage1 != null || jobImage2 != null)
+            {
+                <div class="clearfix">
+
+
+                    @if (jobImage1 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+
+                            <div class="anchoroffsetB" id="three"></div>
+                            <!-- Featured Position Img or Video-->
+
+                            @if (jobImageVideoLink1 != null && jobImageVideoLink1.Any())
+                            {
+                                foreach (var item in jobImageVideoLink1)
+                                {
+                                    @*<div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">*@
+                                        <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                            <div>
+                                                <span id="video-symbol"></span>
+                                                <div class="ImgDiv" id="two" style="background-image: url(@jobImage1.Url);">&nbsp;</div>
+                                            </div>
+                                            <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                        </a>
+                                    @*</div>*@
+                                }
+                            }
+                            else
+                            {
+                                <div class="ImgDiv" style="background-image: url(@jobImage1.Url);">&nbsp;</div>
+                            }
+
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption1</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle1</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc">
+                                <p>@jobDesc1</p>
+                            </div>
+
+                            @foreach (var item in jobLink1)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+
+                    @if (jobImage2 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+
+                            <div class="anchoroffsetB" id="four"></div>
+                            <!-- Featured Position Img or Video-->
+                            
+                            @if (jobImageVideoLink2 != null && jobImageVideoLink2.Any())
+                            {
+                                foreach (var item in jobImageVideoLink2)
+                                {
+                                    @*<div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">*@
+                                    <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                        <div>
+                                            <span id="video-symbol"></span>
+                                            <div class="ImgDiv" id="two" style="background-image: url(@jobImage2.Url);">&nbsp;</div>
+                                        </div>
+                                        <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                    </a>
+                                        @*</div>*@
+                                }
+                            }
+                            else
+                            {
+                                <div class="ImgDiv" style="background-image: url(@jobImage2.Url);">&nbsp;</div>
+                            }
+
+
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption2</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle2</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc" >
+                                <p>@jobDesc2</p>
+                            </div>
+
+                            @foreach (var item in jobLink2)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+                </div><!-- ./row-->
+            }
+
+
+            @if (jobImage3 != null || jobImage4 != null)
+                {
+                <div class="clearfix">
+
+
+                    @if (jobImage3 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="anchoroffsetB" id="five"></div>
+                            <!-- Featured Position Img -->
+                            <img class="featPosImg" src="@jobImage3.Url" style="width: 100%;" />
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption3</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle3</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc">
+                                <p>@jobDesc3</p>
+                            </div>
+
+                            @foreach (var item in jobLink3)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                    <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+
+                    @if (jobImage4 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="anchoroffsetB" id="six"></div>
+                            <!-- Featured Position Img -->
+                            <img class="featPosImg" src="@jobImage4.Url" style="width: 100%;" />
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption4</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle4</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc">
+                                <p>@jobDesc4</p>
+                            </div>
+
+                            @foreach (var item in jobLink4)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                    <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+                </div><!-- ./row-->
+            }
+
+            @if (jobImage5 != null || jobImage6 != null)
+            {
+                <div class="clearfix">
+                    @if (jobImage5 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="anchoroffsetB" id="seven"></div>
+                            <!-- Featured Position Img -->
+                            <img class="featPosImg" src="@jobImage5.Url" style="width: 100%;" />
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption5</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle5</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc">
+                                <p>@jobDesc5</p>
+                            </div>
+
+                            @foreach (var item in jobLink5)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                    <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+
+                    @if (jobImage6 != null)
+                    {
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="anchoroffsetB" id="eight"></div>
+                            <!-- Featured Position Img -->
+                            <img id="eight" class="featPosImg" src="@jobImage6.Url" style="width: 100%;" />
+                            <!-- Featured Position Img Caption -->
+                            <p class="featPosImgCaption">@jobCaption6</p>
+                            <!-- Featured Position Title -->
+                            <h3>@jobTitle6</h3>
+                            <!-- Featured Position Description Text -->
+                            <div class="featPosDesc" >
+                                <p>@jobDesc6</p>
+                            </div>
+
+                            @foreach (var item in jobLink6)
+                            {
+                                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                                    <!-- Featured Position Apply Button -->
+                                @*<a class="btn btn-block" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                                <a class="btn btn-block" target="_blank" href="@item.Link">@item.Caption</a>
+                            }
+                        </div>
+                    }
+
+                </div><!-- ./row-->
+            }
+
+                       
+    </div>
+</div>
+

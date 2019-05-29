@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+<div class="CareersSubMenu">
+    <div class="CareersSubMenuInner">
+        <ul class="clearfix">
+@{
+    int count = 5;
+    for (int i = 1; i <= count; i++)
+    {
+        var submenuLink = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("careerSubMenu" + @i + "Link");
+        var submenuImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("careerSubMenu" + @i + "Image"));
+        var submenuLabel = Umbraco.AssignedContentItem.GetPropertyValue("careerSubMenu" + @i + "Text");
+        if (submenuLink != null)
+        {
+            foreach (var item in submenuLink)
+            {
+                var linkTarget = (item.NewWindow) ? "_blank" : null;
+                <li><a href="@item.Link" target="@linkTarget"><img src="@submenuImage.Url" alt="@item.Caption" title="@submenuLabel"/><br />@submenuLabel</a></li>
+            }
+        }
+    }
+}
+        </ul>
+    </div>
+</div>

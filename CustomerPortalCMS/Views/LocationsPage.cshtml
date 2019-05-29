@@ -1,0 +1,74 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "BldrMaster.cshtml";
+}
+@section scripts
+{
+    <script>
+        backButton.ClearDataOnLoad = false;
+        backButton.enablePageRestore();
+        backButton.allowRestoreForThePage = true;
+        backButton.element = $(".content_full.LocationsPage")
+        backButton.onRestoreLoad = function () {
+            var additionalData = backButton.additionalData()
+            if (additionalData != null && additionalData.mapData != null)
+                InitializeMap(additionalData.mapData);
+            if (additionalData != null && additionalData.restoredata != null) {
+                $('#TxtZipCod').val(additionalData.restoredata.zipcode);
+                $('#TxtCity').val(additionalData.restoredata.city);
+                $('#ddlState').val(additionalData.restoredata.state);
+
+                $.each(additionalData.restoredata.checkboxes1, function (i, value) {
+                    $(value.key).prop("checked", true);
+                });
+                $.each(additionalData.restoredata.checkboxes2, function (i, value) {
+                    $(value.key).prop("checked", true);
+                });
+            }
+            $(".logo_search_outerwrap").fadeIn();
+        }
+        backButton.onReady = function () {
+            registerButtonEvent();
+        }
+    </script>
+}
+<div class="container retroContainer">
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+    <div class="content_full LocationsPage">
+        @Html.Partial("_Location")
+        <div id="map_device" style="height:450px; margin-bottom: 25px; background: #FFF; border: solid 1px #FFF; box-shadow: 0px 2px 8px 0 rgba(0,0,0,.2);">
+            <div id="MapListLoading">
+                <div class="sk-fading-circle">
+                    <div class="sk-circle1 sk-circle"></div>
+                    <div class="sk-circle2 sk-circle"></div>
+                    <div class="sk-circle3 sk-circle"></div>
+                    <div class="sk-circle4 sk-circle"></div>
+                    <div class="sk-circle5 sk-circle"></div>
+                    <div class="sk-circle6 sk-circle"></div>
+                    <div class="sk-circle7 sk-circle"></div>
+                    <div class="sk-circle8 sk-circle"></div>
+                    <div class="sk-circle9 sk-circle"></div>
+                    <div class="sk-circle10 sk-circle"></div>
+                    <div class="sk-circle11 sk-circle"></div>
+                    <div class="sk-circle12 sk-circle"></div>
+                </div>
+                <div style="text-align: center; font-size: 17px; font-family: Verdana, Geneva, sans-serif !important; color: #324c9f">Loading Map Information<br /><br />Please Wait...</div>
+            </div>
+        </div>
+
+        @Html.Partial("Locations/_LocationList")
+        @*@CurrentPage.GetGridHtml("contentGrid", "bootstrap3")
+            <div style="text-transform:uppercase;"><strong>[new content area]</strong><br /><br /></div>*@
+        @Model.Content.GetPropertyValue("pageContent")
+    </div>
+</div>
+@section optionalScripts{
+    <script type="text/javascript" src="~/Scripts/Locations/Locations2.js"></script>
+    @* Gmaps API Key *@
+   @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoVqbt-sfIz39XSIWHLrdFLljklTNfwTY" async defer></script>*@
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA2d4VrwuNuSE6QBiT9axx6ds4nRcsVXIs"></script>
+    @* Overlapping Marker Spiderfier - https://github.com/jawj/OverlappingMarkerSpiderfier *@
+    <script type="text/javascript" src="~/Scripts/oms.min.js"></script>
+}

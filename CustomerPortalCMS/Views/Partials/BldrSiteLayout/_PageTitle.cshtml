@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{   
+    var headerImageUrl = String.Empty;
+    //var headerImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("headerImage"));
+    var headerImage = Umbraco.TypedMedia(Model.Content.GetPropertyValue<int>("headerImage"));
+    //if (headerImage != null){
+    //    headerImageUrl = headerImage.Url;
+    //}
+
+
+<div class="BasicPageTopWrap">
+
+
+    @if (headerImage != null) {
+        <div class="banner">
+            @*<a target="banner" href="/">*@
+            <img src="@headerImage.Url" border="0" alt="@Model.Content.GetPropertyValue("title")">
+            @*</a>*@
+        </div>
+    } else
+    {
+        <div class="bannerEmpty"></div>
+    }
+
+
+    <h1 class="MainH1">
+        @Model.Content.GetPropertyValue("title")
+    </h1>
+    <img class="shadow" alt="line" title="@Model.Content.GetPropertyValue("title")" src="/Content/Images/Effects/shadow.png" />
+</div>
+
+}

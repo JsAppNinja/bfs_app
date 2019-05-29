@@ -1,0 +1,13 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+
+@{
+    var careerContent = Umbraco.AssignedContentItem.GetPropertyValue("careerContent");
+}
+
+<div class="CareersDisclaimer">
+    <div class="CareersDisclaimerInner">
+        <p>@careerContent</p>
+    </div>
+</div>

@@ -1,0 +1,212 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+
+@{
+    var nav1 = Umbraco.AssignedContentItem.GetPropertyValue("navLink1");
+    var nav2 = Umbraco.AssignedContentItem.GetPropertyValue("navLink2");
+    var nav3 = Umbraco.AssignedContentItem.GetPropertyValue("navLink3");
+    var nav4 = Umbraco.AssignedContentItem.GetPropertyValue("navLink4");
+    var nav5 = Umbraco.AssignedContentItem.GetPropertyValue("navLink5");
+    var nav6 = Umbraco.AssignedContentItem.GetPropertyValue("navLink6");
+    var nav7 = Umbraco.AssignedContentItem.GetPropertyValue("navLink7");
+    var nav8 = Umbraco.AssignedContentItem.GetPropertyValue("navLink8");
+}
+
+@{
+    var careersHeading = Umbraco.AssignedContentItem.GetPropertyValue("featuredCareersHeading");
+}
+
+<div class="career_sub_content">
+    @*<div class="CareersFeaturedInner career_sub_content">*@
+    <h2>@careersHeading</h2>
+
+    @{
+
+        var careerImage1 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("career1Image"));
+        var careerSecondImage1 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("career1SecondImage"));
+        var careerTitle1 = Umbraco.AssignedContentItem.GetPropertyValue("career1Title");
+        var careerDesc1 = Umbraco.AssignedContentItem.GetPropertyValue("career1Description");
+        var careerLink1 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career1Link");
+        var career1Imagevideo = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career1ImageVideoLink");
+        var career1SecondImageVideoLink = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career1");
+
+        var careerImage2 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("career2Image"));
+        var careerSecondImage2 = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("career2SecondImage"));
+        var careerTitle2 = Umbraco.AssignedContentItem.GetPropertyValue("career2Title");
+        var careerDesc2 = Umbraco.AssignedContentItem.GetPropertyValue("career2Description");
+        var careerLink2 = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career2Link");
+        var career2Imagevideo = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career2ImageVideoLink");
+        var career2SecondImageVideoLink = Umbraco.AssignedContentItem.GetPropertyValue<RelatedLinks>("career2SecondImageVideoLink");
+
+    }
+
+    @if (careerImage1 != null)
+    {
+        <div class="FeaturedJobItemWrap">
+            <div class="anchoroffset" id="@nav1"></div>
+
+            @if (careerImage1 != null)
+            {
+                <div class="FeaturedJobItemRow clearfix">
+                    <!-- Featured Position Img -->
+                    <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                        @if (career1Imagevideo != null && career1Imagevideo.Any())
+                        {
+                            foreach (var item in career1Imagevideo)
+                            {
+                                <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                                    <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                        <div>
+                                            <span id="video-sym"></span>
+                                            <div class="ImgDiv" id="two" style="background-image: url(@careerImage1.Url);">&nbsp;</div>
+                                        </div>
+                                        <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                        <div class="ImgDiv" style="background-image: url(@careerImage1.Url);">&nbsp;</div>
+                        }
+                    </div>
+                    @if (career1SecondImageVideoLink != null && career1SecondImageVideoLink.Any() && careerSecondImage1 != null)
+                    {
+                        foreach (var item in career1SecondImageVideoLink)
+                        {
+                            <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                                <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                    <div>
+                                        <span id="video-sym"></span>
+                                        <div class="ImgDiv" id="two" style="background-image: url(@careerSecondImage1.Url);">&nbsp;</div>
+                                    </div>
+                                    <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else if (careerSecondImage1 != null)
+                    {
+                        <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                            <div class="ImgDiv" id="two" style="background-image: url(@careerSecondImage1.Url);">&nbsp;</div>
+                        </div>
+                    }
+                    <div class="FeaturedJobItemSingleCol">
+                        <div class="ImgDiv" style="background-image: url(@careerImage1.Url);">&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="FeaturedJobItemRow clearfix">
+                    <div class="FeaturedJobItemColumn FeaturedJobDesc col-xs-12 col-sm-8">
+                        <!-- Featured Position Title -->
+                        <h3>@careerTitle1</h3>
+                        <!-- Featured Position Description Text -->
+                        <p>@careerDesc1</p>
+                    </div>
+                    <div class="FeaturedJobItemColumn col-xs-12 col-sm-4">
+                        @foreach (var item in careerLink1)
+                        {
+                            var linkTarget = (item.NewWindow) ? "_blank" : null;
+                            <!-- Featured Position Apply Button -->
+                            @*<a class="bttn" target="@linkTarget" href="@item.Link">@item.Caption</a>*@
+                            <div style="height: 100%;"><a class="btn CareersButton" target="@linkTarget" href="@item.Link">@item.Caption</a></div>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div><!-- ./row-->
+    }
+
+
+            @if (careerImage2 != null)
+            {
+                <div class="FeaturedJobItemWrap">
+                    <div class="anchoroffset" id="@nav2"></div>
+
+
+                    @if (careerImage2 != null)
+                {
+                        <div class="FeaturedJobItemRow clearfix">
+                            <!-- Featured Position Img -->
+                            <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                                @if (career2Imagevideo != null && career2Imagevideo.Any())
+                                {
+                                    foreach (var item in career2Imagevideo)
+                                    {
+                                        @*<div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">*@
+                                            <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                                <div>
+                                                    <span id="video-sym"></span>
+                                                    <div class="ImgDiv" id="two" style="background-image: url(@careerImage2.Url);">&nbsp;</div>
+                                                </div>
+                                                <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                            </a>
+                                        @*</div>*@
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="ImgDiv" style="background-image: url(@careerImage2.Url);">&nbsp;</div>
+                                }
+
+
+                            </div>
+                            @if (career2SecondImageVideoLink != null && career2SecondImageVideoLink.Any() && careerSecondImage2 != null)
+                    {
+                        foreach (var item in career2SecondImageVideoLink)
+                        {
+                                    <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                                        <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;">
+                                            <div>
+                                                <span id="video-sym"></span>
+                                                <div class="ImgDiv" id="two" style="background-image: url(@careerSecondImage2.Url);">&nbsp;</div>
+                                            </div>
+                                            <div class="videoLabel">@*@item.videoLinkLabel*@ </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            else if (careerSecondImage2 != null)
+                            {
+                                <div class="FeaturedJobItemColumn ImgDivWrap col-xs-6 col-sm-6">
+                                    <div class="ImgDiv" id="two" style="background-image: url(@careerSecondImage2.Url);">&nbsp;</div>
+                                </div>
+                            }
+                            <div class="FeaturedJobItemSingleCol">
+                                <div class="ImgDiv" style="background-image: url(@careerImage2.Url);">&nbsp;</div>
+                            </div>
+                        </div>
+
+                        <div class="FeaturedJobItemRow clearfix">
+                            <div class="FeaturedJobItemColumn col-xs-12 col-sm-4 hidden-xs">
+                                @foreach (var item in careerLink2)
+                                {
+                                    var linkTarget = (item.NewWindow) ? "_blank" : null;
+                            <!-- Featured Position Apply Button -->
+                                    <div style="height: 100%;"><a class="btn CareersButton" target="@linkTarget" href="@item.Link">@item.Caption</a></div>
+                                }
+                            </div>
+                            <div class="FeaturedJobItemColumn FeaturedJobDesc col-xs-12 col-sm-8">
+                                <!-- Featured Position Title -->
+                                <h3>@careerTitle2</h3>
+                                <!-- Featured Position Description Text -->
+                                <p>@careerDesc2</p>
+                            </div>
+                            <div class="FeaturedJobItemColumn col-xs-12 visible-xs-block">
+                                @foreach (var item in careerLink2)
+                                {
+                                    var linkTarget = (item.NewWindow) ? "_blank" : null;
+                            <!-- Featured Position Apply Button -->
+                                    <div style="height: 100%;"><a class="btn CareersButton" target="@linkTarget" href="@item.Link">@item.Caption</a></div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                </div><!-- ./row-->
+                        }
+
+                        @*</div>*@
+                    </div>

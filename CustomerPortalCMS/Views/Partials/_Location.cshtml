@@ -1,0 +1,95 @@
+﻿<div style="border: 1px solid #ddd; background: #f9f9f9; border-radius: 3px; padding: 8px; margin-bottom: 8px;">
+    <h2>Find a location close to you by:</h2>
+    <div id="PnlEnter" class="lct_search_wrap" style="padding: 0;">
+        <form id="searchForm" name="searchForm" class="form-inline clearfix">
+            <div class="form-group col-sm-3 col-md-3">
+                @*<div class="radio-inline">
+                    <input type="radio" name="searchBy" value="Zip" checked="checked">*@
+                    <input name="TxtZipCod" type="text" maxlength="5" id="TxtZipCod" class="form-control" placeholder="ZIP (leave empty for all)" style="width: 100% !important;">
+                    <input type="hidden" name="HdnTxtZipCode" id="HdnTxtZipCode" />
+                @*</div>*@
+            </div>
+            <div class="form-group col-sm-1 col-md-1" style="white-space: nowrap; text-align: center;"><div style="font-size: 15px; padding-top: 5px;"> or </div></div>
+            @*<div class="form-group col-sm-6 col-md-6" style="text-align: right; padding-right: 4px;">
+                <div class="radio-inline">*@
+                    <div class="form-group col-sm-3 col-md-3" style="text-align: right; padding-right: 8px;">
+                        @*<input type="radio" name="searchBy" value="byCityAndState" >*@
+                        <input name="TxtCity" type="text" id="TxtCity" title="City" maxlength="25" class="form-control" placeholder="City" style="width: 100% !important;">
+                        <input type="hidden" name="HdnTxtCity" id="HdnTxtCity">
+                    </div>
+                    <div class="form-group col-sm-3 col-md-3" style="text-align: center; padding-right: 8px;">
+                        <select name="ddlState" id="ddlState" class="form-control" style="width: 100% !important;">
+                            <option value="0">-- Select State --</option>
+                            <option value="1">AL Alabama</option>
+                            <option value="2">AK Alaska</option>
+                            <option value="3">AZ Arizona</option>
+                            <option value="4">AR Arkansas</option>
+                            <option value="5">CA California</option>
+                            <option value="6">CO Colorado</option>
+                            <option value="7">CT Connecticut</option>
+                            <option value="8">DE Delaware</option>
+                            <option value="9">FL Florida</option>
+                            <option value="10">GA Georgia</option>
+                            <option value="11">HI Hawaii</option>
+                            <option value="12">ID Idaho</option>
+                            <option value="13">IL Illinois</option>
+                            <option value="14">IN Indiana</option>
+                            <option value="15">IA Iowa</option>
+                            <option value="16">KS Kansas</option>
+                            <option value="17">KY Kentucky</option>
+                            <option value="18">LA Louisiana</option>
+                            <option value="19">ME Maine</option>
+                            <option value="20">MD Maryland</option>
+                            <option value="21">MA Massachusetts</option>
+                            <option value="22">MI Michigan</option>
+                            <option value="23">MN Minnesota</option>
+                            <option value="24">MS Mississippi</option>
+                            <option value="25">MO Missouri</option>
+                            <option value="26">MT Montana</option>
+                            <option value="27">NE Nebraska</option>
+                            <option value="28">NV Nevada</option>
+                            <option value="29">NH New Hampshire</option>
+                            <option value="30">NJ New Jersey</option>
+                            <option value="31">NM New Mexico</option>
+                            <option value="32">NY New York</option>
+                            <option value="33">NC North Carolina</option>
+                            <option value="34">ND North Dakota</option>
+                            <option value="35">OH Ohio</option>
+                            <option value="36">OK Oklahoma</option>
+                            <option value="37">OR Oregon</option>
+                            <option value="38">PA Pennsylvania</option>
+                            <option value="39">RI Rhode Island</option>
+                            <option value="40">SC South Carolina</option>
+                            <option value="41">SD South Dakota</option>
+                            <option value="42">TN Tennessee</option>
+                            <option value="43">TX Texas</option>
+                            <option value="44">UT Utah</option>
+                            <option value="45">VT Vermont</option>
+                            <option value="46">VA Virginia</option>
+                            <option value="47">WA Washington</option>
+                            <option value="48">WV West Virginia</option>
+                            <option value="49">WI Wisconsin</option>
+                            <option value="50">WY Wyoming</option>
+                        </select>
+                    </div>
+                @*</div>
+            </div>*@
+            <div class="form-group col-sm-2 col-md-2" style="text-align: right;">
+                <input type="submit" name="BtnSearch" value="Search" id="BtnSearch" class="sbmt_bttn btn btn-primary" style="width: 100%;">
+                <span id="RegularExpressionValidator1" style="display:none;"></span>
+                <div id="ValidationSummary1" style="display:none;"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<div style="border: 1px solid #ddd; background: #f9f9f9; border-radius: 3px; padding: 18px 8px 18px 18px; margin-bottom: 8px; margin-top: 12px">
+    <strong>Show only locations that distribute any of these Products:</strong>
+    <div id="divDistributions" class="container" style="padding: 8px 0 0px 0px;"></div> <br/>
+    <strong>Show only locations that install any of these Products:</strong>
+    <div id="divInstallServices" class="container" style="padding: 8px 0 0 0px;"></div>
+</div>
+<div style="padding-bottom: 10px;" class="clearfix">
+    <input type="submit" name="BtnResetMap" value="Reset Map" style="padding:5px; float: left;" id="BtnResetMap" class="btn btn-primary">
+    @*<input type="submit" name="BtnReset" value="Apply Filters" style="padding:5px; float: right;" id="BtnReset" class="btn btn-primary">*@
+</div>
+@*key=AIzaSyBoVqbt-sfIz39XSIWHLrdFLljklTNfwTY*@

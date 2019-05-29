@@ -1,0 +1,106 @@
+﻿@media (max-width: 767px) {
+
+    body {
+        font-size: 14px !important;
+    }
+
+    p {
+        font-size: .9em !important;
+    }
+
+    .MainH1 {
+        color: #324c9f !important;
+        font-size: 2em !important;
+        margin: 12px 6px 10px 6px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+    }
+
+        .MainH1 a {
+            color: #324c9f;
+            text-decoration: none;
+        }
+
+    h1 {
+        font-size: 2em !important;
+    }
+
+    h2 {
+        font-size: 1.7em !important;
+    }
+
+    h3 {
+        font-size: 1.5em !important;
+    }
+
+    h4 {
+        font-size: 1.2em !important;
+    }
+
+    h5 {
+        font-size: 1em !important;
+    }
+
+    .h5-left {
+        font-size: 1em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    .h5-right {
+        font-size: 1em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    
+    
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+color: #fff;
+font-size: .7em;
+}
+
+    .form-gap {
+        padding-top: .1em;
+    }
+
+
+    /* START ########################### INVOICE Page STYLES ################## */
+
+    .dateDropdown {
+        text-align: left;
+    }
+
+    .toggleButtons {
+        text-align: left;
+    }
+
+    .exportButtons {
+        text-align: left;
+    }
+
+
+    .navbar-header {
+        padding: 11px;
+    }
+    .navbar-brand img{
+        margin:0;
+        padding:0;
+    }
+    .dropdown-menu li{
+        color:#ffffff !important;
+    }
+    .dropdown-menu li a{
+        color:#ffffff !important;
+    }
+    .navbar-brand{
+        float:none;
+    }
+    .navbar-brand img {
+        padding: 0;
+        margin: 0 auto !important;
+    }
+    /* END ########################### INVOICE Page STYLES ################## */
+
+}

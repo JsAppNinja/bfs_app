@@ -1,0 +1,75 @@
+﻿/*  Monster Trucks */
+
+.k-window {
+    width: 75%;
+}
+
+.ageing {
+    color: #324C9F;
+    font-weight: 700;
+}
+
+.ageing-panel {
+    margin-bottom: 4px !important;
+}
+
+.file-text {
+    margin-top: .3em;
+    margin-right: .5em;
+    color: #337ab7;
+    font-size: 1.5em;
+}
+
+.cal-text {
+    margin-top: .35em;
+    margin-left: .08em;
+    color: #337ab7;
+    font-size: 1.5em;
+}
+
+.truck-text {
+    color: #FFF;
+    margin-top: .2em;
+    margin-left: .5em;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+.fa-truck:before {
+    color: #404040;
+    font-size: 1.3em;
+}
+
+.fa-file-o:before {
+    color: #404040;
+    font-size: 1.2em;
+}
+
+.fa-calendar-o:before {
+    color: #404040;
+    font-size: 1.2em;
+}
+
+.panel-group .title span {
+    font-size: 12px;
+    color: #464646;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.panel-heading .title:before {
+    font-family: FontAwesome;
+    content: "\f106";
+    font-size: 25px;
+    padding-right: 10px;
+    line-height: 25px;
+    /*float: right;*/
+}
+
+.panel-heading .title.collapsed:before {
+    font-size: 25px;
+    padding-right: 10px;
+    line-height: 25px;
+    /*float: right;*/
+    content: "\f107";
+}

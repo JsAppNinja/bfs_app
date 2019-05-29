@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "BldrMaster.cshtml";
+}
+
+<section class="content_wrap Careers WhyBuildersWrap">
+
+    <div class="CareersBanner CareerSubBanner">
+        @Html.Partial("Careers/_Banner")
+    </div>
+    <div class="career_sub_content WhyBuilders">
+        @Html.Partial("Careers/_IntroWhyBuilders")
+        @Html.Partial("Careers/_Vision")
+        
+        <div class="CareeersSubContentWrap">
+            <div class="CareersSubContHeader"><h3 id="benefits" style="text-align: left !important; margin-top: 30px;">Benefits</h3></div>
+            <div class="BenefitsContentWrap">
+                @Html.Partial("Careers/_CareerContent")
+            </div>
+        </div>
+        
+    </div>
+
+</section>

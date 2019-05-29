@@ -1,0 +1,80 @@
+﻿@inherits UmbracoViewPage<InstallUmbraco.Models.ContactUsModel>
+
+<div style="padding-bottom: 40px; max-width: 400px; margin: 0 auto;">
+    <h3 style="text-align: center;">Get in touch with BFS</h3>
+
+    @using (Html.BeginUmbracoForm("SubmitForm", "ContactUsSurface", FormMethod.Post))
+    {
+        
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        
+        <input type="hidden" id="LocationZipCode" name="LocationZipCode" value="N/A" />
+        <div class="form-group">
+            <select id="ContactReason" name="ToAddress">
+                <option id="reason" value="reason">Reason for Inquiry</option>
+                <option id="sales" value="sales" @((ViewData["reason"] != null && (char)ViewData["reason"] == 's') ? "selected='selected'": "")>Sales</option>
+                <option id="warranty" value="warranty">Warranty</option>
+                <option id="safety" value="safety">Safety</option>
+                <option id="careers" value="careers">Careers</option>
+                <option id="other" value="other">Other</option>
+            </select>
+        </div>
+
+        <div class=@((ViewData["reason"] != null && (char)ViewData["reason"] == 's') ? "": "InnerFormWrap")>
+            @Html.ValidationMessageFor(m => m.ZipCode)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ZipCode, new { @placeholder = "Enter Zip Code" })
+            </div>
+
+            @Html.ValidationMessageFor(m => m.Name)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name" })
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.Company)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Company, new { @placeholder = "Company" })
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.EmailAddress)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.EmailAddress, new { @placeholder = "Email" })
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.Phone)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Phone" })
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.ContactTime)
+            <div class="form-group">
+                <select id="ContactTime" name="ContactTime">
+                    <option selected="selected" value="Preferred Contact Time">Preferred Contact Time</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                </select>
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.HearAboutUs)
+            <div class="form-group">
+                <select id="HearAboutUs" name="HearAboutUs">
+                    <option selected="selected" value="How did you hear about us ?">How did you hear about us ?</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Advertising in a newspaper or magazine">Advertising in a newspaper or magazine</option>
+                    <option value="Online site (community, site, newsletters, etc.)">Online site (community, site, newsletters, etc.)</option>
+                    <option value="Search engine">Search engine</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            @Html.ValidationMessageFor(m => m.Message)
+            <div class="form-group">
+                @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message" })
+            </div>
+
+            <button class="sbmtBtn">Submit</button>
+        </div>
+    }
+</div>

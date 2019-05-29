@@ -1,0 +1,126 @@
+﻿/* Small devices (max-width:480px and 320) */
+
+@media(max-width:480px) {
+
+body {
+    font-size: 12px !important;
+}
+
+p {
+    font-size: .9em !important;
+}
+
+    .MainH1 {
+        color: #324c9f !important;
+        font-size: 2em !important;
+        margin: 12px 6px 10px 6px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .MainH1 a {
+        color: #324c9f;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 2em !important;
+    }
+
+    h2 {
+        font-size: 1.7em !important;
+    }
+
+    h3 {
+        font-size: 1.4em !important;
+    }
+
+    h4 {
+        font-size: 1.2em !important;
+    }
+
+    h5 {
+        font-size: .8em !important;
+    }
+
+    .h5-left {
+        font-size: .8em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    .h5-right {
+        font-size: .8em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    .btn {
+        font-size: 1em !important;
+    }
+
+
+    .form-control {
+        font-size: .9em;
+        padding: 3px;
+    }
+
+
+    .input-group-addon {
+        font-size: .9em;
+        padding: 3px;
+        min-width: 95px !important;
+    }
+
+    .list-group-item {
+        font-size: .8em;
+    }
+
+    .badge {
+        font-size: .8em;
+    }
+/*-------------------- Navbar ------------------------*/
+.navbar-brand img {
+    width: 150px;
+    padding: 10px;
+    margin: -1% 50%;
+}
+
+
+.dropdown-menu > li > a {
+    font-size: .7em;
+}
+    /*-------------------- Head ------------------------*/
+    .form-gap {
+        padding-top: 2.8em;
+    }
+
+
+
+/*-------------------- Containers ------------------------*/
+    .sub-bottom {
+        POSITION: ABSOLUTE;
+        WIDTH: 100%;
+        padding-right: 2% !important;
+        padding-left: 2% !important;
+        background-color: darkgrey !important;
+    }
+
+
+    .container-fluid {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    .panel-body {
+         padding: 5px; 
+    }
+
+
+    
+}
+
+
+

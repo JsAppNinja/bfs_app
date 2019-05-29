@@ -1,0 +1,71 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+<div class="HeaderBG">
+    @if (true)
+    {
+        <div class="Slider">
+            @{
+                int count2 = 4;
+                for (int i = 1; i <= count2; i++)
+                {
+
+                    var carouselImageUrl = String.Empty;
+                    // Pragmatx: the following line of code does not seem to work with Models Builder in API mode, but does work in PureLive mode
+                    var carouselImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("carouselImage" + @i));
+                    // Pragmatx:  this is what it needs to be in API mode.
+                    //IPublishedContent carouselImage = Umbraco.TypedMedia(Model.Content.GetPropertyValue<IPublishedContent>("carouselImage" + @i).Id);
+                    var carouselLabel = Umbraco.AssignedContentItem.GetPropertyValue("carouselImage" + @i + "Caption");
+                    var cssclass = i == 1 ? "" : "cS-hidden";
+                    if (carouselImage != null)
+                    {
+                        carouselImageUrl = carouselImage.Url;
+
+                        <div class="slideImg @cssclass" style="background: url(@carouselImageUrl); ">
+                            <div class="slideCaptionWrap">
+                                <div class="slideCaption">
+                                    <div class="slideCaptionBG">&nbsp;</div>
+                                    <h1>@carouselLabel</h1>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    }
+    
+    @if (false)
+    {
+    <div id="home-jumbo" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div class="carousel-inner" role="listbox">
+        @{
+            int count = 4;
+            for (int i = 1; i <= count; i++)
+            {
+
+                var carouselImageUrl = String.Empty;
+                // Pragmatx: the following line of code does not seem to work with Models Builder in API mode, but does work in PureLive mode
+                var carouselImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("carouselImage" + @i));
+                // Pragmatx:  this is what it needs to be in API mode.
+                //IPublishedContent carouselImage = Umbraco.TypedMedia(Model.Content.GetPropertyValue<IPublishedContent>("carouselImage" + @i).Id);
+                var carouselLabel = Umbraco.AssignedContentItem.GetPropertyValue("carouselImage" + @i + "Caption");
+                var cssclass = i == 1 ? "active" : "";
+                if (carouselImage != null)
+                {
+                    carouselImageUrl = carouselImage.Url;
+
+            <div class="item @cssclass">
+                <img src="@carouselImageUrl" alt="">
+                <div class="carousel-caption">
+                    <h1>@carouselLabel</h1>
+                </div>
+            </div>
+                }
+            }
+        }
+        </div>
+     </div>
+     }
+</div>
+            

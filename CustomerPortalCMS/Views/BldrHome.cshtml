@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "BldrMaster.cshtml";
+}
+
+<section class="content_wrap">
+
+    <!-- PRAGMATX: make direct call to partial to avoid need for controler -->
+
+    @*@{ Html.RenderAction("RenderCarousel", "Home"); }*@
+    @Html.Partial("Home/_HomeCarousel",@Model.Content)
+
+    @*@{ Html.RenderAction("RenderConstructionTypes", "Home"); }*@
+    @Html.Partial("Home/_ConstructionTypes", @Model.Content)
+
+    @*@{ Html.RenderAction("RenderHomeFeatured", "Home"); }*@
+    @Html.Partial("Home/_HomeFeatured", @Model.Content)
+
+    @*@{ Html.RenderAction("RenderEmployment", "Home"); }*@
+    @Html.Partial("Home/_Employment", @Model.Content)
+</section>
+                

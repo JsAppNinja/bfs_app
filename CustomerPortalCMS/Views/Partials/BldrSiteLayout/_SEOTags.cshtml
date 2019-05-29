@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{   
+    var websiteName = "Builders FirstSource";
+    var homeURL = "https://www.bldr.com";
+    var pageURL = homeURL + Model.Content.Url;
+    var pageImage = "https://www.bldr.com/Content/Images/Branding/BFSLogo.png";    
+    var pageDesc = Model.Content.HasValue("metaDescription") ? Model.Content.GetPropertyValue("metaDescription") : Model.Content.Name;
+
+
+    var pageTitle = "";
+    if (Model.Content.HasValue("sEOPageTitle"))
+    {
+        pageTitle = Model.Content.GetPropertyValue("sEOPageTitle").ToString();
+    } else if (Model.Content.HasValue("title"))
+    {
+        pageTitle = Model.Content.GetPropertyValue("title").ToString();
+    } else
+    {
+        pageTitle = Model.Content.Name;
+    }
+
+    if (Model.Content.HasValue("headerImage"))
+    {
+        pageImage = Umbraco.TypedMedia(Model.Content.GetPropertyValue<int>("headerImage")).Url;
+    }
+
+    <title>@websiteName | @pageTitle</title>
+    <meta name="Description" content="@pageDesc" />
+    <meta property="og:title" content="@pageTitle" />
+    <meta property="og:description" content="@pageDesc" />
+    <meta property="og:url" content="@pageURL" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="@pageImage" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@websiteName" />
+}
+

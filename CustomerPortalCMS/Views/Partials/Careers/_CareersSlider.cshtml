@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+
+<div style="background: #6e9198;">
+    <div class="SliderCareers">
+        @{
+            int count = 5;
+            for (int i = 1; i <= count; i++)
+            {
+
+                var carouselImageUrl = String.Empty;
+                var carouselImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("careerCarouselImage" + @i));
+                var carouselLabel = Umbraco.AssignedContentItem.GetPropertyValue("careerCarouselImage" + @i + "Caption");
+
+                if (carouselImage != null)
+                {
+                    carouselImageUrl = carouselImage.Url;
+
+                    <div class="slideImg" style="background: url(@carouselImageUrl);">
+                        <div class="slideCaptionWrap">
+                            <div class="slideCaption LargeCap">
+                                <h1>@carouselLabel</h1>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        }
+
+    </div>
+</div>

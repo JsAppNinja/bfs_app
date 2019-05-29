@@ -1,0 +1,108 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.validation-summary-valid {
+    display: none;
+}
+.carousel-caption {
+    display: inline-block;
+    width: 100%;
+    max-width: 550px;
+    background: #000;
+    opacity: 0.5;
+    padding: 8px 8px;
+    font-size: 22px;
+}
+/*//PG TODO rename these slide* classes and use them form carousel caption*/
+.slideCaptionWrap {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+}
+
+.slideCaption {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+    .slideCaption h1 {
+        color: #fff;
+        font-size: 22px;
+        margin: -35px 0 0 8px !important;
+        position: relative;
+        z-index: 2;
+    }
+
+.slideCaptionBG {
+    background: #000;
+    opacity: 0.5;
+    max-width: 550px;
+    padding: 8px 8px;
+    font-size: 22px;
+}
+
+.google-maps {
+    position: relative;
+    padding-bottom: 75%;
+    // This is the aspect ratio height: 0;
+    overflow: hidden;
+}
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*.slick-prev.slick-arrow:before {
+    content: "";
+    font-family: 'FontAwesome';
+    font-size: 22px;
+}
+.slick-next.slick-arrow:before {
+    content: "";
+    font-family: 'FontAwesome';
+    font-size: 22px;
+}*/
+
+@media screen and (min-width: 1200px) {
+    #divDistributions div {
+        width: 16.67%;
+    }
+}
+#divDistributions div label {
+    font-weight: 100;
+}
+
+.paymentOption {
+    display: inline-block;
+    border: 3px solid;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px;
+    padding: 30px;
+    max-width: 30%;
+    min-width: 300px;
+}
+
+.paymentOption :hover {
+    border: solid #324C9F;
+}
+

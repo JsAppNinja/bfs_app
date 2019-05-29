@@ -1,0 +1,363 @@
+﻿/* ########################### MAIN LAYOUT STYLES ################## */
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 100%;
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    font-family: Verdana, Geneva, sans-serif !important;
+    font-size: 100%;
+    font-size: 12px;
+    color: #666666;
+}
+
+body {
+    padding-top: 67px;
+    margin-top: 67px;
+    padding-bottom: 70px;
+}
+
+.k-widget{
+    font-size: 1.25rem;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+/* ######### CONTENT STYLES ######### */
+
+h1{
+    color: #324c9f !important;
+    font-size: 34px;
+}
+
+.MainH1 {
+    color: #324c9f !important;
+    font-size: 36px;
+    font-weight: normal;
+    margin: 12px 6px 7px 6px;
+}
+
+    .MainH1 a {
+        color: #324c9f;
+        text-decoration: none;
+    }
+
+h2, h3 {
+    padding: 0px;
+    color: #324c9f !important;
+    margin: 0px 0px 10px 0px;
+}
+
+h2 {
+    font-size: 30px !important;
+}
+
+h3 {
+    font-size: 24px !important;
+}
+
+p {
+    font-size: 14px;
+    /*line-height: 13px;
+    margin-bottom: 15px;*/
+}
+
+
+/* ######### WRAPPER STYLES ######### */
+
+.retroContainer {
+    max-width: 1030px;
+}
+
+.retroContainer .ThumbRow .row {
+    margin-right: -13px;
+    margin-left: -13px;
+}
+
+.form-gap {
+    padding-top: 70px;
+}
+
+
+/* ######### TOP NAVIGATION STYLES ######### */
+.logo {
+    margin-top: -33px;
+    max-width: 266px;
+    min-height: 94px;
+}
+
+    .logo a {
+        min-height: 94px;
+    }
+
+.logo {
+    margin-top: -33px;
+    max-width: 266px;
+    min-height: 94px;
+}
+
+.logo a {
+    min-height: 94px;
+}
+
+.HeaderTop {
+    font-size: 14px;
+    color: #fff;
+    text-align: right;
+    padding: 9px 0 5px 0;
+}
+
+    .HeaderTop a {
+        color: #ccc;
+    }
+
+.navbar-inverse {
+    background-image: none;
+    background-color: #324c9f !important;
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+    margin-bottom: 0;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #ccc;
+        font-size: 16px;
+        line-height: 18px;
+        padding: 7px 12px;
+    }
+
+
+    .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+        color: #FFF;
+        background-color: #3f5cba;
+    }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #FFF;
+        background-color: #3f5cba;
+    }
+
+.navbar .container {
+    max-width: 1024px;
+}
+
+
+.navbar-collapse.collapse.in {
+    display: block !important;
+}
+
+
+header .dropdown-menu {
+    background: #324c9f;
+    opacity: 0.9;
+    border-radius: 0;
+    width: 180px;
+    padding: 10px 0px 10px;
+    border-width: 0px;
+}
+
+header .dropdown-menu a {
+    color: #CCCCCC !important;
+    padding: 6px 12px !important;
+    font-size: 15px;
+}
+
+header .dropdown-menu a:hover {
+    background: #999999 !important;
+    color: #FFFFFF !important;
+}
+
+
+
+/* ######### FOOTER STYLES ######### */
+
+footer .navbar {
+    background-color: #a8a8a8;
+    background-image: linear-gradient(to bottom, #c8c8c8 0%, #a8a8a8 100%);
+    border-radius: 0px;
+    margin-bottom: 0px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    font-size: 11px;
+    border-width: 0px;
+}
+
+footer .navbar .container {
+    padding: 0px;
+}
+
+footer .links, footer .copy {
+    width: 100%;
+    max-width: 1024px;
+    padding: 10px;
+    margin: auto;
+    color: #fff;
+}
+
+footer .links div {
+    text-align: center;
+}
+
+footer .links ul {
+    display: inline-block;
+    /*width: 25%;*/
+    vertical-align: top;
+    font-weight: bold;
+    padding: 0px 0px 0px 0;
+    border-right: 1px solid #cccccc;
+    margin-bottom: 0px;
+    min-width: 120px;
+}
+
+footer .links li {
+    list-style-type: none;
+    text-align: left;
+}
+
+footer .links ul a {
+    display: block;
+    padding: 4px 0px;
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .links ul a:hover {
+    color: #666;
+}
+
+footer .links ul:last-child {
+    border: 0px;
+}
+
+footer .copy {
+    padding: 5px 10px;
+}
+
+footer .copy .pull-left {
+    padding: 12px 0px;
+    margin: 0;
+    font-size: 11px;
+}
+.validation-summary-valid {
+    display: none;
+}
+
+.k-filter-row th, .k-grid-header th.k-header {
+    border-width: 0 0 1px 0;
+}
+
+.k-grid tr td {
+    border-width: 0;
+} 
+
+/* END ########################### MAIN LAYOUT STYLES ################## */
+
+/* BEGIN ########################### MODAL LAYOUT STYLES ################## */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    #myImg:hover {
+        opacity: 0.7;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 90%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: transparent;
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+.close {
+    /*position: absolute;
+    top: 15px;
+    right: 35px;*/
+    color: #000000;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+/* END ########################### MODAL LAYOUT STYLES ################## */
+

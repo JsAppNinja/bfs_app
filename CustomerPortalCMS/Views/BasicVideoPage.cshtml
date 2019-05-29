@@ -1,0 +1,98 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using umbraco.NodeFactory;
+@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.BasicVideoPage>
+    @using ContentModels = Umbraco.Web.PublishedContentModels;*@
+
+@{
+    Layout = "BldrMaster.cshtml";
+}
+
+<div class="container retroContainer">
+
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+
+    <div class="content_full">
+
+        <div style="margin-top: 20px; margin-left: 2px;">
+            @*@CurrentPage.GetGridHtml("contentParagraph", "bootstrap3")*@
+            @Model.Content.GetPropertyValue("pageContent")
+        </div>
+
+
+        @* OrderBy() takes the property to sort by *@
+        @{
+            // Pragmatx:  Visible shoulbe be used for navigation logic. Unpublish node or add active property to control display on the page. 
+            //var video = CurrentPage.Children.Where("Visible").OrderBy("Name");
+            var video = CurrentPage.Children.OrderBy("sortIndex");
+            var sourceID = Umbraco.AssignedContentItem.GetPropertyValue("dataLocation");
+            var sourceName = (Umbraco.Core.Models.PublishedContent.PublishedContentWrapped)sourceID;
+            var thumb = ((Umbraco.Core.Models.PublishedContent.PublishedContentWrapped)sourceID).Children;
+            var showOnPagePropAlias = Model.Content.GetPropertyValue<string>("dataFilterPropertyAlias");
+        }
+
+        @if (thumb != null)
+        {
+            <div class="MediaListWrap">
+                <ul class="MediaList">
+                    @foreach (var item in thumb)
+                    {
+                        var showOnPage = true;
+                        if (!string.IsNullOrWhiteSpace(showOnPagePropAlias))
+                        {
+                            showOnPage = item.GetPropertyValue<bool>(showOnPagePropAlias);
+                        }
+                        if (showOnPage)
+                        {
+                            var heading = item.GetPropertyValue("typeName");
+                            <li>
+                                <div>@heading</div>
+                                <div>
+                                    @if (item.HasValue("typeImage"))
+                                    {
+                                        var typeImage = item.GetPropertyValue("typeImage");
+                                        var imageUrl = ((Umbraco.Core.Models.PublishedContent.PublishedContentWrapped)typeImage).Url;
+                                        <img src="@imageUrl" />
+                                    }
+
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </div>
+                    }
+
+        <div id="video">
+            <h2>@Umbraco.AssignedContentItem.GetPropertyValue("videoHeader")</h2>
+            <div class="MediaListWrap">
+                <ul class="MediaList">
+                    @foreach (var item in video)
+                    {
+                        var thumbnailImage = @item.videoLinkThumbnail.Url;
+                        var videoLink = ((Umbraco.Web.Models.RelatedLinks)(@item.videoLinkURL));
+
+                        <li class="video">
+                            @foreach (var i in videoLink)
+                            {
+                                //var linkTarget = (i.NewWindow) ? "_blank" : null;
+                                <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@i.Link" style="cursor: pointer;">
+                                    <div>
+                                        <span></span>
+                                        <img alt="@i.Caption" src="@thumbnailImage" />
+                                    </div>
+                                    <div class="videoLabel">@item.videoLinkLabel</div>
+                                </a>
+
+                                break;
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>

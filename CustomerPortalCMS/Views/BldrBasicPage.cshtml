@@ -1,0 +1,18 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "BldrMaster.cshtml";
+}
+
+<div class="container retroContainer">
+
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+
+    <div class="content_full">
+        @*@CurrentPage.GetGridHtml("contentGrid","bootstrap3")
+            <div style="text-transform:uppercase;"><strong>[new content area]</strong><br /><br /></div>*@
+        @Model.Content.GetPropertyValue("pageContent")
+    </div>
+
+</div>
+                

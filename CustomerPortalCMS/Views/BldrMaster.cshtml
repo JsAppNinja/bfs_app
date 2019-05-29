@@ -1,0 +1,322 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Builders FirstSource | Building Supplies &amp; Materials</title>
+    @Html.Partial("BldrSiteLayout/_SEOTags", @Model)
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/lightslider.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css?ver2">
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/BusyLoad/app.min.css">
+    <script type="text/javascript" src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="~/Scripts/respond.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41312511-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-41312511-1');
+    </script>
+
+
+</head>
+<body>
+
+    @Html.Partial("BldrSiteLayout/_HeaderNav", @Model, new ViewDataDictionary { { "rootDocType", "home" } })
+
+    <!-- Top Navigation Start -->
+    @*@{ Html.RenderAction("RenderHeader", "BldrSiteLayout"); }*@
+    <!-- Top Navigation End -->
+    <!-- Logo & Search Bar (Overlaps Page Banner)-->
+    <div class="logo_search_outerwrap">
+        <div class="logo_search_innerwrap clearfix">
+            <div class="logo_forbeslogo_innerwrap minusforbes">
+                <div id="PrimaryLogo" class="logo">
+                    <a href="/"><img src="~/Content/Images/Branding/BFSLogo.png" id="LocationSearch1_imgLogo" alt="Builders FirstSource" title="Builders FirstSource"></a>
+                </div>
+                <div class="forbesLogo" style="display: none;">
+                    <img src="~/Content/Images/Branding/forbes.jpg" id="LocationSearch1_imgForbesLogo" alt="Forbes 2017 America's Best Large Employers - Powered by Statista" title="Forbes 2017 America's Best Large Employers - Powered by Statista">
+                </div>
+                <div class="forbesLogo" style="display: none; margin-left: 0px;">
+                    <img src="~/Content/Images/Branding/Forbes2018.png" id="LocationSearch1_imgForbesLogo" alt="Forbes 2018 America's Best Large Employers - Powered by Statista" title="Forbes 2018 America's Best Large Employers - Powered by Statista">
+                </div>
+                </div>
+                <div class="search_wrap clearfix">
+                    <span>Find a Location</span>
+                    <div class="clearfix">
+                        <input type="text" maxlength="5" id="txtLocationSearch" title="Zip Code" placeholder="ZIP Code"> @*onkeypress="See event listner added return loadLocationonEnter(event)}*@
+                        <span id="LocationSearch1_RegularExpressionValidator1" style="display: none;"></span>
+                        <input type="submit" name="LocationSearch1$ImgBtnZipSearch" value="" onclick="loadLocation();" id="LocationSearch" class="fleft hand" style="height:29px;width:32px;">
+                        <input type="hidden" name="LocationSearch1$TxtWaterMarkZip_ClientState" id="LocationSearch1_TxtWaterMarkZip_ClientState">
+                    </div>
+                    <div id="LocationSearch1_ValidationSummary1" style="display: none;"></div>
+                </div>
+            </div>
+    </div>
+    <!-- Body Start -->
+    @RenderBody()
+    <!-- Body End -->
+    <!-- Bottom Navigation Start -->
+    @Html.Partial("BldrSiteLayout/_Footer")
+    @*@{ Html.RenderAction("RenderFooter", "BldrSiteLayout"); }*@
+    <!-- Bottom Navigation End -->
+    <!-- Global Modal Window -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document" style="height: 100%; width: 100%; margin:auto;">
+            <div class="modal-content" style="width: 80%;padding-bottom: 36%;position: relative;top: 50%;left: 50%;transform: translate(-50%,-50%);max-width: 900px;">
+                <button title="Close (Esc)" type="button" class="mfp-close" style="float:right;top: -35px;position:relative;background: rgba(256,256,256,0);color: white;font-weight: bold;padding: 0px;border: 0px;font-size: x-large;">×</button>
+                <iframe id="modalIframe" style="position: absolute;padding-top: 4px;padding-bottom: 4px;padding-right: 4px;padding-left: 4px; top: 0px; bottom: 0px;left: 0px;right: 0px;height: 100%;width: 100%;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="modal fade" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="logoModalLabel">
+            <div class="modal-dialog" role="document" style="height: 100%; width: 90%; margin: 0 auto;">
+                <div style="padding-bottom: 56.25%; position: relative; top: 50%; transform: translateY(-50%);">
+                    <div class="modal-content" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;">
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="modal fade" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="logoModalLabel">
+        <div class="modal-dialog" role="document" style="margin: 0 auto !important; max-width: 600px; text-align: center;">
+            <div class="modal-content" style="position: absolute; top: 50%; transform: translateY(-50%); width: 100%;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 id="ModalTitle" style="color: #666 !important; text-align: center; margin: 6px 0 0 0; text-shadow: 2px 2px #bcbcb2;"></h3>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Script References Start *@
+    <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/slick.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/lightslider.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/kendo/js/kendo.all.min.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/Locations/History.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/BusyLoad/app.min.js"></script>*@
+
+    @RenderSection("scripts", required: false)
+    <script>
+        $('.Slider').slick({
+            speed: 1000,
+            fade: true,
+            cssEase: 'linear',
+            autoplay: true,
+            autoplaySpeed: 5000,
+            infinite: true
+        });
+
+        $('.SliderCareers').slick({
+            speed: 1000,
+            fade: true,
+            cssEase: 'linear',
+            autoplay: true,
+            autoplaySpeed: 5000,
+            infinite: true
+        });
+
+        if ($(".Careers").hasClass("active")) {
+            $('.search_wrap').css("display", "none");
+        };
+
+        if ($("section.Careers").length) {
+            $('.search_wrap').css("display", "none");
+            $('li.Careers').addClass("active");
+        };
+
+        if ($(".AllJobsWrap").length) {
+            $('.search_wrap').css("display", "none");
+            $('li.Careers').addClass("active");
+        };
+
+        if ($(".Login").length) {
+            $('.search_wrap').css("display", "none");
+        };
+
+        if ($(".LocationsPage").length) {
+            $('.logo_search_innerwrap').css("max-width", "1000px");
+        };
+
+        if ($(".LocationDetail").length) {
+            $('.logo_search_innerwrap').css("max-width", "1000px");
+        };
+
+        if ($("#LocLogo").length && $("#LocLogo img").attr("src") != "/media/1120/cr-logo-1-2.png") {
+            //$('#LocationSearch1_imgLogo').css("max-width", "1000px");
+            $("#PrimaryLogo").replaceWith($("#LocLogo"));
+            $("#PrimaryLogo").css("background", "none");
+            $("#PrimaryLogo").css("padding", "unset");
+        };
+
+        if ($(".Home").hasClass("active")) {
+            $('.forbesLogo').css("display", "inline-block");
+            $(".logo_forbeslogo_innerwrap").removeClass("minusforbes");
+        } else {
+            //$('.logo_search_outerwrap').css("display", "none");
+            $('.forbesLogo').css("display", "none");
+            $(".logo_forbeslogo_innerwrap").addClass("minusforbes");
+        }
+
+        //if ($('.dropdown-menu li').children().length > 1) {
+        //    $(this).removeClass("dropdown");
+        //    $(this).children("a").removeClass("dropdown");
+        //} else {
+        //    console.log($this);
+        //}
+
+        //$(document).on("click", "a.PDFLink", function () {
+        //    $.fileDownload($(this).prop('href'))
+        //        .done( //function () { alert('File download a success!'); }
+        //        )
+        //        .fail( //function () { alert('File download failed!'); }
+        //        );
+        //    return false; //this is critical to stop the click event which will trigger a normal file download
+        //});
+
+        $('.logo_search_outerwrap').css("display", "block");
+
+        $('#trMltiData').bind("DOMSubtreeModified", function () {
+            $('#LocListLoading').hide();
+        });
+
+        $('#map_device').bind("DOMSubtreeModified", function () {
+            $('#LocListLoading').hide();
+        });
+
+        $("#content-slider-Cabinets").lightSlider({
+            loop: false,
+            keyPress: true
+        });
+
+        $("[id^=content-slider-]").lightSlider({
+            autoWidth: true,
+            adaptiveHeight: true,
+            keyPress: true,
+            gallery: false,
+            slideMargin: 0,
+            pager: false,
+            onSliderLoad: function () {
+                $('[id^=content-slider-]').removeClass('cS-hidden');
+            }
+        });
+
+        $('#logoModal').on('show.bs.modal', function (event) {
+            var link = $(event.relatedTarget)
+            var category = link.data('category')
+            var catName = link.data('catname')
+            var logos = $("#modal-content-" + category).clone();
+            $("#logoModal .modal-body").html(logos);
+            $("#logoModal .modal-body #modal-content-" + category).css("display", "block");
+            $("#ModalTitle").text(catName);
+        })
+
+
+        $("#LocationSearch1_TxtZipCode").on("keypress", function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                var filterLocationServiceModel = {};
+                var zipCode = $('#LocationSearch1_TxtZipCode').val();
+                if (zipCode.length > 0) {
+                    filterLocationServiceModel.ZipCode = zipCode;
+                    filterLocationServiceModel.City = null;
+                    filterLocationServiceModel.state = null;
+                    filterLocationServiceModel.Radius = 150;
+                    filterLocationServiceModel.DistributionList = null;
+                    filterLocationServiceModel.InstalledServiceList = null;
+                    localStorage.setItem('mainZipCode', zipCode);
+                    $('#LocationSearch1_TxtWaterMarkZip_ClientState').val(zipCode);
+                    $.ajax({
+                        type: "POST",
+                        url: "/umbraco/api/LocationData/GetZipCodesOfRadius",
+                        data: JSON.stringify(filterLocationServiceModel),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        processData: true,
+                        success: function (data, status, jqXHR) {
+                            if (window.location.href.indexOf("locations") <= -1) {
+                                var url = window.location.href.split('/');
+                                window.location.href = url[0] + "/locations";
+                            }
+                            // InitializeMap(data);
+                        },
+                        error: function (xhr) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+            }
+        });
+        $(function () {
+            $("#txtLocationSearch").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    loadLocation();
+                }
+                if (e.which < 48 || e.which > 57) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        if (backButton != "undefined" && backButton.ClearDataOnLoad) {
+            backButton.clearData = true;
+            backButton.remove();
+        }
+
+        function loadLocation() {
+            var zipcode = $("#txtLocationSearch").val();
+            if (zipcode.trim() != '') {
+                if (zipcode.length < 5) {
+                    alert('Please enter valid ZIP code');
+                }
+                else if (backButton != "undefined" && backButton != null) {
+                    backButton.DisableRestoreOnLoad();
+                    backButton.clearData = true;
+                    backButton.remove();
+                    window.onbeforeunload = function () { };
+                    localStorage.setItem('mainZipCode', zipcode);
+                    document.location.href = '/locations';
+                }
+                else {
+                    localStorage.setItem('mainZipCode', zipcode);
+                    document.location.href = '/locations';
+                }
+            }
+            else {
+                alert('Please enter valid ZIP code');
+            }
+        }
+
+            //function loadLocationonEnter(e) {
+            //    if (e.keyCode == 13) {
+            //        e.preventDefault();
+            //        loadLocation();
+            //    }
+            //}
+    </script>
+    @RenderSection("optionalScripts", false)
+    @* Custom Global Scripting *@
+    <script type="text/javascript" src="~/Scripts/bldrmain.js"></script>
+</body>
+</html>

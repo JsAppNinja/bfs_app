@@ -1,0 +1,81 @@
+﻿/* Small devices 767 */
+@media(min-width:768px) {
+
+    body {
+        font-size: 14px !important;
+    }
+
+    p {
+        font-size: .9em !important;
+    }
+
+    .MainH1 {
+        color: #324c9f !important;
+        font-size: 2em !important;
+        margin: 40px 6px 10px 6px;
+        /*text-transform: uppercase;*/
+        text-align: center;
+        font-weight: 700;
+    }
+
+        .MainH1 a {
+            color: #324c9f;
+            text-decoration: none;
+        }
+
+    h1 {
+        font-size: 2em !important;
+    }
+
+    h2 {
+        font-size: 1.7em !important;
+    }
+
+    h3 {
+        font-size: 1.5em !important;
+    }
+
+    h4 {
+        font-size: 1.2em !important;
+    }
+
+    h5 {
+        font-size: .8em !important;
+    }
+
+    .h5-left {
+        font-size: .8em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    .h5-right {
+        font-size: .8em !important;
+        text-align: center;
+        color: #253877
+    }
+
+    /*---------------- Navbar --------------------*/
+
+    .nav > li {
+        margin-left: .1em;
+        margin-right: .1em;
+        color: #fff !important;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #fff !important;
+        font-weight: 400 !important;
+    }
+
+
+/*---------------- Containers --------------------*/
+
+    .form-gap {
+        padding-top: .1em;
+    }
+
+  
+
+
+}

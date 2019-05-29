@@ -1,0 +1,71 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<NavigationListItem>>
+@using CustomerPortalCMS.Models
+<header class="clearfix">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container retroContainer">
+            <div class="HeaderTop">
+                Log In: <a target="_blank" href="https://owa.bldr.com/owa/">Employee</a> | <a target="_blank" href="https://www.dayforcehcm.com/">Employee Self Service</a> | <a target="_blank" href="https://seemyw2.ceridian.com/seemyw2/cgi-bin/3pp.pl/eReports?cid=806327">SeeMyW2</a> @*| <a href="/customer/">Customer</a>*@
+            </div>
+        </div>
+        <div class="HeaderNav">
+            <div class="navbar-header container">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">@Umbraco.Field("pageTitle")</a>*@
+            </div>
+            <div id="navbar" class="navbar-collapse collapse container">
+                <ul class="nav navbar-nav" style="padding: 0 17px 0 19px;">
+                    @RenderChildItems(Model, 0)
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </div>
+    </nav>
+</header>
+
+@* TODO Add caching so that this is not pulling from the database each time for the nav *@
+
+@helper RenderChildItems(List<NavigationListItem> listItems, int level)
+{
+    //Response.Write(listItems);
+    if (listItems != null)
+    {
+        foreach (var item in listItems)
+        { 
+            <li class="@(item.HasChildren ? "dropdown" : null) @(Umbraco.AssignedContentItem.Url == item.Link.Url ? "active" : null) @item.Link.Text">
+                @if (!String.IsNullOrEmpty(item.Text))
+                {
+                    @item.Text
+                }
+                else if (item.Link != null)
+                {
+                    if (item.Link.externalURL != null)
+                    {
+                        <a data-toggle="@(level == 0 && item.HasChildren ? "dropdown" : null)" role="button" aria-haspopup="true" aria-expanded="false" href="@item.Link.externalURL" class="@(level == 0 && item.HasChildren ? "fh5co-sub-ddown dropdown-toggle" : null)" target="@item.Link.Target">
+                            @item.Link.Text @if (Umbraco.AssignedContentItem.Url == item.Link.Url){<span class="sr-only">(current)</span>}
+                        </a>
+                    }
+                    else
+                    {
+                        <a data-toggle="@(level == 0 && item.HasChildren ? "dropdown" : null)" role="button" aria-haspopup="true" aria-expanded="false" href="@item.Link.Url" class="@(level == 0 && item.HasChildren ? "fh5co-sub-ddown dropdown-toggle" : null)" target="@item.Link.Target">
+                            @item.Link.Text @if (Umbraco.AssignedContentItem.Url == item.Link.Url){<span class="sr-only">(current)</span>}
+                        </a>
+                    }
+                }
+                @if (item.HasChildren && level < 1)
+                {
+                    <ul class="dropdown-menu dgdsgds" id="_dropdown">
+                        @RenderChildItems(item.Items, level+1)
+                    </ul>
+                }
+            </li>
+        }
+    }
+}
+

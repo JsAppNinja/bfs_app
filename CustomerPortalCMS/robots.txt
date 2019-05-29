@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /customer-portal/
+Disallow: /customer/
+Disallow: /sales/
+Disallow: /support/
+Disallow: /mybfsbuilder/

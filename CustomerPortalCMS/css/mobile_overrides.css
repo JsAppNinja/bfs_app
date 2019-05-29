@@ -1,0 +1,11 @@
+﻿/*Please do not modify existing classes*/
+@media(max-width:480px) {
+    body .icon-jobs{
+        display:none !important;
+    }
+
+    body .title.collapsed {
+        font-size: 12px;
+    }
+
+}

@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "BldrMaster.cshtml";
+}
+
+<div class="container retroContainer">
+    @*@{ Html.RenderAction("RenderPageTitle", "BldrSiteLayout"); }*@
+    @Html.Partial("BldrSiteLayout/_PageTitle", @Model)
+
+    <div class="row">
+        <div class="xs-hidden sm-hidden md-hidden col-lg-1"></div>
+        <div class="col-sm-7 col-md-7 col-lg-6">
+            @{
+
+                var CTN = TempData["ContactSuccess"];
+                if (CTN != null && !string.IsNullOrWhiteSpace(CTN as string))
+                {
+                    <div class="ThankYou">Your query has been submitted successfully.<br />Your query reference number is @CTN</div>
+                    <div style="text-align: center;"><a href="/contact-us/" class="sbmtBtn btn">Return to Contact Form</a></div>
+                }
+                else
+                {
+                    Umbraco.Field("contactIntroduction");
+                    Html.RenderAction("RenderForm", "ContactUsSurface");
+                }
+            }
+        </div>
+        <div class="xs-hidden sm-hidden md-hidden col-lg-1"></div>
+        <div class="col-sm-5 col-md-5 col-lg-4 ContactInfoCol">
+            @*@CurrentPage.GetGridHtml("contentGrid", "bootstrap3")
+                <div style="text-transform:uppercase;"><strong>[new content area]</strong><br /><br /></div>*@
+            @Model.Content.GetPropertyValue("pageContent")
+        </div>
+    </div>
+
+</div>
+@section optionalScripts{
+    <script>
+        $("form").each(function () {
+            this.onsubmit = function () {
+                $(".sbmtBtn").attr('disabled', true);
+                return true;
+            };
+        });
+    </script>
+}

@@ -1,0 +1,125 @@
+﻿@*@inherits UmbracoViewPage*@
+@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+<section class="home_columns">
+    <div class="container FeaturedWrap">
+
+        @{
+
+            int count = 4;
+            for (int i = 1; i <= count; i++)
+            {
+                var featureLabel = Umbraco.AssignedContentItem.GetPropertyValue("feature" + @i + "Label");
+                var thumbnailImage = Umbraco.TypedMedia(Umbraco.AssignedContentItem.GetPropertyValue<int>("feature" + @i + "Thumbnail"));
+                var relatedLinkDirect = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("feature" + @i + "DirectVideoLink");
+                var relatedLinkVideoList = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("feature" + @i + "VideoLink");
+                var relatedLinkButton = Umbraco.AssignedContentItem.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("feature" + @i + "ButtonLink");
+
+                if (relatedLinkDirect != null)
+                {
+                    foreach (var item in relatedLinkDirect)
+                    {
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 FeaturedItemWrap">
+                            <div style="display: table; margin: 0 auto;">
+                                <h2>@featureLabel</h2>
+                                <div>
+                                    <a class="popup-vimeo" data-toggle="modal" data-target="#videoModal" data-backdrop="true" data-whatever="@item.Link" style="cursor: pointer;"><img class="FeaturedThumb" alt="@item.Caption" src="@thumbnailImage.Url" /></a>
+                                </div>
+                                @{
+
+                                    if (relatedLinkButton != null)
+                                    {
+                                        foreach (var linkItem in relatedLinkButton)
+                                        {
+                                            var linkTarget = (linkItem.NewWindow) ? "_blank" : null;
+                                            <div class="BtnLearnMore">
+                                                <a href="@linkItem.Link" target="@linkTarget" class="learn_more">Learn More &rsaquo;</a>
+                                            </div>
+                                        }
+                                    }
+                                    if (relatedLinkVideoList != null)
+                                    {
+                                        foreach (var linkItem in relatedLinkVideoList)
+                                        {
+                                            var linkTarget = (linkItem.NewWindow) ? "_blank" : null;
+                                            <div class="VideosListLink">
+                                                <a href="@linkItem.Link" class="video">
+                                                    <img src="~/Content/Images/Icons/Icon_Video.png" style="width: 16px;" /><br />
+                                                    Click for Videos
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else if (relatedLinkButton != null || relatedLinkVideoList != null)
+                {
+                    
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 FeaturedItemWrap">
+                        <div style="display: table; margin: 0 auto;">
+                            <h2>@featureLabel</h2>
+
+                            @{
+
+                                if (relatedLinkButton != null)
+                                {
+                                    foreach (var item in relatedLinkButton)
+                                    {
+                                        var linkTarget = (item.NewWindow) ? "_blank" : null;
+
+                                        <div>
+                                            <a href="@item.Link" target="@linkTarget"><img class="FeaturedThumb" alt="@item.Caption" src="@thumbnailImage.Url"></a>
+                                        </div>
+
+                                        <div class="BtnLearnMore">
+                                            <a href="@item.Link" target="@linkTarget" class="learn_more">Learn More &rsaquo;</a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>
+                                        <img class="FeaturedThumb" alt="@featureLabel" src="@thumbnailImage.Url">
+                                    </div>
+                                }
+
+                                if (relatedLinkVideoList != null)
+                                {
+                                    foreach (var item in relatedLinkVideoList)
+                                    {
+                                        var linkTarget = (item.NewWindow) ? "_blank" : null;
+
+                                        <div class="VideosListLink">
+                                            <a href="@item.Link" class="video">
+                                                <img src="~/Content/Images/Icons/Icon_Video.png" style="width: 16px;" /><br />
+                                                Click for Videos
+                                            </a>
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 FeaturedItemWrap">
+                                        <h2>@featureLabel</h2>
+                                        <div>
+                                            <img class="FeaturedThumb" alt="@featureLabel" src="@thumbnailImage.Url">
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+                    </div>
+
+                }
+
+            }
+        }
+    
+    </div>
+</section>
