@@ -21,7 +21,7 @@ class FinancialInformationComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div  className="bg-gray">
 
 
     <section className="stock-quote py-3">
@@ -59,12 +59,12 @@ class FinancialInformationComponent extends Component {
             <section className="my-5 financial-info">
                 <div className="container">
                    <div className="row">
-                         <div className="col-md-6">
+                         <div className="col-md-9 col-lg-8">
                             <h2 className="font-weight-bold color-dark-gray">
                                 Latest Earnings Release and 10-Q
                             </h2>
                             </div>
-                             <div className="col-md-6 text-right">
+                             <div className="col-md-3 col-lg-4 text-md-right">
                                  <div className="dropdown">
                                      <span className="h6 font-weight-400">Year</span> &nbsp; <button type="button" className="btn btn-primary d-inline-block dropdown-toggle theme-dropdown" data-toggle="dropdown">
                                                    2015
@@ -79,25 +79,25 @@ class FinancialInformationComponent extends Component {
                             </div>
                          </div>
                       <div className="row mt-4">
-                            <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 border-right">
-                                <div className="position-relative Info-Download">
+                            <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                                <div className="position-relative Info-Download   border-right">
                                     <h4>Second Quarter 2018 Financial Results</h4>
                                     <h6 className="DownloadPresentation">Download Presentation</h6>
                                 </div>
                             </div>
-                             <div className="col-lg-3 col-md-6 border-right">
-                                <div className="position-relative Info-Download">
+                             <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                                <div className="position-relative Info-Download  border-right">
                                    <h4 className="">Form 10-Q</h4>
                                     <h6 className="DownloadPresentation">Download Presentation</h6>
                                 </div>
                              </div>
-                             <div className="col-lg-3 col-md-6 border-right">
-                                <div className="position-relative Info-Download">
+                             <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                                <div className="position-relative Info-Download  border-right">
                                    <h4 className="">Form 11-S</h4>
                                     <h6 className="DownloadPresentation">Download Presentation</h6>
                                 </div>
                              </div>
-                             <div className="col-lg-3 col-md-6">
+                             <div className="col-lg-3 col-sm-6">
                                 <div className="position-relative Info-Download">
                                    <h4 className="">Form 12-T</h4>
                                     <h6 className="DownloadPresentation">Download Presentation</h6>
@@ -122,12 +122,12 @@ class FinancialInformationComponent extends Component {
              <section className="my-5 financial-info">
                 <div className="container">
                         <div className="row">
-                         <div className="col-md-6">
+                         <div className="col-md-9 col-lg-8">
                             <h2 className="font-32 font-weight-bold color-dark-gray">
                                Latest Annual Report and 10-k
                             </h2>
                          </div>
-                          <div className="col-md-6 text-right">
+                          <div className="col-md-3 col-lg-4 text-md-right">
                                 <span className="h6 font-weight-400">Year</span> &nbsp;  <div className="dropdown d-inline-block">
                                       <button type="button" className="btn btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
                                                    2015
@@ -144,25 +144,25 @@ class FinancialInformationComponent extends Component {
                     </div>
                     
                       <div className="row mt-4">
-                            <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 border-right">
-                                 <div className="position-relative Info-Download">
+                            <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0 ">
+                                 <div className="position-relative Info-Download border-right">
                                     <h4>Second Quarter 2018 Financial Results</h4>
                                     <h6 className="DownloadPresentation">2017 Annual Report</h6>
                                   </div>
                             </div>
-                             <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 border-right">
-                                   <div className="position-relative Info-Download">
+                             <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0 ">
+                                   <div className="position-relative Info-Download border-right">
                                       <h4 className="">2018 Proxy Statement</h4>
                                       <h6 className="DownloadPresentation">Download Presentation</h6>
                                   </div>
                              </div>
-                             <div className="col-lg-3 col-md-6 mb-0 border-right">
-                                  <div className="position-relative Info-Download">
+                             <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                                  <div className="position-relative Info-Download  border-right">
                                     <h4 className="">Form 10-Q</h4>
                                       <h6 className="DownloadPresentation">Download Presentation</h6>
                                   </div>
                              </div>
-                                <div className="col-lg-3 col-md-6 mb-0">
+                                <div className="col-lg-3 col-sm-6 mb-0">
                                   <div className="position-relative Info-Download">
                                     <h4 className="">Form 11-QT</h4>
                                       <h6 className="DownloadPresentation">Download Presentation</h6>
@@ -192,8 +192,8 @@ class FinancialInformationComponent extends Component {
                               SEC Filings
                             </h2>
                          </div>
-                          <div className="col-md-8 text-right">
-                          <div className="d-inline-block mr-4">
+                          <div className="col-md-8 text-md-right">
+                          <div className="d-inline-block mr-4 mb-3 mb-sm-0">
         
                                  <div className="dropdown">
                                       <span className="h6 font-weight-400">Year</span> &nbsp;<button type="button" className="btn d-inline-block btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
@@ -295,12 +295,12 @@ class FinancialInformationComponent extends Component {
             <section className="my-5 financial-info">
                 <div className="container">
                     <div className="row">
-                         <div className="col-md-6">
+                         <div className="col-lg-8 col-md-9">
                             <h2 className="font-32 font-weight-bold color-dark-gray">
                               Latest Proxy Statement
                             </h2>
                             </div>
-                           <div className="col-md-6 text-right">
+                           <div className="col-lg-4 col-md-3 text-md-right">
                                  <div className="dropdown">
                                       <span className="h6 font-weight-400">Year</span> &nbsp;<button type="button" className="btn btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
                                                    2015
@@ -315,28 +315,28 @@ class FinancialInformationComponent extends Component {
                             </div>
                          </div>
                       <div className="row mt-4">
-                            <div className="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                            <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                                  <div className="position-relative Info-Download border-right">
                                     <h4 className="mb-0">DEF 14A</h4>
                                     <i className="h6">Apr 12, 2019</i>
                                     <h6 className="DownloadPresentation mt-3">Download Presentation</h6>
                                 </div>
                             </div>
-                             <div className="col-lg-3 col-md-6">
+                             <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                                 <div className="position-relative Info-Download border-right">
                                   <h4 className="mb-0">DEFA14A</h4>
                                   <i className="h6">Apr 12, 2019</i>
                                     <h6 className="DownloadPresentation mt-3">Download Presentation</h6>
                                 </div>
                              </div>
-                              <div className="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                              <div className="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                                  <div className="position-relative Info-Download border-right">
                                     <h4 className="mb-0">DEF 15AB </h4>
                                     <i className="h6">Apr 12, 2019</i>
                                     <h6 className="DownloadPresentation mt-3">Download Presentation</h6>
                                 </div>
                             </div>
-                             <div className="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                             <div className="col-lg-3 col-sm-6">
                                  <div className="position-relative Info-Download">
                                     <h4 className="mb-0">DEF 16A</h4>
                                     <i className="h6">Apr 12, 2019</i>

@@ -5211,6 +5211,27 @@ html,body{height: 100%;}
 .Info-Download.border-right{
     border-color: #ccc !important;
 }
+
+.financial-info2-mobile .card-header a:after{
+    right: 15px;
+    top: 15px;
+}
+
+
+@media only screen and (max-width: 1025px){
+    .Info-Download h4{
+            font-size: 1.3rem;
+    }
+}
+@media only screen and (max-width: 991px){
+    .financial-info .col-sm-6:nth-child(even) .border-right,
+    .financial-info2-mobile .col-sm-6:nth-child(even) .Info-Download.border-right{
+        border-right:0 solid transparent !important;
+    }
+
+
+}
+
 @media only screen and (min-width: 768px){
      .Info-Download{
         min-height: 100px
@@ -5222,6 +5243,12 @@ html,body{height: 100%;}
      }
 }
 
+@media only screen and (max-width: 575px){
+ .financial-info .col-sm-6 .border-right ,
+ .financial-info2-mobile .col-sm-6 .Info-Download.border-right{
+        border-right:0 solid transparent !important;
+    }
+}
 @media only screen and (max-width: 480px){
    .financial-info  h2 {
         font-size: 1.8rem;
@@ -5292,3 +5319,114 @@ html,body{height: 100%;}
     color: #1d69b4;
     text-decoration: underline;
 }
+
+/*--------------------------Event page-----------------*/
+.section-event h4{
+    color: #1d69b4;
+}
+.font-600{
+    font-weight: 600;
+}
+
+.section-event .heading-outline:after{
+    background-color: #f6184e;
+    top: 45px;
+    width: 70px;
+}
+.section-event .add-calender span img{
+    width: 17px;
+}
+.add-calender{
+    font-weight: 400
+}
+
+.section-event .add-calender.heading-outline:after  {
+ background-color: #1d69b4;
+    top: 25px;
+    width: 40px;
+    height: 2px;
+}
+.section-event .border-right{
+    border-color: #ccc
+}
+
+.event-table td{
+     color: #595959;
+    font-size: 14px;
+    padding:20px;
+}
+.event-table td div{
+    opacity: 0.6;
+
+}
+.event-table img{
+    width: 25px;
+    margin-right:5px;
+    opacity: 0.6
+}
+.event-table img.speakerImg {
+    width: 17px;
+    margin-right: 8px;
+}
+.cursor-pointer{
+    cursor: pointer
+}
+.dropdownPlus{
+    width: auto;
+    border: none;
+    background: transparent;
+}
+/*.dropdown-menu:after{
+    content: '';
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fffdfd;
+    top: -11px;
+    position: absolute;
+    left: 40%;
+ }*/
+ .section-event .dropdown-menu{
+   margin-top:10px
+ }
+@media only screen and (max-width: 992px){
+    .section-event .col-md-6:nth-child(2) .border-right{
+        border-right: 0px solid transparent !important;
+    }
+}
+
+@media only screen and (max-width: 767px){
+
+  .section-event .col-md-6 .border-right{
+    border-right: 0px solid transparent !important;
+  }
+  .event-table td{
+    min-width: 190px
+  }
+
+}
+
+@media only screen and (max-width: 480px){
+       .section-event  h2 {
+            font-size: 1.8rem;
+        }
+
+       .section-event h3 {
+            font-size: 1.5rem;
+        }
+
+      .section-event  h4 {
+            font-size: 1.3rem;
+        }
+
+        .section-event  h5 {
+            font-size: 1.2rem;
+        }
+    }
+
+
+    /*---------------------------SEC FILING-----------------*/
+    .Sec-filling-table td{
+        min-width: 200px
+    }
