@@ -1,10 +1,7 @@
 export const globalVar = {
-    base_url1: "https://bfs.protacto.com",
-    base_url2: "https://bfs.protacto.com",
-    base_url3: "https://bldr.com",
+    base_url1: process.env.REACT_APP_base_url1,
     production: false,
-    apiKey:"AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs",
+    apiKey: process.env.REACT_APP_apiKey,
     //apiKey:"AIzaSyCXVDCYgk_82rFJWcqvXvqGHH0uQzIFjr4"
 }
-
 

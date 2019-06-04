@@ -216,6 +216,7 @@ button.navbar-toggler {
     width: 100%;
     background-color: #fff;
 }
+
 .on_top_head .sticky-navigation{
     position: relative;
     top:-300px;
@@ -4892,9 +4893,7 @@ span.error-message {
 
 }
 @media screen and (min-width:481px) and (max-width:767px) {
-    .header-fixed {
-        position: relative;
-   }
+  
    .header.on_top_head.head_sticky .alert.alert-primary.toastpopup {
    top: 0;
 }
@@ -5191,12 +5190,15 @@ html,body{height: 100%;}
 
  .SEC-Filings .table thead th ,
 .SEC-Filings .table tbody td {
-    font-size: 16px;
+    font-size: 14px;
     min-width: 100px
  }
 
   .SEC-Filings .table thead th{
     border-top:none;
+  }
+  .SEC-fill label{
+    font-weight: 700
   }
  .dropdown-toggle::after {
     display:none;
@@ -5302,6 +5304,20 @@ html,body{height: 100%;}
 
 
 
+.financialInfo2 .quartely-earning-banner{
+        height: 350px;
+ }
+  .financialInfo2 .quartely-earning-banner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+  
+  }
+
+ .financialInfo2 .invest-banner-heading {
+    top: 0;
+    background: rgba(0,0,0,0.1);
+}
 /*--------------------Annual Report--------------------*/
 .quartely-earning-accordian h4{
     color:#ed174b
@@ -5430,3 +5446,238 @@ html,body{height: 100%;}
     .Sec-filling-table td{
         min-width: 200px
     }
+
+
+
+
+    .subboxes-heading {
+       color: #1e1e1e;
+    font-size:4.5rem;
+    width: 100%;
+    font-weight: 800;
+    margin: 0;
+    line-height: 7.5rem;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+@media only screen and (max-width: 1025px){ 
+     .subboxes-heading{
+      font-size: 50px;
+  }
+    }
+
+@media only screen and (max-width: 768px){
+.subboxes-heading {
+    font-size: 40px;
+    line-height: normal;
+}
+}
+@media only screen and (max-width: 568px){
+.subboxes-heading {
+    font-size: 30px;
+    line-height: normal;
+}
+}
+
+
+
+
+/*----------------stock information--------------*/
+ul.ul-home-stock{
+    -moz-column-count: 5;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 5;
+    -webkit-column-gap: 20px;
+    column-count:5;
+    column-gap: 20px;
+}
+.font-0{
+    font-size: 0
+}
+
+@media only screen and (max-width:576px){
+    ul.ul-home-stock{
+        -moz-column-count: auto;
+        -webkit-column-count: auto;
+        column-count:auto;
+    }
+      ul.ul-home-stock li{
+        width: 46%;
+        display: inline-block;
+
+      }
+     ul.ul-home-stock li:nth-child(even){
+        margin-right:4%;
+     }
+
+    ul.ul-home-stock li:first-child{
+        width: 100%;
+    }
+        ul.ul-home-stock li div{
+         border-top: 1px solid #dee2e6;
+            padding-top: 1rem;
+        }
+}
+
+/*common 2018 EARNINGS section*/
+@media (max-width: 480px){
+    .earn-head-section h2.display-2 {
+        font-size: 2.2rem;
+    }
+}
+
+
+/*-----common-----*/
+.theme-table .table thead th ,
+.theme-table .table tbody td {
+    font-size: 14px;
+    min-width: 100px;
+   vertical-align:top;
+   color: #666
+ }
+ .theme-table .table thead th{
+    border-top: none;
+      border-bottom: none;
+ }
+.investor-calculator .form-group label ,
+.historic-stock .form-group label {
+    font-weight:700
+}
+.btn-submit-2{
+    min-width: 120px
+}
+
+
+
+/*----------------Historic-stock-lookup--------------*/
+
+
+.theme-table.table thead th{
+    border-top:none;
+}
+
+@media (max-width: 992px){
+    .theme-table .table thead th ,
+     .theme-table .table tbody td {
+            min-width: 150px;
+    }
+ }
+
+@media (max-width:568px){
+    .theme-table .table thead th, .theme-table .table tbody td {
+        font-size: 13px;
+    }
+}
+
+
+
+
+/*---------investor calculator----------*/
+
+.custom-input{
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+        height: calc(2.25rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    display: inline-block;
+    width: 100%
+ } 
+ @media (min-width:991px){
+    .investor-calculator .form-group.col-lg-2 {
+    max-width: 20% !important;
+    flex: 0 0 20% !important;
+}
+
+ }
+
+
+/*---------analyst-coverage----------*/
+
+ .analystCoverage .theme-table .table thead th,
+  .analystCoverage .theme-table .table tbody td{
+    width: 40%
+}
+.linkit{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #666
+}
+
+
+
+.sticky-navigation-invest{
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    width: 100%;
+
+}
+.sticky-navigation-invest{
+    transition: top .35s ease .1s;
+    position: relative ;
+    z-index: 100;
+}
+
+.on_top_head .sticky-navigation-invest{
+    position: relative;
+    top:-335px;
+}
+.head_sticky .sticky-navigation-invest {
+    position: fixed;
+    top: 64px;
+    z-index: 100;
+    left: 0;
+    width: 100%;
+}
+
+/*--------------Annual-----------------*/
+ .yearlyDetailUl li{ 
+   font-size: 15px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+.yearlyDetailUl img{
+    width: 20px;
+}
+
+
+/*----------contact--------------*/
+.contactForm .form-control{
+    height: 40px;
+}
+.contactForm .h-100-px.form-control{
+    height: 100px;
+     resize: none;
+}
+@media (max-width:575px){
+    .email-detail{
+        display: block;
+    }
+    .divider-email{
+        display: none;
+    }
+    .investor-relation h3{
+        font-size: 1.2rem;
+    }
+    .Earnings-head {
+        font-size: 1.8rem
+    }
+}
+
+
+/*---------email alert------------*/
+.alert-Type{
+    font-size: 14px;
+}
+.theme-form-control{
+    height: 40px
+}

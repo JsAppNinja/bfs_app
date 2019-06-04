@@ -261,11 +261,11 @@ class StoreLocatore extends Component {
         )
 
         this.state.distributeArray.map(function (item) {
-         return   item.checked = false
+            return item.checked = false
         })
 
         this.state.installLocationArray.map(function (item) {
-            return   item.checked = false
+            return item.checked = false
         })
         var cbarray = document.getElementsByName("is_name");
         for (var i = 0; i < cbarray.length; i++) {

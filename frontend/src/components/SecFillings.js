@@ -12,9 +12,31 @@ class SecFillingComponent extends Component {
 
         //Defining state variable
         this.state = {
-
+            addClass: false,
+            secondryClass:false
         };
 
+    }
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+    /**
+* Handle Scroll
+*/
+    handleScroll = () => {
+        if (window.pageYOffset > 125) {
+            this.setState({ secondryClass: true })
+        } else {
+            this.setState({ secondryClass: false })
+        }
+        if (window.pageYOffset > 135) {
+            this.setState({ addClass: true })
+        } else {
+            this.setState({ addClass: false })
+        }
     }
 
     componentDidUpdate() {
@@ -23,174 +45,170 @@ class SecFillingComponent extends Component {
 
     render() {
         return (
-            <div className="bg-gray" >
-              <section className="stock-quote py-3">
-        <div className="container">
-            <div className="row">
-                 <div className="col-md-12">
-                      <div className="d-lg-flex w-100">
-                                <h5 className="font-weight-medium  mb-0 mr-4">Share Price</h5>
-                                   <ul className="ul-top-share">
+            <div className={"bg-gray" + (this.state.addClass ? ' head_sticky' : '') + (this.state.secondryClass ? ' on_top_head' : '')} >
+                <section className="stock-quote py-3 sticky-navigation-invest" >
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="d-lg-flex w-100">
+                                    <h5 className="font-weight-medium  mb-0 mr-4">Share Price</h5>
+                                    <ul className="ul-top-share">
                                         <li className="list-inline-item pr-sm-4 pl-lg-4 pl-0 pr-2 border-right-black h4 mb-0">NASDAQ: BLDR <span className="heading-blue">$15.81</span> </li>
                                         <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black  h4 mb-0"> $ Change <span className="heading-blue">+0.00 </span></li>
-                                         <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black h4 mb-0">  % Change <span className="heading-blue">+0.00</span> </li>
+                                        <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black h4 mb-0">  % Change <span className="heading-blue">+0.00</span> </li>
                                         <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 h4 mb-0"> Volume <span className="heading-blue">533,00 </span> </li>
                                     </ul>
-                               <h6 className="position-absolute mb-0 date-stock">Pricing Delayed by 15 min</h6>
-                         </div>
-                  </div>
-               </div>
-          </div>
-     </section>
-        <section className="quartely-earning-banner position-relative mt-4">
-               <div className="container">
-                  <div className="row">
-                     <div className="col-md-12 px-0">
-                        <img className="img-fluid" alt="invertor" title="invertor" src={quartelyearning} />
-                     </div>
-                     <div className="col-md-12 ">
-                              <div className="banner-heading text-left position-absolute w-100 px-5 py-2">
-                                 <h2 className="mb-0 font-weight-medium text-white">SEC FILINGS</h2>
+                                    <h6 className="position-absolute mb-0 date-stock">Pricing Delayed by 15 min</h6>
+                                </div>
                             </div>
-                     </div>
-                  </div>
-               </div>
-            </section>
-              <section className="investor-relation my-5 pt-lg-4">
+                        </div>
+                    </div>
+                </section>
+                <section className="main-heading">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 mt-5 mb-2  text-center">
+                                <h1 className="subboxes-heading text-left">SEC FILINGS</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="SEC-fill investor-relation py-5">
                     <div className="container sec-bg border-top-blue ">
                         <div className="row row-eq-height">
                             <div className="col-12 mb-5 mb-lg-0">
-                                  <div className="invertor-bg  p-4 h-100 invertor-news-release">
-                                         <div className="row">
-                                                 <div className="form-group col-6">
-                                                        <label for="category">Group</label>
-                                                      <select className="custom-select" id="category">
-                                                      <option selected>Choose from List</option>
-                                                            
-                                                            <option value="1">Annual Filling</option>
-                                                            <option value="2">Curent Report</option>
-                                                            <option >3 ,4,5</option>
-                                                             <option value="1">Annual Filling</option>
-                                                            <option value="2">Mergers & acquisitions</option>
-                                                            <option>Others</option>
-                                                             <option value="1">Proxy Filling</option>
-                                                            <option value="2">Quaretly Filling</option>
-                                                            <option value="2">Registration statement</option>
-                                                         </select>
-                                                    </div>
-                                                     <div className="form-group col-6">
-                                                                          <label for="year">Filling Year: </label>
-                                                                          <select class="custom-select" id="year">
-                                                                             <option selected>--Any--</option>
-                                                                             <option value="1">2019</option>
-                                                                             <option value="2">2018</option>
-                                                                             <option value="3">2017</option>
-                                                                             <option value="3">2016</option>
-                                                                             <option value="3">2015</option>
-                                                                             <option value="3">2014</option>
-                                                                             <option value="3">2013</option>
-                                                                             <option value="3">2012</option>
-                                                                             <option value="3">2011</option>
-                                                                             <option value="3">2010</option>
-                                                                             <option value="3">2009</option>
-                                                                             <option value="3">2008</option>
-                                                                             <option value="3">2007</option>
-                                                                             <option value="3">2006</option>
-                                                                             <option value="3">2005</option>
-                                                                          </select>
-                                                    </div>
-                                            </div>
-                                     </div>
+                                <div className="invertor-bg  p-4 h-100 invertor-news-release">
+                                    <div className="row">
+                                        <div className="form-group col-6">
+                                            <label for="category">Group</label>
+                                            <select className="custom-select" id="category">
+                                                <option selected>Choose from List</option>
+
+                                                <option value="1">Annual Filling</option>
+                                                <option value="2">Curent Report</option>
+                                                <option >3 ,4,5</option>
+                                                <option value="1">Annual Filling</option>
+                                                <option value="2">Mergers & acquisitions</option>
+                                                <option>Others</option>
+                                                <option value="1">Proxy Filling</option>
+                                                <option value="2">Quaretly Filling</option>
+                                                <option value="2">Registration statement</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group col-6">
+                                            <label for="year">Filling Year: </label>
+                                            <select className="custom-select" id="year">
+                                                <option selected>--Any--</option>
+                                                <option value="1">2019</option>
+                                                <option value="2">2018</option>
+                                                <option value="3">2017</option>
+                                                <option value="3">2016</option>
+                                                <option value="3">2015</option>
+                                                <option value="3">2014</option>
+                                                <option value="3">2013</option>
+                                                <option value="3">2012</option>
+                                                <option value="3">2011</option>
+                                                <option value="3">2010</option>
+                                                <option value="3">2009</option>
+                                                <option value="3">2008</option>
+                                                <option value="3">2007</option>
+                                                <option value="3">2006</option>
+                                                <option value="3">2005</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                             </div>
-        
-                
-                      <div className="row">
+                            </div>
+                        </div>
+
+
+                        <div className="row">
                             <div className="col-md-12">
                                 <div className="table-responsive w-100 Sec-filling-table">
                                     <table className="w-100 table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                 <div className="mb-2"> Form  </div>  S-1
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div className="mb-2"> Form  </div>  S-1
                                              </td>
-                                             <td>
-                                                 <div className="mb-2"> Description </div>  Registration statement for face-amount certificate companies
+                                                <td>
+                                                    <div className="mb-2"> Description </div>  Registration statement for face-amount certificate companies
                                             </td>
-                                            <td>
-                                               <div className="mb-2"> Final Date   </div> Feb 14, 2005
+                                                <td>
+                                                    <div className="mb-2"> Final Date   </div> Feb 14, 2005
                                              </td>
-                                            <td  className="viewFile">
-                                                <div className="mb-2">View  </div>
-                                                <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
-                                                <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
-                                                 <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                 <div className="mb-2"> Form  </div>  3
+                                                <td className="viewFile">
+                                                    <div className="mb-2">View  </div>
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className="mb-2"> Form  </div>  3
                                              </td>
-                                             <td>
-                                                 <div className="mb-2"> Description </div> 
-                                                 Initial filing by director officer or owner of more than ten percent.
+                                                <td>
+                                                    <div className="mb-2"> Description </div>
+                                                    Initial filing by director officer or owner of more than ten percent.
                                             </td>
-                                            <td>
-                                               <div className="mb-2"> Final Date   </div>   Jun 21, 2005
+                                                <td>
+                                                    <div className="mb-2"> Final Date   </div>   Jun 21, 2005
                                              </td>
-                                            <td className="viewFile">
-                                                <div className="mb-2">View  </div>
-                                             <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
-                                                <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
-                                                 <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
-                                            </td>
-                                        </tr>
-                                       <tr>
-                                            <td>
-                                                 <div className="mb-2"> Form  </div>  S-1/A
+                                                <td className="viewFile">
+                                                    <div className="mb-2">View  </div>
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className="mb-2"> Form  </div>  S-1/A
                                              </td>
-                                             <td>
-                                                 <div className="mb-2"> Description </div> 
-                                                        Amended Registration statement for face-amount certificate companies
+                                                <td>
+                                                    <div className="mb-2"> Description </div>
+                                                    Amended Registration statement for face-amount certificate companies
                                             </td>
-                                            <td>
-                                               <div className="mb-2"> Final Date   </div>   Jun 15, 2005
+                                                <td>
+                                                    <div className="mb-2"> Final Date   </div>   Jun 15, 2005
                                              </td>
-                                            <td className="viewFile">
-                                                <div className="mb-2">View  </div>
-                                             <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
-                                                <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
-                                                 <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
-                                            </td>
-                                        </tr>
-                                          <tr>
-                                            <td>
-                                                 <div className="mb-2"> Form  </div>  8-A12G
+                                                <td className="viewFile">
+                                                    <div className="mb-2">View  </div>
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className="mb-2"> Form  </div>  8-A12G
                                              </td>
-                                             <td>
-                                                 <div className="mb-2"> Description </div> 
-                                                      Registration of certain classes of securities 12(g) of the Securities Exchange Act
+                                                <td>
+                                                    <div className="mb-2"> Description </div>
+                                                    Registration of certain classes of securities 12(g) of the Securities Exchange Act
                                             </td>
-                                            <td>
-                                               <div className="mb-2"> Final Date   </div>   Jun 14, 2005
+                                                <td>
+                                                    <div className="mb-2"> Final Date   </div>   Jun 14, 2005
                                              </td>
-                                            <td className="viewFile">
-                                                <div className="mb-2">View  </div>
-                                             <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
-                                                <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
-                                                 <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                                <td className="viewFile">
+                                                    <div className="mb-2">View  </div>
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={htmlsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={pdfsvg} />
+                                                    <img className="img-fluid" alt="pdf" title="pdf" src={xlssvg} />
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
-                      </div>
-                  
                         </div>
+
+                    </div>
                 </section>
 
-        </div>
+            </div>
 
         );
     }

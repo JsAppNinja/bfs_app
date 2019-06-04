@@ -2,20 +2,8 @@
 //Import statement
 import React, { Component } from 'react';
 
-import { topFunctionButtonClick } from "../utils";
-import { globalVar } from "../config";
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
-import investorbanner from "../img/investor-banner.jpg";
 import investgraph from "../img/invest-graph.jpg";
 import downloadpdf from "../img/download-pdf.jpg";
-import investpresentation from "../img/investor-presentation.jpg";
-import latestEarings from "../img/latest-Earings.jpg";
-import printedmat from "../img/printer.svg";
-import rssnews from "../img/newspaper.svg";
-import emailalert from "../img/email.svg";
-import downloadlib from "../img/download.svg";
-import backimg from "../img/2018-earning.jpg";
 
 class InvestorsOverview extends Component {
     constructor(props) {
@@ -171,8 +159,8 @@ class InvestorsOverview extends Component {
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="col-12 text-center mob-xs-1  mt-5 p-0">
-                                        <a class="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-4" href="">
+                                    <div className="col-12 text-center mob-xs-1  mt-5 p-0">
+                                        <a className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-4" href="">
                                             View All</a>
                                     </div>
                                 </div>

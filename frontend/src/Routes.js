@@ -35,6 +35,12 @@ import InvestorsEventsComponent from "./components/InvestorsEvents";
 import FinancialInformation from "./components/FinancialInformation";
 import FinancialInformation2 from "./components/FinancialInformation2";
 import SecFillingComponent from "./components/SecFillings";
+import StockInfoComponent from './components/StockInformation';
+import AnalystCoverageComponent from './components/AnalystCoverage';
+import InvestmentCalculatorComponent from './components/InvestmentCalculator';
+import HistoricStockLookupComponent from './components/HistoricStockLookup';
+import InvestorsEmailAlertComponent from './components/InvestorsEmailAlert';
+import InvestorsContactUsComponent from './components/InvestorsContactUs';
 
 //defining routes
 const Route = ({ childProps }) =>
@@ -74,6 +80,12 @@ const Route = ({ childProps }) =>
         <AppliedRoute exact path="/financial-info" component={FinancialInformation} props={childProps} />
         <AppliedRoute exact path="/sec-filings" component={SecFillingComponent} props={childProps} />
         <AppliedRoute exact path="/financial-info2" component={FinancialInformation2} props={childProps} />
+        <AppliedRoute exact path="/stock-info" component={StockInfoComponent} props={childProps} />
+        <AppliedRoute exact path="/analyst-coverage" component={AnalystCoverageComponent} props={childProps} />
+        <AppliedRoute exact path="/investment-calculator" component={InvestmentCalculatorComponent} props={childProps} />
+        <AppliedRoute exact path="/historic-stock-lookup" component={HistoricStockLookupComponent} props={childProps} />
+        <AppliedRoute exact path="/contact" component={InvestorsContactUsComponent} props={childProps} />
+        <AppliedRoute exact path="/email-alert" component={InvestorsEmailAlertComponent} props={childProps} />
 
         <AppliedRoute exact path="*" component={DashboardComponent} props={childProps} />
     </Switch>

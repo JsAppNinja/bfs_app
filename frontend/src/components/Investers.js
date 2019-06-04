@@ -7,6 +7,7 @@ import Leaderimg1 from "../img/Leaderimg1.jpg";
 import userprofileinvest from "../img/userProfile-invest.svg";
 import classnames from 'classnames';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 class InvesterComponent extends Component {
   constructor(props) {
@@ -14,11 +15,18 @@ class InvesterComponent extends Component {
 
     //Defining state variable
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      addClass: false
     };
 
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.handleScroll);
+  }
   componentDidUpdate() {
   }
 
@@ -32,36 +40,44 @@ class InvesterComponent extends Component {
       });
     }
   }
+  /**
+   * Handle Scroll
+   */
+  handleScroll = () => {
+    if (window.pageYOffset > 130) {
+      this.setState({ addClass: true })
+    } else {
+      this.setState({ addClass: false })
+    }
+  }
+
   render() {
     return (
-      <div className="invertor-relation">
-       <section className="stock-quote py-3">
-          <div className="container">
-            <div className="row">
-                 <div className="col-md-12">
-                            <div className="d-lg-flex w-100">
-                                     <h5 className="font-weight-medium  mb-0 mr-4">Share Price</h5>
-                                      <ul className="ul-top-share">
-                                            <li className="list-inline-item pr-sm-4 pl-lg-4 pl-0 pr-2 border-right-black h4 mb-0">NASDAQ: BLDR <span class="heading-blue">$15.81</span> </li>
-                                            <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black  h4 mb-0"> $ Change <span class="heading-blue">+0.00 </span></li>
-                                            <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black h4 mb-0">  % Change <span class="heading-blue">+0.00</span> </li>
-                                            <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 h4 mb-0"> Volume <span class="heading-blue">533,00 </span> </li>
-                                         </ul>
-                               <h6 className="position-absolute mb-0 date-stock">Pricing Delayed by 15 min</h6>
-                             </div>
-                          </div>
-               </div>
-          </div>
-        </section>
-        <section className="inveter-banner position-relative">
+
+      <div className={"invertor-relation " + (this.state.addClass ? 'head_sticky' : '')}>
+        <section className="stock-quote py-3 sticky-navigation-invest">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <img className="w-100" alt="invertor" title="invertor" src={investorbanner} />
-              </div> <div className="col-md-12">
-                <div className="banner-heading text-left position-absolute w-100 px-5 py-2">
-                  <h2 className="mb-0 font-weight-medium text-white">Investor Relations</h2>
+                <div className="d-lg-flex w-100">
+                  <h5 className="font-weight-medium  mb-0 mr-4">Share Price</h5>
+                  <ul className="ul-top-share">
+                    <li className="list-inline-item pr-sm-4 pl-lg-4 pl-0 pr-2 border-right-black h4 mb-0">NASDAQ: BLDR <span className="heading-blue">$15.81</span> </li>
+                    <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black  h4 mb-0"> $ Change <span className="heading-blue">+0.00 </span></li>
+                    <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 border-right-black h4 mb-0">  % Change <span className="heading-blue">+0.00</span> </li>
+                    <li className="list-inline-item pr-sm-4 pl-sm-4 pl-0 pr-2 h4 mb-0"> Volume <span className="heading-blue">533,00 </span> </li>
+                  </ul>
+                  <h6 className="position-absolute mb-0 date-stock">Pricing Delayed by 15 min</h6>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="main-heading">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12 mt-5 mb-2  text-center">
+                <h1 className="subboxes-heading text-left">Leadership</h1>
               </div>
             </div>
           </div>
@@ -72,15 +88,15 @@ class InvesterComponent extends Component {
             <div className="row">
               <div className="col-md-12">
                 <ul className="list-unstyled menu-company-hightlight text-center">
-                  <li className="list-inline-item active py-2 py-lg-3"><a href="#" className="">Company Highlights</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Governance</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">News</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Events</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Stock Information</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Financial Information</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Email Alerts</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">FAQs</a></li>
-                  <li className="list-inline-item  py-2 py-lg-3"><a href="#" className="">Contact Us</a></li>
+                <li className="list-inline-item  py-2 py-lg-4" ><Link to={'/investorhome'} className="">Company Highlights</Link></li>
+                  <li className="list-inline-item active py-2 py-lg-4" ><Link to={'/governance'} className="">Governance</Link></li>
+                  <li className="list-inline-item py-2 py-lg-4"><Link to={'/news'} className="">News</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/events'} className="">Events</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/stock-info'} className="">Stock Information</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/financial-info'} className="">Financial Information</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/email-alert'}className="">Email Alerts</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/investorhome'} className="">FAQs</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/contact'} className="">Contact Us</Link></li>
                 </ul>
               </div>
             </div>
@@ -198,9 +214,7 @@ class InvesterComponent extends Component {
 
                           </div>
                         </div>
-                        {/* {data1.length > 0 ? (<div className="col-12 text-center  pt-lg-5 px-0">
-                      <Link to={'/manufacturing'} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mob-view-all">View All</Link>
-                    </div>) : null} */}
+                    
                       </div>
                     </div>
                     <div className="card-custom position-relative">
@@ -254,9 +268,7 @@ class InvesterComponent extends Component {
                             </div>
                           </div>
                         </div>
-                        {/* {data2.length > 0 ? (<div className="col-12 text-center  pt-lg-5 px-0">
-                      <Link to={'/distribution/'} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mob-view-all">View All</Link>
-                    </div>) : null} */}
+              
                       </div>
                     </div>
                     <div className="card-custom position-relative">
@@ -302,9 +314,7 @@ class InvesterComponent extends Component {
                             </div>
                           </div>
                         </div>
-                        {/* {data3.length > 0 ? (<div className="col-12 text-center  pt-lg-5 px-0">
-                      <Link to={'/installed-services'} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mob-view-all">View All</Link>
-                    </div>) : null} */}
+ 
                       </div>
                     </div>
                   </div>

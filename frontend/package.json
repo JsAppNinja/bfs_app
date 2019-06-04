@@ -10,6 +10,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-react-hooks": "0.0.0",
+    "fusioncharts": "^3.13.4",
     "google-maps-react": "^2.0.2",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
@@ -21,6 +22,7 @@
     "react-dom": "^16.4.2",
     "react-fancybox": "^0.2.3",
     "react-fastclick": "^3.0.2",
+    "react-fusioncharts": "^3.0.1",
     "react-geocode": "^0.1.2",
     "react-geolocation": "^1.0.4",
     "react-google-autocomplete": "^1.0.16",
@@ -39,8 +41,10 @@
     "ts-overlapping-marker-spiderfier": "^1.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-env start",
+    "start:production": "react-app-env --env-file=production.env start",
+    "build": "react-app-env --env-file=development.env build",
+    "build:production": "react-app-env --env-file=production.env build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js  --cache || true"
@@ -51,6 +55,7 @@
     "eslint-config-google": "^0.11.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1"
+    "eslint-plugin-react": "^7.11.1",
+    "react-app-env": "^1.2.3"
   }
 }
