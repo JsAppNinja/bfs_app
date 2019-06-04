@@ -3,6 +3,8 @@
 //Import statement
 import React, { Component } from 'react';
 import historicdummygraph from "../img/historic-stock.jpg";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 
 
 class HistoricStockLookupComponent extends Component {
@@ -11,6 +13,7 @@ class HistoricStockLookupComponent extends Component {
 
     //Defining state variable
     this.state = {
+          activeTab: '2',
         addClass: false
     };
 
@@ -22,6 +25,9 @@ class HistoricStockLookupComponent extends Component {
 componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
 }
+     toggle(tab) {
+    this.props.history.push(tab)
+  }
 /**
 * Handle Scroll
 */
@@ -31,6 +37,7 @@ handleScroll = () => {
     } else {
         this.setState({ addClass: false })
     }
+
 }
 
 
@@ -65,7 +72,50 @@ handleScroll = () => {
                         </div>
                     </div>
                 </section>
+     
+     <section className="theme-nav-page  py-4">
+           <div className="container p-0">
+                 <div className="row">
+                        <div className="col-md-12">
+                            <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/stock-info'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Stock Quote</span>
+                                </NavLink>
+                              </NavItem>
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/historic-stock-lookup'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Historic Stock Lookup </span>
+                                </NavLink>
+                              </NavItem>
 
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/investment-calculator'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Investment Calculator</span>
+                                </NavLink>
+                              </NavItem>
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/analyst-coverage'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Analyst List</span>
+                                </NavLink>
+                              </NavItem>
+                            </Nav>
+                          </div>
+                      </div>
+          </div>
+        </section>
                 <section className="historic-stock py-4">
                     <div className="container sec-bg border-top-blue">
                         <div className="row p-4">

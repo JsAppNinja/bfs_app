@@ -95,7 +95,7 @@ class InvesterComponent extends Component {
                   <li className="list-inline-item  py-2 py-lg-4"><Link to={'/stock-info'} className="">Stock Information</Link></li>
                   <li className="list-inline-item  py-2 py-lg-4"><Link to={'/financial-info'} className="">Financial Information</Link></li>
                   <li className="list-inline-item  py-2 py-lg-4"><Link to={'/email-alert'}className="">Email Alerts</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/investorhome'} className="">FAQs</Link></li>
+                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/faq'} className="">FAQs</Link></li>
                   <li className="list-inline-item  py-2 py-lg-4"><Link to={'/contact'} className="">Contact Us</Link></li>
                 </ul>
               </div>

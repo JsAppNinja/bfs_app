@@ -41,6 +41,11 @@ import InvestmentCalculatorComponent from './components/InvestmentCalculator';
 import HistoricStockLookupComponent from './components/HistoricStockLookup';
 import InvestorsEmailAlertComponent from './components/InvestorsEmailAlert';
 import InvestorsContactUsComponent from './components/InvestorsContactUs';
+import BoardOfDirectorsComponent from './components/BoardOfDirectors';
+import CommiteesComponent from './components/Commitees';
+import ContactTheBoardComponent from './components/ContactTheBoard';
+import ManagementComponent from './components/Management';
+import FaqComponent from './components/faq';
 
 //defining routes
 const Route = ({ childProps }) =>
@@ -87,6 +92,13 @@ const Route = ({ childProps }) =>
         <AppliedRoute exact path="/contact" component={InvestorsContactUsComponent} props={childProps} />
         <AppliedRoute exact path="/email-alert" component={InvestorsEmailAlertComponent} props={childProps} />
 
+        <AppliedRoute exact path="/board-of-directors" component={BoardOfDirectorsComponent} props={childProps} />
+        <AppliedRoute exact path="/commitees" component={CommiteesComponent} props={childProps} />
+        <AppliedRoute exact path="/contact-board" component={ContactTheBoardComponent} props={childProps} />
+        <AppliedRoute exact path="/management" component={ManagementComponent} props={childProps} />
+        <AppliedRoute exact path="/faq" component={FaqComponent} props={childProps} />
+
+        
         <AppliedRoute exact path="*" component={DashboardComponent} props={childProps} />
     </Switch>
 

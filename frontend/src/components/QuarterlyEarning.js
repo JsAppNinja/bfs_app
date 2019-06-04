@@ -8,6 +8,8 @@ import earningImg4 from "../img/earing4.jpg";
 import pdfsvg from "../img/pdf.svg";
 import fileimg from "../img/document.svg";
 import webcastimg from "../img/webcast.svg";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 
 
 
@@ -17,6 +19,7 @@ class QuarterlyEarningComponent extends Component {
 
       //Defining state variable
       this.state = {
+          activeTab: '4',
          addClass: false
       };
 
@@ -27,6 +30,9 @@ class QuarterlyEarningComponent extends Component {
   }
   componentWillUnmount() {
       window.removeEventListener('scroll', this.handleScroll);
+  }
+      toggle(tab) {
+    this.props.history.push(tab)
   }
   /**
 * Handle Scroll
@@ -92,6 +98,50 @@ class QuarterlyEarningComponent extends Component {
                   </div>
                </div>
             </section>
+             <section className="theme-nav-page  py-4">
+          <div className="container p-0">
+            <div className="row">
+              <div className="col-md-12">
+                <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/financial-info'); }}
+                    >
+                   <span className="font-weight-medium font-weight-bold z-index">Overview </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+
+                       <NavLink
+                      className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/annualreport'); }} 
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Annual Reports</span>
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/sec-filings'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">SEC Filings  </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/quarterlyearning'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Quarterly Results</span>
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              </div>
+            </div>
+          </div>
+        </section>
 
             {/* IE fix */}
             {
@@ -118,7 +168,7 @@ class QuarterlyEarningComponent extends Component {
                      <div className="col-md-6 mt-5 mb-2">
                         <h1>2019</h1>
                         <div className="my-3">
-                           <div className="card panel"  >
+                           <div className="card panel">
                               <div className="card-header  p-0" id="heading-1">
                                  <a className="accord_style h5  mb-0 py-2 px-4 collapsed" id="accord1" role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="false" aria-controls="collapse-1" onClick={() => this.expandcollapse()}>
                                     First Quarter

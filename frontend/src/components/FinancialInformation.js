@@ -10,6 +10,9 @@ import earningImg3 from "../img/earing3.jpg";
 import earningImg4 from "../img/earing4.jpg";
 import pdfsvg from "../img/pdf.svg";
 import { Link } from "react-router-dom";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
+import { BrowserRouter as Route } from 'react-router-dom';
 
 class FinancialInformationComponent extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ class FinancialInformationComponent extends Component {
 
     //Defining state variable
     this.state = {
-
+      activeTab: '1',
       addClass: false
     };
 
@@ -27,6 +30,11 @@ class FinancialInformationComponent extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  toggle(tab) {
+
+    this.props.history.push(tab)
   }
   /**
 * Handle Scroll
@@ -73,6 +81,50 @@ class FinancialInformationComponent extends Component {
             </div>
           </div>
         </section>
+        <section className="theme-nav-page  py-4">
+          <div className="container p-0">
+            <div className="row">
+              <div className="col-md-12">
+                <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/financial-info'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Overview </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/annualreport'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Annual Reports</span>
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/sec-filings'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">SEC Filings  </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/quarterlyearning'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Quarterly Results</span>
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="my-5 financial-info">
           <div className="container">
@@ -85,7 +137,7 @@ class FinancialInformationComponent extends Component {
               <div className="col-md-3 col-lg-4 text-md-right">
                 <div className="dropdown">
                   <span className="h6 font-weight-400">Year</span> &nbsp; <button type="button" className="btn btn-primary d-inline-block dropdown-toggle theme-dropdown" data-toggle="dropdown">
-                    2015
+                    2019
                                              <i className="fa fa-angle-down h4 float-right" aria-hidden="true"></i>
                   </button>
                   <ul className="dropdown-menu">
@@ -148,13 +200,15 @@ class FinancialInformationComponent extends Component {
               <div className="col-md-3 col-lg-4 text-md-right">
                 <span className="h6 font-weight-400">Year</span> &nbsp;  <div className="dropdown d-inline-block">
                   <button type="button" className="btn btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
-                    2015
+                    2019
                                                     <i className="fa fa-angle-down float-right" aria-hidden="true"></i>
                   </button>
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">2016</li>
                     <li className="dropdown-item">2017</li>
                     <li className="dropdown-item">2018</li>
+                    <li className="dropdown-item">2019</li>
+
                   </ul>
                 </div>
               </div>
@@ -190,7 +244,7 @@ class FinancialInformationComponent extends Component {
             </div>
             <div className="row mt-5">
               <div className="col-md-12">
-                <Link to={'/annualreport'}  className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-4">View More</Link>
+                <Link to={'/annualreport'} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-4">View More</Link>
               </div>
             </div>
           </div>
@@ -215,10 +269,16 @@ class FinancialInformationComponent extends Component {
 
                   <div className="dropdown">
                     <span className="h6 font-weight-400">Year</span> &nbsp;<button type="button" className="btn d-inline-block btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
-                      2017
+                      2019
+
+
                                                     <i className="fa fa-angle-down h4 float-right" aria-hidden="true"></i>
                     </button>
                     <ul className="dropdown-menu">
+                      <li className="dropdown-item">2019</li>
+
+                      <li className="dropdown-item">2018</li>
+                      <li className="dropdown-item">2017 </li>
                       <li className="dropdown-item">2016</li>
                       <li className="dropdown-item">2015 </li>
                       <li className="dropdown-item">2014</li>
@@ -321,13 +381,15 @@ class FinancialInformationComponent extends Component {
               <div className="col-lg-4 col-md-3 text-md-right">
                 <div className="dropdown">
                   <span className="h6 font-weight-400">Year</span> &nbsp;<button type="button" className="btn btn-primary dropdown-toggle theme-dropdown" data-toggle="dropdown">
-                    2015
+                    2019
                                              <i className="fa fa-angle-down h4 float-right" aria-hidden="true"></i>
                   </button>
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">2016</li>
                     <li className="dropdown-item">2017</li>
                     <li className="dropdown-item">2018</li>
+                    <li className="dropdown-item">2019</li>
+
                   </ul>
                 </div>
               </div>
@@ -460,7 +522,7 @@ class FinancialInformationComponent extends Component {
                           About Builders <br /> First Source
                                                 </h5>
                         <div className="rd-name mt-3">
-                        <Link className="btn theme-btn text-white  text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/investorhome'} >Learn More</Link>
+                          <Link className="btn theme-btn text-white  text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/investorhome'} >Learn More</Link>
                         </div>
                       </div>
                     </div>
@@ -477,7 +539,7 @@ class FinancialInformationComponent extends Component {
                           QUARTERLY  <br /> EARNINGS
                                                 </h5>
                         <div className="rd-name mt-3">
-                        <Link className="btn theme-btn text-white text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/quarterlyearning'}>Learn More</Link>
+                          <Link className="btn theme-btn text-white text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/quarterlyearning'}>Learn More</Link>
                         </div>
                       </div>
                     </div>
@@ -494,7 +556,7 @@ class FinancialInformationComponent extends Component {
                           LEADERSHIP
                                                 </h5>
                         <div className="rd-name mt-3">
-                        <Link className="btn text-white theme-btn text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/leaderships'}>Learn More</Link>
+                          <Link className="btn text-white theme-btn text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/leaderships'}>Learn More</Link>
                         </div>
                       </div>
                     </div>
@@ -511,7 +573,7 @@ class FinancialInformationComponent extends Component {
                           News &  <br /> Events
                                                 </h5>
                         <div className="rd-name mt-3">
-                        <Link className="btn text-white theme-btn text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/news'}>Learn More</Link>
+                          <Link className="btn text-white theme-btn text-uppercase bg-info px-4 py-3 text-white h5 mb-0" to={'/news'}>Learn More</Link>
                         </div>
                       </div>
                     </div>
@@ -522,74 +584,6 @@ class FinancialInformationComponent extends Component {
             </div>
           </div>
         </section>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <hr />
-            </div>
-          </div>
-        </div>
-        <section className="pt-3 pb-5">
-          <div className="container">
-            <div className="row  row-eq-height">
-              <div className="col-md-12 flex-column   d-flex justify-content-center">
-                <h2 class="font-32 font-weight-bold color-dark-gray">Stock Information</h2>
-                <ul className="list-unstyled ul-home-stock mt-5">
-                  <li className="">
-                    <h6 className="mb-0 text-gray6">Last Price</h6>
-                    <h3 className="text-gray6 font-weight-bold">$14.57</h3>
-                  </li>
-                  <li className="mt-3 mt-sm-0">
-                    <div className="d-inline-block w-100 pb-3">
-                      <h6 className="mb-0">Change</h6>
-                      <h5 className="text-gray6 font-weight-bold">0 (0.00)</h5>
-                    </div>
-                    <div className="d-inline-block w-100  border-top pt-3">
-                      <h6 className="mb-0">Volume</h6>
-                      <h5 className="text-gray6 font-weight-bold">0</h5>
-                    </div>
-
-
-                  </li>
-                  <li className="mt-3 mt-sm-0">
-                    <div className="d-inline-block w-100 pb-3">
-                      <h6 className="mb-0">Open</h6>
-                      <h5 className="text-gray6 font-weight-bold">-</h5>
-                    </div>
-                    <div className="d-inline-block w-100  border-top pt-3">
-                      <h6 className="mb-0">Previous Close</h6>
-                      <h5 className="text-gray6 font-weight-bold">$14.57</h5>
-                    </div>
-                  </li>
-                  <li className="">
-                    <div className="d-inline-block w-100 pb-3">
-                      <h6 className="mb-0">Day High</h6>
-                      <h5 className="text-gray6 font-weight-bold">$14.71</h5>
-                    </div>
-                    <div className="d-inline-block w-100  border-top pt-3">
-                      <h6 className="mb-0">Day Low</h6>
-                      <h5 className="text-gray6 font-weight-bold">$14.00</h5>
-                    </div>
-
-
-
-                  </li>
-                  <li className="">
-                    <div className="d-inline-block w-100 pb-3">
-                      <h6 className="mb-0">52-Week High</h6>
-                      <h5 className="text-gray6 font-weight-bold">$20.79</h5>
-                    </div>
-                    <div className="d-inline-block w-100  border-top pt-3">
-                      <h6 className="mb-0">52-Week Low</h6>
-                      <h5 className="text-gray6 font-weight-bold">$10.15</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
       </div>
 
     );

@@ -938,7 +938,7 @@ class HeaderComponent extends Component {
 
             if (item.RootName === "INVESTORS") {
 
-                item={};
+                item = {};
                 item = {
                     $id: "30",
                     Childrens: [
@@ -950,7 +950,44 @@ class HeaderComponent extends Component {
                             RootId: 12939,
                             RootName: "Company Highlights",
                             RootUrl: "/investorhome",
-                        }, {
+                        },
+                        {
+                            $id: "104",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "Events",
+                            RootUrl: "/events",
+                        },
+                        {
+                            $id: "109",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "Contact Us",
+                            RootUrl: "/contact",
+                        },
+                        {
+                            $id: "110",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "FAQ",
+                            RootUrl: "/faq",
+                        },
+                        {
+                            $id: "106",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "Financial Information",
+                            RootUrl: "/financial-info",
+                        },
+                        {
                             $id: "101",
                             Childrens: null,
                             HideFromNavigation: false,
@@ -959,38 +996,6 @@ class HeaderComponent extends Component {
                             RootName: "Governance",
                             RootUrl: "/governance",
                         }, {
-                            $id: "102",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "News",
-                            RootUrl: "/news",
-                        }, {
-                            $id: "104",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Events",
-                            RootUrl: "/events",
-                        }, {
-                            $id: "105",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Stock Information",
-                            RootUrl: "/stock-info",
-                        }, {
-                            $id: "106",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Financial Information",
-                            RootUrl: "/financial-info",
-                        }, {
                             $id: "107",
                             Childrens: null,
                             HideFromNavigation: false,
@@ -998,15 +1003,35 @@ class HeaderComponent extends Component {
                             RootId: 12939,
                             RootName: "Leaderships",
                             RootUrl: "/leaderships",
-                        }, {
+                        },
+                        {
+                            $id: "102",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "News",
+                            RootUrl: "/news",
+                        },
+                        {
                             $id: "108",
                             Childrens: null,
                             HideFromNavigation: false,
                             IsExternal: false,
                             RootId: 12939,
-                            RootName: "Quarterl Yearning",
+                            RootName: "Quarterly Yearning",
                             RootUrl: "/quarterlyearning",
+                        },
+                        {
+                            $id: "105",
+                            Childrens: null,
+                            HideFromNavigation: false,
+                            IsExternal: false,
+                            RootId: 12939,
+                            RootName: "Stock Information",
+                            RootUrl: "/stock-info",
                         }
+
 
                     ],
                     HideFromNavigation: false,

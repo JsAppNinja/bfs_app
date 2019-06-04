@@ -22,6 +22,8 @@ import World from 'fusioncharts/maps/fusioncharts.world';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import ReactFC from 'react-fusioncharts';
 import TimeSeries from 'fusioncharts/fusioncharts.timeseries';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 
 ReactFC.fcRoot(FusionCharts, Maps, World, FusionTheme, TimeSeries);
 
@@ -70,6 +72,8 @@ class StockInfoComponent extends Component {
 
     //Defining state variable
     this.state = {
+
+      activeTab: '1',
       addClass: false,
       timeseriesDs: {
         type: "timeseries",
@@ -88,6 +92,12 @@ class StockInfoComponent extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+  }
+  /**
+     * To toggle menu
+    */
+    toggle(tab) {
+    this.props.history.push(tab)
   }
 
   /**
@@ -150,6 +160,49 @@ class StockInfoComponent extends Component {
                 <h1 className="subboxes-heading text-left">Stock information</h1>
               </div>
             </div>
+          </div>
+        </section>
+         <section className="theme-nav-page  py-4">
+           <div className="container p-0">
+                 <div className="row">
+                        <div className="col-md-12">
+                            <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/stock-info'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Stock Quote</span>
+                                </NavLink>
+                              </NavItem>
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/historic-stock-lookup'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Historic Stock Lookup </span>
+                                </NavLink>
+                              </NavItem>
+
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/investment-calculator'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Investment Calculator</span>
+                                </NavLink>
+                              </NavItem>
+                              <NavItem className="text-uppercase txt-left-mob">
+                                <NavLink
+                                  className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
+                                  onClick={() => { this.toggle('/analyst-coverage'); }}
+                                >
+                                  <span className="font-weight-medium font-weight-bold z-index">Analyst List</span>
+                                </NavLink>
+                              </NavItem>
+                            </Nav>
+                          </div>
+                      </div>
           </div>
         </section>
         <section className="">
@@ -246,85 +299,6 @@ class StockInfoComponent extends Component {
           </div>
 
         </section> */}
-
-        <section className="bg-blue mt-5">
-
-          <div className="section-image col-12 p-0">
-            <img src={backimg} />
-
-            <div className="earn-head-section">
-              <div className="container">
-
-                <h2 className="display-2 text-uppercase font-weight-bold">2018 Earnings</h2>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="earn-section">
-
-            <div className="container py-3 px-5">
-              <div className="row text-white">
-
-                <div className="col-md-6 mb-sm-0 text-center">
-                  <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Latest Earnings Presentation</h4>
-                  <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={latestEarings} />
-                </div>
-
-                <div className="col-md-6 text-center">
-                  <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Investor Presentation</h4>
-
-                  <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={investpresentation} />
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div className="container p-3">
-            <div className="col-lg-12 col-md-12 mt-5">
-              <h4 className="mb-3 et-text w-100 d-inline-block mt-3 text-center display-5 font-weight-bold">Shareholder Tools</h4>
-
-              <ul className="list-unstyled share-holder-ul mt-4 row">
-
-                <li className="mb-3 text-center col-md-3">
-                  <Link to={'/contact'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={printedmat} /></div>
-                    <div className="d-block w-100 text-center h5">Contact</div>
-                  </Link></li>
-
-                <li className="mb-3 text-center col-md-3">
-                  <Link to={'/sec-filings'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={downloadlib} /></div>
-                    <div className="d-block w-100 text-center h5">SEC Filings</div>
-                  </Link>
-                </li>
-
-
-
-
-                <li className="mb-3 col-md-3">
-                  <Link to={'/financial-info'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={emailalert} /></div>
-                    <div className="d-block w-100 text-center h5">Financial Information</div></Link></li>
-
-
-                <li className="mb-3 col-md-3">
-                  <Link to={'/stock-info'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={rssnews} /></div>
-                    <div className="d-block w-100 text-center h5">Share Information</div>
-                  </Link></li>
-
-              </ul>
-
-
-            </div>
-
-          </div>
-
-        </section>
         <section className="py-5">
           <div className="container">
             <div className="row">

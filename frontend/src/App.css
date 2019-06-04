@@ -1620,7 +1620,7 @@ select::-ms-expand {
   padding: 4% 0px 0;
     color: #fff;}
 .investHome .inveter-banner{height: calc(100vh - 250px)}
-.inveter-banner img{height: 100%; object-fit: cover;}
+
 .banner-heading{
     bottom: 40px;
     left: 0;
@@ -4986,10 +4986,10 @@ height: 250px;}
    height: 450px;
 }
 .jobsarea-banner .slick-slider .slick-list .slick-track .career-banner-text h1 {
-   font-size: 48px;
+   font-size: 35px;
    }
    .jobsarea-banner .slick-slider .slick-list .slick-track .career-banner-text {
-   bottom: 114px;
+   bottom: 30px;
 }
 }
 
@@ -5681,3 +5681,85 @@ ul.ul-home-stock{
 .theme-form-control{
     height: 40px
 }
+
+
+
+/*----------theme-nave-bar----------*/
+.theme-nav-page .nav-tabs {
+    background: #0768b4;
+    overflow: hidden;
+}
+.theme-nav-page .nav-tabs .nav-link:before {
+    height: 100%;
+    top: 0;
+    bottom: auto;
+}
+.theme-nav-page .nav-item a {
+    border: 0;
+}
+
+
+/*----------FAQ ----------*/
+.faqUl li{
+
+}
+
+
+/*-------------------theme accordian------------------*/
+.theme-accordian .card-header  {
+   border:2px solid transparent;
+    background: transparent;
+    border-radius: 50px;
+
+}
+.theme-accordian .card-header a.accord_style {
+    border-radius: 50px;
+    background: #ed174b;
+  color: #fff;
+     display: block;
+      border:2px solid #ed174b;
+}
+.theme-accordian .card-header a.accord_style.collapsed{
+      background:#fafbff;
+        border:2px solid rgba(35,45,61,0.8);
+        color: rgba(35,45,61,0.8)
+}
+.theme-accordian .card  {
+          border: 2px solid #fff;
+    background: #f3f2f2;
+    border:none;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+        border-bottom-left-radius: 1.375rem;
+    border-bottom-right-radius:1.375rem
+}
+.theme-accordian .card .collapsed i  {
+     color: rgba(35,45,61,0.8);
+   -webkit-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+   transform: rotate(0deg);
+}
+.theme-accordian .card  i{
+ transform: rotate(180deg);
+ color: #fff;
+    font-size: 25px;
+    float: right;
+     -webkit-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.theme-accordian  .card-header {
+    background: transparent;
+    border: none;
+ }
+
+
+ /*-----------------management---------*/
+ .investor-relation-managment p{
+    font-size: 15px
+ }
+ .investor-relation-managment h1{
+    line-height: normal;
+ }

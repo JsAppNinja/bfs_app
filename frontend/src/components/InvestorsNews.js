@@ -76,30 +76,7 @@ class InvestorsNewsComponent extends Component {
                   </div>
                </div>
             </section>
-
-            <section className="bg-blue">
-               <div className="container">
-                  <div className="row">
-                     <div className="col-md-12">
-                        <ul className="list-unstyled menu-company-hightlight text-center">
-                           <li className="list-inline-item  py-2 py-lg-4" ><Link to={'/investorhome'} className="">Company Highlights</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4" ><Link to={'/governance'} className="">Governance</Link></li>
-                           <li className="list-inline-item active py-2 py-lg-4"><Link to={'/news'} className="">News</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/events'} className="">Events</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/stock-info'} className="">Stock Information</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/financial-info'} className="">Financial Information</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/email-alert'} className="">Email Alerts</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/investorhome'} className="">FAQs</Link></li>
-                           <li className="list-inline-item  py-2 py-lg-4"><Link to={'/contact'} className="">Contact Us</Link></li>
-                        </ul>
-                     </div>
-                  </div>
-
-               </div>
-
-            </section>
-
-            <section className="investor-relation my-5 pt-lg-4">
+            <section className="investor-relation">
                <div className="container">
                   <div className="row row-eq-height">
                      <div className="col-12 mb-5 mb-lg-0">
@@ -244,82 +221,7 @@ class InvestorsNewsComponent extends Component {
                </div>
             </section>
 
-            <section className="bg-blue">
-
-               <div className="section-image col-12 p-0">
-                  <img src={backimg} />
-
-                  <div className="earn-head-section">
-                     <div className="container">
-
-                        <h2 className="display-2 text-uppercase font-weight-bold">2018 Earnings</h2>
-
-                     </div>
-
-                  </div>
-
-               </div>
-
-               <div className="earn-section">
-
-                  <div className="container py-3 px-5">
-                     <div className="row text-white">
-
-                        <div className="col-md-6 mb-sm-0 text-center">
-                           <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Latest Earnings Presentation</h4>
-                           <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={latestEarings} />
-                        </div>
-
-                        <div className="col-md-6 text-center">
-                           <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Investor Presentation</h4>
-
-                           <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={investpresentation} />
-
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-
-
-               <div className="container p-3">
-                  <div className="col-lg-12 col-md-12 mt-5">
-                     <h4 className="mb-3 et-text w-100 d-inline-block mt-3 text-center display-5 font-weight-bold">Shareholder Tools</h4>
-
-                     <ul className="list-unstyled share-holder-ul mt-4 row">
-
-                        <li className="mb-3 text-center col-md-3">
-                           <Link to={'/contact'}>
-                              <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={printedmat} /></div>
-                              <div className="d-block w-100 text-center h5">Contact</div>
-                           </Link></li>
-
-                        <li className="mb-3 text-center col-md-3">
-                           <Link to={'/sec-filings'}>
-                              <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={downloadlib} /></div>
-                              <div className="d-block w-100 text-center h5">SEC Filings</div>
-                           </Link>
-                        </li>
-
-                        <li className="mb-3 col-md-3">
-                           <Link to={'/financial-info'}>
-                              <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={emailalert} /></div>
-                              <div className="d-block w-100 text-center h5">Financial Information</div></Link></li>
-
-
-                        <li className="mb-3 col-md-3">
-                           <Link to={'/stock-info'}>
-                              <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={rssnews} /></div>
-                              <div className="d-block w-100 text-center h5">Share Information</div>
-                           </Link></li>
-
-                     </ul>
-
-                  </div>
-
-               </div>
-
-            </section>
+      
             <section className="py-5">
                <div className="container">
                   <div className="row">

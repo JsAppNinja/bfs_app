@@ -36,6 +36,9 @@ class GovernanceComponent extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
+     toggle(tab) {
+    this.props.history.push(tab)
+  }
   /**
   * Handle Scroll
   */
@@ -52,12 +55,8 @@ class GovernanceComponent extends Component {
   /**
      * To toggle menu
     */
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
+toggle(tab) {
+    this.props.history.push(tab)
   }
 
   tabsinternaldata() {
@@ -336,36 +335,14 @@ class GovernanceComponent extends Component {
             </div>
           </div>
         </section>
-        <section className="bg-blue">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <ul className="list-unstyled menu-company-hightlight text-center">
-                  <li className="list-inline-item  py-2 py-lg-4" ><Link to={'/investorhome'} className="">Company Highlights</Link></li>
-                  <li className="list-inline-item active py-2 py-lg-4" ><Link to={'/governance'} className="">Governance</Link></li>
-                  <li className="list-inline-item py-2 py-lg-4"><Link to={'/news'} className="">News</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/events'} className="">Events</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/stock-info'} className="">Stock Information</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/financial-info'} className="">Financial Information</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/email-alert'} className="">Email Alerts</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/investorhome'} className="">FAQs</Link></li>
-                  <li className="list-inline-item  py-2 py-lg-4"><Link to={'/contact'} className="">Contact Us</Link></li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-
-
+    
         <section className="governance-page-navs py-4">
           <div className="container">
             <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
               <NavItem className="text-uppercase txt-left-mob">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
-                  onClick={() => { this.toggle('1'); }}
+                  onClick={() => { this.toggle('/governance'); }}
                 >
                   <span className="font-weight-medium font-weight-bold z-index">Overview</span>
                 </NavLink>
@@ -373,7 +350,7 @@ class GovernanceComponent extends Component {
               <NavItem className="text-uppercase txt-left-mob">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
-                  onClick={() => { this.toggle('2'); }}
+                  onClick={() => { this.toggle('/management'); }}
                 >
                   <span className="font-weight-medium font-weight-bold z-index">Management</span>
                 </NavLink>
@@ -382,7 +359,7 @@ class GovernanceComponent extends Component {
               <NavItem className="text-uppercase txt-left-mob">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
-                  onClick={() => { this.toggle('3'); }}
+                  onClick={() => { this.toggle('/board-of-directors'); }}
                 >
                   <span className="font-weight-medium font-weight-bold z-index">Board of Directors</span>
                 </NavLink>
@@ -390,7 +367,7 @@ class GovernanceComponent extends Component {
               <NavItem className="text-uppercase txt-left-mob">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
-                  onClick={() => { this.toggle('4'); }}
+                  onClick={() => { this.toggle('/commitees'); }}
                 >
                   <span className="font-weight-medium font-weight-bold z-index">Committees</span>
                 </NavLink>
@@ -399,7 +376,7 @@ class GovernanceComponent extends Component {
               <NavItem className="text-uppercase txt-left-mob">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === '5' }) + " py-md-4 py-3 text-white"}
-                  onClick={() => { this.toggle('5'); }}
+                  onClick={() => { this.toggle('/contact-board'); }}
                 >
                   <span className="font-weight-medium font-weight-bold z-index">Contact the Board</span>
                 </NavLink>
@@ -407,125 +384,9 @@ class GovernanceComponent extends Component {
             </Nav>
           </div>
         </section>
-
-        <TabContent className="tab-none" activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            {this.tabsinternaldata()}
-          </TabPane>
-          <TabPane tabId="2">
-            {this.tabsinternaldata()}
-
-          </TabPane>
-          <TabPane tabId="3">
-            {this.tabsinternaldata()}
-
-          </TabPane>
-          <TabPane tabId="4">
-            {this.tabsinternaldata()}
-
-          </TabPane>
-          <TabPane tabId="5">
-            {this.tabsinternaldata()}
-
-          </TabPane>
-        </TabContent>
-
-
-
-
-        <section className="bg-blue">
-
-          <div className="section-image col-12 p-0">
-            <img src={backimg} />
-
-            <div className="earn-head-section">
-              <div className="container">
-
-                <h2 className="display-2 text-uppercase font-weight-bold">2018 Earnings</h2>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="earn-section">
-
-            <div className="container py-3 px-5">
-              <div className="row text-white">
-
-                <div className="col-md-6 mb-sm-0 text-center">
-                  <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Latest Earnings Presentation</h4>
-                  <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={latestEarings} />
-                </div>
-
-                <div className="col-md-6 text-center">
-                  <h4 className="mb-3 et-text w-100 d-inline-block mt-3">Investor Presentation</h4>
-
-                  <img className="img-fluid bg-white d-inline-block w-100" alt="" title="" src={investpresentation} />
-
-                </div>
-
-
-
-
-
-
-              </div>
-            </div>
-
-          </div>
-          <div className="container p-3">
-            <div className="col-lg-12 col-md-12 mt-5">
-              <h4 className="mb-3 et-text w-100 d-inline-block mt-3 text-center display-5 font-weight-bold">Shareholder Tools</h4>
-
-              <ul className="list-unstyled share-holder-ul mt-4 row">
-
-                <li className="mb-3 text-center col-md-3">
-                  <Link to={'/contact'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={printedmat} /></div>
-                    <div className="d-block w-100 text-center h5">Contact</div>
-                  </Link></li>
-
-
-
-
-                <li className="mb-3 text-center col-md-3">
-                  <Link to={'/sec-filings'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={downloadlib} /></div>
-                    <div className="d-block w-100 text-center h5">SEC Filings</div>
-                  </Link>
-                </li>
-
-
-
-
-                <li className="mb-3 col-md-3">
-                  <Link to={'/financial-info'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={emailalert} /></div>
-                    <div className="d-block w-100 text-center h5">Financial Information</div></Link></li>
-
-
-                <li className="mb-3 col-md-3">
-                  <Link to={'/stock-info'}>
-                    <div className="icon-circle d-inline-block"><img className="img-fluid d-inline-block" alt="invertor" title="invertor" src={rssnews} /></div>
-                    <div className="d-block w-100 text-center h5">Share Information</div>
-                  </Link></li>
-
-              </ul>
-
-
-            </div>
-
-          </div>
-
-
-
-
-
-
-        </section>
-        <section className="py-5">
+   {this.tabsinternaldata()}
+       
+ <section className="py-5">
           <div className="container">
             <div className="row">
               <div className="col-md-12 mb-sm-0 mb-5">

@@ -5,6 +5,8 @@ import htmlsvg from "../img/html.svg";
 import pdfsvg from "../img/pdf.svg";
 import xlssvg from "../img/xls.svg";
 import quartelyearning from "../img/Quarterly-Earning-bg.jpg";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 
 class SecFillingComponent extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class SecFillingComponent extends Component {
 
         //Defining state variable
         this.state = {
+              activeTab: '3',
             addClass: false,
             secondryClass:false
         };
@@ -23,6 +26,10 @@ class SecFillingComponent extends Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
     }
+      toggle(tab) {
+  
+    this.props.history.push(tab)
+  }
     /**
 * Handle Scroll
 */
@@ -73,6 +80,50 @@ class SecFillingComponent extends Component {
                         </div>
                     </div>
                 </section>
+                 <section className="theme-nav-page  py-4">
+          <div className="container p-0">
+            <div className="row">
+              <div className="col-md-12">
+                <Nav tabs className="nav-fill tab-none border-bottom-0 overflow-h">
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '1' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/financial-info'); }}
+                    >
+                   <span className="font-weight-medium font-weight-bold z-index">Overview </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+
+                       <NavLink
+                      className={classnames({ active: this.state.activeTab === '2' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/annualreport'); }} 
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Annual Reports</span>
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '3' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/sec-filings'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">SEC Filings  </span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="text-uppercase txt-left-mob">
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '4' }) + " py-md-4 py-3 text-white"}
+                      onClick={() => { this.toggle('/quarterlyearning'); }}
+                    >
+                      <span className="font-weight-medium font-weight-bold z-index">Quarterly Results</span>
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              </div>
+            </div>
+          </div>
+        </section>
 
                 <section className="SEC-fill investor-relation py-5">
                     <div className="container sec-bg border-top-blue ">
