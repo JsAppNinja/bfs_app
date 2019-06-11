@@ -19,10 +19,9 @@ import ReactLoading from 'react-loading';
 import axios from 'axios';
 import {GoogleApiWrapper} from 'google-maps-react';
 
-//global variable
-//const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
 var baseurl = globalVar.base_url1;
 var mybody = {}
+var captchaKey = globalVar.googleCaptchaKey;
 
 class HeaderComponent extends Component {
     constructor() {
@@ -1242,7 +1241,7 @@ class HeaderComponent extends Component {
                         <div className="form-group col-md-12  mb-5">
 
                             <ReCAPTCHA
-                                sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+                                sitekey={captchaKey}
                                 onChange={(e) => this.onRecaptchChange(e)}
                             />
                             <span className="error-message">{this.state.captchaErr}</span>
