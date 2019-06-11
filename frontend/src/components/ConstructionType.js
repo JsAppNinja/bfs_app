@@ -147,7 +147,7 @@ class ConstructionTypeComponent extends Component {
                                         <div className="row">
                                             <div className=" col-12 col-sm-12 col-md-12 col-xl-6  ">
                                                 <h4 dangerouslySetInnerHTML={{ __html: item.title }} className="display-4 dis-4-tab font-weight-normal"></h4>
-                                                <span dangerouslySetInnerHTML={{ __html: item.about }}></span>
+                                                <span className="construct-desc" dangerouslySetInnerHTML={{ __html: item.about }}></span>
                                             </div>
                                             <div className="col-12  col-md-12 col-xl-6 image-layer pr-3 pr-xl-0">
                                                 {item.image1 ? (<figure className="mb-4 section_fig"><img src={item.image1} alt="section_2" className="w-100" /></figure>) : null}

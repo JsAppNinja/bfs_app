@@ -17,7 +17,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import PropTypes from 'prop-types';
 import ReactLoading from 'react-loading';
 import axios from 'axios';
-import { GoogleApiWrapper } from 'google-maps-react';
+import {GoogleApiWrapper} from 'google-maps-react';
 
 //global variable
 //const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
@@ -64,7 +64,7 @@ class HeaderComponent extends Component {
             sendquotemodal: false,
             dropdownOpen: false,
             serviceOption: "Service Type",
-            locationAllowed: false
+            locationAllowed:false
         }
 
         //binding function
@@ -224,31 +224,31 @@ class HeaderComponent extends Component {
         this.togglelocation();
     }
 
-    getNearbyStores(latitude, longitude) {
+    getNearbyStores(latitude,longitude) {
         let self = this;
         let data = {
             radius: 200,
             latitude: latitude,
             longitude: longitude
         }
-        axios.post(globalVar.base_url1 + "/umbraco/api/LocationData/GetClosestStore", data, {
+        axios.post(globalVar.base_url1 + "/umbraco/api/LocationData/GetClosestStore",data, {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-
-            if (response) {
+            
+            if(response){
                 let storedetail = response.data.Alias + "," + response.data.Id + "," + response.data.Name;
                 localStorage.setItem("selectedStore", storedetail);
                 self.setState(
                     {
-                        locationAllowed: true
+                        locationAllowed:true 
                     }
                 )
             }
         }).catch(() => {
         });
-
+       
     }
 
 
@@ -276,7 +276,7 @@ class HeaderComponent extends Component {
                             }
                         )
                         self.updateStorelocator()
-                        self.getNearbyStores(position.coords.latitude, position.coords.longitude);
+                        self.getNearbyStores(position.coords.latitude,position.coords.longitude);
                     }
                 }, function (error) {
                     switch (error.code) {
@@ -316,7 +316,7 @@ class HeaderComponent extends Component {
                             }
                         )
                         self.updateStorelocator();
-                        self.getNearbyStores(position.coords.latitude, position.coords.longitude);
+                        self.getNearbyStores(position.coords.latitude,position.coords.longitude);
                     }
                 }, function (error) {
                     switch (error.code) {
@@ -455,9 +455,9 @@ class HeaderComponent extends Component {
                 zipcodeModal: true
             })
 
-            var geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ 'componentRestrictions': { 'postalCode': e.target.value } }, function (results, status) {
-                if (results[0]) {
+            var  geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({ 'componentRestrictions':{ 'postalCode': e.target.value }}, function (results, status) {
+                if(results[0]){
                     document.getElementById("zip_code_search").value = "";
                     localStorage.setItem("locationzip", "locationdetail");
                     mybody = {};
@@ -490,7 +490,7 @@ class HeaderComponent extends Component {
                             })
                         }
                     }, 5000);
-                } else {
+                }else{
                     self.setState({
                         storemessage: "This Zip code could not be found please try with another zipcode."
                     })
@@ -513,42 +513,42 @@ class HeaderComponent extends Component {
             zipcodeModal: true
         })
 
-        var geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ 'componentRestrictions': { 'postalCode': this.state.searchZipcode } }, function (results, status) {
-            if (results[0]) {
+        var  geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ 'componentRestrictions':{ 'postalCode': this.state.searchZipcode }}, function (results, status) {
+            if(results[0]){
                 document.getElementById("zip_code_search").value = "";
-                localStorage.setItem("locationzip", "locationdetail");
-                mybody = {};
-                mybody["Address"] = "";
-                mybody["Radius"] = 200;
-                mybody["DistributionList"] = [];
-                mybody["InstalledServiceList"] = [];
-                mybody["Latitude"] = results[0].geometry.location.lat();
-                mybody["Longitude"] = results[0].geometry.location.lng();
-                self.setState({ noStoreFound: false })
-                self.props.childProps.getStoreDataHeader(mybody);
-                setTimeout(function () {
-                    if (self.props.childProps.storeDataHeader) {
-                        let mydata = [];
-                        var myHour = new Date();
-                        myHour.setMinutes(myHour.getMinutes() + 30); //one hour from now
-                        mydata.push(myHour);
-                        localStorage.setItem('storesitem', JSON.stringify(mydata));
-                        localStorage.setItem('storesitemdata', JSON.stringify(self.props.childProps.storeDataHeader));
-                        localStorage.setItem('zipcodevalue', self.state.searchZipcode);
-                        self.setState({
-                            storeDataHeader: self.props.childProps.storeDataHeader,
-                            storemessage: "",
-                            searchZipcode: ""
-                        })
-                    } else {
-                        self.setState({
-                            storeDataHeader: self.props.childProps.storeDataHeader,
-                            storemessage: "No result found matching your zip code please try with another zip code"
-                        })
-                    }
-                }, 5000);
-            } else {
+                    localStorage.setItem("locationzip", "locationdetail");
+                    mybody = {};
+                    mybody["Address"] = "";
+                    mybody["Radius"] = 200;
+                    mybody["DistributionList"] = [];
+                    mybody["InstalledServiceList"] = [];
+                    mybody["Latitude"] = results[0].geometry.location.lat();
+                    mybody["Longitude"] = results[0].geometry.location.lng();
+                    self.setState({ noStoreFound: false })
+                    self.props.childProps.getStoreDataHeader(mybody);
+                    setTimeout(function () {
+                        if (self.props.childProps.storeDataHeader) {
+                            let mydata = [];
+                            var myHour = new Date();
+                            myHour.setMinutes(myHour.getMinutes() + 30); //one hour from now
+                            mydata.push(myHour);
+                            localStorage.setItem('storesitem', JSON.stringify(mydata));
+                            localStorage.setItem('storesitemdata', JSON.stringify(self.props.childProps.storeDataHeader));
+                            localStorage.setItem('zipcodevalue', self.state.searchZipcode);
+                            self.setState({
+                                storeDataHeader: self.props.childProps.storeDataHeader,
+                                storemessage: "",
+                                searchZipcode: ""
+                            })
+                        } else {
+                            self.setState({
+                                storeDataHeader: self.props.childProps.storeDataHeader,
+                                storemessage: "No result found matching your zip code please try with another zip code"
+                            })
+                        }
+                    }, 5000);
+            }else{
                 self.setState(
                     {
                         storemessage: "This zipcode could not be found please try with another zipcode!!!"
@@ -576,9 +576,9 @@ class HeaderComponent extends Component {
                 toggleLocation: !this.state.toggleLocation
             })
 
-            var geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ 'componentRestrictions': { 'postalCode': e.target.value } }, function (results, status) {
-                if (results[0]) {
+            var  geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({ 'componentRestrictions':{ 'postalCode': e.target.value }}, function (results, status) {
+                if(results[0]){
                     document.getElementById("zip_code_search_mobile").value = "";
                     localStorage.setItem("locationzip", "locationdetail");
                     mybody = {};
@@ -611,12 +611,12 @@ class HeaderComponent extends Component {
                             })
                         }
                     }, 5000);
-                } else {
+                }else{
                     self.setState({
                         storemessage: "This Zip code could not be found please try with another zipcode."
-                    })
+                    }) 
                 }
-            });
+            });  
         }
     }
 
@@ -634,9 +634,9 @@ class HeaderComponent extends Component {
             zipcodeModal: true
         })
 
-        var geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ 'componentRestrictions': { 'postalCode': this.state.searchZipcode } }, function (results, status) {
-            if (results[0]) {
+        var  geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ 'componentRestrictions':{ 'postalCode': this.state.searchZipcode }}, function (results, status) {
+            if(results[0]){
                 localStorage.setItem("locationzip", "locationdetail");
                 mybody = {};
                 mybody["Address"] = "";
@@ -669,7 +669,7 @@ class HeaderComponent extends Component {
                         })
                     }
                 }, 5000);
-            } else {
+            }else{
                 self.setState({
                     storemessage: "This Zip code could not be found please try with another zipcode."
                 })
@@ -793,7 +793,7 @@ class HeaderComponent extends Component {
      */
     sendQuoteApi = (quoteData) => {
         let self = this;
-        axios.post(globalVar.base_url1 + "/umbraco/Api/Content/SendQuoteByLocation", quoteData, {
+        axios.post(globalVar.base_url1 + "/umbraco/Api/Content/SendQuoteByLocation",quoteData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -807,7 +807,7 @@ class HeaderComponent extends Component {
             } else {
                 this.setState({ quoteEmailStatus: "Internal problem occured not able to send email please try again!" })
             }
-
+           
         }).catch((error) => {
             this.setState({ quoteEmailStatus: error })
         });
@@ -845,8 +845,8 @@ class HeaderComponent extends Component {
      */
     getLatLngFromZip = (zip) => {
         let self = this
-        var geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ 'componentRestrictions': { 'postalCode': zip } }, function (results, status) {
+        var  geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ 'componentRestrictions':{ 'postalCode': zip }}, function (results, status) {
             if (results[0]) {
                 localStorage.setItem("locationzip", "locationdetail");
                 mybody = {};
@@ -855,7 +855,7 @@ class HeaderComponent extends Component {
                 mybody["DistributionList"] = [];
                 mybody["InstalledServiceList"] = [];
                 mybody["Latitude"] = results[0].geometry.location.lat();
-                mybody["Longitude"] = results[0].geometry.location.lng();
+                mybody["Longitude"] =results[0].geometry.location.lng();
                 localStorage.setItem("locationagain", JSON.stringify(mybody));
                 self.setState({ noStoreFound: false })
                 self.props.childProps.getStoreData(mybody);
@@ -865,7 +865,7 @@ class HeaderComponent extends Component {
                 self.setState({ zipcodeErr: "Zip code could not be found." })
             }
         });
-
+       
     }
 
     /**
@@ -873,9 +873,9 @@ class HeaderComponent extends Component {
      */
     getLatLngFromZipHeader = (zip) => {
         let self = this
-        var geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ 'componentRestrictions': { 'postalCode': zip } }, function (results, status) {
-            if (results[0]) {
+        var  geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ 'componentRestrictions':{ 'postalCode': zip }}, function (results, status) {
+            if(results[0]){
                 mybody = {};
                 mybody["Address"] = "";
                 mybody["Radius"] = 200;
@@ -891,7 +891,7 @@ class HeaderComponent extends Component {
                 if (!(page[3] === "products-services" || page[3] === "")) {
                     document.getElementById("linkToHome").click();
                 }
-            } else {
+            }else{
                 self.setState({ zipcodeErr: "Zip code could not be found." })
             }
         });
@@ -933,192 +933,43 @@ class HeaderComponent extends Component {
             shoppingItem = data.split(",")
         }
         this.props.menuData.map(function (item, i) {
-
             let isActive = false;
-
-            if (item.RootName === "INVESTORS") {
-
-                item = {};
-                item = {
-                    $id: "30",
-                    Childrens: [
-                        {
-                            $id: "100",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Company Highlights",
-                            RootUrl: "/investorhome",
-                        },
-                        {
-                            $id: "104",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Events",
-                            RootUrl: "/events",
-                        },
-                        {
-                            $id: "109",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Contact Us",
-                            RootUrl: "/contact",
-                        },
-                        {
-                            $id: "110",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "FAQ",
-                            RootUrl: "/faq",
-                        },
-                        {
-                            $id: "106",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Financial Information",
-                            RootUrl: "/financial-info",
-                        },
-                        {
-                            $id: "101",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Governance",
-                            RootUrl: "/governance",
-                        }, {
-                            $id: "107",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Leaderships",
-                            RootUrl: "/leaderships",
-                        },
-                        {
-                            $id: "102",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "News",
-                            RootUrl: "/news",
-                        },
-                        {
-                            $id: "108",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Quarterly Yearning",
-                            RootUrl: "/quarterlyearning",
-                        },
-                        {
-                            $id: "105",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Stock Information",
-                            RootUrl: "/stock-info",
-                        }
-
-
-                    ],
-                    HideFromNavigation: false,
-                    IsExternal: false,
-                    RootId: 12938,
-                    RootName: "INVESTORS",
-                    RootUrl: "/investors/"
-                }
-                if (item.Childrens) {
-                    menuItems.push(
-
-                        <li className="dropdown nav-item" key={i}>
+            if (item.Childrens) {
+                menuItems.push(
+                    <li className="dropdown nav-item" key={i}>
+                        {item.Childrens.map(function (submenu, index) {
+                            let r = submenu.RootUrl.split('/');
+                            if (window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") {
+                                isActive = true;
+                            }
+                            if (isActive === false && index === item.Childrens.length - 1) {
+                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium" data-toggle="dropdown" href="">{item.RootName}</a>
+                            }
+                            if (isActive === true && index === item.Childrens.length - 1) {
+                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu" data-toggle="dropdown" href="">{item.RootName}</a>
+                            }
+                        })}
+                        <ul className="dropdown-menu mt-xl-3 shadow_d">
                             {item.Childrens.map(function (submenu, index) {
-                                let r = submenu.RootUrl.split('/');
-                                if (window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") {
-                                    isActive = true;
+                                if (submenu.IsExternal) {
+                                    return <li key={index}>
+                                        <a href={submenu.RootUrl} rel="noopener noreferrer" className="dropdown-item"> {submenu.RootName}</a></li>
+                                } else {
+                                    let r = submenu.RootUrl.split('/');
+                                    return <li key={index}>
+                                        <Link to={'/' + r[2]} className={(window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") ? "dropdown-item active-menu" : "dropdown-item"} > {submenu.RootName}</Link></li>
                                 }
-                                if (isActive === false && index === item.Childrens.length - 1) {
-                                    return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium" data-toggle="dropdown" href="">{item.RootName}</a>
-                                }
-                                if (isActive === true && index === item.Childrens.length - 1) {
-                                    return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu" data-toggle="dropdown" href="">{item.RootName}</a>
-                                }
-                            })}
-                            <ul className="dropdown-menu mt-xl-3 shadow_d">
-                                {item.Childrens.map(function (submenu, index) {
-                                    if (submenu.IsExternal) {
-                                        return <li key={index}>
-                                            <a href={submenu.RootUrl} rel="noopener noreferrer" className="dropdown-item"> {submenu.RootName}</a></li>
-                                    } else {
-                                        let r = submenu.RootUrl
-                                        return <li key={index}>
-                                            <Link to={r} className={(window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") ? "dropdown-item active-menu" : "dropdown-item"} > {submenu.RootName}</Link></li>
-                                    }
 
-                                })}
-                            </ul>
-                        </li>)
-                    return true
-                } else {
-                    menuItems.push(
-                        <li className="nav-item" key={i}>
-                            <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
-                    return true
-                }
+                            })}
+                        </ul>
+                    </li>)
+                return true
             } else {
-                if (item.Childrens) {
-                    menuItems.push(
-
-                        <li className="dropdown nav-item" key={i}>
-                            {item.Childrens.map(function (submenu, index) {
-                                let r = submenu.RootUrl.split('/');
-                                if (window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") {
-                                    isActive = true;
-                                }
-                                if (isActive === false && index === item.Childrens.length - 1) {
-                                    return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium" data-toggle="dropdown" href="">{item.RootName}</a>
-                                }
-                                if (isActive === true && index === item.Childrens.length - 1) {
-                                    return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu" data-toggle="dropdown" href="">{item.RootName}</a>
-                                }
-                            })}
-                            <ul className="dropdown-menu mt-xl-3 shadow_d">
-                                {item.Childrens.map(function (submenu, index) {
-                                    if (submenu.IsExternal) {
-                                        return <li key={index}>
-                                            <a href={submenu.RootUrl} rel="noopener noreferrer" className="dropdown-item"> {submenu.RootName}</a></li>
-                                    } else {
-                                        let r = submenu.RootUrl.split('/');
-                                        return <li key={index}>
-                                            <Link to={'/' + r[2]} className={(window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") ? "dropdown-item active-menu" : "dropdown-item"} > {submenu.RootName}</Link></li>
-                                    }
-
-                                })}
-                            </ul>
-                        </li>)
-                    return true
-                } else {
-                    menuItems.push(
-                        <li className="nav-item" key={i}>
-                            <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
-                    return true
-                }
+                menuItems.push(<li className="nav-item" key={i}>
+                    <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
+                return true
             }
-
         })
-
         return (<div className={"header col-12 px-0 " + (window.pageYOffset > 130 ? 'on_top_head ' : '') + (window.pageYOffset > 140 ? 'head_sticky' : '')}>
             <div className="header-fixed mobile_navigation_menu">
                 <div id="content_for_mobnav">
@@ -1169,10 +1020,9 @@ class HeaderComponent extends Component {
                         </a>
                         <span className="close_Side_menu" onClick={() => { this.closeSideBar() }}>  <img src={close_icon} alt="" /> </span>
                     </div>
-
-
                     <ul className="list-unstyled components mobile_components">
                         {menuItems}
+                        
                     </ul>
                     <div onClick={() => { this.redirectToLogin() }} className="pt-3 position-relative text-center  loginOnMob">
                         <img src={login} alt="builder-first" />
@@ -1204,6 +1054,9 @@ class HeaderComponent extends Component {
                         <div className="collapse navbar-collapse" id="navbarsExample06">
                             <ul className="mainmenu navbar-nav mr-auto">
                                 {menuItems}
+                                {/* <li className="nav-item">
+                                <Link to="/investors" className={"nav-link text-uppercase font-weight-medium"} >New Investors</ Link>
+                                  </li> */}
                                 <li className="nav-item d-md-none">
                                     <button type="button" onClick={() => this.showPopUP} className="btn btn-danger text-uppercase theme-btn  px-4 py-3">Request a quote</button>
                                 </li>
@@ -1287,7 +1140,7 @@ class HeaderComponent extends Component {
                 </ModalFooter>
             </Modal>
             <Modal isOpen={this.state.zipcodeModal} toggle={this.togglezipmodal} className="modal-dialog-centered location">
-                {this.state.storeDataHeader.length > 0 ? (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light ">Locations near you</span></ModalHeader>) : (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light finding-location">Finding locations near you  <ReactLoading className="loaderhead" type={"spin"} color={"black"} height={40} width={40} /></span></ModalHeader>)}
+                {this.state.storeDataHeader.length > 0 ? (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light ">Locations near you</span></ModalHeader>) : (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light finding-location">Finding locations near you  <ReactLoading className="loaderhead"  type={"spin"} color={"black"} height={40} width={40} /></span></ModalHeader>)}
                 <ModalBody className="">
                     <h5>{this.state.storemessage}</h5>
                     {this.state.storeDataHeader.slice(0, 5).map((store, index) => (

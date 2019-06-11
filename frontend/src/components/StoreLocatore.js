@@ -17,10 +17,11 @@ import { globalVar } from "../config";
 
 var mylocation = {};
 var mybody = {};
-//const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
 var searchField = [];
 var count = 1;
 var infoWindow;
+
+var captchaKey = globalVar.googleCaptchaKey;
 
 class StoreLocatoreComponent extends Component {
 
@@ -1493,7 +1494,7 @@ class StoreLocatoreComponent extends Component {
                             <div className="form-group col-md-12  mb-5">
 
                                 <ReCAPTCHA
-                                    sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+                                    sitekey={captchaKey}
                                     onChange={(e) => this.onRecaptchChange(e)}
                                 />
                                 <span className="error-message">{this.state.captchaErr}</span>

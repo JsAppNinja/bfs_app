@@ -1,0 +1,26 @@
+
+/*investor home page*/
+
+
+@media only screen and (max-width:767px){
+
+.DownloadPresentation:after{position: relative;
+    display: block;
+    clear: both;
+    bottom: auto;
+    top: auto;
+    left: auto;
+    margin-top: 10px;
+    margin-bottom: 17px;}
+
+}
+
+
+
+
+/*investor home page*/
+
+@media only screen and (max-width:767px){
+.investor-img img{width:100%;}
+
+}

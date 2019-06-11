@@ -151,6 +151,19 @@ namespace CustomerPortalCMS.Models
         public string DistributionListName { get; set; }
     }
 
+    public class LocationDistributionModel
+    {
+        public int Id { get; set; }
+
+        public string SupplierName { get; set; }
+
+        public string SupplierLogo { get; set; }
+
+        public string ImportId { get; set; }
+
+        public string DistributionListName { get; set; }
+    }
+
     public enum StoreIconType
     {
         Circle = 842,

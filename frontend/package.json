@@ -22,6 +22,7 @@
     "react-dom": "^16.4.2",
     "react-fancybox": "^0.2.3",
     "react-fastclick": "^3.0.2",
+    "react-floater": "^0.6.4",
     "react-fusioncharts": "^3.0.1",
     "react-geocode": "^0.1.2",
     "react-geolocation": "^1.0.4",
@@ -36,7 +37,7 @@
     "react-scripts": "1.1.5",
     "react-slick": "^0.23.2",
     "react-tap-event-plugin": "^2.0.1",
-    "react-tooltip": "^3.9.0",
+    "react-tooltip": "^3.10.0",
     "reactstrap": "^6.4.0",
     "ts-overlapping-marker-spiderfier": "^1.0.3"
   },

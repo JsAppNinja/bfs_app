@@ -53,7 +53,7 @@ class AboutUsComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="aboutUs_text" dangerouslySetInnerHTML={{ __html: this.state.content }}>
+                <div className="aboutUs_text construct-desc"  dangerouslySetInnerHTML={{ __html: this.state.content }}>
                 </div> 
             </div>
         );

@@ -341,8 +341,8 @@ class CareerComponent extends Component {
                 </div>
                 <div className="CareersIntro py-5">
                     {dataobj.introText1 ? (<div className="CareersIntroInner container">
-                        <div className=""><span dangerouslySetInnerHTML={{ __html: dataobj.introText1 }}></span></div>
-                        <div className=" pt-4"><span dangerouslySetInnerHTML={{ __html: dataobj.introText2 }}></span></div>
+                        <div className=""><span className="accolades-desc" dangerouslySetInnerHTML={{ __html: dataobj.introText1 }}></span></div>
+                        <div className=" pt-4"><span className="careersubhead" dangerouslySetInnerHTML={{ __html: dataobj.introText2 }}></span></div>
                     </div>) : null}
                     {dataobj.careerSubMenu1Image ? (<div className="CareersSubMenu">
                         <div className="CareersSubMenuInner container">
@@ -350,7 +350,7 @@ class CareerComponent extends Component {
                                 {dataobj.careerSubMenu1Image || dataobj.careerSubMenu1Text?(<div className="col-12 col-xl-2 text-center CareersSubMenu-list px-0 d-inline-block">
                                     <Link to={"/job-areas"}>
                                         {dataobj.careerSubMenu1Image?(<span className="col-12 d-block"><img src={dataobj.careerSubMenu1Image} alt="Jobs" title="All Positions &amp; Career Paths" /></span>):null}
-                                        {dataobj.careerSubMenu1Text?(<span dangerouslySetInnerHTML={{ __html: dataobj.careerSubMenu1Text }} className="col-12 d-block h5 font-weight-bold text-white text-center mt-3 px-0"></span>):null}
+                                        {dataobj.careerSubMenu1Text?(<span className="col-12 d-block h5 font-weight-bold text-white text-center mt-3 px-0">{dataobj.careerSubMenu1Text}</span>):null}
                                     </Link>
                                 </div>):null}
                                 {dataobj.careerSubMenu2Image || dataobj.careerSubMenu2Text?(<div className="col-12 col-xl-2 text-center CareersSubMenu-list px-0 d-inline-block">
@@ -395,7 +395,7 @@ class CareerComponent extends Component {
                                         <div className="jobs_box sales-cdn py-4">
                                             {jobs.videolink ? (<a onClick={() => this.changeModalData(jobs.videolink)}><img src={jobs.jobimage} alt="sales" className="w-100" /></a>) : <img src={jobs.jobimage} alt="sales" className="w-100" />}
                                             {jobs.jobtitle ? (<h2 className="display-4 font-weight-normal my-4">{jobs.jobtitle}</h2>):null}
-                                            {jobs.jobdescription?(<span dangerouslySetInnerHTML={{ __html: jobs.jobdescription }}></span>):null}
+                                            {jobs.jobdescription?(<span className="construct-desc" dangerouslySetInnerHTML={{ __html: jobs.jobdescription }}></span>):null}
                                             {jobs.link?(<a href={jobs.link} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block text-white d-none-mob mt-4" rel="noopener noreferrer" target="_blank ">{jobs.buttoncaption}</a>):null}
                                         </div>
                                     </div>)) : null}
@@ -416,7 +416,7 @@ class CareerComponent extends Component {
                 </div>) : null}
                 {dataobj.careerContent ? (<div className="CareersDisclaimer container mt-4">
                     <div className="CareersDisclaimerInner">
-                        <span dangerouslySetInnerHTML={{ __html: dataobj.careerContent }}></span>
+                        <span className="construct-desc" dangerouslySetInnerHTML={{ __html: dataobj.careerContent }}></span>
                     </div>
                 </div>) : null}
                 <div className="career_logos clearfix CareersBrandBanner">

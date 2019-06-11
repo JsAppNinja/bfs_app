@@ -11,6 +11,8 @@ import axios from 'axios';
 import tenor from "./img/loader.gif";
 import PropTypes from 'prop-types';
 import './App.css';
+import './Appresponsive.css';
+
 class App extends Component {
   constructor(props) {
     super(props);

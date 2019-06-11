@@ -24,28 +24,6 @@ import BfsTermsComponent from "./components/BfsTerms";
 import { Switch } from "react-router-dom";
 import AppliedRoute from "./components/AppliedRouting";
 import Example from "./components/Slidercarousel";
-import InvesterComponent from "./components/Investers";
-import QuarterlyEarningComponent from "./components/QuarterlyEarning";
-import AnnualReportComponent from "./components/AnnualReport";
-import InvesterHomeComponent from "./components/InvestorHome";
-import InvestorsNewsComponent from "./components/InvestorsNews";
-import GovernanceComponent from "./components/Governance";
-import Invester2Component from "./components/Investers2";
-import InvestorsEventsComponent from "./components/InvestorsEvents";
-import FinancialInformation from "./components/FinancialInformation";
-import FinancialInformation2 from "./components/FinancialInformation2";
-import SecFillingComponent from "./components/SecFillings";
-import StockInfoComponent from './components/StockInformation';
-import AnalystCoverageComponent from './components/AnalystCoverage';
-import InvestmentCalculatorComponent from './components/InvestmentCalculator';
-import HistoricStockLookupComponent from './components/HistoricStockLookup';
-import InvestorsEmailAlertComponent from './components/InvestorsEmailAlert';
-import InvestorsContactUsComponent from './components/InvestorsContactUs';
-import BoardOfDirectorsComponent from './components/BoardOfDirectors';
-import CommiteesComponent from './components/Commitees';
-import ContactTheBoardComponent from './components/ContactTheBoard';
-import ManagementComponent from './components/Management';
-import FaqComponent from './components/faq';
 
 //defining routes
 const Route = ({ childProps }) =>
@@ -73,32 +51,7 @@ const Route = ({ childProps }) =>
         <AppliedRoute exact path="/site-map" component={SitemapComponent} props={childProps} />
         <AppliedRoute exact path="/bfs-terms" component={BfsTermsComponent} props={childProps} />
         <AppliedRoute exact path="/carouselexample" component={Example} props={childProps} />
-        <AppliedRoute exact path="/investorhome" component={InvesterHomeComponent} props={childProps} />
-        <AppliedRoute exact path="/leaderships" component={InvesterComponent} props={childProps} />
-        <AppliedRoute exact path="/quarterlyearning" component={QuarterlyEarningComponent} props={childProps} />
-        <AppliedRoute exact path="/annualreport" component={AnnualReportComponent} props={childProps} />
-        <AppliedRoute exact path="/news" component={InvestorsNewsComponent} props={childProps} />
-        <AppliedRoute exact path="/governance" component={GovernanceComponent} props={childProps} />
-        {/* <AppliedRoute exact path="/investors_:subpage" component={InvesterHomeComponent} props={childProps} /> */}
-        <AppliedRoute exact path="/investors2" component={Invester2Component} props={childProps} />
-        <AppliedRoute exact path="/events" component={InvestorsEventsComponent} props={childProps} />
-        <AppliedRoute exact path="/financial-info" component={FinancialInformation} props={childProps} />
-        <AppliedRoute exact path="/sec-filings" component={SecFillingComponent} props={childProps} />
-        <AppliedRoute exact path="/financial-info2" component={FinancialInformation2} props={childProps} />
-        <AppliedRoute exact path="/stock-info" component={StockInfoComponent} props={childProps} />
-        <AppliedRoute exact path="/analyst-coverage" component={AnalystCoverageComponent} props={childProps} />
-        <AppliedRoute exact path="/investment-calculator" component={InvestmentCalculatorComponent} props={childProps} />
-        <AppliedRoute exact path="/historic-stock-lookup" component={HistoricStockLookupComponent} props={childProps} />
-        <AppliedRoute exact path="/contact" component={InvestorsContactUsComponent} props={childProps} />
-        <AppliedRoute exact path="/email-alert" component={InvestorsEmailAlertComponent} props={childProps} />
-
-        <AppliedRoute exact path="/board-of-directors" component={BoardOfDirectorsComponent} props={childProps} />
-        <AppliedRoute exact path="/commitees" component={CommiteesComponent} props={childProps} />
-        <AppliedRoute exact path="/contact-board" component={ContactTheBoardComponent} props={childProps} />
-        <AppliedRoute exact path="/management" component={ManagementComponent} props={childProps} />
-        <AppliedRoute exact path="/faq" component={FaqComponent} props={childProps} />
-
-        
+  
         <AppliedRoute exact path="*" component={DashboardComponent} props={childProps} />
     </Switch>
 

@@ -6,7 +6,6 @@ import { globalVar } from "../config";
 import { topFunction } from "../utils";
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
 var base_url = globalVar.base_url1;
 
 class ContactUsComponent extends Component {
@@ -425,7 +424,7 @@ class ContactUsComponent extends Component {
 
                                     <div className="form-group">
                                         <ReCAPTCHA
-                                            sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+                                            sitekey={globalVar.googleCaptchaKey}
                                             onChange={(e) => this.onRecaptchChange(e)}
                                         />
                                     </div>

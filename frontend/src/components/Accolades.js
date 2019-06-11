@@ -129,7 +129,7 @@ class AccoladesComponent extends Component {
                <div className="container px-0">
                   <div className="w-100 pad-xs py-5">
                      <h1 className="display-4 font-weight-medium color-dark-gray text-center pb-3">{this.state.page_properties.title}</h1>
-                     <div className="text-center mt-xs-3"><span dangerouslySetInnerHTML={{ __html: this.state.page_properties.content }}></span></div>
+                     <div className="text-center mt-xs-3"><span className="accolades-desc" dangerouslySetInnerHTML={{ __html: this.state.page_properties.content }}></span></div>
                   </div>
                </div>
             </div>

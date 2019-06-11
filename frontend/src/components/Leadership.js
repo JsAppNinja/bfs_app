@@ -139,7 +139,7 @@ class LeaderShipComponent extends Component {
                     <div className="container">
                         <div className="w-100">
                             <h1 dangerouslySetInnerHTML={{ __html: this.state.title }} className="display-4 font-weight-medium color-dark-gray text-center"></h1>
-                            <span className="mob-font-ttl" dangerouslySetInnerHTML={{ __html: this.state.content }}></span>
+                            <span className="mob-font-ttl construct-desc" dangerouslySetInnerHTML={{ __html: this.state.content }}></span>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@ class LeaderShipComponent extends Component {
                             <div className="col-sm-12 col-xl-7">
                                 <h1 className="display-4 font-weight-normal position-relative"> {this.state.leaderObj.companyUserName} </h1>
                                 <h6 className="py-2 font-medium"> {this.state.leaderObj.companyUserPosition}</h6>
-                                <div dangerouslySetInnerHTML={{ __html: this.state.leaderObj.companyUserAbout }} className="line-height mb-4 aboutuser"></div>
+                                <div dangerouslySetInnerHTML={{ __html: this.state.leaderObj.companyUserAbout }} className="line-height mb-4 aboutuser leader-desc"></div>
                             </div>
                         </div>
                         <button type="button" onClick={() => { this.previousButton(this.state.leaderObj.id) }} className="position-absolute left-side-btn bg-transparent border-0"><img src={left_icon} className="border-icon left-img without_hover" alt="left_icon" /><img src={left_h} className="border-icon hoverable" alt="left_h" /></button>

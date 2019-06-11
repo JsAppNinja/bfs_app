@@ -5,6 +5,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PropTypes from 'prop-types';
+import Floater from 'react-floater';
+
+var captchaKey = globalVar.googleCaptchaKey;
 
 
 let lastStore = ""
@@ -44,7 +47,7 @@ class DetailsLocationsComponent extends Component {
     componentDidUpdate() {
         let index = window.location.href.indexOf("location_")
         let storeName = window.location.href.slice(index + 9, window.location.href.length)
-        
+
         if (lastStore !== storeName || !this.state.store) {
             this.getStoreDetail(storeName ? storeName : "Chesapeake-Gypsum");
             lastStore = storeName
@@ -122,7 +125,7 @@ class DetailsLocationsComponent extends Component {
      * Sending request quote email
     */
     sendQuote() {
-        
+
         let self = this;
         if (this.checkFormValidation() === true) {
             this.setState({ quoteEmailStatus: "Please wait sending email..." })
@@ -280,10 +283,10 @@ class DetailsLocationsComponent extends Component {
                                 <div className="row mx-0">
                                     <div className="col-md-12 px-0">
                                         <div className="single_loc_banner">
-                                            {this.state.store.largeImage?(<img alt="bannerimage" className="w-100" src={globalVar.base_url1 + this.state.store.largeImage} />):null}
+                                            {this.state.store.largeImage ? (<img alt="bannerimage" className="w-100" src={globalVar.base_url1 + this.state.store.largeImage} />) : null}
                                             <div className="d-lg-flex align-items-center">
                                                 <div className="text-left factlogo">
-                                                  {this.state.store.logoImage?(<img alt="bannerimage" className="single_loc_logo mb-3" src={globalVar.base_url1 + this.state.store.logoImage} />):null}
+                                                    {this.state.store.logoImage ? (<img alt="bannerimage" className="single_loc_logo mb-3" src={globalVar.base_url1 + this.state.store.logoImage} />) : null}
                                                 </div>
                                                 <div className="py-3 text-right requestinfo ml-auto">
                                                     <a className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-0" onClick={() => { this.setLocationZipCode() }}>Request a Quote</a>
@@ -321,148 +324,605 @@ class DetailsLocationsComponent extends Component {
                                                 <div className="row pb-4 pb-lg-5">
 
                                                     {this.state.store.acousticalCeilings && JSON.parse(this.state.store.acousticalCeilings).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.acousticalCeilings) }) }} > {JSON.parse(this.state.store.acousticalCeilings)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.acousticalCeiling && (JSON.parse(this.state.store.acousticalCeiling).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.acousticalCeilings) }) }} > {JSON.parse(this.state.store.acousticalCeilings)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.adhesivesSealants && JSON.parse(this.state.store.adhesivesSealants).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.adhesivesSealants) }) }} > {JSON.parse(this.state.store.adhesivesSealants)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.adhesivesSealants && (JSON.parse(this.state.store.adhesivesSealants).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.adhesivesSealants) }) }} > {JSON.parse(this.state.store.adhesivesSealants)[0].DistributionListName}</a>
+
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.brick && JSON.parse(this.state.store.brick).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.brick) }) }} > {JSON.parse(this.state.store.brick)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.brick && (JSON.parse(this.state.store.brick).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.brick) }) }} > {JSON.parse(this.state.store.brick)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.cabinets && JSON.parse(this.state.store.cabinets).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.cabinets) }) }} > {JSON.parse(this.state.store.cabinets)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.cabinets && (JSON.parse(this.state.store.cabinets).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.cabinets) }) }} > {JSON.parse(this.state.store.cabinets)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.civil && JSON.parse(this.state.store.civil).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.civil) }) }} > {JSON.parse(this.state.store.civil)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.civil && (JSON.parse(this.state.store.civil).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.civil) }) }} > {JSON.parse(this.state.store.civil)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.coatings && JSON.parse(this.state.store.coatings).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.coatings) }) }} > {JSON.parse(this.state.store.coatings)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.coatings && (JSON.parse(this.state.store.coatings).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.coatings) }) }} > {JSON.parse(this.state.store.coatings)[0].DistributionListName}</a>
+                                                            </Floater>
+
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.columns && JSON.parse(this.state.store.columns).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.columns) }) }} > {JSON.parse(this.state.store.columns)[0].DistributionListName}</a></div>
+                                                    {this.state.store.columns && JSON.parse(this.state.store.columns).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.columns && (JSON.parse(this.state.store.columns).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.columns) }) }} > {JSON.parse(this.state.store.columns)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.concrete && JSON.parse(this.state.store.concrete).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.concrete) }) }} > {JSON.parse(this.state.store.concrete)[0].DistributionListName}</a></div>
+                                                    {this.state.store.concrete && JSON.parse(this.state.store.concrete).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.concrete && (JSON.parse(this.state.store.concrete).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.concrete) }) }} > {JSON.parse(this.state.store.concrete)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.connectors && JSON.parse(this.state.store.connectors).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.connectors) }) }} > {JSON.parse(this.state.store.connectors)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.connectors && (JSON.parse(this.state.store.connectors).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.connectors) }) }} > {JSON.parse(this.state.store.connectors)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
-                                                    
+
                                                     {this.state.store.culturedStone && JSON.parse(this.state.store.culturedStone).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.culturedStone) }) }} > {JSON.parse(this.state.store.culturedStone)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.culturedStone && (JSON.parse(this.state.store.culturedStone).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.culturedStone) }) }} > {JSON.parse(this.state.store.culturedStone)[0].DistributionListName}</a>
+                                                            </Floater>
+
+                                                        </div>
                                                     </div>) : null}
 
-                                                     {this.state.store.decking && JSON.parse(this.state.store.decking).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.decking) }) }} > {JSON.parse(this.state.store.decking)[0].DistributionListName}</a></div>
+                                                    {this.state.store.decking && JSON.parse(this.state.store.decking).length > 0 ? (<div className="col-md-3 col-sm-6">
+                                                        <Floater
+                                                            content={
+                                                                this.state.store.decking && (JSON.parse(this.state.store.decking).map(function (data, index) {
+                                                                    return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                }))
+                                                            }
+                                                            event="hover"
+                                                        >
+                                                            <div className="dlink mb-2"><a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.decking) }) }} > {JSON.parse(this.state.store.decking)[0].DistributionListName}</a></div>
+                                                        </Floater>
                                                     </div>) : null}
 
-                                                     {this.state.store.doors && JSON.parse(this.state.store.doors).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.doors) }) }} > {JSON.parse(this.state.store.doors)[0].DistributionListName}</a></div>
+                                                    {this.state.store.doors && JSON.parse(this.state.store.doors).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.doors && (JSON.parse(this.state.store.doors).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.doors) }) }} > {JSON.parse(this.state.store.doors)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.drywall && JSON.parse(this.state.store.drywall).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.drywall) }) }} > {JSON.parse(this.state.store.drywall)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.drywall && (JSON.parse(this.state.store.drywall).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.drywall) }) }} > {JSON.parse(this.state.store.drywall)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.engineeredWoodProducts && JSON.parse(this.state.store.engineeredWoodProducts).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.engineeredWoodProducts) }) }} > {JSON.parse(this.state.store.engineeredWoodProducts)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.engineeredWoodProducts && (JSON.parse(this.state.store.engineeredWoodProducts).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.engineeredWoodProducts) }) }} > {JSON.parse(this.state.store.engineeredWoodProducts)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.fireplaces && JSON.parse(this.state.store.fireplaces).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.fireplaces) }) }} > {JSON.parse(this.state.store.fireplaces)[0].DistributionListName}</a></div>
+                                                    {this.state.store.fireplaces && JSON.parse(this.state.store.fireplaces).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.fireplaces && (JSON.parse(this.state.store.fireplaces).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.fireplaces) }) }} > {JSON.parse(this.state.store.fireplaces)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.flooring && JSON.parse(this.state.store.flooring).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.flooring) }) }} > {JSON.parse(this.state.store.flooring)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.flooring && (JSON.parse(this.state.store.flooring).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.flooring) }) }} > {JSON.parse(this.state.store.flooring)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
-                                                    
+
                                                     {this.state.store.garageDoors && JSON.parse(this.state.store.garageDoors).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.garageDoors) }) }} > {JSON.parse(this.state.store.garageDoors)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.garageDoors && (JSON.parse(this.state.store.garageDoors).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.garageDoors) }) }} > {JSON.parse(this.state.store.garageDoors)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.hardware && JSON.parse(this.state.store.hardware).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.hardware) }) }} > {JSON.parse(this.state.store.hardware)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.hardware && (JSON.parse(this.state.store.hardware).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.hardware) }) }} > {JSON.parse(this.state.store.hardware)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.houseWrap && JSON.parse(this.state.store.houseWrap).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.houseWrap) }) }} > {JSON.parse(this.state.store.houseWrap)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.houseWrap && (JSON.parse(this.state.store.houseWrap).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.houseWrap) }) }} > {JSON.parse(this.state.store.houseWrap)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                    
+
 
                                                     {this.state.store.insulation && JSON.parse(this.state.store.insulation).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.insulation) }) }} > {JSON.parse(this.state.store.insulation)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.insulation && (JSON.parse(this.state.store.insulation).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.insulation) }) }} > {JSON.parse(this.state.store.insulation)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.interiorTrimMouldings && JSON.parse(this.state.store.interiorTrimMouldings).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.interiorTrimMouldings) }) }} > {JSON.parse(this.state.store.interiorTrimMouldings)[0].DistributionListName}</a></div>
+                                                    {this.state.store.interiorTrimMouldings && JSON.parse(this.state.store.interiorTrimMouldings).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.interiorTrimMouldings && (JSON.parse(this.state.store.interiorTrimMouldings).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.interiorTrimMouldings) }) }} > {JSON.parse(this.state.store.interiorTrimMouldings)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.lumberTreatedWood && JSON.parse(this.state.store.lumberTreatedWood).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.lumberTreatedWood) }) }} > {JSON.parse(this.state.store.lumberTreatedWood)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.lumberTreatedWood && (JSON.parse(this.state.store.lumberTreatedWood).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.lumberTreatedWood) }) }} > {JSON.parse(this.state.store.lumberTreatedWood)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.lvlWoodBeams && JSON.parse(this.state.store.lvlWoodBeams).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.lvlWoodBeams) }) }} > {JSON.parse(this.state.store.lvlWoodBeams)[0].DistributionListName}</a></div>
+                                                    {this.state.store.lvlWoodBeams && JSON.parse(this.state.store.lvlWoodBeams).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.lvlWoodBeams && (JSON.parse(this.state.store.lvlWoodBeams).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.lvlWoodBeams) }) }} > {JSON.parse(this.state.store.lvlWoodBeams)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.railings && JSON.parse(this.state.store.railings).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.railings) }) }} > {JSON.parse(this.state.store.railings)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.railings && (JSON.parse(this.state.store.railings).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.railings) }) }} > {JSON.parse(this.state.store.railings)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.roadMarkings && JSON.parse(this.state.store.roadMarkings).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.roadMarkings) }) }} > {JSON.parse(this.state.store.roadMarkings)[0].DistributionListName}</a></div>
+                                                    {this.state.store.roadMarkings && JSON.parse(this.state.store.roadMarkings).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.roadMarkings && (JSON.parse(this.state.store.roadMarkings).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.roadMarkings) }) }} > {JSON.parse(this.state.store.roadMarkings)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.roofing && JSON.parse(this.state.store.roofing).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.roofing) }) }} > {JSON.parse(this.state.store.roofing)[0].DistributionListName}</a></div>
+                                                    {this.state.store.roofing && JSON.parse(this.state.store.roofing).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.roofing && (JSON.parse(this.state.store.roofing).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.roofing) }) }} > {JSON.parse(this.state.store.roofing)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.sheathing && JSON.parse(this.state.store.sheathing).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.sheathing) }) }} > {JSON.parse(this.state.store.sheathing)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.sheathing && (JSON.parse(this.state.store.sheathing).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.sheathing) }) }} > {JSON.parse(this.state.store.sheathing)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.shingles && JSON.parse(this.state.store.shingles).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.shingles) }) }} > {JSON.parse(this.state.store.shingles)[0].DistributionListName}</a></div>
+                                                    {this.state.store.shingles && JSON.parse(this.state.store.shingles).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.shingles && (JSON.parse(this.state.store.shingles).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.shingles) }) }} > {JSON.parse(this.state.store.shingles)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.shutters && JSON.parse(this.state.store.shutters).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.shutters) }) }} > {JSON.parse(this.state.store.shutters)[0].DistributionListName}</a></div>
+                                                    {this.state.store.shutters && JSON.parse(this.state.store.shutters).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.shutters && (JSON.parse(this.state.store.shutters).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.shutters) }) }} > {JSON.parse(this.state.store.shutters)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.siding && JSON.parse(this.state.store.siding).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.siding) }) }} > {JSON.parse(this.state.store.siding)[0].DistributionListName}</a></div>
+                                                    {this.state.store.siding && JSON.parse(this.state.store.siding).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.siding && (JSON.parse(this.state.store.siding).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.siding) }) }} > {JSON.parse(this.state.store.siding)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
                                                     {this.state.store.stairs && JSON.parse(this.state.store.stairs).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.stairs) }) }} > {JSON.parse(this.state.store.stairs)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.stairs && (JSON.parse(this.state.store.stairs).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.stairs) }) }} > {JSON.parse(this.state.store.stairs)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.steelTrusses && JSON.parse(this.state.store.steelTrusses).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.steelTrusses) }) }} > {JSON.parse(this.state.store.steelTrusses)[0].DistributionListName}</a></div>
+                                                    {this.state.store.steelTrusses && JSON.parse(this.state.store.steelTrusses).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.steelTrusses && (JSON.parse(this.state.store.steelTrusses).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.steelTrusses) }) }} > {JSON.parse(this.state.store.steelTrusses)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                     {this.state.store.wallPanel && JSON.parse(this.state.store.wallPanel).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.wallPanel) }) }} > {JSON.parse(this.state.store.wallPanel)[0].DistributionListName}</a></div>
+                                                    {this.state.store.wallPanel && JSON.parse(this.state.store.wallPanel).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.wallPanel && (JSON.parse(this.state.store.wallPanel).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.wallPanel) }) }} > {JSON.parse(this.state.store.wallPanel)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                    
+
                                                     {this.state.store.windows && JSON.parse(this.state.store.windows).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2" ><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.windows) }) }} > {JSON.parse(this.state.store.windows)[0].DistributionListName}</a></div>
+
+                                                        <div className="dlink mb-2" >
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.windows && (JSON.parse(this.state.store.windows).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.windows) }) }} > {JSON.parse(this.state.store.windows)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
 
-                                                      {this.state.store.woodTrusses && JSON.parse(this.state.store.woodTrusses).length > 0 ? (<div className="col-md-3 col-sm-6">
-                                                        <div className="dlink mb-2"><a onClick={() => { this.showServiceModal();this.setState({ pop_up_images: JSON.parse(this.state.store.woodTrusses) }) }} > {JSON.parse(this.state.store.woodTrusses)[0].DistributionListName}</a></div>
+                                                    {this.state.store.woodTrusses && JSON.parse(this.state.store.woodTrusses).length > 0 ? (<div className="col-md-3 col-sm-6">
+
+                                                        <div className="dlink mb-2">
+                                                            <Floater
+                                                                content={
+                                                                    this.state.store.woodTrusses && (JSON.parse(this.state.store.woodTrusses).map(function (data, index) {
+                                                                        return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                                                                    }))
+                                                                }
+                                                                event="hover"
+                                                            >
+                                                                <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: JSON.parse(this.state.store.woodTrusses) }) }} > {JSON.parse(this.state.store.woodTrusses)[0].DistributionListName}</a>
+                                                            </Floater>
+                                                        </div>
+
                                                     </div>) : null}
-                                                   
+
                                                 </div>
                                             </div>
                                             {this.state.store.installedServicesPicker && JSON.parse(this.state.store.installedServicesPicker).length > 0 ? (
@@ -507,12 +967,12 @@ class DetailsLocationsComponent extends Component {
                 <Modal isOpen={this.state.modal1} toggle={this.toggle1} className="request-form modal-dialog-centered">
                     {/* <ModalHeader toggle={this.toggle}><span className="display-4 m-auto pt-5 pb-4 d-block ">Request a quote</span></ModalHeader> */}
                     <ModalBody className="service-images-model">
-                            <button type="button" className="close position-absolute md-close"  onClick={this.toggle1}><img src={close} alt="close" /></button>
-                            {
-                                this.state.pop_up_images && typeof this.state.pop_up_images === 'object' ? (this.state.pop_up_images.map(function (data, index) {
-                                    return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
-                                })) : null
-                            }
+                        <button type="button" className="close position-absolute md-close" onClick={this.toggle1}><img src={close} alt="close" /></button>
+                        {
+                            this.state.pop_up_images && typeof this.state.pop_up_images === 'object' ? (this.state.pop_up_images.map(function (data, index) {
+                                return (<img src={globalVar.base_url1 + data.SupplierLogo} alt="" key={index} />)
+                            })) : null
+                        }
 
                     </ModalBody>
                     {/* <ModalFooter className="border-0 px-5  pb-5">
@@ -551,9 +1011,9 @@ class DetailsLocationsComponent extends Component {
                                             {this.state.serviceOption}
                                         </DropdownToggle>
                                         <DropdownMenu>
-                                            <DropdownItem onClick={() => {  this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
-                                            <DropdownItem onClick={() => {  this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
-                                            <DropdownItem onClick={() => {  this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
+                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
+                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
+                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
                                         </DropdownMenu>
                                     </Dropdown>
                                     <label htmlFor="Email" className="head-label h5 font-weight-normal">Service Type</label>
@@ -589,7 +1049,7 @@ class DetailsLocationsComponent extends Component {
                             <div className="form-group col-md-12  mb-5">
 
                                 <ReCAPTCHA
-                                    sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+                                    sitekey={captchaKey}
                                     onChange={(e) => this.onRecaptchChange(e)}
                                 />
                                 <span className="error-message">{this.state.captchaErr}</span>

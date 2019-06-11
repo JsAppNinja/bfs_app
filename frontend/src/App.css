@@ -217,10 +217,10 @@ button.navbar-toggler {
     background-color: #fff;
 }
 
-.on_top_head .sticky-navigation{
+/*.on_top_head .sticky-navigation{
     position: relative;
-    top:-300px;
-}
+    top:-250px;
+}*/
 .header .sticky-navigation{
     padding-left: 1rem;
     padding-right: 1rem;
@@ -230,6 +230,40 @@ button.navbar-toggler {
     top:0px;
     z-index: 100;
     left:0;
+}
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 .head_sticky .sticky-navigation .top-section{
     display: none;
@@ -1619,7 +1653,7 @@ select::-ms-expand {
 .earn-head-section h2{  
   padding: 4% 0px 0;
     color: #fff;}
-.investHome .inveter-banner{height: calc(100vh - 250px)}
+
 
 .banner-heading{
     bottom: 40px;
@@ -2479,6 +2513,17 @@ top: 100%;
         flex: 0 0 20%;
         max-width: 20%;
    }
+
+   .head_sticky .sticky-navigation-invest {
+    position: fixed;
+    top: 64px;
+    z-index: 100;
+    left: 0;
+    width: 100%;
+}
+
+
+
 }
 @media (max-width: 1279px){
     .jobrole_in li {
@@ -3070,6 +3115,7 @@ scrollbar-width: thin;
 }
 #accordion .accord_style {
     text-decoration: none;
+        line-height: normal;
 }
 #accordion .mb-0 > a:after {
     right: 15px;
@@ -3759,6 +3805,12 @@ ul.media_list li a {
    }
 }
 @media (max-width:767px) {
+/*------------investorJome------------*/
+.jobsarea-banner .slick-slider {
+    height: 400px;
+    margin-bottom: 15px;
+}
+/*------------investorHome------------*/
 
 .bottomLinks  .const_img_mob img{
     width: 100%
@@ -3809,9 +3861,7 @@ ul.media_list li a {
     .videoLabel {
         font-size: 11px;
    }
-    .card-body {
-        text-align: center;
-   }
+   
     .scrollbar_store .m-0 {
         margin-right: 0;
         margin-left: 0;
@@ -4178,6 +4228,10 @@ ul.media_list li a {
 }
 
 
+.Info-Download.border-right{border-bottom: 1px solid #ccc; border-right: none;}
+
+
+
 }
 
 @media (min-width: 768px){
@@ -4195,7 +4249,10 @@ ul.media_list li a {
    }*/
 }
 @media (max-width:580px) {
-
+    
+.jobsarea-banner .slick-slider {
+    height: 250px;
+}
     .banner-heading  h3{
         font-size: 1rem
     }
@@ -4224,9 +4281,7 @@ ul.media_list li a {
     .card-body img {
         width: 100%;
    }
-    #accordion .collapsed {
-        font-size: 15px;
-   }
+
     .award {
         width: 100%;
    }
@@ -4985,6 +5040,9 @@ height: 250px;}
 .jobsarea-banner{
    height: 450px;
 }
+.jobsarea-banner.inveter-banner {
+   height:auto;
+}
 .jobsarea-banner .slick-slider .slick-list .slick-track .career-banner-text h1 {
    font-size: 35px;
    }
@@ -5179,7 +5237,7 @@ html,body{height: 100%;}
     font-weight: 400;
 }
 .DownloadPresentation:after {
-       content: '';
+    content: '';
     position: absolute;
     width: 40px;
     height: 2px;
@@ -5298,9 +5356,9 @@ html,body{height: 100%;}
     margin-right:5px;
     opacity: 0.6
 }
-.viewFile{
+/*.viewFile{
     width: 130px;
-}
+}*/
 
 
 
@@ -5369,7 +5427,7 @@ html,body{height: 100%;}
 .event-table td{
      color: #595959;
     font-size: 14px;
-    padding:20px;
+    padding:20px 0;
 }
 .event-table td div{
     opacity: 0.6;
@@ -5392,20 +5450,13 @@ html,body{height: 100%;}
     border: none;
     background: transparent;
 }
-/*.dropdown-menu:after{
-    content: '';
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fffdfd;
-    top: -11px;
-    position: absolute;
-    left: 40%;
- }*/
  .section-event .dropdown-menu{
    margin-top:10px
  }
+ .section-event .viewFile{
+    width: 50px;
+    min-width: 50px
+}
 @media only screen and (max-width: 992px){
     .section-event .col-md-6:nth-child(2) .border-right{
         border-right: 0px solid transparent !important;
@@ -5416,9 +5467,6 @@ html,body{height: 100%;}
 
   .section-event .col-md-6 .border-right{
     border-right: 0px solid transparent !important;
-  }
-  .event-table td{
-    min-width: 190px
   }
 
 }
@@ -5496,30 +5544,9 @@ ul.ul-home-stock{
     font-size: 0
 }
 
-@media only screen and (max-width:576px){
-    ul.ul-home-stock{
-        -moz-column-count: auto;
-        -webkit-column-count: auto;
-        column-count:auto;
-    }
-      ul.ul-home-stock li{
-        width: 46%;
-        display: inline-block;
 
-      }
-     ul.ul-home-stock li:nth-child(even){
-        margin-right:4%;
-     }
 
-    ul.ul-home-stock li:first-child{
-        width: 100%;
-    }
-        ul.ul-home-stock li div{
-         border-top: 1px solid #dee2e6;
-            padding-top: 1rem;
-        }
-}
-
+  
 /*common 2018 EARNINGS section*/
 @media (max-width: 480px){
     .earn-head-section h2.display-2 {
@@ -5547,7 +5574,10 @@ ul.ul-home-stock{
 .btn-submit-2{
     min-width: 120px
 }
-
+#accordion span{
+    display: inline-block;
+    padding: 0;
+}
 
 
 /*----------------Historic-stock-lookup--------------*/
@@ -5631,13 +5661,7 @@ ul.ul-home-stock{
     position: relative;
     top:-335px;
 }
-.head_sticky .sticky-navigation-invest {
-    position: fixed;
-    top: 64px;
-    z-index: 100;
-    left: 0;
-    width: 100%;
-}
+
 
 /*--------------Annual-----------------*/
  .yearlyDetailUl li{ 
@@ -5658,21 +5682,37 @@ ul.ul-home-stock{
     height: 100px;
      resize: none;
 }
-@media (max-width:575px){
-    .email-detail{
+
+@media (max-width:812px){
+    .contact-investor .investor-relation h1{
+     font-size: 2.2rem;
+    }
+    .contact-investor .investor-relation h3 {
+        font-size: 1.4rem;
+    }
+       .email-detail{
         display: block;
     }
     .divider-email{
         display: none;
     }
-    .investor-relation h3{
+}
+@media (max-width:575px){
+ 
+    .contact-investor .investor-relation h3{
         font-size: 1.2rem;
     }
-    .Earnings-head {
+   .contact-investor .Earnings-head {
         font-size: 1.8rem
     }
 }
-
+@media (max-width:480px){
+   .contact-investor .investor-relation .col-5 ,.contact-investor  .investor-relation .col-7 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
 
 /*---------email alert------------*/
 .alert-Type{
@@ -5704,7 +5744,14 @@ ul.ul-home-stock{
 
 }
 
-
+/*--------------location page------------*/
+.__floater {
+    max-width: 50% !important;
+    text-align: center;
+}
+.__floater img{
+    padding:10px;
+}
 /*-------------------theme accordian------------------*/
 .theme-accordian .card-header  {
    border:2px solid transparent;
@@ -5722,7 +5769,8 @@ ul.ul-home-stock{
 .theme-accordian .card-header a.accord_style.collapsed{
       background:#fafbff;
         border:2px solid rgba(35,45,61,0.8);
-        color: rgba(35,45,61,0.8)
+        color: rgba(35,45,61,0.8);
+        line-height: normal
 }
 .theme-accordian .card  {
           border: 2px solid #fff;
@@ -5744,7 +5792,8 @@ ul.ul-home-stock{
  transform: rotate(180deg);
  color: #fff;
     font-size: 25px;
-    float: right;
+  position: absolute;
+  right: 20px;
      -webkit-transition: all 0.8s ease;
   -o-transition: all 0.8s ease;
   transition: all 0.8s ease;
@@ -5763,3 +5812,361 @@ ul.ul-home-stock{
  .investor-relation-managment h1{
     line-height: normal;
  }
+ /*--------------board-of-directors----------------*/
+ .board-ul li{
+    color: #1d69b4;
+    display: inline-block;
+    text-decoration: underline;
+ }
+
+.read-more{
+    color: #ff0c47;
+    cursor: pointer;
+}
+.font-16{
+    font-size: 16px;
+}
+.text-red{
+    color: red
+}
+
+/*-------------Contact the borad----------------*/
+.contact-board-ul li{
+    font-size: 16px;
+}
+/*---------------COMMON-----------*/
+ .linktr{
+    text-decoration: underline;
+    cursor: pointer;
+ }
+ .construct-desc h1 , 
+.construct-desc h2 , 
+.construct-desc h3 , 
+.construct-desc h4 , 
+.construct-desc h5 , 
+.construct-desc h6, 
+.construct-desc p , 
+.construct-desc span , 
+.construct-desc strong , 
+.construct-desc b , 
+.construct-desc i , 
+.construct-desc li, 
+.construct-desc a{
+font-size: 1.5rem !important;
+font-weight: 300 !important;
+}
+
+.leader-desc h1 , 
+.leader-desc h2 , 
+.leader-desc h3 , 
+.leader-desc h4 , 
+.leader-desc h5 , 
+.leader-desc h6, 
+.leader-desc p , 
+.leader-desc span , 
+.leader-desc strong , 
+.leader-desc b , 
+.leader-desc i , 
+.leader-desc li, 
+.leader-desc a{
+font-size:1.25rem !important;
+font-weight:300 !important;
+}
+
+.accolades-desc h1 , 
+.accolades-desc h2 , 
+.accolades-desc h3 , 
+.accolades-desc h4 , 
+.accolades-desc h5 , 
+.accolades-desc h6, 
+.accolades-desc p , 
+.accolades-desc span , 
+.accolades-desc strong , 
+.accolades-desc b , 
+.accolades-desc i , 
+.accolades-desc li, 
+.accolades-desc a{
+font-size:1.5rem !important;
+font-weight:500 !important;
+}
+
+@media only screen and (min-width: 768px){
+    .community-ban h1 , 
+    .community-ban h2 , 
+    .community-ban h3 , 
+    .community-ban h4 , 
+    .community-ban h5 , 
+    .community-ban h6, 
+    .community-ban p , 
+    .community-ban span , 
+    .community-ban strong , 
+    .community-ban b , 
+    .community-ban i , 
+    .community-ban li, 
+    .community-ban a{
+    font-size: 1.75rem !important;
+    font-weight:400 !important;
+    }
+    }
+    
+    @media only screen and (max-width: 575px){
+    .community-ban h1 , 
+    .community-ban h2 , 
+    .community-ban h3 , 
+    .community-ban h4 , 
+    .community-ban h5 , 
+    .community-ban h6, 
+    .community-ban p , 
+    .community-ban span , 
+    .community-ban strong , 
+    .community-ban b , 
+    .community-ban i , 
+    .community-ban li, 
+    .community-ban a{
+    font-size: 12px !important;
+    font-weight:400 !important;
+    }
+    }
+.otherpages h1 , 
+.otherpages h2 , 
+.otherpages h3 , 
+.otherpages h4 , 
+.otherpages h5 , 
+.otherpages h6, 
+.otherpages p , 
+.otherpages span , 
+.otherpages strong , 
+.otherpages b , 
+.otherpages i , 
+.otherpages li, 
+.otherpages a{
+font-size:1rem !important;
+font-weight:400 !important;
+}
+
+.otherpagescareer h1 , 
+.otherpagescareer h2 , 
+.otherpagescareer h3 , 
+.otherpagescareer h4 , 
+.otherpagescareer h5 , 
+.otherpagescareer h6, 
+.otherpagescareer p , 
+.otherpagescareer span , 
+.otherpagescareer strong , 
+.otherpagescareer b , 
+.otherpagescareer i , 
+.otherpagescareer li, 
+.otherpagescareer a{
+font-size:14px !important;
+font-weight:400 !important;
+}
+
+
+.careersubhead h1 , 
+.careersubhead h2 , 
+.careersubhead h3 , 
+.careersubhead h4 , 
+.careersubhead h5 , 
+.careersubhead h6, 
+.careersubhead p , 
+.careersubhead span , 
+.careersubhead strong , 
+.careersubhead b , 
+.careersubhead i , 
+.careersubhead li, 
+.careersubhead a{
+font-size:2rem !important;
+font-weight:bold !important;
+}
+ /*---------------table style-2----------*/
+ .theme-table2-layout td{
+     color: #595959;
+    font-size: 14px;
+    padding:20px 10px  20px 0;
+  min-width: 145px
+}
+.theme-table2-layout td div{
+    opacity: 0.6;
+
+}
+.theme-table2-layout img{
+    width: 25px;
+    margin-right:5px;
+    opacity: 0.6
+}
+table td.border-top-none{
+    border-top: none
+}
+.bg-investor{
+   background: #f4f4f4;
+}
+
+.limit-vertical-heading{
+     -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+}
+
+.word-limit-width{
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: "----";
+    display:inline-block;
+
+}
+.download-pdf-news img ,.pdfImg{
+    width: 25px;
+    opacity: 0.6;
+}
+/*----------common end---------------*/
+
+/*----DOWNLOAD LIBRARY----*/
+.download-Lib .pdf-file{
+    width: 25px;
+    margin-right: 5px;
+    opacity: 0.6;
+}
+.custom-select:focus {
+    border-color:transparent;
+    box-shadow: none;
+}
+.download-Lib .table  td{
+    width: 45%;
+ }
+
+
+ /*----------------------Rss FEED---------------*/
+
+.investor-para ,
+.rssFeedUl li{   
+    font-size: 16px;
+    font-weight: 400;
+}
+.rss-file{
+    width: 25px;
+}
+
+.rss-feed-detail  .linktr {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+ .wordLimit { 
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+
+/*-------Search-----------*/
+.theme-table2-layout td.w-td-80{
+min-width: 80px
+}
+.theme-table2-layout td.viewFile.w-td-90{
+   min-width: 90px;
+    width: 90px;
+}
+.theme-table2-layout td.w-td-100 {
+   min-width: 100px;
+
+}
+.theme-table2-layout td.w-td-120{
+    min-width: 120px
+}
+
+.AssetSection .Info-Download  h4{
+
+    -webkit-box-orient: vertical;
+        overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+}
+
+/*------------Investor Event------------*/
+
+@media only screen and (max-width:576px){
+    ul.ul-home-stock{
+        -moz-column-count: auto;
+        -webkit-column-count: auto;
+        column-count:auto;
+    }
+      ul.ul-home-stock li{
+        width: 46%;
+        display: inline-block;
+
+      }
+     ul.ul-home-stock li:nth-child(even){
+        margin-right:4%;
+     }
+
+    ul.ul-home-stock li:first-child{
+        width: 100%;
+    }
+        ul.ul-home-stock li div{
+         border-top: 1px solid #dee2e6;
+            padding-top: 1rem;
+        }
+
+        /*----------accordian-----------*/
+  #accordion a.accord_style {
+        font-size: 14px;
+   }
+  .theme-accordian .card .accord_style i{
+    font-size: 20px
+   }
+       .yearlyDetailUl li {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+}
+
+
+
+/*------------------Mobile tab change to dropdown Common------------------*/
+@media (max-width:1199px) {
+    .theme-mobile-dropdown .card-header span {
+        padding: 1.2rem 1.25rem;
+        display: block;
+    }
+ }
+
+
+
+ /*-----------------------------Mobile media sub menu ------------------*/
+ .mobileViewPage button{
+     background: transparent;
+    border: none;
+    color: #fff;
+    width: 100%;
+    background: #0768b4;
+    border-radius: 0;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+ }
+ .mobileViewPage  .dropdown-menu{
+    width: 100%;
+    transform: translate3d(0px, 30px, 0px) !important;
+    top: 25px !important;
+      z-index: 9
+ }
+
+
+.mobileViewPage .dropdown-item{
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e4e1e1;
+    padding: 15px;
+
+}
+.mobileViewPage  .dropdown-item:focus,
+.mobileViewPage  .dropdown-item:hover{
+    background-color: #F5184E;
+}

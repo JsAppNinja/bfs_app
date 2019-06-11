@@ -141,6 +141,9 @@ class ManufacturingComponent extends Component {
                             {this.state.title}
                         </h1>
                     </div>
+                    <div className="content_full">
+						<span className="otherpages" dangerouslySetInnerHTML={{ __html: this.state.content }}></span>
+					</div>
                     {this.state.manufacturingitems.length > 0 ? (<div className="content_full_all">
                         <div className="row">
                             <div className="col-sm-12">

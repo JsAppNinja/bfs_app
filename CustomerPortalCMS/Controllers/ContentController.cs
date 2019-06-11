@@ -690,7 +690,9 @@ namespace CustomerPortalCMS.Controllers
                             }
 
                             mediaList = mediaList.TrimEnd(',');
-                            result.Properties[item.Key] = mediaList;
+
+                            if(!string.IsNullOrEmpty(mediaList))
+                                result.Properties[item.Key] = mediaList;
                         }
                     }
                     else if (item.Value.ToString().Contains("umb://document/") && item.Key.ToString() == "dataLocation")
@@ -779,6 +781,71 @@ namespace CustomerPortalCMS.Controllers
                         }
 
                         result.Properties[item.Key] = JsonConvert.SerializeObject(installedServices);
+                    }
+                    else if (item.Value.ToString().Contains("umb://document/") && item.Key.ToString() == "locationDistributions")
+                    {
+                        var udis = item.Value.ToString().Split(',');
+                        var locationDistributions = new List<LocationDistributionModel>();
+
+                        foreach (var uid in udis)
+                        {
+                            Udi udi = null;
+                            Udi.TryParse(uid, out udi);
+                            var contentList = Umbraco.TypedContent(udi);
+
+                            if (contentList != null)
+                            {
+                                dynamic data = contentList;
+
+                                if (data.DocumentTypeAlias == "distributionSupplier")
+                                {
+                                    var locationDistribution = new LocationDistributionModel
+                                    {
+                                        Id = data.Id,
+                                        SupplierLogo = data.SupplierLogo != null ? data.SupplierLogo.Url : null,
+                                        SupplierName = data.SupplierName,
+                                        DistributionListName = data.Parent.TypeName
+                                    };
+
+                                    locationDistributions.Add(locationDistribution);
+                                }
+                                else if(data.DocumentTypeAlias == "distributionType")
+                                {
+                                    if (data.Children.Count > 0)
+                                    {
+                                        foreach (var supplier in data.Children)
+                                        {
+                                            var locationDistribution = new LocationDistributionModel
+                                            {
+                                                Id = supplier.Id,
+                                                SupplierLogo = supplier.SupplierLogo != null ? supplier.SupplierLogo.Url : null,
+                                                SupplierName = supplier.SupplierName,
+                                                DistributionListName = supplier.Parent.TypeName
+                                            };
+
+                                            locationDistributions.Add(locationDistribution);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var locationDistribution = new LocationDistributionModel
+                                        {
+                                            Id = data.Id,
+                                            DistributionListName = data.TypeName
+                                        };
+
+                                        locationDistributions.Add(locationDistribution);
+                                    }
+                                }
+                            }
+                        }
+
+                        var grouped = locationDistributions.GroupBy(g => g.DistributionListName).Select(s => new
+                        {
+                            DistributionName = s.Key,
+                            DistributionSuppliers = s.GroupBy(g => g.Id).Select(si => si.FirstOrDefault()).ToList()
+                        }).ToList();
+                        result.Properties[item.Key] = JsonConvert.SerializeObject(grouped);
                     }
                     else if (item.Value.ToString().Contains("umb://document/"))
                     {

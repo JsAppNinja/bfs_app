@@ -154,7 +154,7 @@ class DistributionComponent extends Component {
 							</h1>
 						</div>
 						<div className="content_full">
-							<span dangerouslySetInnerHTML={{ __html: this.state.content }}></span>
+							<span className="otherpages" dangerouslySetInnerHTML={{ __html: this.state.content }}></span>
 						</div>
 					</div>
 				</div>

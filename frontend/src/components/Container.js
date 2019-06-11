@@ -16,8 +16,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 var base_url = globalVar.base_url1;
-
-
+var captchaKey = globalVar.googleCaptchaKey;
 var mybody = {};
 //const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
 
@@ -571,7 +570,7 @@ class ContainerComponent extends Component {
                     <div className="row pt-md-5">
                         <div className="col-12 col-sm-12 col-xl-6 wid-100-tab col-lg-6">
                             <h4 className="display-4  font-weight-normal">{homedata.section1title}</h4>
-                            <span dangerouslySetInnerHTML={{ __html: homedata.section1about }}></span>
+                            <span className="construct-desc" dangerouslySetInnerHTML={{ __html: homedata.section1about }}></span>
                             {homedata.section1button?(<div className="col-12 mob-xs-1  p-0">
                                 <Link to={'/about-us'} className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white mb-4">{homedata.section1button}</Link>
                             </div>):null}
@@ -600,7 +599,7 @@ class ContainerComponent extends Component {
                             <div className="mob-ht  h-100 align-items-center gallery-area">
                                 <div className="w-100 d-sm-flex d-md-flex d-lg-flex align-items-center h-100  ">
                                     <div className="text-center flex-content-mob font-weight-normal w-100 text-white">
-                                        <h3 className="display-5 tab-sm mb-xs-50" dangerouslySetInnerHTML={{ __html: item.title }}></h3>
+                                        <h3 className="display-5 tab-sm mb-xs-50 " dangerouslySetInnerHTML={{ __html: item.title }}></h3>
                                         <div className="rd-name">
                                             <Link to={'/' + item.link} className="btn theme-btn text-uppercase bg-info px-4 py-3 text-white small-size-btn">{item.caption}</Link>
                                         </div>
@@ -764,7 +763,7 @@ class ContainerComponent extends Component {
                     <div className="col-12 small-pad px-0">
                         <div className="m-auto small-pad col-12 col-xl-11">
                             <h2 className="display-4 font-small-mob text-center font-weight-normal">{homedata.section3Title}</h2>
-                            <div dangerouslySetInnerHTML={{ __html: homedata.section3Description }} className="text-center line-height py-4"></div>
+                            <div dangerouslySetInnerHTML={{ __html: homedata.section3Description }} className="text-center line-height py-4 construct-desc"></div>
                             <div className="col-12 text-center pb-5 p-0">
                                 {homedata.section3ButtonLink?(<a href={homedata.section3ButtonLink} rel="noopener noreferrer" target="_blank" className="btn theme-btn text-uppercase bg-info px-4 py-3 d-inline-block login-blue text-white d-none-mob" style={{ marginBottom: '30px' }}>{homedata.section3ButtonCaption} </a>):null}
                                 <div className="w-100">
@@ -882,7 +881,7 @@ class ContainerComponent extends Component {
                             <div className="form-group col-md-12  mb-5">
 
                                 <ReCAPTCHA
-                                    sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+                                    sitekey={captchaKey}
                                     onChange={(e) => this.onRecaptchChange(e)}
                                 />
                                 <span className="error-message">{this.state.captchaErr}</span>

@@ -302,7 +302,7 @@ class JobAreaComponent extends Component {
 										<div className="FeaturedJobItemColumn FeaturedJobDesc col-xs-12 col-md-8">
 											{data.career1title ? (<h3>{data.career1title}</h3>) : null}
 											<p></p>
-											<span dangerouslySetInnerHTML={{ __html: data.career1description }}></span>
+											<span className="otherpagescareer" dangerouslySetInnerHTML={{ __html: data.career1description }}></span>
 											<p></p>
 										</div>
 										{data.career1link ? (<div className="FeaturedJobItemColumn col-xs-12 col-md-4">
