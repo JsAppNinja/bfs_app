@@ -1,4 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Newtonsoft.Json;
 
 @{
     Layout = "BldrMaster.cshtml";
@@ -15,6 +16,7 @@
     </script>
 }
 
+
 @{
     var locationId = @CurrentPage.Id;
     var location = @Umbraco.Content(@locationId);
@@ -22,9 +24,6 @@
     //var allDistributionCategories = Umbraco.TypedContentAtRoot().Where(c => c.Name == "Bldr Data Repository").First().Children.Where(c => c.Name == "Distribution"); //.First().Where(x => x.showOnLocationsDetailsPages == true);
     var allDistributionCategories = @Umbraco.Content(1919).Children; // Where(x => x.showOnLocationsDetailsPages == true);
     var installed = location.InstalledServicesPicker;
-    string categoryFullName;
-    string categoryName;
-    bool atLeastOneSupplierFound = false;
 }
 
 @{
@@ -145,68 +144,69 @@
 
 
         @*---------------- Distributions - START ------------------------*@
+
         <div class="clearfix">
-            @*this for bloc may seem quite redundant but is the only way to make C# and HTML play nice with each other*@
-            @foreach (IPublishedContent distributionCateogry in allDistributionCategories)
+            @if(Model.Content.HasValue("suppliers"))
             {
-                categoryFullName = distributionCateogry.Name;
-                categoryName = distributionCateogry.GetPropertyValue("locationListItemPropertyAlias").ToString();
-                var suppliers = location.GetPropertyValue(categoryName);
-                if (suppliers != null && suppliers.Count > 0)
+                var supplierDynamic = Model.Content.GetPropertyValue<dynamic>("suppliers");
+                var suppliers = supplierDynamic.suppliers;
+                var distributions = supplierDynamic.distributions;
+
+                var validSuppliers = new List<IPublishedContent>();
+                foreach(var supplierId in suppliers)
                 {
+                    IPublishedContent supplier = Umbraco.TypedContent(Convert.ToInt32(supplierId.Value));
+                    if (supplier != null)
+                    {
+                        var supplierDistribution = supplier.Parent;
+                        foreach (var distributionId in distributions)
+                        {
+                            if(supplierDistribution.Id == Convert.ToInt32(distributionId.Value))
+                            {
+                                validSuppliers.Add(supplier);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (validSuppliers.Any()) { 
                     <p>
                         <b>Distributed Products</b> (Click to See Suppliers)
                     </p>
-                    atLeastOneSupplierFound = true;
-                    break;
-                }
-            }
-            @if (atLeastOneSupplierFound)
-            {
-                <ul class="DistListWrap">
-                    @foreach (IPublishedContent distributionCateogry in allDistributionCategories)
+            
+                    <ul class="DistListWrap">
+                    
+                    @foreach (var supplierGroup in validSuppliers.GroupBy(x => x.Parent.Id))
                     {
-                        categoryFullName = distributionCateogry.Name;
-                        categoryName = distributionCateogry.GetPropertyValue("locationListItemPropertyAlias").ToString();
-                        var allSuppliers = location.GetPropertyValue(categoryName);
-                        //now want to de-dup suppliers, and i don't know how to cast these dynamic objects to something i can run linq on ... so i'll build a dictionary
-                        if (allSuppliers != null && allSuppliers.Count > 0)
-                        {
-                            var suppliers = (new Dictionary<int, string>());
-                            foreach (var item in allSuppliers)
-                            {
-                                if (!suppliers.ContainsKey(item.Id))
+                        var parent = Umbraco.TypedContent(supplierGroup.Key);
+                        if(parent != null) { 
+                        <li>
+                            @{var dc = "dist" + parent.Id;}
+                            <text><a href="#" data-toggle="modal" data-target="#logoModal" data-category="@dc" data-catname="@parent.Name">@parent.Name</a></text>
+                            @{var id = "modal-content-dist" + parent.Id;}
+                            <div id="@id" class="clearfix">
+                                @foreach (var supplier in supplierGroup)
                                 {
-                                    suppliers.Add(item.Id, item.Name);
+                                    var supplierLogo = supplier.GetPropertyValue<IPublishedContent>("supplierLogo");
+                                    <div class="ModalLogosWrap">
+                                    
+                                        @if (supplierLogo != null)
+                                        {
+                                            <img src="@supplierLogo.Url" alt="@supplier.Id" />
+                                        }
+                                        else
+                                        {
+                                            <div class="DistItemImg">@supplier.Name</div>
+                                        }
+                                    </div>
                                 }
-                            }
-                            <li>
-                                @{var dc = "dist" + @categoryName;}
-                                <text><a href="#" data-toggle="modal" data-target="#logoModal" data-category="@dc" data-catname="@categoryFullName">@categoryFullName</a></text>
-                                @{var id = "modal-content-dist" + @categoryName;}
-                                <div id="@id" class="clearfix">
-                                    @foreach (var kvp in suppliers.OrderBy(k => k.Value))
-                                    {
-                                        var SupId = kvp.Key;
-                                        var SupName = kvp.Value;
-                                        var Node = Umbraco.Content(SupId);
-                                        <div class="ModalLogosWrap">
-                                            @try
-                                            {
-                                                string file = Node.GetPropertyValue("supplierLogo").Url;
-                                                <img src="@file" alt="@SupId" />
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                <div class="DistItemImg">@SupName</div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            </li>
+                            </div>
+                        </li>
                         }
                     }
-                </ul>
+                    </ul>
+                }
             }
 
 

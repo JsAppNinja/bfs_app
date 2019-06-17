@@ -1,0 +1,15 @@
+﻿.distribution-picker label {
+    line-height:unset;
+}
+
+.distribution-picker .controls {
+    margin-left:250px;
+}
+
+.distribution-picker .control-label label {
+    font-weight: bold;
+}
+
+.distribution-picker .inactive {
+    opacity:.6;
+}

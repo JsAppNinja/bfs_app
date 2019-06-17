@@ -383,6 +383,10 @@
     <Content Include="App_Plugins\DiploTraceLogViewer\backoffice\diplotracelog\plugins\smart-table.min.js" />
     <Content Include="App_Plugins\DiploTraceLogViewer\backoffice\diplotracelog\tracelog3.css" />
     <Content Include="App_Plugins\DiploTraceLogViewer\readme.txt" />
+    <Content Include="App_Plugins\DistributionPicker\distributionpicker.css" />
+    <Content Include="App_Plugins\DistributionPicker\distributionpicker.html" />
+    <Content Include="App_Plugins\DistributionPicker\distributionpicker.js" />
+    <Content Include="App_Plugins\DistributionPicker\pretty-checkbox.css" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
@@ -979,6 +983,7 @@
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <Content Include="config\applications.config" />
+    <Content Include="App_Plugins\DistributionPicker\package.manifest" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -2552,6 +2557,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\LocationDataController.cs" />
     <Compile Include="Controllers\Api\MenuController.cs" />
+    <Compile Include="Controllers\Api\ToolsApiController.cs" />
     <Compile Include="Controllers\ContactUsSurfaceController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

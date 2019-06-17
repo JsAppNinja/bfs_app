@@ -1,0 +1,21 @@
+﻿{   
+    propertyEditors: [      
+      {
+          alias: "DistributionPicker",
+          name: "Distribution Picker",
+			    hideLabel: true,
+          editor: {
+              view: "~/App_Plugins/DistributionPicker/distributionpicker.html",
+				      valueType: "JSON"
+            },
+			  
+      }
+    ],
+    javascript: [
+        '~/App_Plugins/DistributionPicker/distributionpicker.js',
+    ],
+    css: [
+        '~/App_Plugins/DistributionPicker/pretty-checkbox.css',
+        '~/App_Plugins/DistributionPicker/distributionpicker.css',
+    ]
+}
