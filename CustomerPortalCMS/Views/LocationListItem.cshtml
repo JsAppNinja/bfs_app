@@ -177,14 +177,15 @@
             
                     <ul class="DistListWrap">
                     
-                    @foreach (var supplierGroup in validSuppliers.GroupBy(x => x.Parent.Id))
+                    @foreach (var supplierGroup in validSuppliers
+                        .GroupBy(x => x.Parent)
+                        .OrderBy(parent => parent.Key.Name)
+                        )
                     {
-                        var parent = Umbraco.TypedContent(supplierGroup.Key);
-                        if(parent != null) { 
                         <li>
-                            @{var dc = "dist" + parent.Id;}
-                            <text><a href="#" data-toggle="modal" data-target="#logoModal" data-category="@dc" data-catname="@parent.Name">@parent.Name</a></text>
-                            @{var id = "modal-content-dist" + parent.Id;}
+                            @{var dc = "dist" + supplierGroup.Key.Id;}
+                            <text><a href="#" data-toggle="modal" data-target="#logoModal" data-category="@dc" data-catname="@supplierGroup.Key.Name">@supplierGroup.Key.Name</a></text>
+                            @{var id = "modal-content-dist" + supplierGroup.Key.Id;}
                             <div id="@id" class="clearfix">
                                 @foreach (var supplier in supplierGroup)
                                 {
@@ -203,7 +204,7 @@
                                 }
                             </div>
                         </li>
-                        }
+                        
                     }
                     </ul>
                 }
