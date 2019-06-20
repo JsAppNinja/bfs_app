@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 var base_url = globalVar.base_url1;
 
-
 class ContactUsComponent extends Component {
 
     constructor(props) {

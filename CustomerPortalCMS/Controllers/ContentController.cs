@@ -890,12 +890,81 @@ namespace CustomerPortalCMS.Controllers
                                     .Replace("Sat-Closed Sun-Closed", "Sat-Sun Closed")?
                                     .TrimEnd(',');
                     }
+                    else if (item.Key.ToString() == "suppliers")
+                    {
+                        var distributionPickerModel = JsonConvert.DeserializeObject<DistributionPickerModel>(item.Value.ToString());
+                        var locationDistributions = new List<LocationDistributionModel>();
+
+                        foreach (var distributionId in distributionPickerModel.Distributions)
+                        {
+                            var contentList = Umbraco.TypedContent(distributionId);
+
+                            if (contentList != null)
+                            {
+                                dynamic data = contentList;
+
+                                if (data.DocumentTypeAlias == "distributionType" && data.Active == true)
+                                {
+                                    if (data.Children.Count > 0)
+                                    {
+                                        var added = 0;
+                                        foreach (var supplier in data.Children)
+                                        {
+                                            if (distributionPickerModel.Suppliers.Contains(supplier.Id))
+                                            {
+                                                var locationDistribution = new LocationDistributionModel
+                                                {
+                                                    Id = supplier.Id,
+                                                    SupplierLogo = supplier.SupplierLogo != null ? supplier.SupplierLogo.Url : null,
+                                                    SupplierName = supplier.SupplierName,
+                                                    DistributionListName = supplier.Parent.TypeName
+                                                };
+
+                                                locationDistributions.Add(locationDistribution);
+                                                added++;
+                                            }
+                                        }
+
+                                        if(added == 0)
+                                        {
+                                            var locationDistribution = new LocationDistributionModel
+                                            {
+                                                Id = data.Id,
+                                                DistributionListName = data.TypeName,
+                                                Root = true
+                                            };
+
+                                            locationDistributions.Add(locationDistribution);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var locationDistribution = new LocationDistributionModel
+                                        {
+                                            Id = data.Id,
+                                            DistributionListName = data.TypeName,
+                                            Root = true
+                                        };
+
+                                        locationDistributions.Add(locationDistribution);
+                                    }
+                                }
+                            }
+                        }
+
+                        var grouped = locationDistributions.GroupBy(g => g.DistributionListName).Select(s => new
+                        {
+                            DistributionName = s.Key,
+                            DistributionSuppliers = s.Count() > 0 && s.All(a => a.Root != true) ? s.GroupBy(gi => gi.Id).Select(si => si.FirstOrDefault()).ToList() : null
+                        }).ToList();
+                        result.Properties[item.Key] = JsonConvert.SerializeObject(grouped);
+                    }
 
                     result.Properties[item.Key] = GetCroppedUrl(result.Properties[item.Key]?.ToString());
 
                     result.Properties[item.Key] = ReplaceMediaLinks(result.Properties[item.Key]?.ToString(), baseUrl);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     result.Properties[item.Key] = ReplaceMediaLinks(result.Properties[item.Key]?.ToString(), baseUrl);
                 }

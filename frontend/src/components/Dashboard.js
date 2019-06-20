@@ -688,7 +688,7 @@ class DashboardComponent extends Component {
                 }, 4000)
             }
             var banner = document.getElementsByClassName("bannerSlide")
-           if(banner[0]){
+
             var carouselitem = banner[0].getElementsByClassName("carousel-item")
             var carouselitemactive = banner[0].getElementsByClassName("active");
             if (carouselitemactive && carouselitemactive.length) {
@@ -699,8 +699,6 @@ class DashboardComponent extends Component {
                 carouselitem[this.state.videoIndex].classList.add("active");
                 carouselitem[this.state.videoIndex].classList.add("slider-animated");
             }
-           }
-            
 
             video = videos[this.state.videoIndex];
             mobilevideos.push(

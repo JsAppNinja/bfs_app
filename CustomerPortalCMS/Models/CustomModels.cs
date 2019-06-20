@@ -162,6 +162,8 @@ namespace CustomerPortalCMS.Models
         public string ImportId { get; set; }
 
         public string DistributionListName { get; set; }
+
+        public bool Root { get; set; }
     }
 
     public enum StoreIconType
@@ -176,5 +178,12 @@ namespace CustomerPortalCMS.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+    }
+
+    public class DistributionPickerModel
+    {
+        public List<int> Suppliers { get; set; }
+
+        public List<int> Distributions { get; set; }
     }
 }

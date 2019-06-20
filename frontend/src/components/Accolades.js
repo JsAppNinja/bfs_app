@@ -102,8 +102,8 @@ class AccoladesComponent extends Component {
                       lat: data[i].Latitude,
                       lng: data[i].Longitude,
                       description:data[i].Address1,
-                      color: data[i].StoreColor,
-                      type: data[i].StoreIconType.toLowerCase(),
+                      color: data[i].StoreColor ? data[i].StoreColor : '#19e39a',
+                      type: data[i].StoreIconType ? data[i].StoreIconType.toLowerCase() : 'circle',
                       border_color: data[i].StoreColor
                     }
                   )
@@ -117,8 +117,7 @@ class AccoladesComponent extends Component {
                 }) 
               }  
             }
-        }).catch(() => {
-            
+        }).catch((err) => {
         });
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from 'jquery'
 import legent_locations from "../img/legend_new.PNG";
 import PropTypes from 'prop-types';
-import {globalVar} from "../config";
+import { globalVar } from "../config";
 var base_url = globalVar.base_url1;
 
 export default class UsaHeatChartComponent extends Component {
@@ -4540,13 +4540,13 @@ export default class UsaHeatChartComponent extends Component {
    * Handle the scroll event
    */
   handleScroll = () => {
-   
+
     $(document).ready(function () {
       var simplemaps_usmap = '';
       $("[class^=sm_location]").each(function (i) {
         var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
         if (isIE) {
-          if ($(this)[0] && $(this)[0].className &&  $(this)[0].animVal !== "sm_location_groupBy") {
+          if ($(this)[0] && $(this)[0].className && $(this)[0].animVal !== "sm_location_groupBy") {
             let row = $(this);
             setTimeout(function () {
               $("#test").animate({ left: '100px', top: '100px' }, 500);
@@ -4614,33 +4614,60 @@ export default class UsaHeatChartComponent extends Component {
     document.body.appendChild(script);
     $(".mapline").css({ display: "block" }).animate({}, 500);
 
+
     setInterval(() => {
-      let inner_map = $('#map_inner')
+      let inner_map = $('#map_inner');
       if (inner_map && inner_map.children('div').length) {
-        let child = inner_map.children('div')
-        if (child[0].id && child[0].id === "tt_sm_map") {
-          child[1].style['display'] = "none"
+        let child = inner_map.children('div');
+        if (this.checkForIE()) {
+          // For the IE
+          if (child[0].id && child[0].id === "tt_sm_map") {
+            child[1].style['cssText'] = ""
+            child[1].style['display'] = "none"
+          } else if (child[1]) {
+            child[0].style['cssText'] = ""
+            child[0].style['display'] = "none"
+          }
         } else {
-          child[0].style['display'] = "none"
+          // For the Others
+          if (child[0].id && child[0].id === "tt_sm_map") {
+            child[1].style['display'] = "none"
+          } else {
+            child[0].style['display'] = "none"
+          }
         }
       }
     }, 10)
   }
 
+  checkForIE() {
 
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+    {
+      return true
+    }
+    else  // If another browser, return 0
+    {
+      return false
+    }
+
+  }
   render() {
     var USAComponent = <div>
       <div className="row ">
         <div className="col col-xl-12">
           <div id="map" className="accoladesmap" />
           {
-            this.props.regionimage ?(
-              <img alt="mapdescription" className="float-right" src={base_url+this.props.regionimage} />
-            ):(
-              <img alt="mapdescription" className="float-right" src={legent_locations} />
-            ) 
+            this.props.regionimage ? (
+              <img alt="mapdescription" className="float-right" src={base_url + this.props.regionimage} />
+            ) : (
+                <img alt="mapdescription" className="float-right" src={legent_locations} />
+              )
           }
-         
+
         </div>
       </div>
     </div>;
