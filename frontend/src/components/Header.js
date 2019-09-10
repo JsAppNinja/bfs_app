@@ -19,6 +19,13 @@ import ReactLoading from 'react-loading';
 import axios from 'axios';
 import { GoogleApiWrapper } from 'google-maps-react';
 
+import cookie from 'react-cookies'
+import mybfs from "../img/mybfs-logo.jpg";
+import iconremove from "../img/cross.jpg";
+
+
+
+
 var baseurl = globalVar.base_url1;
 var mybody = {}
 var captchaKey = globalVar.googleCaptchaKey;
@@ -77,13 +84,33 @@ class HeaderComponent extends Component {
         this.closeThePopup = this.closeThePopup.bind(this);
         this.togglesendquote = this.togglesendquote.bind(this);
         this.resetSearch = this.resetSearch.bind(this);
+
+        this.toggle2 = this.toggle2.bind(this);
+
         if (localStorage.getItem("selectedStore")) {
             document.body.classList.add("storeselected_main");
         }
+        //cookie.remove('userIdCookies');
     }
 
+    setCookie() {
+          let userIdCookies = 1;
+          //this.setState({ userIdCookies })
+          cookie.save('userIdCookies', userIdCookies, { path: '/' })
+          //cookie.remove('userIdCookies', { path: '/' })
+          //cookie.remove('userIdCookies');
+
+          localStorage.setItem('userIdCookies',userIdCookies);
+    };
+
     componentDidMount() {
+        
         // Add the scroll Listener
+        if (parseInt(localStorage.getItem('userIdCookies'))!==1) {
+            
+        //    this.setCookie();
+            this.showPopUPNotLogin();
+        }
         window.addEventListener('scroll', this.handleScroll);
 
         if (!(localStorage.getItem('currentlat') && localStorage.getItem('currentlon'))) {
@@ -138,6 +165,21 @@ class HeaderComponent extends Component {
     toggle() {
         this.setState({
             modal: !this.state.modal
+        });
+    }
+
+    /**
+    * Show and hide popup modal
+    */
+    toggle2() {
+        if(this.state.modalSecond) {
+            console.log('rredirect to other.......');
+            window.open('https://www.bldrsd.com/mybfsbuilder', '_blank');
+        } else {
+            console.log('neeed to set values.......');
+        }
+        this.setState({
+            modalSecond: true
         });
     }
 
@@ -824,6 +866,36 @@ class HeaderComponent extends Component {
     }
 
     /**
+     * Show gps popup
+     */
+    showPopUPNotLogin = () => {
+        this.toggle2();
+    }
+
+    showPopUPNotLoginClonse = () => {
+        let self = this;
+        self.showPopUPNotLogin();
+    }
+
+    /**
+     * Go to the store locator
+     */
+    newChangesHidePopup = () => {
+        this.setState({
+            modalSecond: !this.state.modalSecond
+        });
+    }
+
+    newChangesHidePopupClose = () => {
+        this.setState({
+            modalSecond: !this.state.modalSecond
+        });
+        if (parseInt(localStorage.getItem('userIdCookies'))!==1) {
+            this.setCookie();
+        }
+    }
+
+    /**
      * Go to the store locator
      */
     goToStoreQuote = () => {
@@ -935,7 +1007,7 @@ class HeaderComponent extends Component {
 
             let isActive = false;
 
-            if (item.RootName === "INVESTORS") {
+            /*if (item.RootName === "INVESTORS") {
 
                 item = {};
                 item = {
@@ -1012,15 +1084,7 @@ class HeaderComponent extends Component {
                             RootName: "News",
                             RootUrl: "/news",
                         },
-                        {
-                            $id: "108",
-                            Childrens: null,
-                            HideFromNavigation: false,
-                            IsExternal: false,
-                            RootId: 12939,
-                            RootName: "Quarterly Earnings",
-                            RootUrl: "/quarterlyearnings",
-                        },
+                       
                         {
                             $id: "105",
                             Childrens: null,
@@ -1114,6 +1178,44 @@ class HeaderComponent extends Component {
                             <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
                     return true
                 }
+            }*/
+
+            if (item.Childrens) {
+                menuItems.push(
+
+                    <li className="dropdown nav-item" key={i}>
+                        {item.Childrens.map(function (submenu, index) {
+                            let r = submenu.RootUrl.split('/');
+                            if (window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") {
+                                isActive = true;
+                            }
+                            if (isActive === false && index === item.Childrens.length - 1) {
+                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium" data-toggle="dropdown" href="">{item.RootName}</a>
+                            }
+                            if (isActive === true && index === item.Childrens.length - 1) {
+                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu" data-toggle="dropdown" href="">{item.RootName}</a>
+                            }
+                        })}
+                        <ul className="dropdown-menu mt-xl-3 shadow_d">
+                            {item.Childrens.map(function (submenu, index) {
+                                if (submenu.IsExternal) {
+                                    return <li key={index}>
+                                        <a href={submenu.RootUrl} rel="noopener noreferrer" className="dropdown-item"> {submenu.RootName}</a></li>
+                                } else {
+                                    let r = submenu.RootUrl.split('/');
+                                    return <li key={index}>
+                                        <Link to={'/' + r[2]} className={(window.location.pathname === "/" + r[2] && window.location.pathname !== "/investors.bldr.com") ? "dropdown-item active-menu" : "dropdown-item"} > {submenu.RootName}</Link></li>
+                                }
+
+                            })}
+                        </ul>
+                    </li>)
+                return true
+            } else {
+                menuItems.push(
+                    <li className="nav-item" key={i}>
+                        <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
+                return true
             }
 
         })
@@ -1237,6 +1339,8 @@ class HeaderComponent extends Component {
                         </div>
                     </div>
                     <button type="button" onClick={() => this.showPopUP()} className="btn btn-danger text-uppercase theme-btn  d-md-inline-block d-none">{this.state.showSpinner ? (<i className="fa fa-refresh fa-spin px-1" style={{ fontSize: "15px" }}></i>) : null}Request a quote </button>
+                    
+
                     <button onClick={() => this.redirectToLogin()} type="button" className="btn btn-link login">
                         <img src={login} alt="builder-first" />
                         <span className="login-btn position-absolute w-100  h-100 align-items-center">
@@ -1248,40 +1352,72 @@ class HeaderComponent extends Component {
                 </div>
             </div>
 
-            {this.state.allowgps && window.location.href.split("/")[3]!="governance" 
-            && window.location.href.split("/")[3]!="investorhome" 
-            && window.location.href.split("/")[3]!="events" 
-            && window.location.href.split("/")[3]!="contact" 
-            && window.location.href.split("/")[3]!="faq" 
-            && window.location.href.split("/")[3]!="financial-info" 
-            && window.location.href.split("/")[3]!="leaderships" 
-            &&  window.location.href.split("/")[3]!="news"  
-            && window.location.href.split("/")[3]!="quarterlyearning" 
-            && window.location.href.split("/")[3]!="stock-info" 
-            && window.location.href.split("/")[3]!="financial-info"
-            && window.location.href.split("/")[3]!="sec-filings"
-            && window.location.href.split("/")[3]!="stock-info" 
-            && window.location.href.split("/")[3]!="analyst-coverage"
-            && window.location.href.split("/")[3]!="investment-calculator"
-            && window.location.href.split("/")[3]!="historic-stock-lookup"
-            && window.location.href.split("/")[3]!="contact"
-            && window.location.href.split("/")[3]!="board-of-directors"
-            && window.location.href.split("/")[3]!="commitees"
-            && window.location.href.split("/")[3]!="contact-board"
-            && window.location.href.split("/")[3]!="management"
-            && window.location.href.split("/")[3]!="faq"
-            && window.location.href.split("/")[3]!="rss-news-feed"
-            && window.location.href.split("/")[3]!="search"
-            && window.location.href.split("/")[3]!="download-library"
+            {this.state.allowgps && window.location.href.split("/")[3]!=="governance" 
+            && window.location.href.split("/")[3]!=="investorhome" 
+            && window.location.href.split("/")[3]!=="events" 
+            && window.location.href.split("/")[3]!=="contact" 
+            && window.location.href.split("/")[3]!=="faq" 
+            && window.location.href.split("/")[3]!=="financial-info" 
+            && window.location.href.split("/")[3]!=="leaderships" 
+            &&  window.location.href.split("/")[3]!=="news"  
+            && window.location.href.split("/")[3]!=="quarterlyearnings" 
+            && window.location.href.split("/")[3]!=="stock-info" 
+            && window.location.href.split("/")[3]!=="financial-info"
+            && window.location.href.split("/")[3]!=="sec-filings"
+            && window.location.href.split("/")[3]!=="stock-info" 
+            && window.location.href.split("/")[3]!=="analyst-coverage"
+            && window.location.href.split("/")[3]!=="investment-calculator"
+            && window.location.href.split("/")[3]!=="historic-stock-lookup"
+            && window.location.href.split("/")[3]!=="contact"
+            && window.location.href.split("/")[3]!=="board-of-directors"
+            && window.location.href.split("/")[3]!=="commitees"
+            && window.location.href.split("/")[3]!=="contact-board"
+            && window.location.href.split("/")[3]!=="management"
+            && window.location.href.split("/")[3]!=="faq"
+            && window.location.href.split("/")[3]!=="rss-news-feed"
+            && window.location.href.split("/")[3]!=="search"
+            && window.location.href.split("/")[3]!=="download-library"
+            && window.location.href.split("/")[3]!=="annualreport"
             ? (<div className={"alert alert-primary toastpopup" + (window.pageYOffset > 140 ? ' slideInDown' : '')} role="alert">
-                <a href="" className="close" id="closetoast" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" className="close" id="closetoast" data-dismiss="alert" aria-label="close">&times;</a>
                 <div className="container">
                     If you would like to be able to find stores close to you, please enable GPS or allow location sharing. <a className="text-white ml-lg-4 text-underline" onClick={this.allowCurrentLocation}>Allow</a> <a onClick={this.cancelGps} className="text-white ml-lg-4 text-underline">Deny</a>
                 </div>
             </div>) : null}
 
-            <Link to={'/'} style={{ display: "none" }} id="linkToHome"></Link>
+            <Link to={'/hh'} style={{ display: "none" }} id="linkToHome"></Link>
+
             <Link to={'/locations'} style={{ display: "none" }} id="linkToLocations"></Link>
+
+
+        <Modal isOpen={this.state.modalSecond} className="request-form tour-content-area">
+
+            <ModalHeader className="tour-close-button">
+                 <Button className="text-uppercase" onClick={this.newChangesHidePopupClose}><img src={iconremove} alt="cross-sign" /></Button>{' '}
+            </ModalHeader>
+
+           <ModalBody className="tour-modal btn text-uppercase text-uppercase-new" >
+              <div className="row" onClick={this.showPopUPNotLoginClonse}>
+
+                <h1 className="tour-title font-weight-bold" >Additional delivery information</h1>
+                <h4 className="font-weight-bold sub-title-tour">for participating locations!</h4>
+                <div className="line-hr"></div>
+                <h3 className="tour-title font-weight-bold" >Now available on</h3>
+
+                <div className="mybfs-logo"><img src={mybfs} alt="mybfs-logo" /></div>
+
+                
+
+
+              </div>
+              <Button className="text-uppercase" onClick={this.newChangesHidePopupClose}>Don't show this again<span><img src={iconremove} alt="remove" /></span></Button>{' '}
+           </ModalBody>
+
+           <ModalFooter className="border-0 px-5  pb-5 d-none">
+              <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.showPopUPNotLoginClonse}>Request Close</Button>{' '}
+           </ModalFooter>
+        </Modal>
+
             <Modal isOpen={this.state.modal} toggle={this.toggle} className="request-form modal-dialog-centered">
                 <ModalHeader toggle={this.toggle}>
                     {this.state.noStoreFound === true ?
@@ -1310,6 +1446,7 @@ class HeaderComponent extends Component {
                     <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.goToStoreQuote}>Request Quote</Button>{' '}
                 </ModalFooter>
             </Modal>
+
             <Modal isOpen={this.state.zipcodeModal} toggle={this.togglezipmodal} className="modal-dialog-centered location">
                 {this.state.storeDataHeader.length > 0 ? (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light ">Locations near you</span></ModalHeader>) : (<ModalHeader toggle={this.togglezipmodal} className="pb-0"><span className="allow-loc-head h1 m-auto pb-0 d-block font-weight-light finding-location">Finding locations near you  <ReactLoading className="loaderhead" type={"spin"} color={"black"} height={40} width={40} /></span></ModalHeader>)}
                 <ModalBody className="">
