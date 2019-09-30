@@ -2101,21 +2101,21 @@ figure.earn-img img {
 }
 
 
-.modal-dialog.tour-content-area .modal-content {
+ .modal-dialog.tour-content-area .modal-content {
     width: 344px;
     height: 369px;
-    border-radius: 70px 0px 0px 442px;
+    border-radius: 100px 0px 0px 151px;
     background-color: #fff;
     -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.2);
 }
-.tour-modal.modal-body {
-    padding: 90px 30px 118px 61px;
+ .tour-modal.modal-body {
+    padding: 83px 30px 118px 69px;
     position: relative;
-    top: 24px;
+    top: 64px;
 }
 
-h1.tour-title {
+ h1.tour-title {
     line-height: 1.2;
     color: #000;
     font-size: 16px;
@@ -2124,26 +2124,26 @@ h1.tour-title {
     margin-bottom: 0;
 }
 
-.line-hr{width: 100%;
+ .line-hr{width: 100%;
     height: 2px;
     background-color: rgb(170, 170, 170);
     display: block;
     margin-bottom: 11px;}
 
-h3.tour-title {
+     h3.tour-title {
     color: #000;
     text-transform: uppercase;
     font-size: 16px;
     line-height: 0.9;
     width: 100%;
-    text-align: center;
-    padding: 4px 0px 0px 40px;
+    text-align: left; margin-bottom: 0;
+    
 }
 
-.tour-feature{display: block;}
-.tour-feature ul{display: block; margin:10px 0px 0px; padding: 0}
+ .tour-feature{display: block;}
+ .tour-feature ul{display: block; margin:10px 0px 0px; padding: 0}
 
-.tour-feature ul li {
+ .tour-feature ul li {
     display: block;
     position: relative;
     font-size: 15px;
@@ -2152,23 +2152,23 @@ h3.tour-title {
 }
 
 
-h4.sub-title-tour{text-transform: uppercase;
+ h4.sub-title-tour{text-transform: uppercase;
     font-size: 13px;}
 
 
-.mybfs-logo{padding: 10px 0px;}
+     .mybfs-logo{padding: 10px 0px;}
 
-.tour-close-button {
+     .tour-close-button {
     position: absolute;
     right: -10px;
     top: 78px;
     z-index: 100;
 }
 
-.mybfs-logo{margin: 0px 0px 0px 52px;}
 
 
-.tour-close-button button{background-color: transparent;
+
+ .tour-close-button button{background-color: transparent;
     color: #000;
     font-size: 11px;
     font-weight: 400;
@@ -2178,16 +2178,16 @@ h4.sub-title-tour{text-transform: uppercase;
     margin-top: 10px;}
 
 
-.tour-close-button button:hover, .tour-close-button button:active, .tour-close-button button:focus{box-shadow: none;}
+     .tour-close-button button:hover, .tour-close-button button:active, .tour-close-button button:focus{box-shadow: none;}
 
 
-.tour-close-button button:hover{text-decoration: underline;}
+     .tour-close-button button:hover{text-decoration: underline;}
 
-.tour-close-button button:hover, 
-.tour-close-button button:active, 
-.tour-close-button button:focus{background-color: transparent; border: transparent; color: #000; opacity: 0.8;}
+     .tour-close-button button:hover, 
+     .tour-close-button button:active, 
+     .tour-close-button button:focus{background-color: transparent; border: transparent; color: #000; opacity: 0.8;}
 
-.tour-modal .btn.btn.btn-secondary{color: #005e9c;
+     .tour-modal .btn.btn.btn-secondary{color: #005e9c;
     background-color: transparent;
     border-color: #004bcf;
     font-size: 13px;
@@ -2201,10 +2201,10 @@ h4.sub-title-tour{text-transform: uppercase;
     text-decoration:none; display: none;}
 
 
-.tour-modal .btn.btn.btn-secondary:hover{text-decoration: underline}
+     .tour-modal .btn.btn.btn-secondary:hover{text-decoration: underline}
 
 
-.tour-modal .btn.btn.btn-secondary span{display:none;}
+     .tour-modal .btn.btn.btn-secondary span{display:none;}
 
 
 
@@ -5249,14 +5249,14 @@ html,body{height: 100%;}
 
 @media(max-width: 767px){
 
-.tour-modal.modal-body{padding: 90px 30px 118px 61px; top: 1px;}
+    .tour-modal.modal-body{padding: 90px 30px 118px 61px; top: 1px;}
 
-.tour-close-button button{margin-top: 0px;}
+    .tour-close-button button{margin-top: 0px;}
 
-.tour-close-button{
-    right: -10px;
-    top: 48px;
-    }
+    .tour-close-button{
+   right: -10px;
+   top: 48px;
+   }
 
 }
 

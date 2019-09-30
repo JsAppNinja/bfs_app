@@ -351,18 +351,20 @@ class DashboardComponent extends Component {
      *  Move to next slide
     */
     next() {
-        const nextIndex = this.state.videoIndex === videos.length - 1 ? 0 : this.state.videoIndex + 1;
-        this.setState({ pausedonmobile: true, videoIndex: nextIndex, paused: true });
-        mobiletitle = allvideos[this.state.videoIndex].videoLabel;
-        var imgelement = document.getElementsByClassName("imagepart");
-        var videoelement = document.getElementsByClassName("videopart");
-        imgelement[0].classList.remove("hideele");
-        imgelement[0].classList.add("showele");
-        videoelement[0].classList.remove("showele");
-        videoelement[0].classList.add("hideele");
-        var titleelement = document.getElementsByClassName("vm-layout");
-        if (titleelement && titleelement.length)
-            titleelement[0].classList.remove("d-none");
+        if(!this.state.isPlaying){
+            const nextIndex = this.state.videoIndex === videos.length - 1 ? 0 : this.state.videoIndex + 1;
+            this.setState({ pausedonmobile: true, videoIndex: nextIndex, paused: true });
+            mobiletitle = allvideos[this.state.videoIndex].videoLabel;
+            var imgelement = document.getElementsByClassName("imagepart");
+            var videoelement = document.getElementsByClassName("videopart");
+            imgelement[0].classList.remove("hideele");
+            imgelement[0].classList.add("showele");
+            videoelement[0].classList.remove("showele");
+            videoelement[0].classList.add("hideele");
+            var titleelement = document.getElementsByClassName("vm-layout");
+            if (titleelement && titleelement.length)
+                titleelement[0].classList.remove("d-none");
+        }
     }
 
     /**
@@ -446,7 +448,7 @@ class DashboardComponent extends Component {
      * Fire on the Video End
     */
     videoEnd() {
-        this.setState({ autoSlide: true });
+        this.setState({ autoSlide: true,isPlaying:false });
         this.next()
     }
 
@@ -674,28 +676,32 @@ class DashboardComponent extends Component {
             dashdata["thumbnailtitle3"] = this.props.homeData[0].feature3Label;
             dashdata["thumbnailtitle4"] = this.props.homeData[0].feature4Label;
             if (clicked) {
-                var src = $('.bannerSlide .carousel-item').eq(this.state.videoIndex).find("img").attr("src");
-                $(".back-image").attr("src", src);
-                this.setState(
-                    {
-                        clicked: false
-                    }
-                )
-            } else {
-                setTimeout(() => {
+                if(!this.state.isPlaying){
                     var src = $('.bannerSlide .carousel-item').eq(this.state.videoIndex).find("img").attr("src");
                     $(".back-image").attr("src", src);
+                    this.setState(
+                        {
+                            clicked: false
+                        }
+                    )
+                }
+            } else {
+                setTimeout(() => {
+                   if(!this.state.isPlaying){
+                     var src = $('.bannerSlide .carousel-item').eq(this.state.videoIndex).find("img").attr("src");
+                     $(".back-image").attr("src", src);
+                   }
+                    
                 }, 4000)
             }
             var banner = document.getElementsByClassName("bannerSlide")
-
             var carouselitem = banner[0].getElementsByClassName("carousel-item")
             var carouselitemactive = banner[0].getElementsByClassName("active");
-            if (carouselitemactive && carouselitemactive.length) {
+            if (carouselitemactive && carouselitemactive.length && !this.state.isPlaying) {
                 carouselitemactive[0].classList.remove("active");
             }
 
-            if (carouselitem && carouselitem.length) {
+            if (carouselitem && carouselitem.length && !this.state.isPlaying) {
                 carouselitem[this.state.videoIndex].classList.add("active");
                 carouselitem[this.state.videoIndex].classList.add("slider-animated");
             }
@@ -715,8 +721,8 @@ class DashboardComponent extends Component {
             var divele = document.getElementsByClassName("video-option");
             var myElements = document.querySelectorAll(".videocaption");
 
+           
             for (var i = 0; i < myElements.length; i++) {
-
                 if (this.props.homeData[0].imageTextHorizontalPosition && this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() === "right") {
                     myElements[i].style.textAlign = "right";
                     var element = document.getElementsByClassName("carousel-caption");
@@ -738,17 +744,9 @@ class DashboardComponent extends Component {
                     }
                 }
                 myElements[i].style.background = "transparent"
-                // if (this.props.homeData[0].imageTextGradientPosition && this.props.homeData[0].imageTextGradientPosition.toLowerCase() === "right") {
-                //     // myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
-                //     myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(this.props.homeData[0].imageGradientOpacity, "%)")
-
-                // }
-                // if (this.props.homeData[0].imageTextGradientPosition && this.props.homeData[0].imageTextGradientPosition.toLowerCase() === "left") {
-                //     // myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
-                //     myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(this.props.homeData[0].imageGradientOpacity, "%)")
-
-                // }
+                
             }
+              
         }
 
 
