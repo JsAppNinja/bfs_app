@@ -61,8 +61,8 @@ namespace CustomerPortalCMS.Controllers.Api
                         Email = c.Email,
                         Alias = c.Url.Split('/')[2],
                         LargeImage = c.LargeImage != null ? c.LargeImage.Url : null,
-                        StoreColor = c.StoreColor,
-                        StoreIconType = c.StoreIconType
+                        //StoreColor = c.StoreColor,
+                        //StoreIconType = c.StoreIconType
                     };
                 }).ToList();
 
