@@ -5260,7 +5260,7 @@ html,body{height: 100%;}
 
 }
 
-.address.loc_distri .dlink > span:hover {
+.address.loc_distri .dlink:hover {
     text-decoration: underline;
     color: #007bff;
 }
