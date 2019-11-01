@@ -695,8 +695,11 @@ class DashboardComponent extends Component {
                 }, 4000)
             }
             var banner = document.getElementsByClassName("bannerSlide")
-            var carouselitem = banner[0].getElementsByClassName("carousel-item")
-            var carouselitemactive = banner[0].getElementsByClassName("active");
+            if(banner[0]){
+                var carouselitem = banner[0].getElementsByClassName("carousel-item")
+                var carouselitemactive = banner[0].getElementsByClassName("active");
+            }
+           
             if (carouselitemactive && carouselitemactive.length && !this.state.isPlaying) {
                 carouselitemactive[0].classList.remove("active");
             }
