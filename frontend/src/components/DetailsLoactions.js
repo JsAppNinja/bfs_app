@@ -342,14 +342,16 @@ class DetailsLocationsComponent extends Component {
                                                                 service.DistributionSuppliers && service.DistributionSuppliers.length &&
                                                                 <div className="col-md-3 col-sm-6" key={index}  >
                                                                     <div className="dlink mb-2">
-                                                                        <Floater className="our-classs"
+                                                                          <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: service.DistributionSuppliers }) }} >
+                                                                                {service.DistributionName}</a>
+                                                                        {/*<Floater className="our-classs"
                                                                             content={this.getHoverContent(service)
                                                                             }
                                                                             event="hover"
                                                                         >
                                                                             <a onClick={() => { this.showServiceModal(); this.setState({ pop_up_images: service.DistributionSuppliers }) }} >
                                                                                 {service.DistributionName}</a>
-                                                                        </Floater>
+                                                                        </Floater>*/}
                                                                     </div>
                                                                 </div>
                                                             )
