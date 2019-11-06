@@ -174,7 +174,7 @@ class HeaderComponent extends Component {
     toggle2() {
         if(this.state.modalSecond) {
             console.log('rredirect to other.......');
-            window.open('https://www.bldrsd.com/mybfsbuilder', '_blank');
+            window.open('https://www.bldr.com/mybfsbuilder', '_blank');
         } else {
             console.log('neeed to set values.......');
         }
