@@ -46,6 +46,7 @@ class DashboardComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			autoplay: true,
 			videoIndex: 0,
 			paused: false,
 			addClass: false,
@@ -744,6 +745,7 @@ class DashboardComponent extends Component {
 		var element = document.getElementsByClassName("carousel-caption");
 		element[0].classList.remove("animated");
 		element[0].classList.remove("fadeInUp");
+		this.setState({ autoPlay: false });
 	}
 
 	/**
@@ -902,7 +904,7 @@ class DashboardComponent extends Component {
 								<img
 									className="img-fluid play-button-img"
 									src={playBtn}
-									onClick={() => this.handleDoubleClick(i)}
+									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
 									alt="playbutton"
 								/>
 							)}{" "}
@@ -947,7 +949,8 @@ class DashboardComponent extends Component {
 									activeIndex={activeIndex}
 									next={this.next}
 									previous={this.previous}
-									interval={false}
+									interval={6000}
+									autoPlay={this.state.autoplay}
 								>
 									{slides}
 									<CarouselControl
