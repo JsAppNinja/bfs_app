@@ -8,6 +8,7 @@ import { Carousel, CarouselItem, CarouselControl, CarouselCaption } from 'reacts
 import PropTypes from 'prop-types';
 import ContainerComponent from "./Container";
 import {GoogleApiWrapper} from 'google-maps-react';
+import { cancellablePromise, delay } from '../utils';
 
 // Import the images
 import mplayButton from "../img/mPlay_button.png"
@@ -29,6 +30,8 @@ var baseurl = globalVar.base_url1;
 var mybody = {}
 
 class DashboardComponent extends Component {
+    pendingPromises = [];
+
     constructor(props) {
         super(props);
         this.state = {
@@ -257,6 +260,57 @@ class DashboardComponent extends Component {
             });
         }
     }
+
+    componentWillUnmount() {
+        this.clearPendingPromises();
+    }
+
+    appendPendingPromise = promise =>
+        (this.pendingPromises = [...this.pendingPromises, promise]);
+
+    removePendingPromise = promise =>
+        (this.pendingPromises = this.pendingPromises.filter(p => p !== promise));
+
+    clearPendingPromises = () => this.pendingPromises.map(p => p.cancel());
+
+    handleClick = index => {
+        const waitForClick = cancellablePromise(delay(300));
+        this.appendPendingPromise(waitForClick);
+
+        return waitForClick.promise
+            .then(() => {
+                this.removePendingPromise(waitForClick);
+                this.selectVideo(index);
+            })
+            .catch(errorInfo => {
+                this.removePendingPromise(waitForClick);
+                if (!errorInfo.isCanceled) {
+                    throw errorInfo.error;
+                }
+            });
+    };
+
+    handleDoubleClick = index => {
+        this.clearPendingPromises();
+        this.playVideo(index);
+    };
+
+    playVideo = index => {
+        var element = document.getElementsByClassName("carousel-caption");
+        element[0].classList.remove("animated");
+        element[0].classList.remove("fadeInUp");
+        
+        var imgelement = document.getElementsByClassName("imagepart");
+        var videoelement = document.getElementsByClassName("videopart");
+        var titleelement = document.getElementsByClassName("vm-layout");
+        imgelement[0].classList.remove("showele");
+        imgelement[0].classList.add("hideele");
+        videoelement[0].classList.remove("hideele");
+        videoelement[0].classList.add("showele");
+        titleelement = document.getElementsByClassName("vm-layout");
+        titleelement[0].classList.add("d-none");
+        this.setState({ videoIndex: index, isPlaying: true, paused: false, pausedonmobile: false });
+    };
 
     /**
      *  Select the video
@@ -767,7 +821,7 @@ class DashboardComponent extends Component {
                                         <h4 className="mb-0">{dashdata.thumbnailtitle1}</h4>
                                     </div>
                                     <div className="position-absolute w-100  h-100 align-items-center play-button" onClick={() =>
-                                        this.selectVideo(0, this.state.paused)}>
+                                        this.handleClick(0, this.state.paused)} onDoubleClick={() => this.handleDoubleClick(0)}>
                                     </div>
                                 </div>
                             </div>
@@ -780,7 +834,7 @@ class DashboardComponent extends Component {
                                         <h4 className="mb-0">{dashdata.thumbnailtitle2}</h4>
                                     </div>
                                     <div className="position-absolute w-100  h-100 align-items-center play-button" onClick={() =>
-                                        this.selectVideo(1, this.state.paused)}>
+                                        this.handleClick(1, this.state.paused)} onDoubleClick={() => this.handleDoubleClick(1)}>
                                     </div>
                                 </div>
 
@@ -794,7 +848,7 @@ class DashboardComponent extends Component {
                                         <h4 className="mb-0">{dashdata.thumbnailtitle3}</h4>
                                     </div>
                                     <div className="position-absolute w-100  h-100 align-items-center play-button" onClick={() =>
-                                        this.selectVideo(2, this.state.paused)}>
+                                        this.handleClick(2, this.state.paused)} onDoubleClick={() => this.handleDoubleClick(2)}>
                                     </div>
                                 </div>
                             </div>
@@ -805,7 +859,7 @@ class DashboardComponent extends Component {
                                         <h4 className="mb-0">{dashdata.thumbnailtitle4}</h4>
                                     </div>
                                     <div className="position-absolute w-100  h-100 align-items-center play-button" onClick={() =>
-                                        this.selectVideo(3, this.state.paused)}>
+                                        this.handleClick(3, this.state.paused)} onDoubleClick={() => this.handleDoubleClick(3)}>
                                     </div>
                                 </div>
                             </div>
