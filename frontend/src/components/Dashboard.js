@@ -46,7 +46,7 @@ class DashboardComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			autoplay: true,
+			autoSlide: true,
 			videoIndex: 0,
 			paused: false,
 			addClass: false,
@@ -77,6 +77,7 @@ class DashboardComponent extends Component {
 			mobilevideos: [],
 			mobiletitle: "",
 			showPlayButton: true,
+			backImage: "",
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -121,6 +122,11 @@ class DashboardComponent extends Component {
 			let video = {};
 			let mobilevideos = [];
 			let mobiletitle = "";
+
+			this.setState({
+				backImage:
+					globalVar.base_url1 + this.props.homeData[0].feature1VideoImage,
+			});
 
 			let video1 = this.props.homeData[0].feature1VideoLink.split("/");
 			let finalvideo1 = video1[4].split("?");
@@ -745,7 +751,15 @@ class DashboardComponent extends Component {
 		var element = document.getElementsByClassName("carousel-caption");
 		element[0].classList.remove("animated");
 		element[0].classList.remove("fadeInUp");
-		this.setState({ autoPlay: false });
+		this.setState({ autoSlide: false });
+	}
+
+	/**
+	 * Fire on the Video End
+	 */
+	videoEnd() {
+		this.setState({ autoSlide: true, isPlaying: false });
+		this.next();
 	}
 
 	/**
@@ -927,6 +941,9 @@ class DashboardComponent extends Component {
 							onPlay={e => {
 								this.vimeoPlayed(e);
 							}}
+							onEnd={e => {
+								this.videoEnd(e);
+							}}
 							muted={false}
 						/>
 					</div>
@@ -945,12 +962,18 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
+								<img
+									alt="backimage"
+									className="back-image d-none d-md-block"
+									src={this.state.backImage}
+								/>
 								<Carousel
 									activeIndex={activeIndex}
 									next={this.next}
 									previous={this.previous}
-									interval={6000}
-									autoPlay={this.state.autoplay}
+									pause={false}
+									autoPlay={true}
+									interval={this.state.autoSlide ? 4000 : false}
 								>
 									{slides}
 									<CarouselControl
