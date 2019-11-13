@@ -2020,6 +2020,9 @@ select {
 	transform: translate(0);
 	opacity: 1;
 }
+.videocaption {
+	pointer-events: none;
+}
 .leader-ship .card-header a:after {
 	right: 15px;
 	top: 14px;
