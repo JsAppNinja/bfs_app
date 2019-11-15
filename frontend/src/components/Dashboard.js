@@ -107,7 +107,7 @@ class DashboardComponent extends Component {
 		if (
 			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
 			this.props.basicDataLoaded
-		) {
+			) {
 			this.props.getHomePageData();
 			this.props.getConstructionTypeDataHome();
 		}
@@ -325,6 +325,8 @@ class DashboardComponent extends Component {
 			this.setState({
 				mobilevideos,
 				mobiletitle,
+				backImage: 
+					globalVar.base_url1 + this.props.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
 			});
 		}
 	}
@@ -666,7 +668,7 @@ class DashboardComponent extends Component {
 		videoelement[0].classList.remove("showele");
 		videoelement[0].classList.add("hideele");
 		var titleelement = document.getElementsByClassName("vm-layout");
-		titleelement[0].classList.remove("d-none");
+		titleelement[0] && titleelement[0].classList.remove("d-none");
 	}
 
 	/**
