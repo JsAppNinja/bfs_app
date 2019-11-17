@@ -16,6 +16,7 @@ import {
 	CarouselCaption,
 } from "reactstrap";
 import PropTypes from "prop-types";
+import ReactPlayer from 'react-player';
 import ContainerComponent from "./Container";
 import { GoogleApiWrapper } from "google-maps-react";
 import { cancellablePromise, delay } from "../utils";
@@ -138,6 +139,7 @@ class DashboardComponent extends Component {
 
 				videos.push({
 					id: finalVideo[0],
+					link: homeData[0][`feature${id}VideoLink`],
 					name: homeData[0][`feature${id}Label`].substring(0, 20),
 					responsive: true,
 					image: sliders[id - 1],
@@ -160,6 +162,7 @@ class DashboardComponent extends Component {
 			video = videos[this.state.videoIndex];
 			mobilevideos.push({
 				id: video.id,
+				link: video.link,
 				name: video.name,
 				responsive: true,
 				videoLabel: video.name,
@@ -253,6 +256,7 @@ class DashboardComponent extends Component {
 			let mobiletitle = "";
 			mobilevideos.push({
 				id: video.id,
+				link: video.link,
 				name: video.name,
 				responsive: true,
 				videoLabel: video.name,
@@ -320,7 +324,7 @@ class DashboardComponent extends Component {
 			videoIndex: index,
 			isPlaying: true,
 			paused: false,
-			pausedonmobile: false,
+			pausedonmobile: !this.state.pausedonmobile,
 		});
 	};
 
@@ -662,13 +666,6 @@ class DashboardComponent extends Component {
 		this.setState({
 			showLoader: false,
 		});
-		setTimeout(function() {
-			self.setState({
-				paused: true,
-				pausedonmobile: true,
-				isPlaying: false,
-			});
-		}, 500);
 		this.manageTextStyles();
 	}
 
@@ -864,23 +861,19 @@ class DashboardComponent extends Component {
 						</div>
 					</div>
 					<div className="videopart hideele">
-						<Vimeo
-							video={item.id}
-							responsive={true}
-							autoplay={false}
-							paused={pausedonmobile}
-							background={false}
-							showPortrait={false}
-							onLoaded={() => {
+						<ReactPlayer
+							url={item.link}
+							autoPlay={false}
+							controls={true}
+							playing={true}
+							onReady={() => {
 								this.changeOnreadyVideo();
 							}}
-							onCueChange={e => {
-								this.vimeoCue(e);
-							}}
-							onPlay={e => {
+							height="100%"
+							onStart={e => {
 								this.vimeoPlayed(e);
 							}}
-							onEnd={e => {
+							onEnded={e => {
 								this.videoEnd(e);
 							}}
 							muted={false}

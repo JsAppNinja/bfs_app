@@ -34,6 +34,7 @@
     "react-loading": "^2.0.3",
     "react-moment": "^0.8.2",
     "react-notifications": "^1.4.3",
+    "react-player": "^1.14.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "react-slick": "^0.23.2",
