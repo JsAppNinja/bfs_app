@@ -27,7 +27,7 @@ import mpauseButton from "../img/mPausebutton.png";
 import Vimeo from "@u-wave/react-vimeo";
 import manufacture from "../img/manufacture.jpg";
 import weAre from "../img/who-we-are.jpg";
-import distribtuition from "../img/distribution.jpg";
+import distribution from "../img/distribution.jpg";
 import Service from "../img/services.jpg";
 import tenor from "../img/loader.gif";
 import slider1 from "../img/sliders/who-we-are.jpg";
@@ -39,6 +39,9 @@ import slider4 from "../img/sliders/installation.jpg";
 var baseurl = globalVar.base_url1;
 //const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
 var mybody = {};
+
+const sliders = [ slider1, slider2, slider3, slider4 ];
+const thumbnails = [ weAre, manufacture, distribution, Service];
 
 class DashboardComponent extends Component {
 	pendingPromises = [];
@@ -128,83 +131,32 @@ class DashboardComponent extends Component {
 					globalVar.base_url1 + this.props.homeData[0].feature1VideoImage,
 			});
 
-			let video1 = this.props.homeData[0].feature1VideoLink.split("/");
-			let finalvideo1 = video1[4].split("?");
-			let video2 = this.props.homeData[0].feature2VideoLink.split("/");
-			let finalvideo2 = video2[4].split("?");
-			let video3 = this.props.homeData[0].feature3VideoLink.split("/");
-			let finalvideo3 = video3[4].split("?");
-			let video4 = this.props.homeData[0].feature4VideoLink.split("/");
-			let finalvideo4 = video4[4].split("?");
-			videos.push(
-				{
-					id: finalvideo1[0],
-					name: this.props.homeData[0].feature1Label.substring(0, 20),
-					responsive: true,
-					image: slider1,
-					featureImage: this.props.homeData[0].feature1VideoImage
-						? baseurl + this.props.homeData[0].feature1VideoImage
-						: slider1,
-				},
-				{
-					id: finalvideo2[0],
-					name: this.props.homeData[0].feature2Label.substring(0, 20),
-					responsive: true,
-					image: slider2,
-					featureImage: this.props.homeData[0].feature2VideoImage
-						? baseurl + this.props.homeData[0].feature2VideoImage
-						: slider2,
-				},
-				{
-					id: finalvideo3[0],
-					name: this.props.homeData[0].feature3Label.substring(0, 20),
-					responsive: true,
-					image: slider3,
-					featureImage: this.props.homeData[0].feature3VideoImage
-						? baseurl + this.props.homeData[0].feature3VideoImage
-						: slider3,
-				},
-				{
-					id: finalvideo4[0],
-					name: this.props.homeData[0].feature4Label.substring(0, 20),
-					responsive: true,
-					image: slider4,
-					featureImage: this.props.homeData[0].feature4VideoImage
-						? baseurl + this.props.homeData[0].feature4VideoImage
-						: slider4,
-				}
-			);
+			[1, 2, 3, 4].forEach(id => {
+				const { homeData } = this.props;
+				let vid = homeData[0][`feature${id}VideoLink`].split('/');
+				let finalVideo = vid[4].split('?');
 
-			allvideos.push(
-				{
-					id: finalvideo1[0],
-					name: this.props.homeData[0].feature1Label.substring(0, 20),
+				videos.push({
+					id: finalVideo[0],
+					name: homeData[0][`feature${id}Label`].substring(0, 20),
 					responsive: true,
-					videoLabel: this.props.homeData[0].feature1Label.substring(0, 20),
-					featureImage: baseurl + this.props.homeData[0].feature1VideoImage,
-				},
-				{
-					id: finalvideo2[0],
-					name: this.props.homeData[0].feature2Label.substring(0, 20),
+					image: sliders[id - 1],
+					featureImage: homeData[0][`feature${id}VideoImage`]
+						? baseurl + homeData[0][`feature${id}VideoImage`]
+						: sliders[id - 1]
+				});
+				allvideos.push({
+					id: finalVideo[0],
+					name: homeData[0][`feature${id}Label`].substring(0, 20),
 					responsive: true,
-					videoLabel: this.props.homeData[0].feature2Label.substring(0, 20),
-					featureImage: baseurl + this.props.homeData[0].feature2VideoImage,
-				},
-				{
-					id: finalvideo3[0],
-					name: this.props.homeData[0].feature3Label.substring(0, 20),
-					responsive: true,
-					videoLabel: this.props.homeData[0].feature3Label.substring(0, 20),
-					featureImage: baseurl + this.props.homeData[0].feature3VideoImage,
-				},
-				{
-					id: finalvideo4[0],
-					name: this.props.homeData[0].feature4Label.substring(0, 20),
-					responsive: true,
-					videoLabel: this.props.homeData[0].feature4Label.substring(0, 20),
-					featureImage: baseurl + this.props.homeData[0].feature4VideoImage,
-				}
-			);
+					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
+					featureImage: baseurl + homeData[0][`feature${id}VideoImage`]
+				});
+				dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
+					? baseurl + homeData[0][`feature${id}Thumbnail`]
+					: thumbnails[id - 1];
+				dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
+			});
 			video = videos[this.state.videoIndex];
 			mobilevideos.push({
 				id: video.id,
@@ -214,22 +166,7 @@ class DashboardComponent extends Component {
 				sliderimage: video.featureImage ? video.featureImage : video.image,
 			});
 			mobiletitle = allvideos[this.state.videoIndex].videoLabel;
-			dashdata["featurethumbnail1"] = this.props.homeData[0].feature1Thumbnail
-				? baseurl + this.props.homeData[0].feature1Thumbnail
-				: weAre;
-			dashdata["featurethumbnail2"] = this.props.homeData[0].feature2Thumbnail
-				? baseurl + this.props.homeData[0].feature2Thumbnail
-				: manufacture;
-			dashdata["featurethumbnail3"] = this.props.homeData[0].feature3Thumbnail
-				? baseurl + this.props.homeData[0].feature3Thumbnail
-				: distribtuition;
-			dashdata["featurethumbnail4"] = this.props.homeData[0].feature4Thumbnail
-				? baseurl + this.props.homeData[0].feature4Thumbnail
-				: Service;
-			dashdata["thumbnailtitle1"] = this.props.homeData[0].feature1Label;
-			dashdata["thumbnailtitle2"] = this.props.homeData[0].feature2Label;
-			dashdata["thumbnailtitle3"] = this.props.homeData[0].feature3Label;
-			dashdata["thumbnailtitle4"] = this.props.homeData[0].feature4Label;
+
 			var divele = document.getElementsByClassName("video-option");
 			var myElements = document.querySelectorAll(".videocaption");
 			for (var i = 0; i < myElements.length; i++) {
@@ -900,7 +837,7 @@ class DashboardComponent extends Component {
 	}
 
 	render() {
-		const { activeIndex, mobilevideos, dashdata, mobiletitle } = this.state;
+		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile } = this.state;
 		//Looping through carousel items
 		const slides = mobilevideos.map((item, i) => {
 			return (
@@ -931,7 +868,7 @@ class DashboardComponent extends Component {
 							video={item.id}
 							responsive={true}
 							autoplay={false}
-							paused={this.state.pausedonmobile}
+							paused={pausedonmobile}
 							background={false}
 							showPortrait={false}
 							onLoaded={() => {
