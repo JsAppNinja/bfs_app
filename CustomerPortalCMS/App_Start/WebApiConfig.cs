@@ -54,12 +54,12 @@ namespace CustomerPortalCMS.App_Start
             }
             else
             {
-                actionExecutedContext.Response.Headers.Remove("Access-Control-Allow-Origin");
-                actionExecutedContext.Response.Headers.Remove("Access-Control-Allow-Methods");
-                actionExecutedContext.Response.Headers.Remove("Access-Control-Allow-Headers");
-                actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Methods", "*");
-                actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+                actionExecutedContext?.Response?.Headers?.Remove("Access-Control-Allow-Origin");
+                actionExecutedContext?.Response?.Headers?.Remove("Access-Control-Allow-Methods");
+                actionExecutedContext?.Response?.Headers?.Remove("Access-Control-Allow-Headers");
+                actionExecutedContext?.Response?.Headers?.Add("Access-Control-Allow-Origin", "*");
+                actionExecutedContext?.Response?.Headers?.Add("Access-Control-Allow-Methods", "*");
+                actionExecutedContext?.Response?.Headers?.Add("Access-Control-Allow-Headers", "*");
             }
             base.OnActionExecuted(actionExecutedContext);
         }

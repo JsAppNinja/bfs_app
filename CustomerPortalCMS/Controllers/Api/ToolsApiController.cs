@@ -24,9 +24,6 @@ namespace CustomerPortalCMS.Controllers.Api
         [HttpGet]
         public string Migrate()
         {
-
-            
-
             var cs = Services.ContentService;
             var cts = Services.ContentTypeService;
 
@@ -40,7 +37,7 @@ namespace CustomerPortalCMS.Controllers.Api
 
             var locationListItemsDocType = cts.GetContentType(locationListItemAlias);
 
-            var propertyGroup = locationListItemsDocType.PropertyGroups.FirstOrDefault(x => x.Name == "Distribution");
+            var propertyGroup = locationListItemsDocType.PropertyGroups.FirstOrDefault(x => x.Name == "Distribution Old");
 
             List<int> primaryList = new List<int>();
             

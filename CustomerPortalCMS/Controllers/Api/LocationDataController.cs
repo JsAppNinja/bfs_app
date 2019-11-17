@@ -27,8 +27,8 @@ namespace CustomerPortalCMS.Controllers.Api
         {
             try
             {
-                dataFolder = Umbraco.TypedContentAtRoot().Where(c => c.Name == "Bldr Data Repository").First();
-                locationList = dataFolder.Children.Where(c => c.Name == "Locations").First();
+                dataFolder = Umbraco.TypedContentAtRoot().First(c => c.DocumentTypeAlias == "dataRepositoryParentFolder");
+                locationList = dataFolder.Children.First(c => c.DocumentTypeAlias == "locationsParentFolder");
                 locations = locationList.Children.Where(l => l.GetPropertyValue<bool>("active") == true);  // don't bother searching locations that are not active
 
                 _locations = locations.Select(l =>
@@ -66,7 +66,7 @@ namespace CustomerPortalCMS.Controllers.Api
                     };
                 }).ToList();
 
-                var distributionList = dataFolder.Children.Where(c => c.Name == "Distribution").First();
+                var distributionList = dataFolder.Children.First(c => c.DocumentTypeAlias == "distributionParentFolder");
                 var distributions = distributionList.Children;
                 _distributions = distributions.Select(c =>
                 {
@@ -82,7 +82,7 @@ namespace CustomerPortalCMS.Controllers.Api
                     };
                 }).ToList();
 
-                var installedServicesList = dataFolder.Children.Where(c => c.Name == "Installed Services").First();
+                var installedServicesList = dataFolder.Children.First(c => c.DocumentTypeAlias == "installedServicesParentFolder");
                 var installedServices = installedServicesList.Children;
                 _installedServices = installedServices.Select(c =>
                 {
