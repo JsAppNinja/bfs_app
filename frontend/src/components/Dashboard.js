@@ -56,7 +56,6 @@ class DashboardComponent extends Component {
 			addClass: false,
 			modal: false,
 			toggleClass: false,
-			isPlaying: true,
 			pausedonmobile: false,
 			activeIndex: 0,
 			mobilevideoIndex: 0,
@@ -82,6 +81,7 @@ class DashboardComponent extends Component {
 			mobiletitle: "",
 			showPlayButton: true,
 			backImage: "",
+			isPlaying: false,
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -601,6 +601,7 @@ class DashboardComponent extends Component {
 			videoIndex: nextIndex,
 			paused: true,
 			mobiletitle,
+			isPlaying: false,
 		});
 		var imgelement = document.getElementsByClassName("imagepart");
 		var videoelement = document.getElementsByClassName("videopart");
@@ -628,6 +629,7 @@ class DashboardComponent extends Component {
 			videoIndex: nextIndex,
 			paused: true,
 			mobiletitle,
+			isPlaying: false,
 		});
 		var imgelement = document.getElementsByClassName("imagepart");
 		var videoelement = document.getElementsByClassName("videopart");
@@ -834,7 +836,7 @@ class DashboardComponent extends Component {
 	}
 
 	render() {
-		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile } = this.state;
+		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
 		//Looping through carousel items
 		const slides = mobilevideos.map((item, i) => {
 			return (
@@ -865,7 +867,7 @@ class DashboardComponent extends Component {
 							url={item.link}
 							autoPlay={false}
 							controls={true}
-							playing={true}
+							playing={isPlaying}
 							onReady={() => {
 								this.changeOnreadyVideo();
 							}}
