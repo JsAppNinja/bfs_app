@@ -1219,12 +1219,16 @@ a {
 	width: 60px;
 	z-index: 1000;
 	position: absolute;
+	height: 60px;
+	top: calc(50% - 30px);
 }
 .carousel-control-next {
 	right: 0px;
 	width: 60px;
 	z-index: 1000;
 	position: absolute;
+	height: 60px;
+	top: calc(50% - 30px);
 }
 .modal iframe {
 	width: 100%;
@@ -2810,6 +2814,10 @@ h4.sub-title-tour {
 	}
 }
 @media (min-width: 1200px) {
+	.mobilePrev.carousel-control-prev,
+	.mobileNext.carousel-control-next {
+		display: none;
+	}
 	.carousel-control-prev-icon,
 	.carousel-control-next-icon {
 		display: none;
@@ -4383,10 +4391,6 @@ ul.media_list li a {
 	}
 }
 @media screen and (min-width: 1280px) {
-	.mobilePrev.carousel-control-prev,
-	.mobileNext.carousel-control-next {
-		display: none;
-	}
 	.cnt-section {
 		margin-bottom: 130px;
 	}
