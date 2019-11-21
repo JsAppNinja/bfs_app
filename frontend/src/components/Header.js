@@ -1190,10 +1190,10 @@ class HeaderComponent extends Component {
                                 isActive = true;
                             }
                             if (isActive === false && index === item.Childrens.length - 1) {
-                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium" data-toggle="dropdown" href="">{item.RootName}</a>
+                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium text-center text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
                             }
                             if (isActive === true && index === item.Childrens.length - 1) {
-                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu" data-toggle="dropdown" href="">{item.RootName}</a>
+                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu text-center text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
                             }
                         })}
                         <ul className="dropdown-menu mt-xl-3 shadow_d">
@@ -1214,7 +1214,7 @@ class HeaderComponent extends Component {
             } else {
                 menuItems.push(
                     <li className="nav-item" key={i}>
-                        <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu " : "nav-link text-uppercase font-weight-medium "} >{item.RootName}</ Link></li>)
+                        <Link to={item.RootUrl.slice(0, -1)} className={window.location.pathname === item.RootUrl.slice(0, -1) ? "nav-link text-uppercase font-weight-medium active-menu text-nowrap" : "nav-link text-uppercase font-weight-medium text-nowrap"} >{item.RootName}</ Link></li>)
                 return true
             }
 
@@ -1282,7 +1282,7 @@ class HeaderComponent extends Component {
                 </nav>
             </div>
             <div className={"sticky-navigation" + (window.pageYOffset > 140 ? ' slideInDown' : '')}>
-                <header className="pt-4 top-section">
+                {/* <header className="pt-4 top-section">
                     <div className="container-fluid p-0">
                         <div className="row m-0">
                             <div className="col-md-12 text-right">
@@ -1292,9 +1292,9 @@ class HeaderComponent extends Component {
                             </div>
                         </div>
                     </div>
-                </header>
+                </header> */}
                 <div className="d-flex align-items-center w-100 position-relative mobile-nav desk_nav">
-                    <nav className=" navbar navbar-expand-xl navbar-light bg-white theme-navbar px-0 ">
+                    <nav className=" navbar navbar-expand-xl navbar-light bg-white theme-navbar px-0 flex-grow-1 flex-wrap justify-content-start">
                         <div className="navbar-header">
                             <a className="navbar-brand" href="/">
                                 {this.props.mainImage && <img src={baseurl + this.props.mainImage} alt="" />}</a>
@@ -1302,45 +1302,50 @@ class HeaderComponent extends Component {
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
+                        <div className="d-flex align-items-start">
+                            <div className="form-inline my-2 my-md-0 ml-3 side-button d-none d-md-block">
+                                <div className="loc_main_box position-relative">
+                                    <div data-tip="Find a location" onClick={() => { this.addToggleLocation() }} className="loc_search">
+                                        <img className="srch_img_svg" src={loc_search} alt="builder-first" />
+                                    </div>
+                                    <div className={this.state.toggleLocation ? "position-absolute locate locate_form text-right loc_serch_show" : "position-absolute locate locate_form text-right invisible"}>
+                                        <div className="lt-box w-100 p-4 d-inline-block">
+                                            <h6 className="text-white mb-3">Find a Location</h6><span className="position-absolute"><a style={{ color: "#fff" }} onClick={() => { this.closeSearchZip() }} className="close" aria-label="close">&times;</a></span>
+                                            <div className="input-group search-section rounded w-100">
+                                                <input placeholder="Zip Code" onChange={(e) => { this.setState({ searchZipcode: e.target.value }) }} autoComplete="off" type="text" maxLength="5" onKeyPress={(e) => this.numberOnly(e)} id="zip_code_search" className="c-search form-control border-0  montserrat font-weight-normal bg-transparent text-white" />
+                                                <div className="input-group-append">
+                                                    <span className="input-group-text border-0 bg-transparent pl-0 py-md-2 py-0" id="basic-addon2">
+                                                        {this.state.searchZipcode.length === 5 ?
+                                                            <a onClick={() => { this.searchWithZipCode() }}><img className="icon-search" src={search_icon} alt="search_icon" /></a>
+                                                            :
+                                                            <img className="icon-search" src={search_icon} alt="search_icon" />
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ol className="breadcrumb right_nav_link p-0  mb-0 text-left d-inline-block bg-transparent">
+                                {localStorage.getItem("selectedStore") ? (<li className="breadcrumb-item font-weight-medium d-flex flex-column ">Selected Store:  <Link className="color-dark-gray" to={'/location_' + shoppingItem[0]}>{shoppingItem[2]}</Link></li>) : null}
+                            </ol>
+                        </div>
                         <div className="collapse navbar-collapse" id="navbarsExample06">
-                            <ul className="mainmenu navbar-nav mr-auto">
+                            <ul className="mainmenu navbar-nav mr-auto pl-2 pr-2">
                                 {menuItems}
                                 <li className="nav-item d-md-none">
                                     <button type="button" onClick={() => this.showPopUP} className="btn btn-danger text-uppercase theme-btn  px-4 py-3">Request a quote</button>
                                 </li>
                                 <li className="nav-item d-md-none">
-                                    <a className="nav-link text-uppercase font-weight-bold " href="https://www.bldr.com/mybfsbuilder/login" rel="noopener noreferrer" target="_blank">Login</a>
+                                    <a className="nav-link text-uppercase font-weight-bold" href="https://www.bldr.com/mybfsbuilder/login" rel="noopener noreferrer" target="_blank">Login</a>
                                 </li>
                             </ul>
                         </div>
                     </nav>
-                    <div className="form-inline my-2 my-md-0 ml-auto side-button d-none d-md-block">
-                        <div className="loc_main_box position-relative">
-                            <div data-tip="Find a location" onClick={() => { this.addToggleLocation() }} className="loc_search">
-                                <img className="srch_img_svg" src={loc_search} alt="builder-first" />
-                            </div>
-                            <div className={this.state.toggleLocation ? "position-absolute locate locate_form text-right loc_serch_show" : "position-absolute locate locate_form text-right invisible"}>
-                                <div className="lt-box w-100 p-4 d-inline-block">
-                                    <h6 className="text-white mb-3">Find a Location</h6><span className="position-absolute"><a style={{ color: "#fff" }} onClick={() => { this.closeSearchZip() }} className="close" aria-label="close">&times;</a></span>
-                                    <div className="input-group search-section rounded w-100">
-                                        <input placeholder="Zip Code" onChange={(e) => { this.setState({ searchZipcode: e.target.value }) }} autoComplete="off" type="text" maxLength="5" onKeyPress={(e) => this.numberOnly(e)} id="zip_code_search" className="c-search form-control border-0  montserrat font-weight-normal bg-transparent text-white" />
-                                        <div className="input-group-append">
-                                            <span className="input-group-text border-0 bg-transparent pl-0 py-md-2 py-0" id="basic-addon2">
-                                                {this.state.searchZipcode.length === 5 ?
-                                                    <a onClick={() => { this.searchWithZipCode() }}><img className="icon-search" src={search_icon} alt="search_icon" /></a>
-                                                    :
-                                                    <img className="icon-search" src={search_icon} alt="search_icon" />
-                                                }
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" onClick={() => this.showPopUP()} className="btn btn-danger text-uppercase theme-btn  d-md-inline-block d-none">{this.state.showSpinner ? (<i className="fa fa-refresh fa-spin px-1" style={{ fontSize: "15px" }}></i>) : null}Request a quote </button>
                     
-
+                    <button type="button" onClick={() => this.showPopUP()} className="btn opt-video border-white btn-primary text-uppercase theme-btn  d-md-inline-block d-none">{this.state.showSpinner ? (<i className="fa fa-refresh fa-spin px-1" style={{ fontSize: "15px" }}></i>) : null}Request a quote </button>
+                    
                     <button onClick={() => this.redirectToLogin()} type="button" className="btn btn-link login">
                         <img src={login} alt="builder-first" />
                         <span className="login-btn position-absolute w-100  h-100 align-items-center">
