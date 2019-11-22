@@ -376,6 +376,8 @@ button.navbar-toggler {
 	width: 270px;
 	height: 0;
 	opacity: 0;
+	left: 50%;
+	transform: translateX(-50%);
 	border-radius: 0px 0px 7px 7px;
 	transition: all 0.2s ease-in 0s;
 	-webkit-transition: all 0.2s ease-in 0s;
@@ -1490,7 +1492,7 @@ iframe .player .vp-controls .play {
 	height: 95px;
 	opacity: 1;
 	top: 100%;
-	margin-top: 13px;
+	margin-top: 17px;
 }
 .head_sticky .loc_serch_show {
 	margin-top: 13px;
