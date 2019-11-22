@@ -2,7 +2,7 @@
 //importing library
 import React, { Component } from 'react';
 import logo from "../img/header-logo.jpg";
-import login from "../img/builder-logo.png";
+import login from "../img/builder-logo.jpg";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import search_icon from "../img/icon-search.svg";
 import close_icon from "../img/close.svg";
@@ -1190,10 +1190,10 @@ class HeaderComponent extends Component {
                                 isActive = true;
                             }
                             if (isActive === false && index === item.Childrens.length - 1) {
-                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium text-center text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
+                                return <a key={index} className="dropdown-toggle nav-link text-uppercase font-weight-medium text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
                             }
                             if (isActive === true && index === item.Childrens.length - 1) {
-                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu text-center text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
+                                return <a key={index} className="dropdown-toggle nav-link  text-uppercase font-weight-medium active-menu text-nowrap" data-toggle="dropdown" href="">{item.RootName}</a>
                             }
                         })}
                         <ul className="dropdown-menu mt-xl-3 shadow_d">
@@ -1276,7 +1276,7 @@ class HeaderComponent extends Component {
                         {menuItems}
                     </ul>
                     <div onClick={() => { this.redirectToLogin() }} className="pt-3 position-relative text-center  loginOnMob">
-                        <img src={login} alt="builder-first" />
+                        <img src={login} width={70} height={57} alt="builder-first" />
                         <span className="mob-login position-absolute">Login</span>
                     </div>
                 </nav>
@@ -1305,7 +1305,7 @@ class HeaderComponent extends Component {
                         <div className="d-flex align-items-start">
                             <div className="form-inline my-2 my-md-0 ml-3 side-button d-none d-md-block">
                                 <div className="loc_main_box position-relative">
-                                    <div data-tip="Find a location" onClick={() => { this.addToggleLocation() }} className="loc_search">
+                                    <div data-tip="Find a location" onClick={() => { this.addToggleLocation() }} className="loc_search" style={{width: 35, height: 35}}>
                                         <img className="srch_img_svg" src={loc_search} alt="builder-first" />
                                     </div>
                                     <div className={this.state.toggleLocation ? "position-absolute locate locate_form text-right loc_serch_show" : "position-absolute locate locate_form text-right invisible"}>
@@ -1347,7 +1347,7 @@ class HeaderComponent extends Component {
                     <button type="button" onClick={() => this.showPopUP()} className="btn opt-video border-white btn-primary text-uppercase theme-btn  d-md-inline-block d-none">{this.state.showSpinner ? (<i className="fa fa-refresh fa-spin px-1" style={{ fontSize: "15px" }}></i>) : null}Request a quote </button>
                     
                     <button onClick={() => this.redirectToLogin()} type="button" className="btn btn-link login">
-                        <img src={login} alt="builder-first" />
+                        <img src={login} width={70} height={57} alt="builder-first" />
                         <span className="login-btn position-absolute w-100  h-100 align-items-center">
                             <span className="w-100 d-flex align-items-center h-100">
                                 <p className="position-relative mx-auto mb-0 h5 login-text">Login</p>
