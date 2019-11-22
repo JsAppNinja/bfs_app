@@ -1413,7 +1413,7 @@ class HeaderComponent extends Component {
               </div>
               <div className="d-flex justify-content-between">
                 <Button className="text-uppercase d-block position-relative" style={{top:0}} onClick={this.newChangesHidePopupClose}>Don't show this again<span><img src={iconremove} alt="remove" /></span></Button>{' '}
-                <Button className="text-uppercase d-block position-relative" style={{top:0}} onClick={this.showPopUPNotLoginClonse}>Close</Button>{' '}
+                <Button className="text-uppercase d-block position-relative" style={{top:0}} onClick={this.newChangesHidePopup}>Close</Button>{' '}
             </div>
            </ModalBody>
 
