@@ -1410,17 +1410,13 @@ class HeaderComponent extends Component {
                 <h3 className="tour-title font-weight-bold" >Now available on</h3>
 
                 <div className="mybfs-logo"><img src={mybfs} alt="mybfs-logo" /></div>
-
-                
-
-
               </div>
-              <Button className="text-uppercase" onClick={this.newChangesHidePopupClose}>Don't show this again<span><img src={iconremove} alt="remove" /></span></Button>{' '}
+              <div className="d-flex justify-content-between">
+                <Button className="text-uppercase d-block position-relative" style={{top:0}} onClick={this.newChangesHidePopupClose}>Don't show this again<span><img src={iconremove} alt="remove" /></span></Button>{' '}
+                <Button className="text-uppercase d-block position-relative" style={{top:0}} onClick={this.showPopUPNotLoginClonse}>Close</Button>{' '}
+            </div>
            </ModalBody>
 
-           <ModalFooter className="border-0 px-5  pb-5 d-none">
-              <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.showPopUPNotLoginClonse}>Request Close</Button>{' '}
-           </ModalFooter>
         </Modal>
 
             <Modal isOpen={this.state.modal} toggle={this.toggle} className="request-form modal-dialog-centered">
