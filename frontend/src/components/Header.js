@@ -1233,7 +1233,7 @@ class HeaderComponent extends Component {
                             {localStorage.getItem("selectedStore") ? (<div className="cartSection">
                                 <p className="">
                                     Selected Store  <br />
-                                    <Link className="color-dark-gray d-inline-block pr-4" to={'/location_' + shoppingItem[0]}>{shoppingItem[2].substr(0, 14)}</Link>
+                                    <Link className="color-dark-gray d-inline-block pr-4" to={'/location_' + shoppingItem[0]}>{shoppingItem[2]}</Link>
                                 </p>
                             </div>) : null}
                             <div className="loc_main_box position-relative">
