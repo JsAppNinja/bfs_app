@@ -1275,9 +1275,9 @@ class HeaderComponent extends Component {
                     <ul className="list-unstyled components mobile_components">
                         {menuItems}
                     </ul>
-                    <div onClick={() => { this.redirectToLogin() }} className="pt-3 position-relative text-center  loginOnMob">
+                    <div onClick={() => { this.redirectToLogin() }} className="pt-3 position-relative text-center ">
                         <img src={login} width={70} height={57} alt="builder-first" />
-                        <span className="mob-login position-absolute">Login</span>
+                        <p className="mob-login position-absolute">Customer Login</p>
                     </div>
                 </nav>
             </div>
@@ -1349,8 +1349,9 @@ class HeaderComponent extends Component {
                     <button onClick={() => this.redirectToLogin()} type="button" className="btn btn-link login">
                         <img src={login} width={70} height={57} alt="builder-first" />
                         <span className="login-btn position-absolute w-100  h-100 align-items-center">
-                            <span className="w-100 d-flex align-items-center h-100">
-                                <p className="position-relative mx-auto mb-0 h5 login-text">Login</p>
+                            <span className="w-100 d-flex align-items-center h-100 flex-column justify-content-center">
+                                <p className="position-relative mx-auto mb-0 h5 login-text customer-login">Customer</p>
+                                <p className="position-relative mx-auto mb-0 h5 login-text customer-login">Login</p>
                             </span>
                         </span>
                     </button>

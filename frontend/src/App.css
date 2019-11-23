@@ -2010,12 +2010,17 @@ select {
 	.carousel-inner
 	.carousel-item
 	img.play-button-img {
-	object-fit: none;
 	width: auto;
 	max-width: 68px;
 	left: auto;
 	right: auto;
-	position: initial;
+	width: 68px;
+    height: 68px;
+	bottom: 0;
+	object-fit: none;
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
 }
 .play-button-banner {
 	transform: translate(9999px);
@@ -3844,6 +3849,15 @@ ul.media_list li a {
 		font-size: 16px;
 		opacity: 1;
 	}
+	p.mob-login {
+		color: #0056b3;
+		text-decoration: underline;
+		font-size: 12px;
+		font-weight: bold;
+		margin: auto;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 	.loginOnMob img {
 		opacity: 0.1;
 	}
@@ -4215,7 +4229,7 @@ ul.media_list li a {
 		font-size: 10px;
 	}
 	.mobile_components {
-		height: calc(100% - 170px);
+		height: calc(100% - 200px);
 		overflow: auto;
 	}
 	.vidio_over {
@@ -5524,4 +5538,16 @@ html {
 .address.loc_distri .dlink:hover {
 	text-decoration: underline;
 	color: #007bff;
+}
+
+.login-btn:hover .customer-login {
+	text-decoration: underline;
+}
+
+.customer-login {
+	width: 50px;
+	white-space: pre-wrap;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	font-weight: 700;
 }
