@@ -1,6 +1,6 @@
 //importing library
 import React, { Component } from 'react';
-import shadow from "../img/shadow.png";
+import shadow from "../assets/img/shadow.png";
 import { globalVar } from "../config";
 
 //Global variable

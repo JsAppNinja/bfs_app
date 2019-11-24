@@ -1,7 +1,7 @@
 //importing library
 import React, { Component } from 'react';
-import shadow from "../img/shadow.png";
-import hm from "../img/hm.png";
+import shadow from "../assets/img/shadow.png";
+import hm from "../assets/img/hm.png";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { globalVar } from "../config";

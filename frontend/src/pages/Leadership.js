@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import left_h from "../img/icon-left-h.svg";
-import right_h from "../img/icon-right-h.svg";
-import read_arrow from "../img/read-arrow.svg";
-import left_icon from "../img/icon-left.svg";
-import right_icon from "../img/icon-right.svg";
-import { scrollTopLeadershipModal } from "../utils";
+import left_h from "../assets/img/icon-left-h.svg";
+import right_h from "../assets/img/icon-right-h.svg";
+import read_arrow from "../assets/img/read-arrow.svg";
+import left_icon from "../assets/img/icon-left.svg";
+import right_icon from "../assets/img/icon-right.svg";
+import { scrollTopLeadershipModal } from "../assets/js/utils";
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
 

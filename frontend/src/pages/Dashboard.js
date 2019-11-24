@@ -17,24 +17,24 @@ import {
 } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactPlayer from 'react-player';
-import ContainerComponent from "./Container";
+import ContainerComponent from "../components/Container";
 import { GoogleApiWrapper } from "google-maps-react";
-import { cancellablePromise, delay } from "../utils";
+import { cancellablePromise, delay } from "../assets/js/utils";
 
 // Import the images
-import mplayButton from "../img/mPlay_button.png";
-import playBtn from "../img/play-button.png";
-import mpauseButton from "../img/mPausebutton.png";
+import mplayButton from "../assets/img/mPlay_button.png";
+import playBtn from "../assets/img/play-button.png";
+import mpauseButton from "../assets/img/mPausebutton.png";
 import Vimeo from "@u-wave/react-vimeo";
-import manufacture from "../img/manufacture.jpg";
-import weAre from "../img/who-we-are.jpg";
-import distribution from "../img/distribution.jpg";
-import Service from "../img/services.jpg";
-import tenor from "../img/loader.gif";
-import slider1 from "../img/sliders/who-we-are.jpg";
-import slider2 from "../img/sliders/manufature.jpg";
-import slider3 from "../img/sliders/distribution.jpg";
-import slider4 from "../img/sliders/installation.jpg";
+import manufacture from "../assets/img/manufacture.jpg";
+import weAre from "../assets/img/who-we-are.jpg";
+import distribution from "../assets/img/distribution.jpg";
+import Service from "../assets/img/services.jpg";
+import tenor from "../assets/img/loader.gif";
+import slider1 from "../assets/img/sliders/who-we-are.jpg";
+import slider2 from "../assets/img/sliders/manufature.jpg";
+import slider3 from "../assets/img/sliders/distribution.jpg";
+import slider4 from "../assets/img/sliders/installation.jpg";
 
 //Global Variables
 var baseurl = globalVar.base_url1;

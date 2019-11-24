@@ -8,9 +8,9 @@ import { globalVar } from "../config";
 import SliderComponent from "./Slider";
 import SliderComponent1 from "./Slider1";
 import SliderComponent2 from "./Slider2";
-import cabinet_frame1 from "../img/product/cabinet.jpg"
-import cabinet_frame2 from "../img/product/distribution.jpg"
-import cabinet_frame3 from "../img/product/man-slide.jpg"
+import cabinet_frame1 from "../assets/img/product/cabinet.jpg"
+import cabinet_frame2 from "../assets/img/product/distribution.jpg"
+import cabinet_frame3 from "../assets/img/product/man-slide.jpg"
 import { Link } from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";

@@ -1,8 +1,8 @@
 
 //Import statement
 import React, { Component } from 'react';
-import { topFunctionButtonClick } from "../utils";
-import uparrwo from "../img/up-arrow-key.png"
+import { topFunctionButtonClick } from "../assets/js/utils";
+import uparrwo from "../assets/img/up-arrow-key.png"
 import { globalVar } from "../config";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from "react-router-dom";

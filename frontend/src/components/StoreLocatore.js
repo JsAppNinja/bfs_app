@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
 import Autocomplete from 'react-google-autocomplete';
-import defaultimage from "../img/default.jpg";
+import defaultimage from "../assets/img/default.jpg";
 import { Link } from "react-router-dom";
-import down_arrow from "../img/angle-arrow-down.svg";
-import cancel_icon from "../img/cancel.svg";
+import down_arrow from "../assets/img/angle-arrow-down.svg";
+import cancel_icon from "../assets/img/cancel.svg";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
 import { OverlappingMarkerSpiderfier } from 'ts-overlapping-marker-spiderfier'
 
-import tenor from "../img/loader.gif";
+import tenor from "../assets/img/loader.gif";
 import { globalVar } from "../config";
 
 var mylocation = {};

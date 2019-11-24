@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import shadow from "../img/shadow.png";
+import shadow from "../assets/img/shadow.png";
 import { globalVar } from "../config";
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 var base_url = globalVar.base_url1;

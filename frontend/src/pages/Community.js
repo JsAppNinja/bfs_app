@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { globalVar } from "../config";
-import { topFunction } from "../utils";
+import { topFunction } from "../assets/js/utils";
 var base_url = globalVar.base_url1;
 var communitylistdata = [];
 

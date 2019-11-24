@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { globalVar } from "../config";
-import close from "../img/close.svg";
+import close from "../assets/img/close.svg";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
