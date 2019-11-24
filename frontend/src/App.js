@@ -3,15 +3,15 @@
 import React, { Component } from 'react';
 import HeaderComponent from './components/Header';
 import FooterComponent from './components/Footer';
-import Routes from "./Routes";
+import Routes from "./route";
 import { withRouter } from "react-router-dom";
 import { topFunction } from "./utils";
 import { globalVar } from "./config";
 import axios from 'axios';
 import tenor from "./img/loader.gif";
 import PropTypes from 'prop-types';
-import './App.css';
-import './Appresponsive.css';
+import './css/App.css';
+import './css/Appresponsive.css';
 
 class App extends Component {
   constructor(props) {
