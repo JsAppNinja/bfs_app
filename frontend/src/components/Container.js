@@ -791,7 +791,7 @@ class ContainerComponent extends Component {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={this.state.modal} toggle={this.togglezipcode} className="request-form modal-dialog-centered">
+            {this.state.modal && <Modal isOpen={this.state.modal} toggle={this.togglezipcode} className="request-form modal-dialog-centered">
                 <ModalHeader toggle={this.togglezipcode}>
                     <span className="display-4 m-auto pt-5 pb-4 d-block ">
                             Enter your zip code
@@ -812,88 +812,91 @@ class ContainerComponent extends Component {
                 <ModalFooter className="border-0 px-5  pb-5">
                     <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.goToStoreQuote}>Request Quote</Button>{' '}
                 </ModalFooter>
-              </Modal>
+              </Modal>}
+            
 
+            {
+                this.state.sendquotemodal && <Modal isOpen={this.state.sendquotemodal} toggle={this.togglesendquote} className="request-form modal-dialog-centered">
+                <ModalHeader toggle={this.togglesendquote}><span className="display-4 m-auto pt-5 pb-4 d-block ">Request a quote</span></ModalHeader>
+                <ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
+                    <div className="row  m-0">
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="name" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="name" className="head-label h5 font-weight-normal">Full Name</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.nameErr}</span>
 
-               <Modal isOpen={this.state.sendquotemodal} toggle={this.togglesendquote} className="request-form modal-dialog-centered">
-                    <ModalHeader toggle={this.togglesendquote}><span className="display-4 m-auto pt-5 pb-4 d-block ">Request a quote</span></ModalHeader>
-                    <ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
-                        <div className="row  m-0">
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="name" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="name" className="head-label h5 font-weight-normal">Full Name</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.nameErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="email" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Email" className="head-label h5 font-weight-normal">Email</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.emailErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-                                <div className="position-relative choose_serv">
-                                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.selectDropToggle}>
-                                        <DropdownToggle caret>
-                                            {this.state.serviceOption}
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                    <label htmlFor="Email" className="head-label h5 font-weight-normal">Service Type</label>
-                                </div>
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="zipcode" type="text" maxLength="5" onChange={(e) => this.handleZipcodeChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Zip" className="head-label h5 font-weight-normal">Zip Code</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.zipcodeErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="phone" type="text" maxLength="12" onChange={(e) => this.handlePhoneChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Phone" className="head-label h5 font-weight-normal">Phone</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.phoneErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-                                <div className="position-relative">
-                                    <textarea id="message" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off"></textarea>
-                                    <label htmlFor="Phone" className="head-label h5 font-weight-normal">Message</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.messageErr}</span>
-                                <span className="success-message">{this.state.successMsg}</span>
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-
-                                <ReCAPTCHA
-                                    sitekey={captchaKey}
-                                    onChange={(e) => this.onRecaptchChange(e)}
-                                />
-                                <span className="error-message">{this.state.captchaErr}</span>
-                            </div>
-                            <div style={{ color: "#2C3E50" }}>{this.state.quoteEmailStatus}</div>
                         </div>
-                    </ModalBody>
-                    <ModalFooter className="border-0 px-5  pb-5">
-                        <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.sendRequestQuote}>Request a Quote</Button>{' '}
-                    </ModalFooter>
-            </Modal>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="email" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Email" className="head-label h5 font-weight-normal">Email</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.emailErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+                            <div className="position-relative choose_serv">
+                                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.selectDropToggle}>
+                                    <DropdownToggle caret>
+                                        {this.state.serviceOption}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                                <label htmlFor="Email" className="head-label h5 font-weight-normal">Service Type</label>
+                            </div>
+                        </div>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="zipcode" type="text" maxLength="5" onChange={(e) => this.handleZipcodeChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Zip" className="head-label h5 font-weight-normal">Zip Code</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.zipcodeErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="phone" type="text" maxLength="12" onChange={(e) => this.handlePhoneChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Phone" className="head-label h5 font-weight-normal">Phone</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.phoneErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+                            <div className="position-relative">
+                                <textarea id="message" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off"></textarea>
+                                <label htmlFor="Phone" className="head-label h5 font-weight-normal">Message</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.messageErr}</span>
+                            <span className="success-message">{this.state.successMsg}</span>
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+
+                            <ReCAPTCHA
+                                sitekey={captchaKey}
+                                onChange={(e) => this.onRecaptchChange(e)}
+                            />
+                            <span className="error-message">{this.state.captchaErr}</span>
+                        </div>
+                        <div style={{ color: "#2C3E50" }}>{this.state.quoteEmailStatus}</div>
+                    </div>
+                </ModalBody>
+                <ModalFooter className="border-0 px-5  pb-5">
+                    <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.sendRequestQuote}>Request a Quote</Button>{' '}
+                </ModalFooter>
+        </Modal>
+            }
+               
         </div>
         );
     }

@@ -82,6 +82,7 @@ class DashboardComponent extends Component {
 			showPlayButton: true,
 			backImage: "",
 			isPlaying: false,
+			homeData: [],
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -92,36 +93,37 @@ class DashboardComponent extends Component {
 		this.togglesendquote = this.togglesendquote.bind(this);
 		this.sendRequestQuote = this.sendRequestQuote.bind(this);
 		window.addEventListener("resize", function() {});
-		this.props.getHomePageData();
 		this.props.getConstructionTypeDataHome();
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (
-			this.props.refreshStore &&
-			this.props.refreshStore.length !== this.state.refreshStores.length
-		) {
-			if (this.props.storeData.length === 0) {
-				this.toggle();
-				this.setState({
-					noStoreFound: true,
-				});
-			}
-			this.setState({ refreshStores: this.props.refreshStore });
+	componentDidMount() {
+		this.getHomePageContent();
+	}
+	getHomePageContent = () => {
+		if (this.state.homeData.length < 1) {
+			let RootId = 12757
+			fetch(globalVar.base_url1 + '/umbraco/api/Content/Get/' + RootId, {
+			  method: 'get'
+			}).then((response) => {
+			  return response.json();
+			}).then((data) => {
+			  let homeDataArray = [];
+			  homeDataArray.push(data.Properties);
+			  this.setState(
+				{
+				  homeData: homeDataArray
+				}, () => this.setHomeData()
+			  )
+			  
+			}).catch(() => {
+	
+			});
+		} else {
+		  return
 		}
+	  }
 
-		if (
-			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
-			this.props.basicDataLoaded
-			) {
-			// this.props.getHomePageData();
-			this.props.getConstructionTypeDataHome();
-		}
-
-		if (
-			this.props.homeData.length !== prevProps.homeData.length &&
-			this.props.homeData.length > 0
-		) {
+	  setHomeData() {
 			let videos = [];
 			let allvideos = [];
 			let dashdata = [];
@@ -131,11 +133,11 @@ class DashboardComponent extends Component {
 
 			this.setState({
 				backImage:
-					globalVar.base_url1 + this.props.homeData[0].feature1VideoImage,
+					globalVar.base_url1 + this.state.homeData[0].feature1VideoImage,
 			});
 
 			[1, 2, 3, 4].forEach(id => {
-				const { homeData } = this.props;
+				const { homeData } = this.state;
 				let vid = homeData[0][`feature${id}VideoLink`].split('/');
 				let finalVideo = vid[4].split('?');
 
@@ -169,6 +171,7 @@ class DashboardComponent extends Component {
 				// dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
 
 			});
+
 			video = videos[this.state.videoIndex];
 			mobilevideos.push({
 				id: video.id,
@@ -184,16 +187,16 @@ class DashboardComponent extends Component {
 			var myElements = document.querySelectorAll(".videocaption");
 			for (var i = 0; i < myElements.length; i++) {
 				if (
-					this.props.homeData[0].imageTextHorizontalPosition &&
-					this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextHorizontalPosition &&
+					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 						"right"
 				) {
 					myElements[i].style.textAlign = "right";
 					var element = document.getElementsByClassName("carousel-caption");
 					element[0].classList.add("rightCaption");
 				} else if (
-					this.props.homeData[0].imageTextHorizontalPosition &&
-					this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextHorizontalPosition &&
+					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 						"middle"
 				) {
 					myElements[i].style.textAlign = "center";
@@ -203,19 +206,19 @@ class DashboardComponent extends Component {
 
 				myElements[
 					i
-				].childNodes[0].style.color = this.props.homeData[0].imageTextFontColor;
-				myElements[i].childNodes[0].style.fontSize = this.props.homeData[0]
+				].childNodes[0].style.color = this.state.homeData[0].imageTextFontColor;
+				myElements[i].childNodes[0].style.fontSize = this.state.homeData[0]
 					.imageTextFontSize
-					? this.props.homeData[0].imageTextFontSize + "px"
+					? this.state.homeData[0].imageTextFontSize + "px"
 					: "48px";
-				if (this.props.homeData[0].imageTextVerticalPosition) {
+				if (this.state.homeData[0].imageTextVerticalPosition) {
 					if (
-						this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 						"top"
 					) {
 						divele[0].classList.add("video-option-top");
 					} else if (
-						this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 						"bottom"
 					) {
 						divele[0].classList.add("video-option-bottom");
@@ -223,28 +226,28 @@ class DashboardComponent extends Component {
 				}
 
 				if (
-					this.props.homeData[0].imageTextGradientPosition &&
-					this.props.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextGradientPosition &&
+					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
 						"right"
 				) {
 					// myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
 					myElements[
 						i
 					].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.props.homeData[0].imageGradientOpacity,
+						this.state.homeData[0].imageGradientOpacity,
 						"%)"
 					);
 				}
 				if (
-					this.props.homeData[0].imageTextGradientPosition &&
-					this.props.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextGradientPosition &&
+					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
 						"left"
 				) {
 					// myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
 					myElements[
 						i
 					].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.props.homeData[0].imageGradientOpacity,
+						this.state.homeData[0].imageGradientOpacity,
 						"%)"
 					);
 				}
@@ -253,11 +256,35 @@ class DashboardComponent extends Component {
 			this.setState({
 				videos,
 				allvideos,
-				dashdata,
+				// dashdata,
 				mobilevideos,
 				mobiletitle,
 			});
+	  }
+
+	componentDidUpdate(prevProps, prevState) {
+		if (
+			this.props.refreshStore &&
+			this.props.refreshStore.length !== this.state.refreshStores.length
+		) {
+			if (this.props.storeData.length === 0) {
+				this.toggle();
+				this.setState({
+					noStoreFound: true,
+				});
+			}
+			this.setState({ refreshStores: this.props.refreshStore });
 		}
+
+		if (
+			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
+			this.props.basicDataLoaded
+			) {
+			// this.props.getHomePageData();
+			this.props.getConstructionTypeDataHome();
+		}
+
+		
 
 		if (this.state.videoIndex !== prevState.videoIndex) {
 			const { videos, allvideos } = this.state;
@@ -277,7 +304,7 @@ class DashboardComponent extends Component {
 				mobilevideos,
 				mobiletitle,
 				backImage: 
-					globalVar.base_url1 + this.props.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
+					globalVar.base_url1 + this.state.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
 			});
 		}
 	}
@@ -808,40 +835,40 @@ class DashboardComponent extends Component {
 		for (var i = 0; i < myMobileElements.length; i++) {
 			myMobileElements[
 				i
-			].childNodes[0].childNodes[1].style.color = this.props.homeData[0].imageTextFontColor;
+			].childNodes[0].childNodes[1].style.color = this.state.homeData[0].imageTextFontColor;
 
-			if (this.props.homeData[0].imageTextVerticalPosition) {
+			if (this.state.homeData[0].imageTextVerticalPosition) {
 				if (
-					this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 					"top"
 				) {
 					myMobileElements[i].style.top = 0;
 				} else if (
-					this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 					"bottom"
 				) {
 					myMobileElements[i].style.bottom = 0;
 				}
 			}
 			if (
-				this.props.homeData[0].imageTextHorizontalPosition &&
-				this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 					"right"
 			) {
 				myMobileElements[i].childNodes[0].style.textAlign = "right";
 			} else if (
-				this.props.homeData[0].imageTextHorizontalPosition &&
-				this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 					"middle"
 			) {
 				myMobileElements[i].childNodes[0].style.textAlign = "center";
 			} else {
 				myMobileElements[i].childNodes[0].style.textAlign = "left";
 			}
-			if (this.props.homeData[0].imageTextFontSizeMobile) {
+			if (this.state.homeData[0].imageTextFontSizeMobile) {
 				myMobileElements[i].childNodes[0].childNodes[1].style.fontSize = this
-					.props.homeData[0].imageTextFontSizeMobile
-					? this.props.homeData[0].imageTextFontSizeMobile + "px"
+					.state.homeData[0].imageTextFontSizeMobile
+					? this.state.homeData[0].imageTextFontSizeMobile + "px"
 					: "";
 			}
 		}
@@ -1235,7 +1262,7 @@ class DashboardComponent extends Component {
 					quoteData={this.props.quoteData}
 					getData={this.getStoreData}
 					storeData={this.props.storeData}
-					homeData={this.props.homeData}
+					homeData={this.state.homeData}
 					constructionData={this.props.constructiontypeDataHome}
 				/>
 				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
