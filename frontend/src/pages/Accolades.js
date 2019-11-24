@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {globalVar} from "../config";
-import UsaHeatChartComponent from './usa-heat-map'
+import UsaHeatChartComponent from '../components/usa-heat-map'
 import { GetStatwiseData } from "../utils";
 var awardsdata = [];
 var base_url = globalVar.base_url1;

@@ -1,29 +1,30 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import AboutUsComponent from './components/AboutUs'
-import DashboardComponent from './components/Dashboard';
-import ConstructionTypeComponent from './components/ConstructionType';
-import AccoladesComponent from './components/Accolades';
-import LeaderShipComponent from './components/Leadership';
-import CommunityComponent from './components/Community';
-import GreenWorksComponent from './components/GreenWorks';
-import CodeStandardComponent from './components/CodeStandards';
-import NewsPressComponent from './components/NewsPress';
-import FormsLibraryComponent from './components/FormsLibrary';
-import ManufacturingComponent from './components/Manufacturing';
-import InstalledServiceComponent from './components/InstalledService';
-import DistributionComponent from './components/Distribution';
-import CareerComponent from './components/Career';
-import JobAreaComponent from './components/JobAreas';
-import WhyBuilderComponent from './components/WhyBuilder';
-import StoreLocatore from "./components/LocationStoreLocator";
-import DetailsLocationsComponent from "./components/DetailsLoactions";
-import ContactUsComponent from "./components/ContactUs";
-import SitemapComponent from "./components/SiteMap";
-import BfsTermsComponent from "./components/BfsTerms";
 import { Switch } from "react-router-dom";
-import AppliedRoute from "./components/AppliedRouting";
-import Example from "./components/Slidercarousel";
+
+import AboutUsComponent from '../pages/AboutUs'
+import DashboardComponent from '../pages/Dashboard';
+import ConstructionTypeComponent from '../pages/ConstructionType';
+import AccoladesComponent from '../pages/Accolades';
+import LeaderShipComponent from '../pages/Leadership';
+import CommunityComponent from '../pages/Community';
+import GreenWorksComponent from '../pages/GreenWorks';
+import CodeStandardComponent from '../pages/CodeStandards';
+import NewsPressComponent from '../pages/NewsPress';
+import FormsLibraryComponent from '../pages/FormsLibrary';
+import ManufacturingComponent from '../pages/Manufacturing';
+import InstalledServiceComponent from '../pages/InstalledService';
+import DistributionComponent from '../pages/Distribution';
+import CareerComponent from '../pages/Career';
+import JobAreaComponent from '../pages/JobAreas';
+import WhyBuilderComponent from '../pages/WhyBuilder';
+import StoreLocatore from "../pages/LocationStoreLocator";
+import DetailsLocationsComponent from "../pages/DetailsLoactions";
+import ContactUsComponent from "../pages/ContactUs";
+import SitemapComponent from "../pages/SiteMap";
+import BfsTermsComponent from "../pages/BfsTerms";
+import AppliedRoute from "../components/AppliedRouting";
+import Example from "../pages/Slidercarousel";
 
 //defining routes
 const Route = ({ childProps }) =>

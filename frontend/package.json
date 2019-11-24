@@ -53,15 +53,12 @@
     "lint": "eslint . --ext .js  --cache || true"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "eslint": "^5.11.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-google": "^0.11.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "react-app-env": "^1.2.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "react-app-env": "^1.2.3"
   }
 }

@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactPlayer from 'react-player';
-import ContainerComponent from "./Container";
+import ContainerComponent from "../components/Container";
 import { GoogleApiWrapper } from "google-maps-react";
 import { cancellablePromise, delay } from "../utils";
 

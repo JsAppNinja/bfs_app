@@ -534,7 +534,7 @@ footer img {
 }
 .content_full .AboutSubPage ul li,
 .content_full ul.AboutSubPage li {
-	background-image: url(img/dot.gif);
+	background-image: url(../img/dot.gif);
 	background-repeat: no-repeat;
 	background-position: 2px 6px;
 	display: inline-block;
@@ -807,7 +807,7 @@ footer img {
 	font-weight: 700;
 }
 .CareersBannerInner {
-	background: url("img/healpeople-bg.jpg");
+	background: url("../img/healpeople-bg.jpg");
 	width: 100%;
 	height: 100%;
 	background-position: center;
@@ -895,7 +895,7 @@ footer img {
 	padding: 20px 15px;
 }
 .CareersSubContHeader {
-	background-image: url("img/shadow.png");
+	background-image: url("../img/shadow.png");
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: contain;
@@ -954,7 +954,7 @@ footer img {
 	margin-top: -20px;
 }
 .SiteMapHome {
-	background-image: url("img/sitempadiv.jpg");
+	background-image: url("../img/sitempadiv.jpg");
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-size: contain;
@@ -972,13 +972,13 @@ footer img {
 	height: 100%;
 }
 .SiteMap .grid ul {
-	background-image: url("img/sitempadiv.jpg");
+	background-image: url("../img/sitempadiv.jpg");
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-size: contain;
 }
 .SiteMap .grid ul {
-	background-image: url("img/sitempadiv.jpg");
+	background-image: url("../img/sitempadiv.jpg");
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-size: contain;
@@ -1422,10 +1422,10 @@ a {
 	height: 40px;
 }
 .jobsarea-banner .slick-prev {
-	background: url(img/chevron-sign-left.svg);
+	background: url(../img/chevron-sign-left.svg);
 }
 .jobsarea-banner .slick-next {
-	background: url(img/chevron-sign-right.svg);
+	background: url(../img/chevron-sign-right.svg);
 }
 .jobsarea-banner .slick-next,
 .jobsarea-banner .slick-prev {
@@ -2118,7 +2118,7 @@ h2.c-h2 {
 	font-weight: 500;
 }
 .bg-investor-relation {
-	background-image: url(img/invester-2.jpg);
+	background-image: url(../img/invester-2.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 430px;
@@ -3751,11 +3751,11 @@ ul.media_list li a {
 		background: #fff;
 	}
 	.carousel-control-prev-icon {
-		background-image: url("img/product/left-e.svg") !important;
+		background-image: url("../img/product/left-e.svg") !important;
 		cursor: pointer;
 	}
 	.carousel-control-next-icon {
-		background-image: url("img/product/right-e.svg") !important;
+		background-image: url("../img/product/right-e.svg") !important;
 		cursor: pointer;
 	}
 	.head_sticky .loc_serch_show {
