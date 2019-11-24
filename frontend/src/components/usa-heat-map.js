@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from 'jquery'
-import legent_locations from "../img/legend_new.PNG";
+import legent_locations from "../assets/img/legend_new.PNG";
 import PropTypes from 'prop-types';
 import { globalVar } from "../config";
 var base_url = globalVar.base_url1;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import salesv from "../img/sales-v.jpg";
+import salesv from "../assets/img/sales-v.jpg";
 import { Link } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { globalVar } from "../config";

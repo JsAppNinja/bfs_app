@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
-import shadow from "../img/shadow.png";
+import shadow from "../assets/img/shadow.png";
 import { globalVar } from "../config";
-import { topFunction } from "../utils";
+import { topFunction } from "../assets/js/utils";
 import PropTypes from 'prop-types';
 import axios from 'axios';
 var base_url = globalVar.base_url1;

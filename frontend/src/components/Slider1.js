@@ -2,12 +2,12 @@
 //importing component and variable
 import React, { Component } from 'react';
 import { globalVar } from "../config";
-import thumbnail_1 from "../img/product/thumbnail-1.jpg"
-import thumbnail_2 from "../img/product/thumbnail-2.jpg"
-import thumbnail_3 from "../img/product/thumbnail-3.jpg"
-import thumbnail_4 from "../img/product/thumbnail-4.jpg"
-import thumbnail_5 from "../img/product/thumbnail-5.jpg"
-import thumbnail_6 from "../img/product/thumbnail-6.jpg"
+import thumbnail_1 from "../assets/img/product/thumbnail-1.jpg"
+import thumbnail_2 from "../assets/img/product/thumbnail-2.jpg"
+import thumbnail_3 from "../assets/img/product/thumbnail-3.jpg"
+import thumbnail_4 from "../assets/img/product/thumbnail-4.jpg"
+import thumbnail_5 from "../assets/img/product/thumbnail-5.jpg"
+import thumbnail_6 from "../assets/img/product/thumbnail-6.jpg"
 import {
   Carousel,
   CarouselItem,

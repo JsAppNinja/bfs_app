@@ -1,17 +1,17 @@
 
 //importing library
 import React, { Component } from 'react';
-import logo from "../img/header-logo.jpg";
-import login from "../img/builder-logo.jpg";
+import logo from "../assets/img/header-logo.jpg";
+import login from "../assets/img/builder-logo.jpg";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import search_icon from "../img/icon-search.svg";
-import close_icon from "../img/close.svg";
-import togller from "../img/menu-button.svg";
-import loc_search from "../img/loc_search.svg";
+import search_icon from "../assets/img/icon-search.svg";
+import close_icon from "../assets/img/close.svg";
+import togller from "../assets/img/menu-button.svg";
+import loc_search from "../assets/img/loc_search.svg";
 import { Link } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
 import { globalVar } from "../config";
-import defaultimage from "../img/default.jpg";
+import defaultimage from "../assets/img/default.jpg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PropTypes from 'prop-types';
@@ -20,8 +20,8 @@ import axios from 'axios';
 import { GoogleApiWrapper } from 'google-maps-react';
 
 import cookie from 'react-cookies'
-import mybfs from "../img/mybfs-logo.jpg";
-import iconremove from "../img/cross.jpg";
+import mybfs from "../assets/img/mybfs-logo.jpg";
+import iconremove from "../assets/img/cross.jpg";
 
 
 

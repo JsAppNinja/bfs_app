@@ -1,8 +1,8 @@
 
 //imprting library
 import React, { Component } from 'react';
-import Icon_Pdf from "../img/Icon_Pdf.png";
-import shadow from "../img/shadow.png";
+import Icon_Pdf from "../assets/img/Icon_Pdf.png";
+import shadow from "../assets/img/shadow.png";
 import { globalVar } from "../config";
 
 //Global variable
