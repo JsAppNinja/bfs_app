@@ -46,7 +46,7 @@ const thumbnails = [ weAre, manufacture, distribution, Service];
 
 class DashboardComponent extends Component {
 	pendingPromises = [];
-
+	dashDataCount = 4;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -82,6 +82,7 @@ class DashboardComponent extends Component {
 			showPlayButton: true,
 			backImage: "",
 			isPlaying: false,
+			homeData: [],
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -92,34 +93,37 @@ class DashboardComponent extends Component {
 		this.togglesendquote = this.togglesendquote.bind(this);
 		this.sendRequestQuote = this.sendRequestQuote.bind(this);
 		window.addEventListener("resize", function() {});
+		this.props.getConstructionTypeDataHome();
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (
-			this.props.refreshStore &&
-			this.props.refreshStore.length !== this.state.refreshStores.length
-		) {
-			if (this.props.storeData.length === 0) {
-				this.toggle();
-				this.setState({
-					noStoreFound: true,
-				});
-			}
-			this.setState({ refreshStores: this.props.refreshStore });
+	componentDidMount() {
+		this.getHomePageContent();
+	}
+	getHomePageContent = () => {
+		if (this.state.homeData.length < 1) {
+			let RootId = 12757
+			fetch(globalVar.base_url1 + '/umbraco/api/Content/Get/' + RootId, {
+			  method: 'get'
+			}).then((response) => {
+			  return response.json();
+			}).then((data) => {
+			  let homeDataArray = [];
+			  homeDataArray.push(data.Properties);
+			  this.setState(
+				{
+				  homeData: homeDataArray
+				}, () => this.setHomeData()
+			  )
+			  
+			}).catch(() => {
+	
+			});
+		} else {
+		  return
 		}
+	  }
 
-		if (
-			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
-			this.props.basicDataLoaded
-			) {
-			this.props.getHomePageData();
-			this.props.getConstructionTypeDataHome();
-		}
-
-		if (
-			this.props.homeData.length !== prevProps.homeData.length &&
-			this.props.homeData.length > 0
-		) {
+	  setHomeData() {
 			let videos = [];
 			let allvideos = [];
 			let dashdata = [];
@@ -129,11 +133,11 @@ class DashboardComponent extends Component {
 
 			this.setState({
 				backImage:
-					globalVar.base_url1 + this.props.homeData[0].feature1VideoImage,
+					globalVar.base_url1 + this.state.homeData[0].feature1VideoImage,
 			});
 
 			[1, 2, 3, 4].forEach(id => {
-				const { homeData } = this.props;
+				const { homeData } = this.state;
 				let vid = homeData[0][`feature${id}VideoLink`].split('/');
 				let finalVideo = vid[4].split('?');
 
@@ -154,11 +158,20 @@ class DashboardComponent extends Component {
 					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
 					featureImage: baseurl + homeData[0][`feature${id}VideoImage`]
 				});
-				dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
+
+				dashdata.push({
+					title: homeData[0][`feature${id}Label`],
+					imageLink: homeData[0][`feature${id}Thumbnail`]
 					? baseurl + homeData[0][`feature${id}Thumbnail`]
-					: thumbnails[id - 1];
-				dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
+					: thumbnails[id - 1]
+				});
+				// dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
+				// 	? baseurl + homeData[0][`feature${id}Thumbnail`]
+				// 	: thumbnails[id - 1];
+				// dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
+
 			});
+
 			video = videos[this.state.videoIndex];
 			mobilevideos.push({
 				id: video.id,
@@ -174,16 +187,16 @@ class DashboardComponent extends Component {
 			var myElements = document.querySelectorAll(".videocaption");
 			for (var i = 0; i < myElements.length; i++) {
 				if (
-					this.props.homeData[0].imageTextHorizontalPosition &&
-					this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextHorizontalPosition &&
+					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 						"right"
 				) {
 					myElements[i].style.textAlign = "right";
 					var element = document.getElementsByClassName("carousel-caption");
 					element[0].classList.add("rightCaption");
 				} else if (
-					this.props.homeData[0].imageTextHorizontalPosition &&
-					this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextHorizontalPosition &&
+					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 						"middle"
 				) {
 					myElements[i].style.textAlign = "center";
@@ -193,19 +206,19 @@ class DashboardComponent extends Component {
 
 				myElements[
 					i
-				].childNodes[0].style.color = this.props.homeData[0].imageTextFontColor;
-				myElements[i].childNodes[0].style.fontSize = this.props.homeData[0]
+				].childNodes[0].style.color = this.state.homeData[0].imageTextFontColor;
+				myElements[i].childNodes[0].style.fontSize = this.state.homeData[0]
 					.imageTextFontSize
-					? this.props.homeData[0].imageTextFontSize + "px"
+					? this.state.homeData[0].imageTextFontSize + "px"
 					: "48px";
-				if (this.props.homeData[0].imageTextVerticalPosition) {
+				if (this.state.homeData[0].imageTextVerticalPosition) {
 					if (
-						this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 						"top"
 					) {
 						divele[0].classList.add("video-option-top");
 					} else if (
-						this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 						"bottom"
 					) {
 						divele[0].classList.add("video-option-bottom");
@@ -213,28 +226,28 @@ class DashboardComponent extends Component {
 				}
 
 				if (
-					this.props.homeData[0].imageTextGradientPosition &&
-					this.props.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextGradientPosition &&
+					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
 						"right"
 				) {
 					// myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
 					myElements[
 						i
 					].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.props.homeData[0].imageGradientOpacity,
+						this.state.homeData[0].imageGradientOpacity,
 						"%)"
 					);
 				}
 				if (
-					this.props.homeData[0].imageTextGradientPosition &&
-					this.props.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextGradientPosition &&
+					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
 						"left"
 				) {
 					// myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
 					myElements[
 						i
 					].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.props.homeData[0].imageGradientOpacity,
+						this.state.homeData[0].imageGradientOpacity,
 						"%)"
 					);
 				}
@@ -243,11 +256,35 @@ class DashboardComponent extends Component {
 			this.setState({
 				videos,
 				allvideos,
-				dashdata,
+				// dashdata,
 				mobilevideos,
 				mobiletitle,
 			});
+	  }
+
+	componentDidUpdate(prevProps, prevState) {
+		if (
+			this.props.refreshStore &&
+			this.props.refreshStore.length !== this.state.refreshStores.length
+		) {
+			if (this.props.storeData.length === 0) {
+				this.toggle();
+				this.setState({
+					noStoreFound: true,
+				});
+			}
+			this.setState({ refreshStores: this.props.refreshStore });
 		}
+
+		if (
+			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
+			this.props.basicDataLoaded
+			) {
+			// this.props.getHomePageData();
+			this.props.getConstructionTypeDataHome();
+		}
+
+		
 
 		if (this.state.videoIndex !== prevState.videoIndex) {
 			const { videos, allvideos } = this.state;
@@ -267,7 +304,7 @@ class DashboardComponent extends Component {
 				mobilevideos,
 				mobiletitle,
 				backImage: 
-					globalVar.base_url1 + this.props.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
+					globalVar.base_url1 + this.state.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
 			});
 		}
 	}
@@ -285,6 +322,7 @@ class DashboardComponent extends Component {
 	clearPendingPromises = () => this.pendingPromises.map(p => p.cancel());
 
 	handleClick = index => {
+		console.log(index);
 		const waitForClick = cancellablePromise(delay(300));
 		this.appendPendingPromise(waitForClick);
 
@@ -664,6 +702,7 @@ class DashboardComponent extends Component {
 	 */
 
 	changeOnreadyVideo() {
+		console.log('changeOnreadyVideo');
 		let self = this;
 		this.setState({
 			showLoader: false,
@@ -796,277 +835,52 @@ class DashboardComponent extends Component {
 		for (var i = 0; i < myMobileElements.length; i++) {
 			myMobileElements[
 				i
-			].childNodes[0].childNodes[1].style.color = this.props.homeData[0].imageTextFontColor;
+			].childNodes[0].childNodes[1].style.color = this.state.homeData[0].imageTextFontColor;
 
-			if (this.props.homeData[0].imageTextVerticalPosition) {
+			if (this.state.homeData[0].imageTextVerticalPosition) {
 				if (
-					this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 					"top"
 				) {
 					myMobileElements[i].style.top = 0;
 				} else if (
-					this.props.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
 					"bottom"
 				) {
 					myMobileElements[i].style.bottom = 0;
 				}
 			}
 			if (
-				this.props.homeData[0].imageTextHorizontalPosition &&
-				this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 					"right"
 			) {
 				myMobileElements[i].childNodes[0].style.textAlign = "right";
 			} else if (
-				this.props.homeData[0].imageTextHorizontalPosition &&
-				this.props.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
 					"middle"
 			) {
 				myMobileElements[i].childNodes[0].style.textAlign = "center";
 			} else {
 				myMobileElements[i].childNodes[0].style.textAlign = "left";
 			}
-			if (this.props.homeData[0].imageTextFontSizeMobile) {
+			if (this.state.homeData[0].imageTextFontSizeMobile) {
 				myMobileElements[i].childNodes[0].childNodes[1].style.fontSize = this
-					.props.homeData[0].imageTextFontSizeMobile
-					? this.props.homeData[0].imageTextFontSizeMobile + "px"
+					.state.homeData[0].imageTextFontSizeMobile
+					? this.state.homeData[0].imageTextFontSizeMobile + "px"
 					: "";
 			}
 		}
 	}
 
-	render() {
-		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
-		//Looping through carousel items
-		const slides = mobilevideos.map((item, i) => {
-			return (
-				<CarouselItem key={i}>
-					<div
-						onMouseEnter={this.showText}
-						onMouseLeave={this.hideText}
-						className="imagepart showele"
-					>
-						<img
-							className="imagepart showele"
-							src={item.sliderimage}
-							alt="sliderimage"
-						/>
-						<div className="w-100 h-100 position-absolute  play-button-banner text-center">
-							{!this.state.showPlayButton ? null : (
-								<img
-									className="img-fluid play-button-img"
-									src={playBtn}
-									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
-									alt="playbutton"
-								/>
-							)}{" "}
-						</div>
-					</div>
-					<div className="videopart hideele">
-						<ReactPlayer
-							url={item.link}
-							autoPlay={false}
-							controls={true}
-							playing={isPlaying}
-							onReady={() => {
-								this.changeOnreadyVideo();
-							}}
-							height="100%"
-							onStart={e => {
-								this.vimeoPlayed(e);
-							}}
-							onEnded={e => {
-								this.videoEnd(e);
-							}}
-							muted={false}
-						/>
-					</div>
-					<CarouselCaption
-						className="videocaption "
-						captionText=""
-						captionHeader={item.videoLabel}
-					/>
-				</CarouselItem>
-			);
-		});
 
+	/**
+	 * Renderable Request Quote Modal
+	 * 
+	 */
+	_renderModal() {
 		return (
-			<div className=" pt-xl-3 bg-gray midcontent">
-				<div className="row m-0 bg-gray pb-2 home_slider_mein_sec">
-					<div className="container hme_slider video-option p-0 ">
-						<div className="home_slid_left">
-							<div className="bannerSlide position-relative">
-								<img
-									alt="backimage"
-									className="back-image d-none d-md-block"
-									src={this.state.backImage}
-								/>
-								<Carousel
-									activeIndex={activeIndex}
-									next={this.next}
-									previous={this.previous}
-									pause={false}
-									autoPlay={true}
-									interval={this.state.autoSlide ? 4000 : false}
-								>
-									{slides}
-									<CarouselControl
-										className="mobilePrev"
-										direction="prev"
-										directionText="Previous"
-										onClickHandler={this.previous}
-									/>
-									<CarouselControl
-										className="mobileNext"
-										direction="next"
-										directionText="Next"
-										onClickHandler={this.next}
-									/>
-								</Carousel>
-
-								{this.state.showLoader ? null : (
-									<span className="vdo_icn">
-										<div className="col-12 p-2 vm-layout">
-											<img
-												className="d-inline-block mb-0 align-middle"
-												onClick={() => this.toggleSliderOnMobile()}
-												src={
-													this.state.pausedonmobile ? mplayButton : mpauseButton
-												}
-												alt="playButton"
-											/>
-											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
-												{mobiletitle}
-											</h5>
-										</div>
-									</span>
-								)}
-							</div>
-						</div>
-					</div>
-					<div className="request_quot_mb bg-gray  text-center col-12 mob-xs-1  p-0">
-						<button
-							type="button"
-							onClick={() => this.togglerequestquote()}
-							className="mt-3  btn theme-btn text-uppercase bg-red px-4 py-3 d-inline-block login-blue text-white mb-4 cursor-pointer"
-						>
-							Request a quote{" "}
-						</button>
-					</div>
-
-					{this.state.showLoader ? null : (
-						<div className="container  p-0  main-home-slider-mob d-none d-xl-block">
-							<div className="row pt-3 video-space">
-								<div
-									className={
-										this.state.videoIndex === 0
-											? "col-12 col-md-3  slide-div shadow-none active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail1}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle1}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(0, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(0)}
-										/>
-									</div>
-								</div>
-
-								<div
-									className={
-										this.state.videoIndex === 1
-											? "col-12 col-md-3  slide-div shadow-none active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail2}
-											alt="manufacture"
-										/>
-										<div className="text-center  position-absolute text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle2}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(1, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(1)}
-										/>
-									</div>
-								</div>
-
-								<div
-									className={
-										this.state.videoIndex === 2
-											? "col-12 col-md-3 shadow-none   slide-div active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail3}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center  text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle3}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(2, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(2)}
-										/>
-									</div>
-								</div>
-								<div
-									className={
-										this.state.videoIndex === 3
-											? "col-12 col-md-3 shadow-none   slide-div active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail4}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center  text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle4}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(3, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(3)}
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-				</div>
-				<ContainerComponent
-					document={document}
-					location={window.location}
-					sendQuote={this.sendQuote}
-					quoteData={this.props.quoteData}
-					getData={this.getStoreData}
-					storeData={this.props.storeData}
-					homeData={this.props.homeData}
-					constructionData={this.props.constructiontypeDataHome}
-				/>
-				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
-
 				<Modal
 					isOpen={this.state.modal}
 					toggle={this.toggle}
@@ -1113,10 +927,19 @@ class DashboardComponent extends Component {
 							onClick={this.goToStoreQuote}
 						>
 							Request Quote
-						</Button>{" "}
+						</Button>
 					</ModalFooter>
 				</Modal>
-				<Modal
+		)
+	}
+
+	/**
+	 * Renderable Quote Modal
+	 * 
+	 */
+	_renderQuoteModal() {
+		return (
+			<Modal
 					isOpen={this.state.sendquotemodal}
 					toggle={this.togglesendquote}
 					className="request-form modal-dialog-centered"
@@ -1284,6 +1107,170 @@ class DashboardComponent extends Component {
 						</Button>{" "}
 					</ModalFooter>
 				</Modal>
+		)
+	}
+
+	render() {
+		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
+		//Looping through carousel items
+		console.log("dashdata☀️ 🐨 🐼☀️ 🐨 🐼", dashdata);
+		const slides = mobilevideos.map((item, i) => {
+			return (
+				<CarouselItem key={i}>
+					<div
+						onMouseEnter={this.showText}
+						onMouseLeave={this.hideText}
+						className="imagepart showele"
+					>
+						<img
+							className="imagepart showele"
+							src={item.sliderimage}
+							alt="sliderimage"
+						/>
+						<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+							{!this.state.showPlayButton ? null : (
+								<img
+									className="img-fluid play-button-img"
+									src={playBtn}
+									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
+									alt="playbutton"
+								/>
+							)}{" "}
+						</div>
+					</div>
+					<div className="videopart hideele">
+						<ReactPlayer
+							url={item.link}
+							autoPlay={false}
+							controls={true}
+							playing={isPlaying}
+							onReady={() => {
+								this.changeOnreadyVideo();
+							}}
+							height="100%"
+							onStart={e => {
+								this.vimeoPlayed(e);
+							}}
+							onEnded={e => {
+								this.videoEnd(e);
+							}}
+							muted={false}
+						/>
+					</div>
+					<CarouselCaption
+						className="videocaption "
+						captionText=""
+						captionHeader={item.videoLabel}
+					/>
+				</CarouselItem>
+			);
+		});
+
+		return (
+			<div className=" pt-xl-3 bg-gray midcontent">
+				<div className="row m-0 bg-gray pb-2 home_slider_mein_sec">
+					<div className="container hme_slider video-option p-0 ">
+						<div className="home_slid_left">
+							<div className="bannerSlide position-relative">
+								<Carousel
+									activeIndex={activeIndex}
+									next={this.next}
+									previous={this.previous}
+									pause={false}
+									autoPlay={true}
+									interval={this.state.autoSlide ? 4000 : false}
+								>
+									{slides}
+									<CarouselControl
+										className="mobilePrev"
+										direction="prev"
+										directionText="Previous"
+										onClickHandler={this.previous}
+									/>
+									<CarouselControl
+										className="mobileNext"
+										direction="next"
+										directionText="Next"
+										onClickHandler={this.next}
+									/>
+								</Carousel>
+
+								{this.state.showLoader ? null : (
+									<span className="vdo_icn">
+										<div className="col-12 p-2 vm-layout">
+											<img
+												className="d-inline-block mb-0 align-middle"
+												onClick={() => this.toggleSliderOnMobile()}
+												src={
+													this.state.pausedonmobile ? mplayButton : mpauseButton
+												}
+												alt="playButton"
+											/>
+											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
+												{mobiletitle}
+											</h5>
+										</div>
+									</span>
+								)}
+							</div>
+						</div>
+					</div>
+					<div className="request_quot_mb bg-gray  text-center col-12 mob-xs-1  p-0">
+						<button
+							type="button"
+							onClick={() => this.togglerequestquote()}
+							className="mt-3  btn theme-btn text-uppercase bg-red px-4 py-3 d-inline-block login-blue text-white mb-4 cursor-pointer"
+						>
+							Request a quote
+						</button>
+					</div>
+
+					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
+						<div className="row pt-3 video-space">
+							{
+								this.state.dashdata.map((item, index) => {
+									return (
+										<div
+											className={
+												`${this.state.videoIndex === index && 'active'} col-12 col-md-3 shadow-none   slide-div`
+											}
+											key={index}
+											onClick={() => this.handleClick(index, this.state.paused)}
+											onDoubleClick={() => this.handleDoubleClick(index)}
+										>
+											<div className="vd-option option-shadow">
+												<img
+													className="img-area"
+													src={item.imageLink}
+													alt="manufacture"
+												/>
+												<div className="position-absolute text-center text-white video-title w-100">
+													<h4 className="mb-0">{item.title}</h4>
+												</div>
+											</div>
+										</div>
+									);
+								})
+							}
+						</div>
+					</div>
+				</div>
+				<ContainerComponent
+					document={document}
+					location={window.location}
+					sendQuote={this.sendQuote}
+					quoteData={this.props.quoteData}
+					getData={this.getStoreData}
+					storeData={this.props.storeData}
+					homeData={this.state.homeData}
+					constructionData={this.props.constructiontypeDataHome}
+				/>
+				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
+				
+				{this.state.modal && this._renderModal()}
+
+				{this.state.sendquotemodal && this._renderQuoteModal()}
+				
 
 				{this.state.showLoader ? (
 					<div className="showloader ">

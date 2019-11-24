@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 var base_url = globalVar.base_url1;
 var captchaKey = globalVar.googleCaptchaKey;
 var mybody = {};
@@ -578,8 +580,8 @@ class ContainerComponent extends Component {
                         <div className="col-sm-12 col-xl-1  col-lg-1 pl-0"></div>
 
                         <div className="col-sm-12 col-xl-5  col-lg-5 ">
-                            {homedata.section1image1 ? (<figure className="mb-4 section_fig d-none-mob"><img src={homedata.section1image1} alt="section_2" className="w-100" /></figure>) : null}
-                            {homedata.section1image2 ? (<figure className="mb-4 section_fig d-none-mob"><img src={homedata.section1image2} alt="section_2" className="w-100" /></figure>) : null}
+                            {homedata.section1image1 ? (<figure className="mb-4 section_fig d-none-mob"><LazyLoadImage src={homedata.section1image1} alt="section_2" className="w-100" /></figure>) : null}
+                            {homedata.section1image2 ? (<figure className="mb-4 section_fig d-none-mob"><LazyLoadImage src={homedata.section1image2} alt="section_2" className="w-100" /></figure>) : null}
                         </div>
                     </div>
                 </div>
@@ -595,7 +597,7 @@ class ContainerComponent extends Component {
                      if(item.isShow){
                         return(<div key={i} className="col-lg-4 col-xl-4 col-md-6  cont_type_mob mb-4">
                         <div className="position-relative cover-area">
-                            {item.image ? (<span className="const_img_mob"><img src={item.image} alt="section_2" className="w-100" /> </span>) : null}
+                            {item.image ? (<span className="const_img_mob"><LazyLoadImage src={item.image} alt="section_2" className="w-100" /> </span>) : null}
                             <div className="mob-ht  h-100 align-items-center gallery-area">
                                 <div className="w-100 d-sm-flex d-md-flex d-lg-flex align-items-center h-100  ">
                                     <div className="text-center flex-content-mob font-weight-normal w-100 text-white">
@@ -639,7 +641,7 @@ class ContainerComponent extends Component {
                                                      data1.map((slides, index) =>(
                                                         slides.imageTitle!=="cabinetcustom"?(<div key={index} className="col-sm-6 col-6 col-md-6">
                                                                 <div className="gal_text bg-white">
-                                                                    { slides.imageUrl?(<img className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
+                                                                    { slides.imageUrl?(<LazyLoadImage className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
                                                                     <h5 className="text-center w-100 p-3 font-13 font-medium"> {slides.imageTitle} </h5>
                                                                 </div>
                                                         </div>):null
@@ -667,7 +669,7 @@ class ContainerComponent extends Component {
                                                      data2.map((slides, index) =>(
                                                         slides.imageTitle!=="cabinetcustom"?(<div key={index} className="col-sm-6 col-6 col-md-6">
                                                                 <div className="gal_text bg-white">
-                                                                    {slides.imageUrl?(<img className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
+                                                                    {slides.imageUrl?(<LazyLoadImage className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
                                                                     <h5 className="text-center w-100 p-3 font-13 font-medium"> {slides.imageTitle} </h5>
                                                                 </div>
                                                         </div>):null
@@ -695,7 +697,7 @@ class ContainerComponent extends Component {
                                                      data3.map((slides, index) =>(
                                                         slides.imageTitle!=="cabinetcustom"?(<div key={index} className="col-sm-6 col-6 col-md-6">
                                                                 <div className="gal_text bg-white">
-                                                                    {slides.imageUrl?(<img className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
+                                                                    {slides.imageUrl?(<LazyLoadImage className="w-100" src={base_url + slides.imageUrl} alt="logo here" />):null}
                                                                     <h5 className="text-center w-100 p-3 font-13 font-medium"> {slides.imageTitle} </h5>
                                                                 </div>
                                                         </div>):null
@@ -742,10 +744,10 @@ class ContainerComponent extends Component {
                                     <SliderComponent item={data1} />
                                 </TabPane>
                                 <TabPane tabId="2">
-                                    <SliderComponent1 item={data2} />
+                                    <SliderComponent item={data2} />
                                 </TabPane>
                                 <TabPane tabId="3">
-                                    <SliderComponent2 item={data3} />
+                                    <SliderComponent item={data3} />
                                 </TabPane>
                             </TabContent>
                             {data1.length>0?(<div className="col-12 text-center  pt-lg-5 px-0">
@@ -781,8 +783,7 @@ class ContainerComponent extends Component {
                                             </iframe>
                                         </div></div> </div>) : null}
                                         {homedata.section3VideoThumbnail ? (<a className="d-block bottom-video" onClick={() => { this.showVideo() }}>
-                                            <img className="w-mob-100  b_img_new" src={homedata.section3VideoThumbnail} alt="logo here" /></a>) : null}
-                                    
+                                            <LazyLoadImage className="w-mob-100  b_img_new" src={homedata.section3VideoThumbnail} alt="logo here" /></a>) : null}
                                     </div>
                                </div>
                             </div>
@@ -790,7 +791,7 @@ class ContainerComponent extends Component {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={this.state.modal} toggle={this.togglezipcode} className="request-form modal-dialog-centered">
+            {this.state.modal && <Modal isOpen={this.state.modal} toggle={this.togglezipcode} className="request-form modal-dialog-centered">
                 <ModalHeader toggle={this.togglezipcode}>
                     <span className="display-4 m-auto pt-5 pb-4 d-block ">
                             Enter your zip code
@@ -811,88 +812,91 @@ class ContainerComponent extends Component {
                 <ModalFooter className="border-0 px-5  pb-5">
                     <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.goToStoreQuote}>Request Quote</Button>{' '}
                 </ModalFooter>
-              </Modal>
+              </Modal>}
+            
 
+            {
+                this.state.sendquotemodal && <Modal isOpen={this.state.sendquotemodal} toggle={this.togglesendquote} className="request-form modal-dialog-centered">
+                <ModalHeader toggle={this.togglesendquote}><span className="display-4 m-auto pt-5 pb-4 d-block ">Request a quote</span></ModalHeader>
+                <ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
+                    <div className="row  m-0">
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="name" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="name" className="head-label h5 font-weight-normal">Full Name</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.nameErr}</span>
 
-               <Modal isOpen={this.state.sendquotemodal} toggle={this.togglesendquote} className="request-form modal-dialog-centered">
-                    <ModalHeader toggle={this.togglesendquote}><span className="display-4 m-auto pt-5 pb-4 d-block ">Request a quote</span></ModalHeader>
-                    <ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
-                        <div className="row  m-0">
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="name" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="name" className="head-label h5 font-weight-normal">Full Name</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.nameErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="email" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Email" className="head-label h5 font-weight-normal">Email</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.emailErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-                                <div className="position-relative choose_serv">
-                                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.selectDropToggle}>
-                                        <DropdownToggle caret>
-                                            {this.state.serviceOption}
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
-                                            <DropdownItem onClick={() => { this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                    <label htmlFor="Email" className="head-label h5 font-weight-normal">Service Type</label>
-                                </div>
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="zipcode" type="text" maxLength="5" onChange={(e) => this.handleZipcodeChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Zip" className="head-label h5 font-weight-normal">Zip Code</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.zipcodeErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-6  mb-5">
-                                <div className="position-relative">
-                                    <input id="phone" type="text" maxLength="12" onChange={(e) => this.handlePhoneChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
-                                    <label htmlFor="Phone" className="head-label h5 font-weight-normal">Phone</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.phoneErr}</span>
-
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-                                <div className="position-relative">
-                                    <textarea id="message" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off"></textarea>
-                                    <label htmlFor="Phone" className="head-label h5 font-weight-normal">Message</label>
-                                    <span className="focus-border"></span>
-                                </div>
-                                <span className="error-message">{this.state.messageErr}</span>
-                                <span className="success-message">{this.state.successMsg}</span>
-                            </div>
-                            <div className="form-group col-md-12  mb-5">
-
-                                <ReCAPTCHA
-                                    sitekey={captchaKey}
-                                    onChange={(e) => this.onRecaptchChange(e)}
-                                />
-                                <span className="error-message">{this.state.captchaErr}</span>
-                            </div>
-                            <div style={{ color: "#2C3E50" }}>{this.state.quoteEmailStatus}</div>
                         </div>
-                    </ModalBody>
-                    <ModalFooter className="border-0 px-5  pb-5">
-                        <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.sendRequestQuote}>Request a Quote</Button>{' '}
-                    </ModalFooter>
-            </Modal>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="email" type="text" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Email" className="head-label h5 font-weight-normal">Email</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.emailErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+                            <div className="position-relative choose_serv">
+                                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.selectDropToggle}>
+                                    <DropdownToggle caret>
+                                        {this.state.serviceOption}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Manufacturing" }) }}>Manufacturing</DropdownItem>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Distribution" }) }}>Distribution</DropdownItem>
+                                        <DropdownItem onClick={() => { this.setState({ serviceOption: "Installation" }) }}>Installation</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                                <label htmlFor="Email" className="head-label h5 font-weight-normal">Service Type</label>
+                            </div>
+                        </div>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="zipcode" type="text" maxLength="5" onChange={(e) => this.handleZipcodeChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Zip" className="head-label h5 font-weight-normal">Zip Code</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.zipcodeErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-6  mb-5">
+                            <div className="position-relative">
+                                <input id="phone" type="text" maxLength="12" onChange={(e) => this.handlePhoneChange(e)} className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off" />
+                                <label htmlFor="Phone" className="head-label h5 font-weight-normal">Phone</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.phoneErr}</span>
+
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+                            <div className="position-relative">
+                                <textarea id="message" className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0" autoComplete="off"></textarea>
+                                <label htmlFor="Phone" className="head-label h5 font-weight-normal">Message</label>
+                                <span className="focus-border"></span>
+                            </div>
+                            <span className="error-message">{this.state.messageErr}</span>
+                            <span className="success-message">{this.state.successMsg}</span>
+                        </div>
+                        <div className="form-group col-md-12  mb-5">
+
+                            <ReCAPTCHA
+                                sitekey={captchaKey}
+                                onChange={(e) => this.onRecaptchChange(e)}
+                            />
+                            <span className="error-message">{this.state.captchaErr}</span>
+                        </div>
+                        <div style={{ color: "#2C3E50" }}>{this.state.quoteEmailStatus}</div>
+                    </div>
+                </ModalBody>
+                <ModalFooter className="border-0 px-5  pb-5">
+                    <Button className="btn btn-danger text-uppercase theme-btn  px-4 py-3" onClick={this.sendRequestQuote}>Request a Quote</Button>{' '}
+                </ModalFooter>
+        </Modal>
+            }
+               
         </div>
         );
     }

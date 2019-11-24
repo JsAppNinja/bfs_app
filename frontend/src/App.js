@@ -140,6 +140,7 @@ class App extends Component {
     * Api to fetch data of home
    */
   getHomePageContent = () => {
+
     if (this.state.homeData.length < 1) {
         let RootId = 12757
         fetch(globalVar.base_url1 + '/umbraco/api/Content/Get/' + RootId, {
@@ -386,7 +387,6 @@ class App extends Component {
       getLocationContent:this.getLocationContent,
       locationContent:this.state.locationtypeData
     };
-
     return (
       <div>
         <HeaderComponent ref={this.child} menuData={this.state.headerData} childProps={childProps} mainImage={this.state.headerImage} />
