@@ -93,6 +93,7 @@ class DashboardComponent extends Component {
 		this.sendRequestQuote = this.sendRequestQuote.bind(this);
 		window.addEventListener("resize", function() {});
 		this.props.getHomePageData();
+		this.props.getConstructionTypeDataHome();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -674,6 +675,7 @@ class DashboardComponent extends Component {
 	 */
 
 	changeOnreadyVideo() {
+		console.log('changeOnreadyVideo');
 		let self = this;
 		this.setState({
 			showLoader: false,
@@ -1143,11 +1145,6 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-								<img
-									alt="backimage"
-									className="back-image d-none d-md-block"
-									src={this.state.backImage}
-								/>
 								<Carousel
 									activeIndex={activeIndex}
 									next={this.next}
@@ -1197,7 +1194,7 @@ class DashboardComponent extends Component {
 							onClick={() => this.togglerequestquote()}
 							className="mt-3  btn theme-btn text-uppercase bg-red px-4 py-3 d-inline-block login-blue text-white mb-4 cursor-pointer"
 						>
-							Request a quote{" "}
+							Request a quote
 						</button>
 					</div>
 
