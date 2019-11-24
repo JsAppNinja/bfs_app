@@ -974,9 +974,7 @@ class DashboardComponent extends Component {
 									return (
 										<div
 											className={
-												this.state.videoIndex === index
-													? "col-12 col-md-3  slide-div shadow-none active "
-													: "col-12 col-md-3 shadow-none   slide-div"
+												`${this.state.videoIndex === index && 'active'} col-12 col-md-3 shadow-none   slide-div`
 											}
 											key={index}
 											onClick={() => this.handleClick(index, this.state.paused)}
