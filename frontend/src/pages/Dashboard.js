@@ -979,6 +979,8 @@ class DashboardComponent extends Component {
 													: "col-12 col-md-3 shadow-none   slide-div"
 											}
 											key={index}
+											onClick={() => this.handleClick(index, this.state.paused)}
+											onDoubleClick={() => this.handleDoubleClick(index)}
 										>
 											<div className="vd-option option-shadow">
 												<img
@@ -989,11 +991,6 @@ class DashboardComponent extends Component {
 												<div className="position-absolute text-center text-white video-title w-100">
 													<h4 className="mb-0">{item.title}</h4>
 												</div>
-												<div
-													className="position-absolute w-100  h-100 align-items-center play-button"
-													onClick={() => this.handleClick(index, this.state.paused)}
-													onDoubleClick={() => this.handleDoubleClick(index)}
-												/>
 											</div>
 										</div>
 									);
