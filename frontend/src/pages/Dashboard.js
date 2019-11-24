@@ -92,9 +92,6 @@ class DashboardComponent extends Component {
 		this.togglesendquote = this.togglesendquote.bind(this);
 		this.sendRequestQuote = this.sendRequestQuote.bind(this);
 		window.addEventListener("resize", function() {});
-	}
-
-	componentDidMount() {
 		this.props.getHomePageData();
 	}
 
@@ -848,167 +845,13 @@ class DashboardComponent extends Component {
 		}
 	}
 
-	render() {
-		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
-		//Looping through carousel items
-		const slides = mobilevideos.map((item, i) => {
-			return (
-				<CarouselItem key={i}>
-					<div
-						onMouseEnter={this.showText}
-						onMouseLeave={this.hideText}
-						className="imagepart showele"
-					>
-						<img
-							className="imagepart showele"
-							src={item.sliderimage}
-							alt="sliderimage"
-						/>
-						<div className="w-100 h-100 position-absolute  play-button-banner text-center">
-							{!this.state.showPlayButton ? null : (
-								<img
-									className="img-fluid play-button-img"
-									src={playBtn}
-									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
-									alt="playbutton"
-								/>
-							)}{" "}
-						</div>
-					</div>
-					<div className="videopart hideele">
-						<ReactPlayer
-							url={item.link}
-							autoPlay={false}
-							controls={true}
-							playing={isPlaying}
-							onReady={() => {
-								this.changeOnreadyVideo();
-							}}
-							height="100%"
-							onStart={e => {
-								this.vimeoPlayed(e);
-							}}
-							onEnded={e => {
-								this.videoEnd(e);
-							}}
-							muted={false}
-						/>
-					</div>
-					<CarouselCaption
-						className="videocaption "
-						captionText=""
-						captionHeader={item.videoLabel}
-					/>
-				</CarouselItem>
-			);
-		});
 
+	/**
+	 * Renderable Request Quote Modal
+	 * 
+	 */
+	_renderModal() {
 		return (
-			<div className=" pt-xl-3 bg-gray midcontent">
-				<div className="row m-0 bg-gray pb-2 home_slider_mein_sec">
-					<div className="container hme_slider video-option p-0 ">
-						<div className="home_slid_left">
-							<div className="bannerSlide position-relative">
-								<img
-									alt="backimage"
-									className="back-image d-none d-md-block"
-									src={this.state.backImage}
-								/>
-								<Carousel
-									activeIndex={activeIndex}
-									next={this.next}
-									previous={this.previous}
-									pause={false}
-									autoPlay={true}
-									interval={this.state.autoSlide ? 4000 : false}
-								>
-									{slides}
-									<CarouselControl
-										className="mobilePrev"
-										direction="prev"
-										directionText="Previous"
-										onClickHandler={this.previous}
-									/>
-									<CarouselControl
-										className="mobileNext"
-										direction="next"
-										directionText="Next"
-										onClickHandler={this.next}
-									/>
-								</Carousel>
-
-								{this.state.showLoader ? null : (
-									<span className="vdo_icn">
-										<div className="col-12 p-2 vm-layout">
-											<img
-												className="d-inline-block mb-0 align-middle"
-												onClick={() => this.toggleSliderOnMobile()}
-												src={
-													this.state.pausedonmobile ? mplayButton : mpauseButton
-												}
-												alt="playButton"
-											/>
-											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
-												{mobiletitle}
-											</h5>
-										</div>
-									</span>
-								)}
-							</div>
-						</div>
-					</div>
-					<div className="request_quot_mb bg-gray  text-center col-12 mob-xs-1  p-0">
-						<button
-							type="button"
-							onClick={() => this.togglerequestquote()}
-							className="mt-3  btn theme-btn text-uppercase bg-red px-4 py-3 d-inline-block login-blue text-white mb-4 cursor-pointer"
-						>
-							Request a quote{" "}
-						</button>
-					</div>
-
-					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
-						<div className="row pt-3 video-space">
-							{
-								this.state.dashdata.map((item, index) => {
-									return (
-										<div
-											className={
-												`${this.state.videoIndex === index && 'active'} col-12 col-md-3 shadow-none   slide-div`
-											}
-											key={index}
-											onClick={() => this.handleClick(index, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(index)}
-										>
-											<div className="vd-option option-shadow">
-												<img
-													className="img-area"
-													src={item.imageLink}
-													alt="manufacture"
-												/>
-												<div className="position-absolute text-center text-white video-title w-100">
-													<h4 className="mb-0">{item.title}</h4>
-												</div>
-											</div>
-										</div>
-									);
-								})
-							}
-						</div>
-					</div>
-				</div>
-				<ContainerComponent
-					document={document}
-					location={window.location}
-					sendQuote={this.sendQuote}
-					quoteData={this.props.quoteData}
-					getData={this.getStoreData}
-					storeData={this.props.storeData}
-					homeData={this.props.homeData}
-					constructionData={this.props.constructiontypeDataHome}
-				/>
-				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
-
 				<Modal
 					isOpen={this.state.modal}
 					toggle={this.toggle}
@@ -1055,10 +898,19 @@ class DashboardComponent extends Component {
 							onClick={this.goToStoreQuote}
 						>
 							Request Quote
-						</Button>{" "}
+						</Button>
 					</ModalFooter>
 				</Modal>
-				<Modal
+		)
+	}
+
+	/**
+	 * Renderable Quote Modal
+	 * 
+	 */
+	_renderQuoteModal() {
+		return (
+			<Modal
 					isOpen={this.state.sendquotemodal}
 					toggle={this.togglesendquote}
 					className="request-form modal-dialog-centered"
@@ -1226,6 +1078,175 @@ class DashboardComponent extends Component {
 						</Button>{" "}
 					</ModalFooter>
 				</Modal>
+		)
+	}
+
+	render() {
+		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
+		//Looping through carousel items
+		console.log("dashdata☀️ 🐨 🐼☀️ 🐨 🐼", dashdata);
+		const slides = mobilevideos.map((item, i) => {
+			return (
+				<CarouselItem key={i}>
+					<div
+						onMouseEnter={this.showText}
+						onMouseLeave={this.hideText}
+						className="imagepart showele"
+					>
+						<img
+							className="imagepart showele"
+							src={item.sliderimage}
+							alt="sliderimage"
+						/>
+						<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+							{!this.state.showPlayButton ? null : (
+								<img
+									className="img-fluid play-button-img"
+									src={playBtn}
+									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
+									alt="playbutton"
+								/>
+							)}{" "}
+						</div>
+					</div>
+					<div className="videopart hideele">
+						<ReactPlayer
+							url={item.link}
+							autoPlay={false}
+							controls={true}
+							playing={isPlaying}
+							onReady={() => {
+								this.changeOnreadyVideo();
+							}}
+							height="100%"
+							onStart={e => {
+								this.vimeoPlayed(e);
+							}}
+							onEnded={e => {
+								this.videoEnd(e);
+							}}
+							muted={false}
+						/>
+					</div>
+					<CarouselCaption
+						className="videocaption "
+						captionText=""
+						captionHeader={item.videoLabel}
+					/>
+				</CarouselItem>
+			);
+		});
+
+		return (
+			<div className=" pt-xl-3 bg-gray midcontent">
+				<div className="row m-0 bg-gray pb-2 home_slider_mein_sec">
+					<div className="container hme_slider video-option p-0 ">
+						<div className="home_slid_left">
+							<div className="bannerSlide position-relative">
+								<img
+									alt="backimage"
+									className="back-image d-none d-md-block"
+									src={this.state.backImage}
+								/>
+								<Carousel
+									activeIndex={activeIndex}
+									next={this.next}
+									previous={this.previous}
+									pause={false}
+									autoPlay={true}
+									interval={this.state.autoSlide ? 4000 : false}
+								>
+									{slides}
+									<CarouselControl
+										className="mobilePrev"
+										direction="prev"
+										directionText="Previous"
+										onClickHandler={this.previous}
+									/>
+									<CarouselControl
+										className="mobileNext"
+										direction="next"
+										directionText="Next"
+										onClickHandler={this.next}
+									/>
+								</Carousel>
+
+								{this.state.showLoader ? null : (
+									<span className="vdo_icn">
+										<div className="col-12 p-2 vm-layout">
+											<img
+												className="d-inline-block mb-0 align-middle"
+												onClick={() => this.toggleSliderOnMobile()}
+												src={
+													this.state.pausedonmobile ? mplayButton : mpauseButton
+												}
+												alt="playButton"
+											/>
+											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
+												{mobiletitle}
+											</h5>
+										</div>
+									</span>
+								)}
+							</div>
+						</div>
+					</div>
+					<div className="request_quot_mb bg-gray  text-center col-12 mob-xs-1  p-0">
+						<button
+							type="button"
+							onClick={() => this.togglerequestquote()}
+							className="mt-3  btn theme-btn text-uppercase bg-red px-4 py-3 d-inline-block login-blue text-white mb-4 cursor-pointer"
+						>
+							Request a quote{" "}
+						</button>
+					</div>
+
+					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
+						<div className="row pt-3 video-space">
+							{
+								this.state.dashdata.map((item, index) => {
+									return (
+										<div
+											className={
+												`${this.state.videoIndex === index && 'active'} col-12 col-md-3 shadow-none   slide-div`
+											}
+											key={index}
+											onClick={() => this.handleClick(index, this.state.paused)}
+											onDoubleClick={() => this.handleDoubleClick(index)}
+										>
+											<div className="vd-option option-shadow">
+												<img
+													className="img-area"
+													src={item.imageLink}
+													alt="manufacture"
+												/>
+												<div className="position-absolute text-center text-white video-title w-100">
+													<h4 className="mb-0">{item.title}</h4>
+												</div>
+											</div>
+										</div>
+									);
+								})
+							}
+						</div>
+					</div>
+				</div>
+				<ContainerComponent
+					document={document}
+					location={window.location}
+					sendQuote={this.sendQuote}
+					quoteData={this.props.quoteData}
+					getData={this.getStoreData}
+					storeData={this.props.storeData}
+					homeData={this.props.homeData}
+					constructionData={this.props.constructiontypeDataHome}
+				/>
+				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
+				
+				{this.state.modal && this._renderModal()}
+
+				{this.state.sendquotemodal && this._renderQuoteModal()}
+				
 
 				{this.state.showLoader ? (
 					<div className="showloader ">
