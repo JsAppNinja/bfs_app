@@ -46,7 +46,7 @@ const thumbnails = [ weAre, manufacture, distribution, Service];
 
 class DashboardComponent extends Component {
 	pendingPromises = [];
-
+	dashDataCount = 4;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -94,6 +94,10 @@ class DashboardComponent extends Component {
 		window.addEventListener("resize", function() {});
 	}
 
+	componentDidMount() {
+		this.props.getHomePageData();
+	}
+
 	componentDidUpdate(prevProps, prevState) {
 		if (
 			this.props.refreshStore &&
@@ -112,7 +116,7 @@ class DashboardComponent extends Component {
 			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
 			this.props.basicDataLoaded
 			) {
-			this.props.getHomePageData();
+			// this.props.getHomePageData();
 			this.props.getConstructionTypeDataHome();
 		}
 
@@ -154,10 +158,18 @@ class DashboardComponent extends Component {
 					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
 					featureImage: baseurl + homeData[0][`feature${id}VideoImage`]
 				});
-				dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
+
+				dashdata.push({
+					title: homeData[0][`feature${id}Label`],
+					imageLink: homeData[0][`feature${id}Thumbnail`]
 					? baseurl + homeData[0][`feature${id}Thumbnail`]
-					: thumbnails[id - 1];
-				dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
+					: thumbnails[id - 1]
+				});
+				// dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
+				// 	? baseurl + homeData[0][`feature${id}Thumbnail`]
+				// 	: thumbnails[id - 1];
+				// dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
+
 			});
 			video = videos[this.state.videoIndex];
 			mobilevideos.push({
@@ -285,6 +297,7 @@ class DashboardComponent extends Component {
 	clearPendingPromises = () => this.pendingPromises.map(p => p.cancel());
 
 	handleClick = index => {
+		console.log(index);
 		const waitForClick = cancellablePromise(delay(300));
 		this.appendPendingPromise(waitForClick);
 
@@ -954,106 +967,40 @@ class DashboardComponent extends Component {
 						</button>
 					</div>
 
-					{this.state.showLoader ? null : (
-						<div className="container  p-0  main-home-slider-mob d-none d-xl-block">
-							<div className="row pt-3 video-space">
-								<div
-									className={
-										this.state.videoIndex === 0
-											? "col-12 col-md-3  slide-div shadow-none active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail1}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle1}</h4>
-										</div>
+					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
+						<div className="row pt-3 video-space">
+							{
+								this.state.dashdata.map((item, index) => {
+									return (
 										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(0, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(0)}
-										/>
-									</div>
-								</div>
-
-								<div
-									className={
-										this.state.videoIndex === 1
-											? "col-12 col-md-3  slide-div shadow-none active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail2}
-											alt="manufacture"
-										/>
-										<div className="text-center  position-absolute text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle2}</h4>
+											className={
+												this.state.videoIndex === index
+													? "col-12 col-md-3  slide-div shadow-none active "
+													: "col-12 col-md-3 shadow-none   slide-div"
+											}
+											key={index}
+										>
+											<div className="vd-option option-shadow">
+												<img
+													className="img-area"
+													src={item.imageLink}
+													alt="manufacture"
+												/>
+												<div className="position-absolute text-center text-white video-title w-100">
+													<h4 className="mb-0">{item.title}</h4>
+												</div>
+												<div
+													className="position-absolute w-100  h-100 align-items-center play-button"
+													onClick={() => this.handleClick(index, this.state.paused)}
+													onDoubleClick={() => this.handleDoubleClick(index)}
+												/>
+											</div>
 										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(1, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(1)}
-										/>
-									</div>
-								</div>
-
-								<div
-									className={
-										this.state.videoIndex === 2
-											? "col-12 col-md-3 shadow-none   slide-div active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail3}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center  text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle3}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(2, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(2)}
-										/>
-									</div>
-								</div>
-								<div
-									className={
-										this.state.videoIndex === 3
-											? "col-12 col-md-3 shadow-none   slide-div active "
-											: "col-12 col-md-3 shadow-none   slide-div"
-									}
-								>
-									<div className="vd-option option-shadow">
-										<img
-											className="img-area"
-											src={dashdata.featurethumbnail4}
-											alt="manufacture"
-										/>
-										<div className="position-absolute text-center  text-white video-title w-100">
-											<h4 className="mb-0">{dashdata.thumbnailtitle4}</h4>
-										</div>
-										<div
-											className="position-absolute w-100  h-100 align-items-center play-button"
-											onClick={() => this.handleClick(3, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(3)}
-										/>
-									</div>
-								</div>
-							</div>
+									);
+								})
+							}
 						</div>
-					)}
+					</div>
 				</div>
 				<ContainerComponent
 					document={document}
