@@ -14,6 +14,7 @@ import {
   CarouselCaption
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 //global variable
@@ -65,6 +66,27 @@ class SliderComponent extends Component {
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
   }
+
+  replaceImageDimension(image_url) {
+    var url = new URL(image_url);
+    var query_string = url.search;
+
+    var search_params = new URLSearchParams(query_string); 
+
+    let width = search_params.get('width')/1.5;
+
+    let height = search_params.get('height')/1.5;
+
+    search_params.set('width', width);
+
+    search_params.set('height', height);
+
+    url.search = search_params.toString();
+
+    var new_url = url.toString();
+
+    return new_url;
+}
   
   /**
   * Moving to next slide

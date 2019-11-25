@@ -416,6 +416,27 @@ class ContainerComponent extends Component {
         }));
     }
 
+    replaceImageDimension(image_url) {
+        var url = new URL(image_url);
+        var query_string = url.search;
+    
+        var search_params = new URLSearchParams(query_string); 
+    
+        let width = search_params.get('width') / 1.5;
+    
+        let height = search_params.get('height') / 1.5;
+    
+        search_params.set('width', width);
+    
+        search_params.set('height', height);
+    
+        url.search = search_params.toString();
+    
+        var new_url = url.toString();
+    
+        return new_url;
+    }
+
     render() {
         let homedata = {};
         let buttonLink = [];
@@ -449,13 +470,13 @@ class ContainerComponent extends Component {
             }
 
             if(this.props.homeData[0].section1Image1){
-                homedata["section1image1"] = base_url + this.props.homeData[0].section1Image1;
+                homedata["section1image1"] = this.replaceImageDimension(base_url + this.props.homeData[0].section1Image1);
             }else{
                 homedata["section1image1"] = null;
             }
 
             if(this.props.homeData[0].section1Image2){
-                homedata["section1image2"] = base_url + this.props.homeData[0].section1Image2;
+                homedata["section1image2"] = this.replaceImageDimension(base_url + this.props.homeData[0].section1Image2);
             }else{
                 homedata["section1image2"] = null;
             }
@@ -532,7 +553,7 @@ class ContainerComponent extends Component {
                    var image = base_url + this.props.constructionData[i].Properties.homePageBackgroundImage;
                 }else{
                     if(this.props.constructionData[i].Properties.image1){
-                        image = base_url + this.props.constructionData[i].Properties.image1;
+                        image = this.replaceImageDimension(base_url + this.props.constructionData[i].Properties.image1);
                     } else{
                         image="";
                     }    
@@ -580,8 +601,8 @@ class ContainerComponent extends Component {
                         <div className="col-sm-12 col-xl-1  col-lg-1 pl-0"></div>
 
                         <div className="col-sm-12 col-xl-5  col-lg-5 ">
-                            {homedata.section1image1 ? (<figure className="mb-4 section_fig d-none-mob"><LazyLoadImage src={homedata.section1image1} alt="section_2" className="w-100" /></figure>) : null}
-                            {homedata.section1image2 ? (<figure className="mb-4 section_fig d-none-mob"><LazyLoadImage src={homedata.section1image2} alt="section_2" className="w-100" /></figure>) : null}
+                            {homedata.section1image1 ? (<figure className="mb-4 section_fig d-none-mob p-4"><LazyLoadImage src={homedata.section1image1} alt="section_2" className="w-100" /></figure>) : null}
+                            {homedata.section1image2 ? (<figure className="mb-4 section_fig d-none-mob p-4"><LazyLoadImage src={homedata.section1image2} alt="section_2" className="w-100" /></figure>) : null}
                         </div>
                     </div>
                 </div>
