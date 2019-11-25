@@ -256,7 +256,7 @@ class DashboardComponent extends Component {
 			this.setState({
 				videos,
 				allvideos,
-				// dashdata,
+				dashdata,
 				mobilevideos,
 				mobiletitle,
 			});
@@ -1113,58 +1113,6 @@ class DashboardComponent extends Component {
 	render() {
 		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
 		//Looping through carousel items
-		console.log("dashdata☀️ 🐨 🐼☀️ 🐨 🐼", dashdata);
-		const slides = mobilevideos.map((item, i) => {
-			return (
-				<CarouselItem key={i}>
-					<div
-						onMouseEnter={this.showText}
-						onMouseLeave={this.hideText}
-						className="imagepart showele"
-					>
-						<img
-							className="imagepart showele"
-							src={item.sliderimage}
-							alt="sliderimage"
-						/>
-						<div className="w-100 h-100 position-absolute  play-button-banner text-center">
-							{!this.state.showPlayButton ? null : (
-								<img
-									className="img-fluid play-button-img"
-									src={playBtn}
-									onClick={() => this.handleDoubleClick(this.state.videoIndex)}
-									alt="playbutton"
-								/>
-							)}{" "}
-						</div>
-					</div>
-					<div className="videopart hideele">
-						<ReactPlayer
-							url={item.link}
-							autoPlay={false}
-							controls={true}
-							playing={isPlaying}
-							onReady={() => {
-								this.changeOnreadyVideo();
-							}}
-							height="100%"
-							onStart={e => {
-								this.vimeoPlayed(e);
-							}}
-							onEnded={e => {
-								this.videoEnd(e);
-							}}
-							muted={false}
-						/>
-					</div>
-					<CarouselCaption
-						className="videocaption "
-						captionText=""
-						captionHeader={item.videoLabel}
-					/>
-				</CarouselItem>
-			);
-		});
 
 		return (
 			<div className=" pt-xl-3 bg-gray midcontent">
@@ -1180,7 +1128,57 @@ class DashboardComponent extends Component {
 									autoPlay={true}
 									interval={this.state.autoSlide ? 4000 : false}
 								>
-									{slides}
+									{mobilevideos.map((item, i) => {
+											return (
+												<CarouselItem key={i}>
+													<div
+														onMouseEnter={this.showText}
+														onMouseLeave={this.hideText}
+														className="imagepart showele"
+													>
+														<img
+															className="imagepart showele"
+															src={item.sliderimage}
+															alt="sliderimage"
+														/>
+														<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+															{!this.state.showPlayButton ? null : (
+																<img
+																	className="img-fluid play-button-img"
+																	src={playBtn}
+																	onClick={() => this.handleDoubleClick(this.state.videoIndex)}
+																	alt="playbutton"
+																/>
+															)}{" "}
+														</div>
+													</div>
+													<div className="videopart hideele">
+														<ReactPlayer
+															url={item.link}
+															autoPlay={false}
+															controls={true}
+															playing={isPlaying}
+															onReady={() => {
+																this.changeOnreadyVideo();
+															}}
+															height="100%"
+															onStart={e => {
+																this.vimeoPlayed(e);
+															}}
+															onEnded={e => {
+																this.videoEnd(e);
+															}}
+															muted={false}
+														/>
+													</div>
+													<CarouselCaption
+														className="videocaption "
+														captionText=""
+														captionHeader={item.videoLabel}
+													/>
+												</CarouselItem>
+											);
+										})}
 									<CarouselControl
 										className="mobilePrev"
 										direction="prev"
