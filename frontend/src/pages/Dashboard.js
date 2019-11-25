@@ -83,6 +83,7 @@ class DashboardComponent extends Component {
 			backImage: "",
 			isPlaying: false,
 			homeData: [],
+			imageLoaded: false
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -305,6 +306,10 @@ class DashboardComponent extends Component {
 				mobiletitle,
 				backImage: 
 					globalVar.base_url1 + this.state.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
+					imageLoaded: true
+			}, () => {
+				var self = this;
+				setTimeout(() => self.setState({imageLoaded: false}), 700);
 			});
 		}
 	}
@@ -1137,14 +1142,14 @@ class DashboardComponent extends Component {
 														className="imagepart showele"
 													>
 														<img
-															className="imagepart showele"
+															className={this.state.imageLoaded ?  ' imagepart showele imageLoaded' :'imagepart showele ' }
 															src={item.sliderimage}
 															alt="sliderimage"
 														/>
 														<div className="w-100 h-100 position-absolute  play-button-banner text-center">
 															{!this.state.showPlayButton ? null : (
 																<img
-																	className="img-fluid play-button-img"
+																	className='img-fluid play-button-img'
 																	src={playBtn}
 																	onClick={() => this.handleDoubleClick(this.state.videoIndex)}
 																	alt="playbutton"
