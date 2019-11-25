@@ -54,10 +54,15 @@ const thumbnails = [
 ];
 
 class SliderComponent extends Component {
-  
+  initDimension =  {
+    center: '0.50187969924812,0.502',
+    mode: 'crop',
+    width: 162,
+    height: 108
+  }
   constructor(props) {
     super(props);
-
+    
     //defining state variable
     this.state = { activeIndex: 6 };
 
@@ -67,16 +72,24 @@ class SliderComponent extends Component {
     this.goToIndex = this.goToIndex.bind(this);
   }
 
-  replaceImageDimension(image_url) {
+  replaceImageDimension(image_url, type = 'add') {
     var url = new URL(image_url);
     var query_string = url.search;
-
     var search_params = new URLSearchParams(query_string); 
+    let width, height, center, mode;
+    if (type == 'add') {
+      width = this.initDimension.width;
+      height = this.initDimension.height;
+      center = this.initDimension.center;
+      mode = this.initDimension.mode;
+      search_params.append('mode', mode);
+      search_params.append('center', center);
+    } else {
+      width = search_params.get('width')/1.5;
 
-    let width = search_params.get('width')/1.5;
+      height = search_params.get('height')/1.5;
 
-    let height = search_params.get('height')/1.5;
-
+    }
     search_params.set('width', width);
 
     search_params.set('height', height);
@@ -119,7 +132,7 @@ class SliderComponent extends Component {
     const slides = items.map((item, i) => {
       return (
         <CarouselItem key={item.imageUrl + i}>
-          <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : base_url + item.imageUrl }  alt={item.imageTitle} />
+          <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : this.replaceImageDimension(base_url + item.imageUrl, 'add') }  alt={item.imageTitle} />
         </CarouselItem>
       );
     });
@@ -151,7 +164,7 @@ class SliderComponent extends Component {
          {items.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
              <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
                <button type="button" onClick={() => this.goToIndex(index)} >
-                 {slides.imageUrl?(<img className="w-100 thumbimage" src={base_url + slides.imageUrl} alt="thumbnail_1" />):null}
+                 {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}
                </button>
                <h5 className="font-weight-normal text-center pt-3 mt-auto">{slides.imageTitle}</h5>
              </div>:null
