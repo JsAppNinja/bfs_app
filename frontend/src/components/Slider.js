@@ -64,12 +64,27 @@ class SliderComponent extends Component {
     super(props);
     
     //defining state variable
-    this.state = { activeIndex: 6 };
+    this.state = {
+      activeIndex: 6,
+      windowWidth: window.innerWidth
+     };
 
     //binding function
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
+  }
+
+  componentDidMount() {
+    this.triggerWindowResize();
+  }
+
+  triggerWindowResize() {
+    window.addEventListener('resize', ()=> {
+      this.setState({
+        windowWidth: window.innerWidth
+      });
+    });
   }
 
   replaceImageDimension(image_url, type = 'add') {
@@ -129,23 +144,8 @@ class SliderComponent extends Component {
   render() {
     const { activeIndex } = this.state;
     items = this.props.item;
-    const slides = items.map((item, i) => {
-      return (
-        <CarouselItem key={item.imageUrl + i}>
-          <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : this.replaceImageDimension(base_url + item.imageUrl, 'add') }  alt={item.imageTitle} />
-        </CarouselItem>
-      );
-    });
 
     //looping through carousel items
-    const slidesThumnails = thumbnails.map((capt, i) => {
-      return (
-        <CarouselItem key={capt.src + i + "d"}>
-          <img src={capt.src} alt={capt.altText} />
-          <CarouselCaption captionText={capt.caption} />
-        </CarouselItem>
-      );
-    });
 
     return (<div>
       <div className="upper_slide">
@@ -155,33 +155,53 @@ class SliderComponent extends Component {
           previous={this.previous}
           interval={false}
         >
-          {slides}
+          {items.map((item, i) => {
+            return (
+              <CarouselItem key={item.imageUrl + i}>
+                <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : this.replaceImageDimension(base_url + item.imageUrl, 'add') }  alt={item.imageTitle} />
+              </CarouselItem>
+            );
+          })}
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
           <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
         </Carousel>
       </div>
-      <div className=" row pt-4 d-none d-md-flex">
-         {items.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
-             <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
-               <button type="button" onClick={() => this.goToIndex(index)} >
-                 {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}
-               </button>
-               <h5 className="font-weight-normal text-center pt-3 mt-auto">{slides.imageTitle}</h5>
-             </div>:null
-          ))}
-      </div>
-       <div className="mobile-slider d-block d-md-none m-auto">
+
+      {
+        this.state.windowWidth > 576 && <div className=" row pt-4 d-none d-md-flex">
+        {items.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
+            <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
+              <button type="button" onClick={() => this.goToIndex(index)} >
+                {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}
+              </button>
+              <h5 className="font-weight-normal text-center pt-3 mt-auto">{slides.imageTitle}</h5>
+            </div>:null
+         ))}
+     </div>
+      }
+
+      {
+        this.state.windowWidth < 768 && <div className="mobile-slider d-block d-md-none m-auto">
           <Carousel
             activeIndex={activeIndex}
             next={this.next}
             previous={this.previous}
             interval={false}
           >
-            {slidesThumnails}
+            {thumbnails.map((capt, i) => {
+              return (
+                <CarouselItem key={capt.src + i + "d"}>
+                  <img src={capt.src} alt={capt.altText} />
+                  <CarouselCaption captionText={capt.caption} />
+                </CarouselItem>
+              );
+            })}
             <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
             <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
           </Carousel>
-       </div>
+      </div>
+      }
+       
       </div>
     );
   }
