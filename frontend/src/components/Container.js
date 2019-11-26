@@ -618,7 +618,7 @@ class ContainerComponent extends Component {
                      if(item.isShow){
                         return(<div key={i} className="col-lg-4 col-xl-4 col-md-6  cont_type_mob mb-4">
                         <div className="position-relative cover-area">
-                            {item.image ? (<span className="const_img_mob"><LazyLoadImage src={item.image} alt="section_2" className="w-100" /> </span>) : null}
+                            {item.image ? (<span className="const_img_mob"><LazyLoadImage src={this.replaceImageDimension(item.image)} alt="section_2" className="w-100" /> </span>) : null}
                             <div className="mob-ht  h-100 align-items-center gallery-area">
                                 <div className="w-100 d-sm-flex d-md-flex d-lg-flex align-items-center h-100  ">
                                     <div className="text-center flex-content-mob font-weight-normal w-100 text-white">
