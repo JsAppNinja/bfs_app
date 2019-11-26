@@ -52,7 +52,6 @@ class DashboardComponent extends Component {
 			autoSlide: true,
 			videoIndex: 0,
 			paused: false,
-			addClass: false,
 			modal: false,
 			toggleClass: false,
 			pausedonmobile: false,
@@ -74,13 +73,9 @@ class DashboardComponent extends Component {
 			quoteEmailStatus: "",
 			recaptchaValue: "",
 			videos: [],
-			mobilevideos: [],
-			mobiletitle: "",
 			showPlayButton: true,
-			backImage: "",
 			isPlaying: false,
 			homeData: [],
-			imageLoaded: false
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -124,13 +119,6 @@ class DashboardComponent extends Component {
 	  setHomeData() {
 			let videos = [];
 			let video = {};
-			let mobilevideos = [];
-			let mobiletitle = "";
-
-			this.setState({
-				backImage:
-					globalVar.base_url1 + this.state.homeData[0].feature1VideoImage,
-			});
 
 			[1, 2, 3, 4].forEach(id => {
 				const { homeData } = this.state;
@@ -155,16 +143,7 @@ class DashboardComponent extends Component {
 			
 			});
 
-			video = videos[this.state.videoIndex];
-			mobilevideos.push({
-				id: video.id,
-				link: video.link,
-				name: video.name,
-				responsive: true,
-				videoLabel: video.name,
-				sliderimage: video.featureImage ? video.featureImage : video.image,
-			});
-			mobiletitle = videos[this.state.videoIndex].videoLabel;
+			this.setState({ videos });
 
 			var divele = document.getElementsByClassName("video-option");
 			var myElements = document.querySelectorAll(".videocaption");
@@ -236,11 +215,7 @@ class DashboardComponent extends Component {
 				}
 			}
 
-			this.setState({
-				videos,
-				mobilevideos,
-				mobiletitle,
-			});
+			
 	  }
 
 	componentDidUpdate(prevProps, prevState) {
@@ -265,33 +240,6 @@ class DashboardComponent extends Component {
 			this.props.getConstructionTypeDataHome();
 		}
 
-		
-
-		if (this.state.videoIndex !== prevState.videoIndex) {
-			const { videos } = this.state;
-			const video = videos[this.state.videoIndex];
-			let mobilevideos = [];
-			let mobiletitle = "";
-			mobilevideos.push({
-				id: video.id,
-				link: video.link,
-				name: video.name,
-				responsive: true,
-				videoLabel: video.name,
-				sliderimage: video.featureImage ? video.featureImage : video.image,
-			});
-			mobiletitle = videos[this.state.videoIndex].videoLabel;
-			this.setState({
-				mobilevideos,
-				mobiletitle,
-				backImage: 
-					globalVar.base_url1 + this.state.homeData[0][`feature${this.state.videoIndex + 1}VideoImage`],
-					imageLoaded: true
-			}, () => {
-				var self = this;
-				setTimeout(() => self.setState({imageLoaded: false}), 700);
-			});
-		}
 	}
 
 	componentWillUnmount() {
@@ -618,12 +566,10 @@ class DashboardComponent extends Component {
 			this.state.videoIndex === videos.length - 1
 				? 0
 				: this.state.videoIndex + 1;
-		const mobiletitle = videos[this.state.videoIndex].videoLabel;
 		this.setState({
 			pausedonmobile: true,
 			videoIndex: nextIndex,
 			paused: true,
-			mobiletitle,
 			isPlaying: false,
 		});
 		var imgelement = document.getElementsByClassName("imagepart");
@@ -646,12 +592,10 @@ class DashboardComponent extends Component {
 			this.state.videoIndex === 0
 				? videos.length - 1
 				: this.state.videoIndex - 1;
-		const mobiletitle = videos[this.state.videoIndex].videoLabel;
 		this.setState({
 			pausedonmobile: true,
 			videoIndex: nextIndex,
 			paused: true,
-			mobiletitle,
 			isPlaying: false,
 		});
 		var imgelement = document.getElementsByClassName("imagepart");
@@ -687,8 +631,6 @@ class DashboardComponent extends Component {
 	 */
 
 	changeOnreadyVideo() {
-		console.log('changeOnreadyVideo');
-		let self = this;
 		this.setState({
 			showLoader: false,
 		});
@@ -1096,7 +1038,7 @@ class DashboardComponent extends Component {
 	}
 
 	render() {
-		const { activeIndex, mobilevideos, mobiletitle, pausedonmobile, isPlaying } = this.state;
+		const { activeIndex, pausedonmobile, isPlaying, videos } = this.state;
 		//Looping through carousel items
 
 		return (
@@ -1106,14 +1048,14 @@ class DashboardComponent extends Component {
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
 								<Carousel
-									activeIndex={activeIndex}
+									activeIndex={this.state.videoIndex}
 									next={this.next}
 									previous={this.previous}
 									pause={false}
 									autoPlay={true}
 									interval={this.state.autoSlide ? 4000 : false}
 								>
-									{mobilevideos.map((item, i) => {
+									{videos.map((item, i) => {
 											return (
 												<CarouselItem key={i}>
 													<div
@@ -1122,8 +1064,8 @@ class DashboardComponent extends Component {
 														className="imagepart showele"
 													>
 														<img
-															className={this.state.imageLoaded ?  'imagepart showele' :'imagepart showele ' }
-															src={item.sliderimage}
+															className='imagepart showele'
+															src={item.featureImage}
 															alt="sliderimage"
 														/>
 														<div className="w-100 h-100 position-absolute  play-button-banner text-center">
@@ -1159,7 +1101,7 @@ class DashboardComponent extends Component {
 													<CarouselCaption
 														className="videocaption "
 														captionText=""
-														captionHeader={item.videoLabel}
+														captionHeader={item.name}
 													/>
 												</CarouselItem>
 											);
@@ -1190,7 +1132,9 @@ class DashboardComponent extends Component {
 												alt="playButton"
 											/>
 											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
-												{mobiletitle}
+												{
+													videos.length && videos[this.state.videoIndex].name
+												}
 											</h5>
 										</div>
 									</span>
