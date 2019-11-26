@@ -46,7 +46,6 @@ const thumbnails = [ weAre, manufacture, distribution, Service];
 
 class DashboardComponent extends Component {
 	pendingPromises = [];
-	dashDataCount = 4;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -75,8 +74,6 @@ class DashboardComponent extends Component {
 			quoteEmailStatus: "",
 			recaptchaValue: "",
 			videos: [],
-			allvideos: [],
-			dashdata: [],
 			mobilevideos: [],
 			mobiletitle: "",
 			showPlayButton: true,
@@ -126,8 +123,6 @@ class DashboardComponent extends Component {
 
 	  setHomeData() {
 			let videos = [];
-			let allvideos = [];
-			let dashdata = [];
 			let video = {};
 			let mobilevideos = [];
 			let mobiletitle = "";
@@ -144,33 +139,20 @@ class DashboardComponent extends Component {
 
 				videos.push({
 					id: finalVideo[0],
-					link: homeData[0][`feature${id}VideoLink`],
 					name: homeData[0][`feature${id}Label`].substring(0, 20),
+					link: homeData[0][`feature${id}VideoLink`],
+					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
 					responsive: true,
 					image: sliders[id - 1],
 					featureImage: homeData[0][`feature${id}VideoImage`]
 						? baseurl + homeData[0][`feature${id}VideoImage`]
-						: sliders[id - 1]
-				});
-				allvideos.push({
-					id: finalVideo[0],
-					name: homeData[0][`feature${id}Label`].substring(0, 20),
-					responsive: true,
-					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
-					featureImage: baseurl + homeData[0][`feature${id}VideoImage`]
-				});
-
-				dashdata.push({
+						: sliders[id - 1],
 					title: homeData[0][`feature${id}Label`],
 					imageLink: homeData[0][`feature${id}Thumbnail`]
-					? baseurl + homeData[0][`feature${id}Thumbnail`]
-					: thumbnails[id - 1]
+						? baseurl + homeData[0][`feature${id}Thumbnail`]
+						: thumbnails[id - 1]
 				});
-				// dashdata[`featurethumbnail${id}`] = homeData[0][`feature${id}Thumbnail`]
-				// 	? baseurl + homeData[0][`feature${id}Thumbnail`]
-				// 	: thumbnails[id - 1];
-				// dashdata[`thumbnailtitle${id}`] = homeData[0][`feature${id}Label`];
-
+			
 			});
 
 			video = videos[this.state.videoIndex];
@@ -182,7 +164,7 @@ class DashboardComponent extends Component {
 				videoLabel: video.name,
 				sliderimage: video.featureImage ? video.featureImage : video.image,
 			});
-			mobiletitle = allvideos[this.state.videoIndex].videoLabel;
+			mobiletitle = videos[this.state.videoIndex].videoLabel;
 
 			var divele = document.getElementsByClassName("video-option");
 			var myElements = document.querySelectorAll(".videocaption");
@@ -256,8 +238,6 @@ class DashboardComponent extends Component {
 
 			this.setState({
 				videos,
-				allvideos,
-				dashdata,
 				mobilevideos,
 				mobiletitle,
 			});
@@ -288,7 +268,7 @@ class DashboardComponent extends Component {
 		
 
 		if (this.state.videoIndex !== prevState.videoIndex) {
-			const { videos, allvideos } = this.state;
+			const { videos } = this.state;
 			const video = videos[this.state.videoIndex];
 			let mobilevideos = [];
 			let mobiletitle = "";
@@ -300,7 +280,7 @@ class DashboardComponent extends Component {
 				videoLabel: video.name,
 				sliderimage: video.featureImage ? video.featureImage : video.image,
 			});
-			mobiletitle = allvideos[this.state.videoIndex].videoLabel;
+			mobiletitle = videos[this.state.videoIndex].videoLabel;
 			this.setState({
 				mobilevideos,
 				mobiletitle,
@@ -633,12 +613,12 @@ class DashboardComponent extends Component {
 	 */
 
 	next() {
-		const { videos, allvideos } = this.state;
+		const { videos } = this.state;
 		const nextIndex =
 			this.state.videoIndex === videos.length - 1
 				? 0
 				: this.state.videoIndex + 1;
-		const mobiletitle = allvideos[this.state.videoIndex].videoLabel;
+		const mobiletitle = videos[this.state.videoIndex].videoLabel;
 		this.setState({
 			pausedonmobile: true,
 			videoIndex: nextIndex,
@@ -661,12 +641,12 @@ class DashboardComponent extends Component {
 	 */
 
 	previous() {
-		const { videos, allvideos } = this.state;
+		const { videos } = this.state;
 		const nextIndex =
 			this.state.videoIndex === 0
 				? videos.length - 1
 				: this.state.videoIndex - 1;
-		const mobiletitle = allvideos[this.state.videoIndex].videoLabel;
+		const mobiletitle = videos[this.state.videoIndex].videoLabel;
 		this.setState({
 			pausedonmobile: true,
 			videoIndex: nextIndex,
@@ -1116,7 +1096,7 @@ class DashboardComponent extends Component {
 	}
 
 	render() {
-		const { activeIndex, mobilevideos, dashdata, mobiletitle, pausedonmobile, isPlaying } = this.state;
+		const { activeIndex, mobilevideos, mobiletitle, pausedonmobile, isPlaying } = this.state;
 		//Looping through carousel items
 
 		return (
@@ -1142,7 +1122,7 @@ class DashboardComponent extends Component {
 														className="imagepart showele"
 													>
 														<img
-															className={this.state.imageLoaded ?  ' imagepart showele imageLoaded' :'imagepart showele ' }
+															className={this.state.imageLoaded ?  'imagepart showele' :'imagepart showele ' }
 															src={item.sliderimage}
 															alt="sliderimage"
 														/>
@@ -1154,7 +1134,7 @@ class DashboardComponent extends Component {
 																	onClick={() => this.handleDoubleClick(this.state.videoIndex)}
 																	alt="playbutton"
 																/>
-															)}{" "}
+															)}
 														</div>
 													</div>
 													<div className="videopart hideele">
@@ -1231,7 +1211,7 @@ class DashboardComponent extends Component {
 					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
 						<div className="row pt-3 video-space">
 							{
-								this.state.dashdata.map((item, index) => {
+								this.state.videos.map((item, index) => {
 									return (
 										<div
 											className={
