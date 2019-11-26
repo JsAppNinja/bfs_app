@@ -1045,16 +1045,17 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-							<div className="w-100 h-100 position-absolute  play-button-banner text-center">
-								{ this.state.isPlaying? null : (
+							{ this.state.isPlaying? null : (<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+								
 									<img
 										className='img-fluid play-button-img'
 										src={playBtn}
 										onClick={() => this.handleDoubleClick(this.state.videoIndex)}
 										alt="playbutton"
 									/>
-								)}
-							</div>
+								
+								</div>
+							)}
 								<Carousel
 									activeIndex={this.state.videoIndex}
 									next={this.next}
