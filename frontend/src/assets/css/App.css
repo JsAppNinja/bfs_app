@@ -2006,9 +2006,6 @@ select {
 .hme_slider
 	.home_slid_left
 	.bannerSlide
-	.carousel
-	.carousel-inner
-	.carousel-item
 	img.play-button-img {
 	width: auto;
 	max-width: 68px;
@@ -2020,13 +2017,17 @@ select {
 	object-fit: none;
 	top: 50%;
 	left: 50%;
-    transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	position: absolute;
+	z-index: 100;
+	cursor: pointer;
 }
 .play-button-banner {
-	transform: translate(9999px);
+	/* transform: translate(9999px); */
 	opacity: 0;
+	z-index: 10;
 }
-.carousel-item:hover .play-button-banner {
+.play-button-banner:hover {
 	transition: opacity 2s linear;
 	transform: translate(0);
 	opacity: 1;

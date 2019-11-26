@@ -277,18 +277,18 @@ class DashboardComponent extends Component {
 
 	playVideo = index => {
 		var element = document.getElementsByClassName("carousel-caption");
-		element[0].classList.remove("animated");
-		element[0].classList.remove("fadeInUp");
+		element[index].classList.remove("animated");
+		element[index].classList.remove("fadeInUp");
 
 		var imgelement = document.getElementsByClassName("imagepart");
 		var videoelement = document.getElementsByClassName("videopart");
 		var titleelement = document.getElementsByClassName("vm-layout");
-		imgelement[0].classList.remove("showele");
-		imgelement[0].classList.add("hideele");
-		videoelement[0].classList.remove("hideele");
-		videoelement[0].classList.add("showele");
-		titleelement = document.getElementsByClassName("vm-layout");
-		titleelement[0].classList.add("d-none");
+		imgelement[index].classList.remove("showele");
+		imgelement[index].classList.add("hideele");
+		videoelement[index].classList.remove("hideele");
+		videoelement[index].classList.add("showele");
+		// titleelement = document.getElementsByClassName("vm-layout");
+		// titleelement.classList.add("d-none");
 		this.setState({
 			videoIndex: index,
 			isPlaying: true,
@@ -1045,6 +1045,16 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
+							<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+								{ this.state.isPlaying? null : (
+									<img
+										className='img-fluid play-button-img'
+										src={playBtn}
+										onClick={() => this.handleDoubleClick(this.state.videoIndex)}
+										alt="playbutton"
+									/>
+								)}
+							</div>
 								<Carousel
 									activeIndex={this.state.videoIndex}
 									next={this.next}
@@ -1067,16 +1077,7 @@ class DashboardComponent extends Component {
 															src={item.featureImage}
 															alt="sliderimage"
 														/>
-														<div className="w-100 h-100 position-absolute  play-button-banner text-center">
-															{!this.state.showPlayButton ? null : (
-																<img
-																	className='img-fluid play-button-img'
-																	src={playBtn}
-																	onClick={() => this.handleDoubleClick(this.state.videoIndex)}
-																	alt="playbutton"
-																/>
-															)}
-														</div>
+														
 													</div>
 													<div className="videopart hideele">
 														<ReactPlayer
