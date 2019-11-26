@@ -158,7 +158,7 @@ class SliderComponent extends Component {
           {items.map((item, i) => {
             return (
               <CarouselItem key={item.imageUrl + i}>
-                <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : this.replaceImageDimension(base_url + item.imageUrl, 'add') }  alt={item.imageTitle} />
+                <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : base_url + item.imageUrl }  alt={item.imageTitle} />
               </CarouselItem>
             );
           })}
