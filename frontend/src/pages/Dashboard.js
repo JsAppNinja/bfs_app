@@ -118,7 +118,6 @@ class DashboardComponent extends Component {
 
 	  setHomeData() {
 			let videos = [];
-			let video = {};
 
 			[1, 2, 3, 4].forEach(id => {
 				const { homeData } = this.state;
@@ -255,7 +254,6 @@ class DashboardComponent extends Component {
 	clearPendingPromises = () => this.pendingPromises.map(p => p.cancel());
 
 	handleClick = index => {
-		console.log(index);
 		const waitForClick = cancellablePromise(delay(300));
 		this.appendPendingPromise(waitForClick);
 
@@ -1054,6 +1052,7 @@ class DashboardComponent extends Component {
 									pause={false}
 									autoPlay={true}
 									interval={this.state.autoSlide ? 4000 : false}
+									className="carousel-fade"
 								>
 									{videos.map((item, i) => {
 											return (

@@ -11,18 +11,6 @@ li {
 	font-weight: 400;
 }
 
-	.carousel-inner .active {
-	  opacity: 1;
-	}
-	.imageLoaded {
-	opacity: 0;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  display: block;
-	  position: absolute;
-	  transition: opacity .3s ease-in-out;
-	}
 /**umb_name:Font Medium*/
 .font-medium {
 	font-weight: 500;
@@ -1664,11 +1652,11 @@ iframe .player .vp-controls .play {
 	z-index: 100;
 }
 
- {
+ /* {
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 	max-width: 100%;
-}
+} */
 
 .CareerHomeBanner {
 	overflow: hidden;
