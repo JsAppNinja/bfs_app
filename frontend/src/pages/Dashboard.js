@@ -91,6 +91,11 @@ class DashboardComponent extends Component {
 
 	componentDidMount() {
 		this.getHomePageContent();
+		window.addEventListener('load', () => {
+			this.setState({
+				showLoader: false,
+			});
+		});
 	}
 	getHomePageContent = () => {
 		if (this.state.homeData.length < 1) {
@@ -254,20 +259,21 @@ class DashboardComponent extends Component {
 	clearPendingPromises = () => this.pendingPromises.map(p => p.cancel());
 
 	handleClick = index => {
-		const waitForClick = cancellablePromise(delay(300));
-		this.appendPendingPromise(waitForClick);
+		this.selectVideo(index);
+		// const waitForClick = cancellablePromise(delay(100));
+		// this.appendPendingPromise(waitForClick);
 
-		return waitForClick.promise
-			.then(() => {
-				this.removePendingPromise(waitForClick);
-				this.selectVideo(index);
-			})
-			.catch(errorInfo => {
-				this.removePendingPromise(waitForClick);
-				if (!errorInfo.isCanceled) {
-					throw errorInfo.error;
-				}
-			});
+		// return waitForClick.promise
+		// 	.then(() => {
+		// 		this.removePendingPromise(waitForClick);
+		// 		this.selectVideo(index);
+		// 	})
+		// 	.catch(errorInfo => {
+		// 		this.removePendingPromise(waitForClick);
+		// 		if (!errorInfo.isCanceled) {
+		// 			throw errorInfo.error;
+		// 		}
+		// 	});
 	};
 
 	handleDoubleClick = index => {
@@ -280,13 +286,13 @@ class DashboardComponent extends Component {
 		element[index].classList.remove("animated");
 		element[index].classList.remove("fadeInUp");
 
-		var imgelement = document.getElementsByClassName("imagepart");
-		var videoelement = document.getElementsByClassName("videopart");
-		var titleelement = document.getElementsByClassName("vm-layout");
-		imgelement[index].classList.remove("showele");
-		imgelement[index].classList.add("hideele");
-		videoelement[index].classList.remove("hideele");
-		videoelement[index].classList.add("showele");
+		// var imgelement = document.getElementsByClassName("imagepart");
+		// var videoelement = document.getElementsByClassName("videopart");
+		// var titleelement = document.getElementsByClassName("vm-layout");
+		// imgelement[index].classList.remove("showele");
+		// imgelement[index].classList.add("hideele");
+		// videoelement[index].classList.remove("hideele");
+		// videoelement[index].classList.add("showele");
 		// titleelement = document.getElementsByClassName("vm-layout");
 		// titleelement.classList.add("d-none");
 		this.setState({
@@ -305,14 +311,14 @@ class DashboardComponent extends Component {
 		element[0].classList.remove("animated");
 		element[0].classList.remove("fadeInUp");
 		if (index !== this.state.videoIndex) {
-			var imgelement = document.getElementsByClassName("imagepart");
-			var videoelement = document.getElementsByClassName("videopart");
-			imgelement[0].classList.remove("hideele");
-			imgelement[0].classList.add("showele");
-			videoelement[0].classList.remove("showele");
-			videoelement[0].classList.add("hideele");
-			var titleelement = document.getElementsByClassName("vm-layout");
-			titleelement[0].classList.remove("d-none");
+			// var imgelement = document.getElementsByClassName("imagepart");
+			// var videoelement = document.getElementsByClassName("videopart");
+			// imgelement[0].classList.remove("hideele");
+			// imgelement[0].classList.add("showele");
+			// videoelement[0].classList.remove("showele");
+			// videoelement[0].classList.add("hideele");
+			// var titleelement = document.getElementsByClassName("vm-layout");
+			// titleelement[0].classList.remove("d-none");
 			this.setState({
 				videoIndex: index,
 				isPlaying: false,
@@ -320,17 +326,17 @@ class DashboardComponent extends Component {
 				pausedonmobile: true,
 			});
 		} else {
-			imgelement = document.getElementsByClassName("imagepart");
-			videoelement = document.getElementsByClassName("videopart");
-			imgelement[0].classList.remove("showele");
-			imgelement[0].classList.add("hideele");
-			videoelement[0].classList.remove("hideele");
-			videoelement[0].classList.add("showele");
-			titleelement = document.getElementsByClassName("vm-layout");
-			titleelement[0].classList.add("d-none");
+			// imgelement = document.getElementsByClassName("imagepart");
+			// videoelement = document.getElementsByClassName("videopart");
+			// imgelement[0].classList.remove("showele");
+			// imgelement[0].classList.add("hideele");
+			// videoelement[0].classList.remove("hideele");
+			// videoelement[0].classList.add("showele");
+			// titleelement = document.getElementsByClassName("vm-layout");
+			// titleelement[0].classList.add("d-none");
 			this.setState({
 				videoIndex: index,
-				isPlaying: !this.state.isPlaying,
+				isPlaying: false,
 				paused: !this.state.paused,
 				pausedonmobile: !this.state.pausedonmobile,
 			});
@@ -629,9 +635,6 @@ class DashboardComponent extends Component {
 	 */
 
 	changeOnreadyVideo() {
-		this.setState({
-			showLoader: false,
-		});
 		this.manageTextStyles();
 	}
 
@@ -737,8 +740,8 @@ class DashboardComponent extends Component {
 
 	showText() {
 		var element = document.getElementsByClassName("carousel-caption");
-		element[0].classList.add("animated");
-		element[0].classList.add("fadeInUp");
+		element[this.state.videoIndex].classList.add("animated");
+		element[this.state.videoIndex].classList.add("fadeInUp");
 	}
 
 	/**
@@ -747,8 +750,8 @@ class DashboardComponent extends Component {
 
 	hideText() {
 		var element = document.getElementsByClassName("carousel-caption");
-		element[0].classList.remove("animated");
-		element[0].classList.remove("fadeInUp");
+		element[this.state.videoIndex].classList.remove("animated");
+		element[this.state.videoIndex].classList.remove("fadeInUp");
 	}
 
 	/**
@@ -1045,7 +1048,10 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-							{ this.state.isPlaying? null : (<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+							{ this.state.isPlaying? null : (
+							<div className="w-100 h-100 position-absolute  play-button-banner text-center"
+									onMouseEnter={() => this.showText()}
+									onMouseLeave={() => this.hideText()}>
 								
 									<img
 										className='img-fluid play-button-img'
@@ -1069,19 +1075,18 @@ class DashboardComponent extends Component {
 											return (
 												<CarouselItem key={i}>
 													<div
-														onMouseEnter={this.showText}
-														onMouseLeave={this.hideText}
 														className="imagepart showele"
 													>
-														<img
+														{!this.state.isPlaying && <img
 															className='imagepart showele'
 															src={item.featureImage}
 															alt="sliderimage"
-														/>
+														/>}
+														
 														
 													</div>
-													<div className="videopart hideele">
-														<ReactPlayer
+													<div className={this.state.isPlaying ? "videopart showele" : "videopart hideele"}>
+														{this.state.isPlaying && <ReactPlayer
 															url={item.link}
 															autoPlay={false}
 															controls={true}
@@ -1097,7 +1102,8 @@ class DashboardComponent extends Component {
 																this.videoEnd(e);
 															}}
 															muted={false}
-														/>
+														/>}
+														
 													</div>
 													<CarouselCaption
 														className="videocaption "
@@ -1199,7 +1205,6 @@ class DashboardComponent extends Component {
 
 				{this.state.sendquotemodal && this._renderQuoteModal()}
 				
-
 				{this.state.showLoader ? (
 					<div className="showloader ">
 						<img src={tenor} alt="loader" />
