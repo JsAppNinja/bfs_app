@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using CustomerPortalCMS.GeneratedModels;
 using Umbraco.Web.WebApi;
 
 namespace CustomerPortalCMS.Controllers.Api
@@ -33,7 +34,7 @@ namespace CustomerPortalCMS.Controllers.Api
 
                 _locations = locations.Select(l =>
                 {
-                    dynamic c = l; //this is using the in-memory umbraco typed models... after we switch the models mode, we can make this not dynamic
+                    LocationListItem c = l as LocationListItem;
                     return new LocationServiceModel
                     {
                         Id = c.Id,
@@ -60,9 +61,9 @@ namespace CustomerPortalCMS.Controllers.Api
                                     .TrimEnd(','),
                         Email = c.Email,
                         Alias = c.Url.Split('/')[2],
-                        LargeImage = c.LargeImage != null ? c.LargeImage.Url : null,
-                        //StoreColor = c.StoreColor,
-                        //StoreIconType = c.StoreIconType
+                        LargeImage = c.LargeImage != null ? c.LargeImage.Url : null, 
+                        StoreColor = c.StoreColor !=null ? c.StoreColor.ToString() : null,
+//                        StoreIconType = c.StoreIconType
                     };
                 }).ToList();
 
