@@ -119,7 +119,7 @@ export default class UsaHeatChartComponent extends Component {
         CO: { name: "locationcolorado", hide: "no", inactive: "no" },
         UT: { name: "Utah", hide: "no", inactive: "no" },
         AZ: { name: "Arizona", hide: "no", inactive: "no" },
-        NV: { name: "Nevada", hide: "no", inactive: "yes", color: "#acacac" },
+        NV: { name: "Nevada", hide: "no", inactive: "no" },
         OR: { name: "Oregon", hide: "no", inactive: "no" },
         WA: { name: "Washington", hide: "no", inactive: "no" },
         CA: { name: "California", hide: "no", inactive: "no" },
