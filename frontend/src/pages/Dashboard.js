@@ -738,8 +738,8 @@ class DashboardComponent extends Component {
 
 	showText() {
 		var element = document.getElementsByClassName("carousel-caption");
-		element[0].classList.add("animated");
-		element[0].classList.add("fadeInUp");
+		element[this.state.videoIndex].classList.add("animated");
+		element[this.state.videoIndex].classList.add("fadeInUp");
 	}
 
 	/**
@@ -748,8 +748,8 @@ class DashboardComponent extends Component {
 
 	hideText() {
 		var element = document.getElementsByClassName("carousel-caption");
-		element[0].classList.remove("animated");
-		element[0].classList.remove("fadeInUp");
+		element[this.state.videoIndex].classList.remove("animated");
+		element[this.state.videoIndex].classList.remove("fadeInUp");
 	}
 
 	/**
@@ -1046,7 +1046,8 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-							{ this.state.isPlaying? null : (<div className="w-100 h-100 position-absolute  play-button-banner text-center">
+							{ this.state.isPlaying? null : (<div className="w-100 h-100 position-absolute  play-button-banner text-center" onMouseEnter={() => this.showText()}
+														onMouseLeave={() => this.hideText()}>
 								
 									<img
 										className='img-fluid play-button-img'
@@ -1070,8 +1071,6 @@ class DashboardComponent extends Component {
 											return (
 												<CarouselItem key={i}>
 													<div
-														onMouseEnter={this.showText}
-														onMouseLeave={this.hideText}
 														className="imagepart showele"
 													>
 														{!this.state.isPlaying && <img
