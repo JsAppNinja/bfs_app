@@ -91,6 +91,11 @@ class DashboardComponent extends Component {
 
 	componentDidMount() {
 		this.getHomePageContent();
+		window.addEventListener('load', () => {
+			this.setState({
+				showLoader: false,
+			});
+		});
 	}
 	getHomePageContent = () => {
 		if (this.state.homeData.length < 1) {
@@ -630,9 +635,6 @@ class DashboardComponent extends Component {
 	 */
 
 	changeOnreadyVideo() {
-		this.setState({
-			showLoader: false,
-		});
 		this.manageTextStyles();
 	}
 
@@ -1046,8 +1048,10 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-							{ this.state.isPlaying? null : (<div className="w-100 h-100 position-absolute  play-button-banner text-center" onMouseEnter={() => this.showText()}
-														onMouseLeave={() => this.hideText()}>
+							{ this.state.isPlaying? null : (
+							<div className="w-100 h-100 position-absolute  play-button-banner text-center"
+									onMouseEnter={() => this.showText()}
+									onMouseLeave={() => this.hideText()}>
 								
 									<img
 										className='img-fluid play-button-img'

@@ -66,7 +66,8 @@ class SliderComponent extends Component {
     //defining state variable
     this.state = {
       activeIndex: 6,
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      loaded: false
      };
 
     //binding function
@@ -77,6 +78,10 @@ class SliderComponent extends Component {
 
   componentDidMount() {
     this.triggerWindowResize();
+    window.addEventListener('load', () => {
+      this.setState({ loaded: true});
+    });
+
   }
 
   triggerWindowResize() {
@@ -144,6 +149,10 @@ class SliderComponent extends Component {
   render() {
     const { activeIndex } = this.state;
     items = this.props.item;
+    let selectedItem = [];
+    if (this.props.item.length) {
+      this.state.loaded ? selectedItem = this.props.item : !selectedItem.length && selectedItem.push(this.props.item[0]);
+    }
 
     //looping through carousel items
 
@@ -155,7 +164,7 @@ class SliderComponent extends Component {
           previous={this.previous}
           interval={false}
         >
-          {items.map((item, i) => {
+          {selectedItem.map((item, i) => {
             return (
               <CarouselItem key={item.imageUrl + i}>
                 <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : base_url + item.imageUrl }  alt={item.imageTitle} />
@@ -169,7 +178,7 @@ class SliderComponent extends Component {
 
       {
         this.state.windowWidth > 576 && <div className=" row pt-4 d-none d-md-flex">
-        {items.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
+        {selectedItem.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
             <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
               <button type="button" onClick={() => this.goToIndex(index)} >
                 {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}

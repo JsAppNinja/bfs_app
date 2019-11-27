@@ -111,7 +111,7 @@ class ContainerComponent extends Component {
     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
-                activeTab: tab
+                activeTab: tab,
             });
         }
     }
@@ -761,14 +761,8 @@ class ContainerComponent extends Component {
                                 </Nav>):null}
                             </div>
                             <TabContent className="tab-none d-none d-xl-block" activeTab={this.state.activeTab}>
-                                <TabPane tabId="1">
-                                    <SliderComponent item={data1} />
-                                </TabPane>
-                                <TabPane tabId="2">
-                                    <SliderComponent item={data2} />
-                                </TabPane>
-                                <TabPane tabId="3">
-                                    <SliderComponent item={data3} />
+                                <TabPane tabId={this.state.activeTab}>
+                                    <SliderComponent item={this.state.activeTab == 1 ? data1 : this.state.activeTab == 2? data2 : data3} />
                                 </TabPane>
                             </TabContent>
                             {data1.length>0?(<div className="col-12 text-center  pt-lg-5 px-0">
