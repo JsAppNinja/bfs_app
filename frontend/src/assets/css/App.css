@@ -2028,7 +2028,7 @@ select {
 	z-index: 10;
 }
 .play-button-banner:hover {
-	transition: opacity 2s linear;
+	transition: opacity 0.6s linear;
 	transform: translate(0);
 	opacity: 1;
 }
