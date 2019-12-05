@@ -156,61 +156,69 @@ class SliderComponent extends Component {
 
     //looping through carousel items
 
-    return (<div>
-      <div className="upper_slide">
-        <Carousel
-          activeIndex={activeIndex}
-          next={this.next}
-          previous={this.previous}
-          interval={false}
-        >
-          {selectedItem.map((item, i) => {
-            return (
-              <CarouselItem key={item.imageUrl + i}>
-                <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : base_url + item.imageUrl }  alt={item.imageTitle} />
-              </CarouselItem>
-            );
-          })}
-          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-        </Carousel>
-      </div>
-
-      {
-        this.state.windowWidth > 576 && <div className=" row pt-4 d-none d-md-flex">
-        {selectedItem.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
-            <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
-              <button type="button" onClick={() => this.goToIndex(index)} >
-                {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}
-              </button>
-              <h5 className="font-weight-normal text-center pt-3 mt-auto">{slides.imageTitle}</h5>
-            </div>:null
-         ))}
-     </div>
-      }
-
-      {
-        this.state.windowWidth < 768 && <div className="mobile-slider d-block d-md-none m-auto">
+    return (
+      <div>
+        <div className="upper_slide">
           <Carousel
             activeIndex={activeIndex}
             next={this.next}
             previous={this.previous}
             interval={false}
           >
-            {thumbnails.map((capt, i) => {
+            {selectedItem.map((item, i) => {
               return (
-                <CarouselItem key={capt.src + i + "d"}>
-                  <img src={capt.src} alt={capt.altText} />
-                  <CarouselCaption captionText={capt.caption} />
+                <CarouselItem key={item.imageUrl + i}>
+                  <img src={item.imageTitle === "cabinetcustom" ? item.imageUrl : base_url + item.imageUrl }  alt={item.imageTitle} />
                 </CarouselItem>
               );
             })}
             <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
             <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
           </Carousel>
-      </div>
-      }
-       
+        </div>
+
+
+        {
+          /**
+           * Visible only when mobile screen mode
+           */
+          this.state.windowWidth < 768 && <div className="mobile-slider d-block d-md-none m-auto">
+            <Carousel
+              activeIndex={activeIndex}
+              next={this.next}
+              previous={this.previous}
+              interval={false}
+            >
+              {thumbnails.map((capt, i) => {
+                return (
+                  <CarouselItem key={capt.src + i + "d"}>
+                    <img src={capt.src} alt={capt.altText} />
+                    <CarouselCaption captionText={capt.caption} />
+                  </CarouselItem>
+                );
+              })}
+              <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+              <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+            </Carousel>
+        </div>
+        }
+
+        {
+          /**
+           * Visible only when desktop mode
+           */
+          this.state.windowWidth > 576 && <div className=" row pt-4 d-none d-md-flex">
+          {selectedItem.map((slides, index) => ( slides.imageTitle!=="cabinetcustom"?
+              <div key={index} className={"col-md-2 px-2 frame-box" + (activeIndex === index ? 'frame-selection' : '')}>
+                <button type="button" onClick={() => this.goToIndex(index)} >
+                  {slides.imageUrl?(<LazyLoadImage className="w-100 thumbimage" src={this.replaceImageDimension(base_url + slides.imageUrl, 'add')} alt="thumbnail_1" />):null}
+                </button>
+                <h5 className="font-weight-normal text-center pt-3 mt-auto">{slides.imageTitle}</h5>
+              </div>:null
+          ))}
+          </div>
+        }
+        
       </div>
     );
   }
