@@ -13,14 +13,9 @@ module.exports =  function(_env, argv) {
   const isDevelopment = !isProduction;
   return {
     entry: "./src/index.js",
-    // output: {
-    //   filename: "[name].[contenthash].js",
-    //   path: path.join( __dirname, "build" ),
-    //   publicPath: "./build/"
-    // },
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "assets/js/[name].[contenthash:8].js",
+      filename: "assets/js/[name].[contenthash].js",
       publicPath: "/"
     },
     module: {
@@ -64,7 +59,7 @@ module.exports =  function(_env, argv) {
           test: /\.(eot|otf|ttf|woff|woff2)$/,
           loader: require.resolve("file-loader"),
           options: {
-            name: "static/media/[name].[hash:8].[ext]"
+            name: "static/media/[name].[contenthash].[ext]"
           }
         }
       ]
@@ -77,11 +72,11 @@ module.exports =  function(_env, argv) {
       }),
       isProduction &&
         new MiniCssExtractPlugin({
-          filename: "assets/css/[name].[contenthash:8].css",
-          chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
+          filename: "assets/css/[name].[contenthash].css",
+          chunkFilename: "assets/css/[name].[contenthash].chunk.css"
         }),
         new webpack.DefinePlugin({
-          "process.env": isProduction ? JSON.stringify(productionEnv.parsed) : developmentEnv.parsed
+          "process.env": isProduction ? JSON.stringify(productionEnv.parsed) : JSON.stringify(developmentEnv.parsed)
         })
     ].filter(Boolean),
     optimization: {
@@ -125,8 +120,9 @@ module.exports =  function(_env, argv) {
           }
         }
       },
-      runtimeChunk: "single"
+      runtimeChunk: "single",
     },
+    
   }
 };
   
