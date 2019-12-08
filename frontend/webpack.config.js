@@ -8,7 +8,7 @@ var productionEnv = require('dotenv').config({path: __dirname + '/production.env
 var developmentEnv = require('dotenv').config({path: __dirname + '/development.env'});
 var CompressionPlugin = require('compression-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
-const glob = require('glob')
+const glob = require('glob');
 
 module.exports =  function(_env, argv) {
   // console.log('NODE_ENV: ', _env.NODE_ENV); // 'local'
