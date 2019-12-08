@@ -7,6 +7,8 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 var productionEnv = require('dotenv').config({path: __dirname + '/production.env'});
 var developmentEnv = require('dotenv').config({path: __dirname + '/development.env'});
 var CompressionPlugin = require('compression-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob')
 
 module.exports =  function(_env, argv) {
   // console.log('NODE_ENV: ', _env.NODE_ENV); // 'local'
@@ -87,13 +89,16 @@ module.exports =  function(_env, argv) {
         new webpack.DefinePlugin({
           "process.env": isProduction ? JSON.stringify(productionEnv.parsed) : JSON.stringify(developmentEnv.parsed)
         }),
+        new PurgecssPlugin({
+          paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`,  { nodir: true }),
+        }),
         new CompressionPlugin({
           filename: "[path].gz[query]",
           algorithm: "gzip",
           test: /\.js$|\.css$|\.html$/,
           threshold: 10240,
           minRatio: 0.8
-        })
+        }),
     ].filter(Boolean),
     optimization: {
       minimize: isProduction,
