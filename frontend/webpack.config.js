@@ -4,10 +4,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+var productionEnv = require('dotenv').config({path: __dirname + '/production.env'});
+var developmentEnv = require('dotenv').config({path: __dirname + '/development.env'});
 
 module.exports =  function(_env, argv) {
   // console.log('NODE_ENV: ', _env.NODE_ENV); // 'local'
-  // console.log('Production: ', _env.production); // true
   const isProduction = argv.mode === "production";
   const isDevelopment = !isProduction;
   return {
@@ -80,9 +81,7 @@ module.exports =  function(_env, argv) {
           chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
         }),
         new webpack.DefinePlugin({
-          "process.env.NODE_ENV": JSON.stringify(
-            isProduction ? "production" : "development"
-          )
+          "process.env": isProduction ? JSON.stringify(productionEnv.parsed) : developmentEnv.parsed
         })
     ].filter(Boolean),
     optimization: {
@@ -104,8 +103,30 @@ module.exports =  function(_env, argv) {
           }
         }),
         new OptimizeCssAssetsPlugin()
-      ]
-    }
+      ],
+      splitChunks: {
+        chunks: "all",
+        minSize: 0,
+        maxInitialRequests: 20,
+        maxAsyncRequests: 20,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name(module, chunks, cacheGroupKey) {
+              const packageName = module.context.match(
+                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+              )[1];
+              return `${cacheGroupKey}.${packageName.replace("@", "")}`;
+            }
+          },
+          common: {
+            minChunks: 2,
+            priority: -10
+          }
+        }
+      },
+      runtimeChunk: "single"
+    },
   }
 };
   
