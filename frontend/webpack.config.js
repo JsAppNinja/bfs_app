@@ -52,8 +52,16 @@ module.exports =  function(_env, argv) {
         },
         {
           test: /\.css$/i,
-          use: [isProduction ? MiniCssExtractPlugin.loader : "style-loader",
-                     "css-loader"],
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 1
+              }
+            },
+            "postcss-loader"
+          ],
         },
         {
           test: /\.(eot|otf|ttf|woff|woff2)$/,
