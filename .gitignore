@@ -298,3 +298,7 @@ __pycache__/
 /CustomerPortalCMS/stats.json
 /CustomerPortalCMS/uSync/data
 /CustomerPortalCMS/uSync/data.zip
+
+# ignore build files
+/frontend/dist/**
+/frontend/build/**
