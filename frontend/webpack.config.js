@@ -2,6 +2,8 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 var path = require( "path" );
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports =  function(_env, argv) {
   // console.log('NODE_ENV: ', _env.NODE_ENV); // 'local'
@@ -82,7 +84,28 @@ module.exports =  function(_env, argv) {
             isProduction ? "production" : "development"
           )
         })
-    ].filter(Boolean)
+    ].filter(Boolean),
+    optimization: {
+      minimize: isProduction,
+      minimizer: [
+        new TerserWebpackPlugin({
+          terserOptions: {
+            compress: {
+              comparisons: false
+            },
+            mangle: {
+              safari10: true
+            },
+            output: {
+              comments: false,
+              ascii_only: true
+            },
+            warnings: false
+          }
+        }),
+        new OptimizeCssAssetsPlugin()
+      ]
+    }
   }
-  };
+};
   
