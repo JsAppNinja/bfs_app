@@ -1,4 +1,4 @@
-<%@ Page Language="c#" MasterPageFile="../../masterpages/umbracoPage.Master"
+﻿<%@ Page Language="c#" MasterPageFile="../../masterpages/umbracoPage.Master"
 AutoEventWireup="True" Inherits="umbraco.presentation.developer.packages.Installer" Trace="false" ValidateRequest="false" %>
 <%@ Register TagPrefix="cc1" Namespace="umbraco.uicontrols" Assembly="controls" %>
 
