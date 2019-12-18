@@ -23,7 +23,7 @@ import DetailsLocationsComponent from "../pages/DetailsLoactions";
 import ContactUsComponent from "../pages/ContactUs";
 import SitemapComponent from "../pages/SiteMap";
 import BfsTermsComponent from "../pages/BfsTerms";
-import AppliedRoute from "../components/AppliedRouting";
+import AppliedRoute from "./AppliedRouting";
 import Example from "../pages/Slidercarousel";
 
 //defining routes

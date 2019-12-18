@@ -55,7 +55,6 @@ class DashboardComponent extends Component {
 			modal: false,
 			toggleClass: false,
 			pausedonmobile: false,
-			activeIndex: 0,
 			mobilevideoIndex: 0,
 			mobileVideoTitle: "",
 			storeData: [],
@@ -1039,7 +1038,7 @@ class DashboardComponent extends Component {
 	}
 
 	render() {
-		const { activeIndex, pausedonmobile, isPlaying, videos } = this.state;
+		const { isPlaying, videos } = this.state;
 		//Looping through carousel items
 
 		return (

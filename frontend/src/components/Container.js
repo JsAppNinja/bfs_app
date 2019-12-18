@@ -6,8 +6,6 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import { globalVar } from "../config";
 import SliderComponent from "./Slider";
-import SliderComponent1 from "./Slider1";
-import SliderComponent2 from "./Slider2";
 import cabinet_frame1 from "../assets/img/product/cabinet.jpg"
 import cabinet_frame2 from "../assets/img/product/distribution.jpg"
 import cabinet_frame3 from "../assets/img/product/man-slide.jpg"
@@ -21,6 +19,7 @@ var base_url = globalVar.base_url1;
 var captchaKey = globalVar.googleCaptchaKey;
 var mybody = {};
 //const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
+
 
 class ContainerComponent extends Component {
     constructor(props) {
