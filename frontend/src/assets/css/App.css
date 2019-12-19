@@ -1652,7 +1652,7 @@ iframe .player .vp-controls .play {
 	z-index: 100;
 }
 
- /* {
+/* {
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 	max-width: 100%;
@@ -2003,16 +2003,13 @@ select {
 	margin-left: auto;
 	margin-right: auto;
 }
-.hme_slider
-	.home_slid_left
-	.bannerSlide
-	img.play-button-img {
+.hme_slider .home_slid_left .bannerSlide img.play-button-img {
 	width: auto;
 	max-width: 68px;
 	left: auto;
 	right: auto;
 	width: 68px;
-    height: 68px;
+	height: 68px;
 	bottom: 0;
 	object-fit: none;
 	top: 50%;
@@ -5551,4 +5548,13 @@ html {
 	font-size: 0.75rem;
 	line-height: 1rem;
 	font-weight: 700;
+}
+
+.videopart {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
 }

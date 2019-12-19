@@ -16,7 +16,7 @@ import {
 	CarouselCaption,
 } from "reactstrap";
 import PropTypes from "prop-types";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 import ContainerComponent from "../components/Container";
 import { GoogleApiWrapper } from "google-maps-react";
 import { cancellablePromise, delay } from "../assets/js/utils";
@@ -41,8 +41,8 @@ var baseurl = globalVar.base_url1;
 //const gid = 'AIzaSyCAPzibK06qRZ_9o8V7GxOA8k1a5o3WOYs';
 var mybody = {};
 
-const sliders = [ slider1, slider2, slider3, slider4 ];
-const thumbnails = [ weAre, manufacture, distribution, Service];
+const sliders = [slider1, slider2, slider3, slider4];
+const thumbnails = [weAre, manufacture, distribution, Service];
 
 class DashboardComponent extends Component {
 	pendingPromises = [];
@@ -90,7 +90,7 @@ class DashboardComponent extends Component {
 
 	componentDidMount() {
 		this.getHomePageContent();
-		window.addEventListener('load', () => {
+		window.addEventListener("load", () => {
 			this.setState({
 				showLoader: false,
 			});
@@ -98,128 +98,126 @@ class DashboardComponent extends Component {
 	}
 	getHomePageContent = () => {
 		if (this.state.homeData.length < 1) {
-			let RootId = 12757
-			fetch(globalVar.base_url1 + '/umbraco/api/Content/Get/' + RootId, {
-			  method: 'get'
-			}).then((response) => {
-			  return response.json();
-			}).then((data) => {
-			  let homeDataArray = [];
-			  homeDataArray.push(data.Properties);
-			  this.setState(
-				{
-				  homeData: homeDataArray
-				}, () => this.setHomeData()
-			  )
-			  
-			}).catch(() => {
-	
-			});
+			let RootId = 12757;
+			fetch(globalVar.base_url1 + "/umbraco/api/Content/Get/" + RootId, {
+				method: "get",
+			})
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					let homeDataArray = [];
+					homeDataArray.push(data.Properties);
+					this.setState(
+						{
+							homeData: homeDataArray,
+						},
+						() => this.setHomeData()
+					);
+				})
+				.catch(() => {});
 		} else {
-		  return
+			return;
 		}
-	  }
+	};
 
-	  setHomeData() {
-			let videos = [];
+	setHomeData() {
+		let videos = [];
 
-			[1, 2, 3, 4].forEach(id => {
-				const { homeData } = this.state;
-				let vid = homeData[0][`feature${id}VideoLink`].split('/');
-				let finalVideo = vid[4].split('?');
+		[1, 2, 3, 4].forEach(id => {
+			const { homeData } = this.state;
+			let vid = homeData[0][`feature${id}VideoLink`].split("/");
+			let finalVideo = vid[4].split("?");
 
-				videos.push({
-					id: finalVideo[0],
-					name: homeData[0][`feature${id}Label`].substring(0, 20),
-					link: homeData[0][`feature${id}VideoLink`],
-					videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
-					responsive: true,
-					image: sliders[id - 1],
-					featureImage: homeData[0][`feature${id}VideoImage`]
-						? baseurl + homeData[0][`feature${id}VideoImage`]
-						: sliders[id - 1],
-					title: homeData[0][`feature${id}Label`],
-					imageLink: homeData[0][`feature${id}Thumbnail`]
-						? baseurl + homeData[0][`feature${id}Thumbnail`]
-						: thumbnails[id - 1]
-				});
-			
+			videos.push({
+				id: finalVideo[0],
+				name: homeData[0][`feature${id}Label`].substring(0, 20),
+				link: homeData[0][`feature${id}VideoLink`],
+				videoLabel: homeData[0][`feature${id}Label`].substring(0, 20),
+				responsive: true,
+				image: sliders[id - 1],
+				featureImage: homeData[0][`feature${id}VideoImage`]
+					? baseurl + homeData[0][`feature${id}VideoImage`]
+					: sliders[id - 1],
+				title: homeData[0][`feature${id}Label`],
+				imageLink: homeData[0][`feature${id}Thumbnail`]
+					? baseurl + homeData[0][`feature${id}Thumbnail`]
+					: thumbnails[id - 1],
 			});
+		});
 
-			this.setState({ videos });
+		this.setState({ videos });
 
-			var divele = document.getElementsByClassName("video-option");
-			var myElements = document.querySelectorAll(".videocaption");
-			for (var i = 0; i < myElements.length; i++) {
+		var divele = document.getElementsByClassName("video-option");
+		var myElements = document.querySelectorAll(".videocaption");
+		for (var i = 0; i < myElements.length; i++) {
+			if (
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					"right"
+			) {
+				myElements[i].style.textAlign = "right";
+				var element = document.getElementsByClassName("carousel-caption");
+				element[0].classList.add("rightCaption");
+			} else if (
+				this.state.homeData[0].imageTextHorizontalPosition &&
+				this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
+					"middle"
+			) {
+				myElements[i].style.textAlign = "center";
+			} else {
+				myElements[i].style.textAlign = "left";
+			}
+
+			myElements[
+				i
+			].childNodes[0].style.color = this.state.homeData[0].imageTextFontColor;
+			myElements[i].childNodes[0].style.fontSize = this.state.homeData[0]
+				.imageTextFontSize
+				? this.state.homeData[0].imageTextFontSize + "px"
+				: "48px";
+			if (this.state.homeData[0].imageTextVerticalPosition) {
 				if (
-					this.state.homeData[0].imageTextHorizontalPosition &&
-					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
-						"right"
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					"top"
 				) {
-					myElements[i].style.textAlign = "right";
-					var element = document.getElementsByClassName("carousel-caption");
-					element[0].classList.add("rightCaption");
+					divele[0].classList.add("video-option-top");
 				} else if (
-					this.state.homeData[0].imageTextHorizontalPosition &&
-					this.state.homeData[0].imageTextHorizontalPosition.toLowerCase() ===
-						"middle"
+					this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
+					"bottom"
 				) {
-					myElements[i].style.textAlign = "center";
-				} else {
-					myElements[i].style.textAlign = "left";
-				}
-
-				myElements[
-					i
-				].childNodes[0].style.color = this.state.homeData[0].imageTextFontColor;
-				myElements[i].childNodes[0].style.fontSize = this.state.homeData[0]
-					.imageTextFontSize
-					? this.state.homeData[0].imageTextFontSize + "px"
-					: "48px";
-				if (this.state.homeData[0].imageTextVerticalPosition) {
-					if (
-						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
-						"top"
-					) {
-						divele[0].classList.add("video-option-top");
-					} else if (
-						this.state.homeData[0].imageTextVerticalPosition.toLowerCase() ===
-						"bottom"
-					) {
-						divele[0].classList.add("video-option-bottom");
-					}
-				}
-
-				if (
-					this.state.homeData[0].imageTextGradientPosition &&
-					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
-						"right"
-				) {
-					// myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
-					myElements[
-						i
-					].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.state.homeData[0].imageGradientOpacity,
-						"%)"
-					);
-				}
-				if (
-					this.state.homeData[0].imageTextGradientPosition &&
-					this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
-						"left"
-				) {
-					// myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
-					myElements[
-						i
-					].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
-						this.state.homeData[0].imageGradientOpacity,
-						"%)"
-					);
+					divele[0].classList.add("video-option-bottom");
 				}
 			}
 
-			
-	  }
+			if (
+				this.state.homeData[0].imageTextGradientPosition &&
+				this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					"right"
+			) {
+				// myElements[i].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
+				myElements[
+					i
+				].style.background = "linear-gradient(to left, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
+					this.state.homeData[0].imageGradientOpacity,
+					"%)"
+				);
+			}
+			if (
+				this.state.homeData[0].imageTextGradientPosition &&
+				this.state.homeData[0].imageTextGradientPosition.toLowerCase() ===
+					"left"
+			) {
+				// myElements[i].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)" + this.props.homeData[0].imageGradientOpacity + "%" + ")"
+				myElements[
+					i
+				].style.background = "linear-gradient(to right, rgba(43,51,56,1) 0%, rgba(43,51,56,0.11)".concat(
+					this.state.homeData[0].imageGradientOpacity,
+					"%)"
+				);
+			}
+		}
+	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (
@@ -238,11 +236,10 @@ class DashboardComponent extends Component {
 		if (
 			this.props.basicDataLoaded !== prevProps.basicDataLoaded &&
 			this.props.basicDataLoaded
-			) {
+		) {
 			// this.props.getHomePageData();
 			this.props.getConstructionTypeDataHome();
 		}
-
 	}
 
 	componentWillUnmount() {
@@ -577,10 +574,14 @@ class DashboardComponent extends Component {
 		});
 		var imgelement = document.getElementsByClassName("imagepart");
 		var videoelement = document.getElementsByClassName("videopart");
-		imgelement[0].classList.remove("hideele");
-		imgelement[0].classList.add("showele");
-		videoelement[0].classList.remove("showele");
-		videoelement[0].classList.add("hideele");
+		if (imgelement[0]) {
+			imgelement[0].classList.remove("hideele");
+			imgelement[0].classList.add("showele");
+		}
+		if (videoelement[0]) {
+			videoelement[0].classList.remove("showele");
+			videoelement[0].classList.add("hideele");
+		}
 		var titleelement = document.getElementsByClassName("vm-layout");
 		titleelement[0] && titleelement[0].classList.remove("d-none");
 	}
@@ -601,14 +602,14 @@ class DashboardComponent extends Component {
 			paused: true,
 			isPlaying: false,
 		});
-		var imgelement = document.getElementsByClassName("imagepart");
-		var videoelement = document.getElementsByClassName("videopart");
-		imgelement[0].classList.remove("hideele");
-		imgelement[0].classList.add("showele");
-		videoelement[0].classList.remove("showele");
-		videoelement[0].classList.add("hideele");
-		var titleelement = document.getElementsByClassName("vm-layout");
-		titleelement[0].classList.remove("d-none");
+		var imgelement = document.querySelector(".imagepart");
+		var videoelement = document.querySelector(".videopart");
+		imgelement.classList.remove("hideele");
+		imgelement.classList.add("showele");
+		videoelement.classList.remove("showele");
+		videoelement.classList.add("hideele");
+		var titleelement = document.querySelector(".vm-layout");
+		titleelement.classList.remove("d-none");
 	}
 
 	/**
@@ -801,240 +802,239 @@ class DashboardComponent extends Component {
 		}
 	}
 
-
 	/**
 	 * Renderable Request Quote Modal
-	 * 
+	 *
 	 */
 	_renderModal() {
 		return (
-				<Modal
-					isOpen={this.state.modal}
-					toggle={this.toggle}
-					className="request-form modal-dialog-centered"
-				>
-					<ModalHeader toggle={this.toggle}>
-						{this.state.noStoreFound === true ? (
-							<span className="display-6 m-auto pt-5 pb-4 d-block ">
-								We found no store nearby you please try with zipcode.
-							</span>
-						) : (
-							<span className="display-4 m-auto pt-5 pb-4 d-block ">
-								Enter your zip code
-							</span>
-						)}
-					</ModalHeader>
-					<ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
-						<div className="row  m-0">
-							<div className="form-group col-12  mb-5">
-								<div className="position-relative">
-									<input
-										id="zipcode"
-										type="text"
-										maxLength="5"
-										onChange={e => this.handleZipcodeChange(e)}
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="Zip"
-										className="head-label h5 font-weight-normal"
-									>
-										Zip Code
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.zipcodeErr}</span>
+			<Modal
+				isOpen={this.state.modal}
+				toggle={this.toggle}
+				className="request-form modal-dialog-centered"
+			>
+				<ModalHeader toggle={this.toggle}>
+					{this.state.noStoreFound === true ? (
+						<span className="display-6 m-auto pt-5 pb-4 d-block ">
+							We found no store nearby you please try with zipcode.
+						</span>
+					) : (
+						<span className="display-4 m-auto pt-5 pb-4 d-block ">
+							Enter your zip code
+						</span>
+					)}
+				</ModalHeader>
+				<ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
+					<div className="row  m-0">
+						<div className="form-group col-12  mb-5">
+							<div className="position-relative">
+								<input
+									id="zipcode"
+									type="text"
+									maxLength="5"
+									onChange={e => this.handleZipcodeChange(e)}
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
+								/>
+								<label
+									htmlFor="Zip"
+									className="head-label h5 font-weight-normal"
+								>
+									Zip Code
+								</label>
+								<span className="focus-border" />
 							</div>
+							<span className="error-message">{this.state.zipcodeErr}</span>
 						</div>
-					</ModalBody>
-					<ModalFooter className="border-0 px-5  pb-5">
-						<Button
-							className="btn btn-danger text-uppercase theme-btn  px-4 py-3"
-							onClick={this.goToStoreQuote}
-						>
-							Request Quote
-						</Button>
-					</ModalFooter>
-				</Modal>
-		)
+					</div>
+				</ModalBody>
+				<ModalFooter className="border-0 px-5  pb-5">
+					<Button
+						className="btn btn-danger text-uppercase theme-btn  px-4 py-3"
+						onClick={this.goToStoreQuote}
+					>
+						Request Quote
+					</Button>
+				</ModalFooter>
+			</Modal>
+		);
 	}
 
 	/**
 	 * Renderable Quote Modal
-	 * 
+	 *
 	 */
 	_renderQuoteModal() {
 		return (
 			<Modal
-					isOpen={this.state.sendquotemodal}
-					toggle={this.togglesendquote}
-					className="request-form modal-dialog-centered"
-				>
-					<ModalHeader toggle={this.togglesendquote}>
-						<span className="display-4 m-auto pt-5 pb-4 d-block ">
-							Request a quote
-						</span>
-					</ModalHeader>
-					<ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
-						<div className="row  m-0">
-							<div className="form-group col-md-6  mb-5">
-								<div className="position-relative">
-									<input
-										id="name"
-										type="text"
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="name"
-										className="head-label h5 font-weight-normal"
-									>
-										Full Name
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.nameErr}</span>
-							</div>
-							<div className="form-group col-md-6  mb-5">
-								<div className="position-relative">
-									<input
-										id="email"
-										type="text"
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="Email"
-										className="head-label h5 font-weight-normal"
-									>
-										Email
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.emailErr}</span>
-							</div>
-							<div className="form-group col-md-12  mb-5">
-								<div className="position-relative choose_serv">
-									<Dropdown
-										isOpen={this.state.dropdownOpen}
-										toggle={this.selectDropToggle}
-									>
-										<DropdownToggle caret>
-											{this.state.serviceOption}
-										</DropdownToggle>
-										<DropdownMenu>
-											<DropdownItem
-												onClick={() => {
-													this.setState({ serviceOption: "Manufacturing" });
-												}}
-											>
-												Manufacturing
-											</DropdownItem>
-											<DropdownItem
-												onClick={() => {
-													this.setState({ serviceOption: "Distribution" });
-												}}
-											>
-												Distribution
-											</DropdownItem>
-											<DropdownItem
-												onClick={() => {
-													this.setState({ serviceOption: "Installation" });
-												}}
-											>
-												Installation
-											</DropdownItem>
-										</DropdownMenu>
-									</Dropdown>
-									<label
-										htmlFor="Email"
-										className="head-label h5 font-weight-normal"
-									>
-										Service Type
-									</label>
-								</div>
-							</div>
-							<div className="form-group col-md-6  mb-5">
-								<div className="position-relative">
-									<input
-										id="zipcode"
-										type="text"
-										maxLength="5"
-										onChange={e => this.handleZipcodeChange(e)}
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="Zip"
-										className="head-label h5 font-weight-normal"
-									>
-										Zip Code
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.zipcodeErr}</span>
-							</div>
-							<div className="form-group col-md-6  mb-5">
-								<div className="position-relative">
-									<input
-										id="phone"
-										type="text"
-										maxLength="12"
-										onChange={e => this.handlePhoneChange(e)}
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="Phone"
-										className="head-label h5 font-weight-normal"
-									>
-										Phone
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.phoneErr}</span>
-							</div>
-							<div className="form-group col-md-12  mb-5">
-								<div className="position-relative">
-									<textarea
-										id="message"
-										className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
-										autoComplete="off"
-									/>
-									<label
-										htmlFor="Phone"
-										className="head-label h5 font-weight-normal"
-									>
-										Message
-									</label>
-									<span className="focus-border" />
-								</div>
-								<span className="error-message">{this.state.messageErr}</span>
-								<span className="success-message">{this.state.successMsg}</span>
-							</div>
-							<div className="form-group col-md-12  mb-5">
-								<ReCAPTCHA
-									sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
-									onChange={e => this.onRecaptchChange(e)}
+				isOpen={this.state.sendquotemodal}
+				toggle={this.togglesendquote}
+				className="request-form modal-dialog-centered"
+			>
+				<ModalHeader toggle={this.togglesendquote}>
+					<span className="display-4 m-auto pt-5 pb-4 d-block ">
+						Request a quote
+					</span>
+				</ModalHeader>
+				<ModalBody className="px-4 pt-4 px-md-5 pt-md-5 pb-0">
+					<div className="row  m-0">
+						<div className="form-group col-md-6  mb-5">
+							<div className="position-relative">
+								<input
+									id="name"
+									type="text"
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
 								/>
-								<span className="error-message">{this.state.captchaErr}</span>
+								<label
+									htmlFor="name"
+									className="head-label h5 font-weight-normal"
+								>
+									Full Name
+								</label>
+								<span className="focus-border" />
 							</div>
-							<div style={{ color: "#2C3E50" }}>
-								{this.state.quoteEmailStatus}
+							<span className="error-message">{this.state.nameErr}</span>
+						</div>
+						<div className="form-group col-md-6  mb-5">
+							<div className="position-relative">
+								<input
+									id="email"
+									type="text"
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
+								/>
+								<label
+									htmlFor="Email"
+									className="head-label h5 font-weight-normal"
+								>
+									Email
+								</label>
+								<span className="focus-border" />
+							</div>
+							<span className="error-message">{this.state.emailErr}</span>
+						</div>
+						<div className="form-group col-md-12  mb-5">
+							<div className="position-relative choose_serv">
+								<Dropdown
+									isOpen={this.state.dropdownOpen}
+									toggle={this.selectDropToggle}
+								>
+									<DropdownToggle caret>
+										{this.state.serviceOption}
+									</DropdownToggle>
+									<DropdownMenu>
+										<DropdownItem
+											onClick={() => {
+												this.setState({ serviceOption: "Manufacturing" });
+											}}
+										>
+											Manufacturing
+										</DropdownItem>
+										<DropdownItem
+											onClick={() => {
+												this.setState({ serviceOption: "Distribution" });
+											}}
+										>
+											Distribution
+										</DropdownItem>
+										<DropdownItem
+											onClick={() => {
+												this.setState({ serviceOption: "Installation" });
+											}}
+										>
+											Installation
+										</DropdownItem>
+									</DropdownMenu>
+								</Dropdown>
+								<label
+									htmlFor="Email"
+									className="head-label h5 font-weight-normal"
+								>
+									Service Type
+								</label>
 							</div>
 						</div>
-					</ModalBody>
-					<ModalFooter className="border-0 px-5  pb-5">
-						<Button
-							className="btn btn-danger text-uppercase theme-btn  px-4 py-3"
-							onClick={this.sendRequestQuote}
-						>
-							Request a Quote
-						</Button>{" "}
-					</ModalFooter>
-				</Modal>
-		)
+						<div className="form-group col-md-6  mb-5">
+							<div className="position-relative">
+								<input
+									id="zipcode"
+									type="text"
+									maxLength="5"
+									onChange={e => this.handleZipcodeChange(e)}
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
+								/>
+								<label
+									htmlFor="Zip"
+									className="head-label h5 font-weight-normal"
+								>
+									Zip Code
+								</label>
+								<span className="focus-border" />
+							</div>
+							<span className="error-message">{this.state.zipcodeErr}</span>
+						</div>
+						<div className="form-group col-md-6  mb-5">
+							<div className="position-relative">
+								<input
+									id="phone"
+									type="text"
+									maxLength="12"
+									onChange={e => this.handlePhoneChange(e)}
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
+								/>
+								<label
+									htmlFor="Phone"
+									className="head-label h5 font-weight-normal"
+								>
+									Phone
+								</label>
+								<span className="focus-border" />
+							</div>
+							<span className="error-message">{this.state.phoneErr}</span>
+						</div>
+						<div className="form-group col-md-12  mb-5">
+							<div className="position-relative">
+								<textarea
+									id="message"
+									className="form-control effect-2 mb-0 bg-transparent rounded-0 border-top-0  border-left-0 border-right-0 px-0"
+									autoComplete="off"
+								/>
+								<label
+									htmlFor="Phone"
+									className="head-label h5 font-weight-normal"
+								>
+									Message
+								</label>
+								<span className="focus-border" />
+							</div>
+							<span className="error-message">{this.state.messageErr}</span>
+							<span className="success-message">{this.state.successMsg}</span>
+						</div>
+						<div className="form-group col-md-12  mb-5">
+							<ReCAPTCHA
+								sitekey="6LeGWXcUAAAAANWVU5kzmSQEd85iFIz4Mk3eL2AZ"
+								onChange={e => this.onRecaptchChange(e)}
+							/>
+							<span className="error-message">{this.state.captchaErr}</span>
+						</div>
+						<div style={{ color: "#2C3E50" }}>
+							{this.state.quoteEmailStatus}
+						</div>
+					</div>
+				</ModalBody>
+				<ModalFooter className="border-0 px-5  pb-5">
+					<Button
+						className="btn btn-danger text-uppercase theme-btn  px-4 py-3"
+						onClick={this.sendRequestQuote}
+					>
+						Request a Quote
+					</Button>{" "}
+				</ModalFooter>
+			</Modal>
+		);
 	}
 
 	render() {
@@ -1047,20 +1047,22 @@ class DashboardComponent extends Component {
 					<div className="container hme_slider video-option p-0 ">
 						<div className="home_slid_left">
 							<div className="bannerSlide position-relative">
-							{ this.state.isPlaying? null : (
-							<div className="w-100 h-100 position-absolute  play-button-banner text-center"
-									onMouseEnter={() => this.showText()}
-									onMouseLeave={() => this.hideText()}>
-								
-									<img
-										className='img-fluid play-button-img'
-										src={playBtn}
-										onClick={() => this.handleDoubleClick(this.state.videoIndex)}
-										alt="playbutton"
-									/>
-								
-								</div>
-							)}
+								{this.state.isPlaying ? null : (
+									<div
+										className="w-100 h-100 position-absolute  play-button-banner text-center"
+										onMouseEnter={() => this.showText()}
+										onMouseLeave={() => this.hideText()}
+									>
+										<img
+											className="img-fluid play-button-img"
+											src={playBtn}
+											onClick={() =>
+												this.handleDoubleClick(this.state.videoIndex)
+											}
+											alt="playbutton"
+										/>
+									</div>
+								)}
 								<Carousel
 									activeIndex={this.state.videoIndex}
 									next={this.next}
@@ -1071,47 +1073,53 @@ class DashboardComponent extends Component {
 									className="carousel-fade"
 								>
 									{videos.map((item, i) => {
-											return (
-												<CarouselItem key={i}>
-													<div
-														className="imagepart showele"
-													>
-														{!this.state.isPlaying && <img
-															className='imagepart showele'
+										return (
+											<CarouselItem key={i}>
+												<div className="imagepart showele">
+													{!this.state.isPlaying && (
+														<img
+															className="imagepart showele"
 															src={item.featureImage}
 															alt="sliderimage"
-														/>}
-														
-														
-													</div>
-													<div className={this.state.isPlaying ? "videopart showele" : "videopart hideele"}>
-														{this.state.isPlaying && <ReactPlayer
-															url={item.link}
-															autoPlay={false}
-															controls={true}
-															playing={isPlaying}
-															onReady={() => {
-																this.changeOnreadyVideo();
-															}}
-															height="100%"
-															onStart={e => {
-																this.vimeoPlayed(e);
-															}}
-															onEnded={e => {
-																this.videoEnd(e);
-															}}
-															muted={false}
-														/>}
-														
-													</div>
-													<CarouselCaption
-														className="videocaption "
-														captionText=""
-														captionHeader={item.name}
-													/>
-												</CarouselItem>
-											);
-										})}
+														/>
+													)}
+												</div>
+												<CarouselCaption
+													className="videocaption "
+													captionText=""
+													captionHeader={item.name}
+												/>
+											</CarouselItem>
+										);
+									})}
+									<div
+										className={
+											this.state.isPlaying
+												? "videopart showele"
+												: "videopart hideele"
+										}
+									>
+										{this.state.isPlaying && (
+											<ReactPlayer
+												url={videos[this.state.videoIndex].link}
+												autoPlay={false}
+												controls={true}
+												playing={isPlaying}
+												onReady={() => {
+													this.changeOnreadyVideo();
+												}}
+												height="100%"
+												width="100%"
+												onStart={e => {
+													this.vimeoPlayed(e);
+												}}
+												onEnded={e => {
+													this.videoEnd(e);
+												}}
+												muted={false}
+											/>
+										)}
+									</div>
 									<CarouselControl
 										className="mobilePrev"
 										direction="prev"
@@ -1138,9 +1146,7 @@ class DashboardComponent extends Component {
 												alt="playButton"
 											/>
 											<h5 className="align-middle font-weight-bold d-inline-block mb-0 slide_titl">
-												{
-													videos.length && videos[this.state.videoIndex].name
-												}
+												{videos.length && videos[this.state.videoIndex].name}
 											</h5>
 										</div>
 									</span>
@@ -1160,31 +1166,28 @@ class DashboardComponent extends Component {
 
 					<div className="container p-0 main-home-slider-mob d-none d-xl-block">
 						<div className="row pt-3 video-space">
-							{
-								this.state.videos.map((item, index) => {
-									return (
-										<div
-											className={
-												`${this.state.videoIndex === index && 'active'} col-12 col-md-3 shadow-none   slide-div`
-											}
-											key={index}
-											onClick={() => this.handleClick(index, this.state.paused)}
-											onDoubleClick={() => this.handleDoubleClick(index)}
-										>
-											<div className="vd-option option-shadow">
-												<img
-													className="img-area"
-													src={item.imageLink}
-													alt="manufacture"
-												/>
-												<div className="position-absolute text-center text-white video-title w-100">
-													<h4 className="mb-0">{item.title}</h4>
-												</div>
+							{this.state.videos.map((item, index) => {
+								return (
+									<div
+										className={`${this.state.videoIndex === index &&
+											"active"} col-12 col-md-3 shadow-none   slide-div`}
+										key={index}
+										onClick={() => this.handleClick(index, this.state.paused)}
+										onDoubleClick={() => this.handleDoubleClick(index)}
+									>
+										<div className="vd-option option-shadow">
+											<img
+												className="img-area"
+												src={item.imageLink}
+												alt="manufacture"
+											/>
+											<div className="position-absolute text-center text-white video-title w-100">
+												<h4 className="mb-0">{item.title}</h4>
 											</div>
 										</div>
-									);
-								})
-							}
+									</div>
+								);
+							})}
 						</div>
 					</div>
 				</div>
@@ -1199,11 +1202,11 @@ class DashboardComponent extends Component {
 					constructionData={this.props.constructiontypeDataHome}
 				/>
 				<Link to={"/"} style={{ display: "none" }} id="linkToHome" />
-				
+
 				{this.state.modal && this._renderModal()}
 
 				{this.state.sendquotemodal && this._renderQuoteModal()}
-				
+
 				{this.state.showLoader ? (
 					<div className="showloader ">
 						<img src={tenor} alt="loader" />
